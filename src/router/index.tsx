@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { hot } from 'react-hot-loader'
-import * as Loadable from 'react-loadable'
+import Loadable from 'react-loadable'
 import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 import PageLoading from './../components/PageLoading'

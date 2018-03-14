@@ -31,6 +31,7 @@ const prodPlugins = [
         chunksSortMode: 'dependency'
     }),
     new ExtractTextPlugin({
+        allChunks: true,
         filename: assetsPath('css/[name].[contenthash].css')
     })
 ]
