@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "sourceMap": true,
+        "baseUrl": "./src",
+        "rootDirs": ["./src"],
+        "jsx": "react",
+        "alwaysStrict": true,
+        "allowJs": true,
+        "importHelpers": true,
+        "experimentalDecorators": true,
+        "lib": [
+            "esnext",
+            "es7",
+            "es6",
+            "es5",
+            "es2015.promise",
+            "es2015.generator",
+            "dom"
+        ],
+        "typeRoots": ["node_modules/@types"]
+    }
+}

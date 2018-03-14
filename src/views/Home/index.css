@@ -1,0 +1,9 @@
+.login {
+    display: flex;
+    font-size: 100px;
+}
+
+.test {
+    composes: login;
+    color: blue;
+}
