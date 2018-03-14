@@ -13,7 +13,7 @@ typescript + react + webpack4 starter
 1. npm i
 2. npm run dev
 
-### What's next
+### what's next
 - state management (Redux or Mobx)
 - UI lib (Element-React)
 - svg icon
