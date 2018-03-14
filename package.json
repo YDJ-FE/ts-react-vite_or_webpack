@@ -34,6 +34,7 @@
     "@types/webpack-env": "^1.13.5",
     "autoprefixer": "^8.1.0",
     "babel-loader": "^7.1.4",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",

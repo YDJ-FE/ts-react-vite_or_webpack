@@ -1,10 +1,10 @@
-const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const constants = require('./constants')
 const config = require('./config')
+const { assetsPath } = require('./utils')
 
 const devPlugins = [
     new HtmlWebpackPlugin({
@@ -31,10 +31,7 @@ const prodPlugins = [
         chunksSortMode: 'dependency'
     }),
     new ExtractTextPlugin({
-        filename: path.posix.join(
-            config.assetsSubDirectory,
-            'css/[name].[contenthash].css'
-        )
+        filename: assetsPath('css/[name].[contenthash].css')
     })
 ]
 
@@ -43,4 +40,4 @@ if (config.bundleAnalyzerReport) {
     prodPlugins.push(new BundleAnalyzerPlugin())
 }
 
-module.exports = constants.NODE_ENV === 'development' ? devPlugins : prodPlugins
+module.exports = constants.APP_ENV === 'dev' ? devPlugins : prodPlugins

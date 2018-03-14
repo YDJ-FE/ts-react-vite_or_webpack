@@ -14,7 +14,15 @@ const typingsForCssModulesLoaderConf = {
         modules: true,
         namedExport: true,
         camelCase: true,
-        sass: true
+        sass: true,
+        sourceMap: false
+    }
+}
+
+function getLoadingWithoutSourceMap(loader) {
+    return {
+        loader,
+        options: { sourceMap: false }
     }
 }
 
@@ -27,7 +35,7 @@ module.exports = config.extractCss
                   fallback: 'style-loader',
                   use: [
                       typingsForCssModulesLoaderConf,
-                      { loader: 'postcss-loader' }
+                      getLoadingWithoutSourceMap('postcss-loader')
                   ]
               })
           },
@@ -36,7 +44,11 @@ module.exports = config.extractCss
               include: resolve('src/styles'),
               use: ExtractTextPlugin.extract({
                   fallback: 'style-loader',
-                  use: ['css-loader', 'sass-loader', 'postcss-loader']
+                  use: [
+                      getLoadingWithoutSourceMap('css-loader'),
+                      getLoadingWithoutSourceMap('sass-loader'),
+                      getLoadingWithoutSourceMap('postcss-loader')
+                  ]
               })
           }
       ]

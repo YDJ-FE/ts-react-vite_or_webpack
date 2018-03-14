@@ -5,6 +5,7 @@
         "moduleResolution": "node",
         "allowSyntheticDefaultImports": true,
         "sourceMap": true,
+        "removeComments": false,
         "baseUrl": "./src",
         "rootDirs": ["./src"],
         "jsx": "react",
@@ -21,6 +22,6 @@
             "es2015.generator",
             "dom"
         ],
-        "typeRoots": ["node_modules/@types"]
+        "typeRoots": ["node", "node_modules/@types"]
     }
 }

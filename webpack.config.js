@@ -5,6 +5,8 @@ const config = require('./build/config')
 const constants = require('./build/constants')
 const styleLoaders = require('./build/style-loaders')
 const plugins = require('./build/plugins')
+const { assetsPath } = require('./build/utils')
+const optimization = require('./build/optimization')
 
 function resolve(dir) {
     return path.join(__dirname, './', dir)
@@ -16,7 +18,14 @@ module.exports = {
     },
     output: {
         path: config.assetsRoot,
-        filename: '[name].js',
+        filename:
+            constants.APP_ENV === 'dev'
+                ? '[name].js'
+                : assetsPath('js/[name].[chunkhash].js'),
+        chunkFilename:
+            constants.APP_ENV === 'dev'
+                ? '[name].js'
+                : assetsPath('js/[name].[id].[chunkhash].js'),
         publicPath: config.assetsPublicPath
     },
     resolve: {
@@ -31,13 +40,7 @@ module.exports = {
                 include: [resolve('src')],
                 exclude: /node_modules/,
                 use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            babelrc: true,
-                            plugins: ['react-hot-loader/babel']
-                        }
-                    },
+                    'babel-loader',
                     'ts-loader'
                 ]
             },
@@ -46,10 +49,7 @@ module.exports = {
                 loader: 'url-loader',
                 query: {
                     limit: 10000,
-                    name: path.posix.join(
-                        config.assetsSubDirectory,
-                        'img/[name].[hash:7].[ext]'
-                    )
+                    name: assetsPath('img/[name].[hash:7].[ext]')
                 }
             },
             {
@@ -57,14 +57,12 @@ module.exports = {
                 loader: 'url-loader',
                 query: {
                     limit: 10000,
-                    name: path.posix.join(
-                        config.assetsSubDirectory,
-                        'fonts/[name].[hash:7].[ext]'
-                    )
+                    name: assetsPath('fonts/[name].[hash:7].[ext]')
                 }
             }
         ]
     },
     plugins,
-    devtool: constants.APP_ENV === 'qa' ? false : '#source-map'
+    optimization,
+    devtool: config.sourceMap ? '#source-map' : false
 }
