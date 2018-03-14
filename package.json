@@ -8,7 +8,9 @@
     "dev": "cross-env APP_ENV=dev webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
     "qa": "cross-env APP_ENV=qa npm run build",
-    "prod": "cross-env APP_ENV=prod npm run build"
+    "prod": "cross-env APP_ENV=prod npm run build",
+    "lint": "tslint -c tslint.json 'src/**/*[^.d$].ts*'",
+    "svg": "node ./tool/generator-svg.js"
   },
   "keywords": [
     "ts-react-webpack4"

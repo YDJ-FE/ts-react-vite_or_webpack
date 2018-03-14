@@ -8,6 +8,7 @@ typescript + react + webpack4 starter
 - component hot reload
 - async component
 - import .(s)css auto generate .(s)css.d.ts
+- svg icon
 
 ### run
 1. npm i
@@ -16,5 +17,4 @@ typescript + react + webpack4 starter
 ### what's next
 - state management (Redux or Mobx)
 - UI lib (Element-React)
-- svg icon
 - jest

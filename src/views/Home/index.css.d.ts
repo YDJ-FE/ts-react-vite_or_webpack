@@ -1,2 +1,2 @@
-export const login: string;
+export const home: string;
 export const test: string;

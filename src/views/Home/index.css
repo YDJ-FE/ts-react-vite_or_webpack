@@ -1,9 +1,10 @@
-.login {
+.home {
     display: flex;
+    justify-content: center;
     font-size: 100px;
 }
 
 .test {
-    composes: login;
+    composes: home;
     color: blue;
 }
