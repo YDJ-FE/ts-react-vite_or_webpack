@@ -5,8 +5,20 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const constants = require('./constants')
 const config = require('./config')
 const { assetsPath } = require('./utils')
+const env = require('./env.json')
+
+const oriEnv = env[constants.APP_ENV]
+Object.assign(oriEnv, {
+    APP_ENV: constants.APP_ENV
+})
+// 照旧将webpack下发变量置于process.env
+const defineEnv = {}
+for (let key in oriEnv) {
+    defineEnv[`process.env.${key}`] = JSON.stringify(oriEnv[key])
+}
 
 const devPlugins = [
+    new webpack.DefinePlugin(defineEnv),
     new HtmlWebpackPlugin({
         filename: 'index.html',
         template: 'build/tpl/index.html',
@@ -15,6 +27,7 @@ const devPlugins = [
 ]
 
 const prodPlugins = [
+    new webpack.DefinePlugin(defineEnv),
     new webpack.WatchIgnorePlugin([/css\.d\.ts$/]),
     new HtmlWebpackPlugin({
         filename: config.index,

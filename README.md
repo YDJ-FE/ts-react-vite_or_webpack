@@ -15,7 +15,6 @@ typescript + react + webpack4 starter
 2. npm run dev
 
 ### what's next
-- postcss-values
 - state management (Redux or Mobx)
 - UI lib (Element-React)
 - jest

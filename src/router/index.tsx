@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { hot } from 'react-hot-loader'
 import Loadable from 'react-loadable'
 import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
@@ -44,4 +43,4 @@ const AppRouter = () => (
     </Router>
 )
 
-export default hot(module)(AppRouter)
+export default AppRouter

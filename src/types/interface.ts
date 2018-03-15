@@ -9,11 +9,3 @@ export interface HttpResquest {
     delete?(url, data, baseUrl?): Promise<any>
     put?(url, data, baseUrl?): Promise<any>
 }
-
-export interface PlainObject {
-    [propName: string]: any
-}
-
-export interface BooleanObject {
-    [propName: string]: boolean
-}
