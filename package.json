@@ -9,7 +9,7 @@
     "build": "webpack --mode production",
     "qa": "cross-env APP_ENV=qa npm run build",
     "prod": "cross-env APP_ENV=prod npm run build",
-    "lint": "tslint -c tslint.json 'src/**/*[^.d$].ts*'",
+    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}' --exclude 'src/**/*css.d.ts'",
     "svg": "node ./tool/generator-svg.js"
   },
   "keywords": [
@@ -55,6 +55,7 @@
     "stylelint-order": "^0.8.1",
     "ts-loader": "^4.0.1",
     "tslib": "^1.9.0",
+    "tslint": "^5.9.1",
     "typescript": "^2.7.2",
     "typescript-react-svg-icon-generator": "^1.1.0",
     "typings-for-css-modules-loader": "^1.7.0",
