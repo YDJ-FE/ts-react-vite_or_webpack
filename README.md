@@ -6,6 +6,7 @@ typescript + react + webpack4 starter
 2. npm run dev
 
 ## joined
+- webpack-4
 - typescript
 - react
 - react-router-4
