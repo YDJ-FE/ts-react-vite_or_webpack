@@ -1,7 +1,11 @@
 # ts-react-webpack4
 typescript + react + webpack4 starter
 
-### keywords
+## run
+1. npm i
+2. npm run dev
+
+## joined
 - typescript
 - react
 - react-router-4
@@ -10,11 +14,7 @@ typescript + react + webpack4 starter
 - import .(s)css auto generate .(s)css.d.ts
 - svg icon
 
-### run
-1. npm i
-2. npm run dev
-
-### what's next
+## what's next
 - state management (Redux or Mobx)
 - UI lib (Element-React)
 - jest
