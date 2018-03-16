@@ -40,8 +40,17 @@ module.exports = {
                 include: [resolve('src')],
                 exclude: /node_modules/,
                 use: [
+                    'cache-loader',
+                    'thread-loader',
                     'babel-loader',
-                    'ts-loader'
+                    {
+                        loader: 'ts-loader',
+                        options: {
+                            // IMPORTANT! use happyPackMode mode to speed-up compilation and reduce errors reported to webpack
+                            happyPackMode: true,
+                            transpileOnly: true
+                        }
+                    }
                 ]
             },
             {
