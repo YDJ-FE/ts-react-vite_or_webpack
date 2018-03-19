@@ -3,3 +3,5 @@ npm-debug*
 /dist
 /index.html
 /.cache-loader
+/.awcache
+/.cache-loader

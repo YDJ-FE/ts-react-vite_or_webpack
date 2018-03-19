@@ -17,8 +17,11 @@ for (let key in oriEnv) {
     defineEnv[`process.env.${key}`] = JSON.stringify(oriEnv[key])
 }
 
-const devPlugins = [
+const basePlugins = [
     new webpack.DefinePlugin(defineEnv),
+]
+
+const devPlugins = [
     new HtmlWebpackPlugin({
         filename: 'index.html',
         template: 'build/tpl/index.html',
@@ -27,7 +30,6 @@ const devPlugins = [
 ]
 
 const prodPlugins = [
-    new webpack.DefinePlugin(defineEnv),
     new webpack.WatchIgnorePlugin([/css\.d\.ts$/]),
     new HtmlWebpackPlugin({
         filename: config.index,
@@ -54,4 +56,4 @@ if (config.bundleAnalyzerReport) {
     prodPlugins.push(new BundleAnalyzerPlugin())
 }
 
-module.exports = constants.APP_ENV === 'dev' ? devPlugins : prodPlugins
+module.exports = basePlugins.concat(constants.APP_ENV === 'dev' ? devPlugins : prodPlugins)

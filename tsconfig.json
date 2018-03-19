@@ -6,8 +6,13 @@
         "allowSyntheticDefaultImports": true,
         "sourceMap": true,
         "removeComments": false,
-        "baseUrl": "./src",
         "rootDirs": ["./src"],
+        "baseUrl": "./src",
+        "paths": {
+            "@utils/*": ["utils/*"],
+            "@assets/*": ["assets/*"],
+            "@components/*": ["components/*"],
+        },
         "jsx": "react",
         "alwaysStrict": true,
         "allowJs": true,
@@ -23,6 +28,7 @@
             "es2015.generator",
             "dom"
         ],
+        "skipLibCheck": true,
         "typeRoots": ["node", "node_modules/@types"]
     }
 }

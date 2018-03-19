@@ -6,5 +6,5 @@
 
 .test {
     composes: home;
-    color: blue;
+    composes: gray from '@css-modules/var.css';
 }

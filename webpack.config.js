@@ -30,7 +30,13 @@ module.exports = {
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json'],
-        modules: [resolve('src'), resolve('node_modules')]
+        modules: [resolve('src'), resolve('node_modules')],
+        alias: {
+            '@utils': resolve('src/utils'),
+            '@assets': resolve('src/assets'),
+            '@components': resolve('src/components'),
+            '@css-modules': resolve('src/styles/css-modules')
+        }
     },
     module: {
         rules: [
