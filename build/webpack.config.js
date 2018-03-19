@@ -5,12 +5,8 @@ const config = require('./config')
 const constants = require('./constants')
 const styleLoaders = require('./style-loaders')
 const plugins = require('./plugins')
-const { assetsPath } = require('./utils')
+const { assetsPath, resolve } = require('./utils')
 const optimization = require('./optimization')
-
-function resolve(dir) {
-    return path.join(__dirname, './../', dir)
-}
 
 module.exports = {
     entry: {

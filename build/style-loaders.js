@@ -2,10 +2,7 @@ const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const config = require('./config')
-
-function resolve(dir) {
-    return path.join(__dirname, './../', dir)
-}
+const { resolve } = require('./utils')
 
 const typingsForCssModulesLoaderConf = {
     loader: 'typings-for-css-modules-loader',
