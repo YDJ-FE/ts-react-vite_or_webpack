@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}' --exclude 'src/**/*css.d.ts'",
-    "dev": "cross-env APP_ENV=dev webpack-dev-server --mode development --open --hot",
-    "build": "webpack --mode production",
+    "dev": "cross-env APP_ENV=dev webpack-dev-server --config build/webpack.config.js --mode development --open --hot",
+    "build": "webpack --config build/webpack.config.js --mode production",
     "qa": "cross-env APP_ENV=qa npm run build",
     "prod": "cross-env APP_ENV=prod npm run build",
     "svg": "node ./tool/generator-svg.js"
@@ -23,16 +23,14 @@
     "react-dom": "^16.2.0",
     "react-hot-loader": "^4.0.0",
     "react-loadable": "^5.3.1",
-    "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
-    "redux": "^3.7.2"
+    "react-router-redux": "^4.0.8"
   },
   "devDependencies": {
     "@types/node": "^9.4.7",
     "@types/react": "^16.0.40",
     "@types/react-dom": "^16.0.4",
     "@types/react-loadable": "^5.3.3",
-    "@types/react-redux": "^5.0.15",
     "@types/react-router-dom": "^4.2.4",
     "@types/webpack-env": "^1.13.5",
     "autoprefixer": "^8.1.0",

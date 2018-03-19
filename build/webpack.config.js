@@ -1,15 +1,15 @@
 const path = require('path')
 const webpack = require('webpack')
 
-const config = require('./build/config')
-const constants = require('./build/constants')
-const styleLoaders = require('./build/style-loaders')
-const plugins = require('./build/plugins')
-const { assetsPath } = require('./build/utils')
-const optimization = require('./build/optimization')
+const config = require('./config')
+const constants = require('./constants')
+const styleLoaders = require('./style-loaders')
+const plugins = require('./plugins')
+const { assetsPath } = require('./utils')
+const optimization = require('./optimization')
 
 function resolve(dir) {
-    return path.join(__dirname, './', dir)
+    return path.join(__dirname, './../', dir)
 }
 
 module.exports = {

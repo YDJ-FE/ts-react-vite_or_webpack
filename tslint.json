@@ -17,6 +17,8 @@
             true,
             { "ignore-module": "(\\.html|\\.css|\\.scss|\\.less)$" }
         ],
+        "no-namespace": false,
+        "no-console": false,
         "no-inferrable-types": [true, "ignore-params", "ignore-properties"],
         "no-invalid-this": [true, "check-function-in-method"],
         "no-null-keyword": false,
