@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}' --exclude 'src/**/*css.d.ts'",
     "dev": "cross-env APP_ENV=dev webpack-dev-server --mode development --open --hot",
-    "build": "webpack --mode production",
+    "build": "npm run lint && webpack --mode production",
     "qa": "cross-env APP_ENV=qa npm run build",
     "prod": "cross-env APP_ENV=prod npm run build",
-    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}' --exclude 'src/**/*css.d.ts'",
     "svg": "node ./tool/generator-svg.js"
   },
   "keywords": [
