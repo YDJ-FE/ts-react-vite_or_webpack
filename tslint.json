@@ -11,12 +11,10 @@
         "member-access": false,
         "member-ordering": [true, { "order": "fields-first" }],
         "newline-before-return": false,
+        "no-empty": false,
         "no-any": false,
         "no-empty-interface": false,
-        "no-import-side-effect": [
-            true,
-            { "ignore-module": "(\\.html|\\.css|\\.scss|\\.less)$" }
-        ],
+        "no-import-side-effect": false,
         "no-namespace": false,
         "no-console": false,
         "no-inferrable-types": [true, "ignore-params", "ignore-properties"],
@@ -46,6 +44,7 @@
             "allow-pascal-case",
             "allow-leading-underscore"
         ],
+        "max-classes-per-file": false,
         // tslint-react
         "jsx-no-lambda": false,
         "jsx-no-multiline-js": false,

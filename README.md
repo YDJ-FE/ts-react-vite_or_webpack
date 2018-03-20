@@ -14,8 +14,8 @@ typescript + react + webpack4 starter
 - async component
 - import .(s)css auto generate .(s)css.d.ts
 - svg icon
+- Mobx
+- Element-React
 
 ## what's next
-- state management (Redux or Mobx)
-- UI lib (Element-React)
 - jest

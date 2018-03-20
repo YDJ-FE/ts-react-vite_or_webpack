@@ -1,25 +1,26 @@
 import './styles/app.scss'
+import 'element-theme-default'
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
+import { Provider } from 'mobx-react'
+import { configure } from 'mobx'
 
 import AppRouter from './router'
+import * as store from './store'
+
+configure({ enforceActions: true })
 
 const render = Component => {
     ReactDOM.render(
-        <AppContainer>
-            <Component />
-        </AppContainer>,
+        <Provider {...store}>
+            <AppContainer>
+                <Component />
+            </AppContainer>
+        </Provider>,
         document.getElementById('app') as HTMLElement
     )
 }
 
 render(AppRouter)
-
-// Hot Module Replacement API
-if (module.hot) {
-    module.hot.accept(['router'], () => {
-        import('./router').then(mod => render(mod.default))
-    })
-}

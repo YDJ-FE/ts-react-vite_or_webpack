@@ -27,6 +27,14 @@ module.exports = config.extractCss
     ? [
           {
               test: /\.css$/,
+              include: [resolve('node_modules')],
+              use: ExtractTextPlugin.extract({
+                  fallback: 'style-loader',
+                  use: [getLoadingWithoutSourceMap('css-loader')]
+              })
+          },
+          {
+              test: /\.css$/,
               include: [resolve('src')],
               use: ExtractTextPlugin.extract({
                   fallback: 'style-loader',
@@ -50,6 +58,11 @@ module.exports = config.extractCss
           }
       ]
     : [
+          {
+              test: /\.css$/,
+              include: [resolve('node_modules')],
+              use: ['style-loader', 'css-loader']
+          },
           {
               test: /\.css$/,
               include: [resolve('src')],

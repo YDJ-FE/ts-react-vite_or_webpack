@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}' --exclude 'src/**/*css.d.ts'",
-    "dev": "cross-env APP_ENV=dev webpack-dev-server --config build/webpack.config.js --mode development --open --hot",
+    "dev": "cross-env APP_ENV=dev webpack-dev-server --config build/webpack.config.js --mode development --progress --open --hot",
     "build": "webpack --config build/webpack.config.js --mode production",
     "qa": "cross-env APP_ENV=qa npm run build",
     "prod": "cross-env APP_ENV=prod npm run build",
@@ -19,6 +19,11 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
+    "blueimp-md5": "^2.10.0",
+    "element-react": "^1.4.8",
+    "element-theme-default": "^1.4.13",
+    "mobx": "^4.1.0",
+    "mobx-react": "^5.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^4.0.0",
@@ -63,6 +68,7 @@
     "typescript": "^2.7.2",
     "typescript-react-svg-icon-generator": "^1.1.0",
     "typings-for-css-modules-loader": "^1.7.0",
+    "url-loader": "^1.0.1",
     "webpack": "^4.1.1",
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cli": "^2.0.11",
