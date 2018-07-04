@@ -1,6 +1,6 @@
 import axios from 'axios'
 import * as qs from 'qs'
-import { Message, Notification } from 'element-react'
+import { message, notification } from 'antd'
 
 import { getCookie } from './'
 import { COOKIE_KEYS } from '@constants/index'
@@ -53,8 +53,10 @@ methods.forEach(v => {
             response => {
                 if (!showAuthError && response.data.code === 402) {
                     showAuthError = true
-                    Notification.error({
-                        message: '登录已经过期'
+                    notification.destroy()
+                    notification.error({
+                        message: '错误',
+                        description: '登录已经过期'
                     })
                     setTimeout(() => {
                         showAuthError = false
@@ -65,8 +67,10 @@ methods.forEach(v => {
                     })
                 }
                 if (response.data.code === 401) {
-                    Notification.error({
-                        message: '你没有权限访问'
+                    notification.destroy()
+                    notification.error({
+                        message: '错误',
+                        description: '你没有权限访问'
                     })
                     return Promise.reject({
                         msg: '你没有权限访问'
@@ -114,13 +118,8 @@ methods.forEach(v => {
             .request(axiosConfig)
             .then(res => res)
             .catch(err => {
-                err.msg && err.msg.indexOf('</') > 0
-                    ? Message({
-                          showClose: true,
-                          duration: 0,
-                          message: err.msg
-                      })
-                    : Message.error(err.response || err.msg || err.stack || '未知错误')
+                message.destroy()
+                message.error(err.response || err.msg || err.stack || '未知错误')
                 if (axiosConfig.url.includes('autoScript.set')) {
                     return Promise.resolve({
                         err

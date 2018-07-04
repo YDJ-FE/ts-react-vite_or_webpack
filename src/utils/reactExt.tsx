@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Message, Notification } from 'element-react'
+import { message, notification } from 'antd'
 
 import * as api from '@services/api'
 
@@ -9,12 +9,12 @@ import * as api from '@services/api'
  */
 export class ComponentExt<P = {}, S = {}> extends React.Component<P, S> {
     readonly api = api
-    readonly $message = Message
-    readonly $notification = Notification
+    readonly $message = message
+    readonly $notification = notification
 }
 
 export class StoreExt {
     readonly api = api
-    readonly $message = Message
-    readonly $notification = Notification
+    readonly $message = message
+    readonly $notification = notification
 }

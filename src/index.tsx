@@ -1,5 +1,4 @@
 import './styles/app.scss'
-import 'element-theme-default'
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'

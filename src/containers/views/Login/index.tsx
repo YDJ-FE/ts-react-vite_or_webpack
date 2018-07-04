@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { inject, observer } from 'mobx-react'
-import { Button } from 'element-react'
+import { Button } from 'antd'
 
 import * as styles from './index.css'
 
 interface Props {
-    userStore?: Store.IUserStore
+    userStore?: IUserStore.UserStore
 }
 
 function Login(props: Props) {
