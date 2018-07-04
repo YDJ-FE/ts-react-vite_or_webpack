@@ -2,9 +2,8 @@
 
 .login {
     display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
     font-size: 100px;
-}
-
-.test {
-    color: red;
 }

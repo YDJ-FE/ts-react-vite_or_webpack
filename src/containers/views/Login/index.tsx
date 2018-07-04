@@ -11,7 +11,7 @@ interface Props {
 function Login(props: Props) {
     const { userStore } = props
     return (
-        <div className={styles.test}>
+        <div className={styles.login}>
             Login
             <div>
                 <Button type="primary" onClick={userStore.login}>
