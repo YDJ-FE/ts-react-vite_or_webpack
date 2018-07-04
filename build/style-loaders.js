@@ -4,6 +4,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const config = require('./config')
 const { resolve } = require('./utils')
 
+const sassLoader = {
+    loader: 'sass-loader',
+    options: {
+        includePaths: [require('bourbon').includePaths, resolve('src/styles')]
+    }
+}
+
 const typingsForCssModulesLoaderConf = {
     loader: 'typings-for-css-modules-loader',
     options: {
@@ -23,26 +30,13 @@ module.exports = [
         use: [config.extractCss ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader']
     },
     {
-        test: /\.css$/,
+        test: /\.scss$/,
         include: [resolve('src')],
         use: [
             config.extractCss ? MiniCssExtractPlugin.loader : 'style-loader',
             typingsForCssModulesLoaderConf,
+            sassLoader,
             { loader: 'postcss-loader' }
-        ]
-    },
-    {
-        test: /\.scss$/,
-        include: resolve('src/styles'),
-        rules: [
-            {
-                use: [
-                    config.extractCss ? MiniCssExtractPlugin.loader : 'style-loader',
-                    'css-loader',
-                    'sass-loader',
-                    'postcss-loader'
-                ]
-            }
         ]
     }
 ]

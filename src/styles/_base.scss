@@ -1,0 +1,9 @@
+// 所有sass文件依赖基础入口
+// 注意： 因为所有scss文件都依赖，
+//       此文件包括此文件依赖的所有模块都不能有实际的css代码输出，
+//       避免太多重复的css代码输出
+
+@import './_var.scss';
+
+// -------- bourbon --------
+@import '~bourbon/core/_bourbon.scss';

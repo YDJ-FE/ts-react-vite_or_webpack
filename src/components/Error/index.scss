@@ -1,3 +1,5 @@
+@import '_base.scss';
+
 .centered {
     position: fixed;
     left: 50%;
@@ -12,7 +14,7 @@
 }
 
 .title {
+    color: grey;
     font-size: 3em;
     text-align: center;
-    color: grey;
 }

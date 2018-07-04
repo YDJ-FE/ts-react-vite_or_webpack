@@ -1,9 +1,7 @@
+@import '_base.scss';
+
 .home {
     display: flex;
     justify-content: center;
     font-size: 100px;
-}
-
-.test {
-    composes: home;
 }

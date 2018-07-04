@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import * as styles from './index.css'
+import * as styles from './index.scss'
 
 const Error = () => (
     <div className={styles.centered}>

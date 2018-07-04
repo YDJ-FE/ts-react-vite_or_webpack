@@ -2,7 +2,7 @@ import * as React from 'react'
 import { inject, observer } from 'mobx-react'
 import { Button } from 'antd'
 
-import * as styles from './index.css'
+import * as styles from './index.scss'
 
 interface Props {
     userStore?: IUserStore.UserStore
@@ -12,8 +12,7 @@ function Login(props: Props) {
     const { userStore } = props
     return (
         <div className={styles.test}>
-            {process.env.APP_ENV}
-            ... Login !!!...
+            Login
             <div>
                 <Button type="primary" onClick={userStore.login}>
                     成功!
