@@ -20,6 +20,6 @@ typescript + react + webpack4 starter
 -   Mobx
 -   Antd
 
-## what's next
+## 脚手架
 
--   jest
+[steamer-react-redux-ts](https://github.com/YDJ-FE/steamer-react-redux-ts)
