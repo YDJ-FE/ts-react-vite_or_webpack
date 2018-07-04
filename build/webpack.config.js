@@ -26,7 +26,9 @@ module.exports = {
             '@services': resolve('src/services'),
             '@utils': resolve('src/utils'),
             '@assets': resolve('src/assets'),
-            '@components': resolve('src/components')
+            '@components': resolve('src/components'),
+            '@views': resolve('src/containers/views'),
+            '@shared': resolve('src/containers/shared')
         }
     },
     module: {

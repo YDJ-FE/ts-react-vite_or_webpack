@@ -13,7 +13,9 @@
             "@services/*": ["services/*"],
             "@utils/*": ["utils/*"],
             "@assets/*": ["assets/*"],
-            "@components/*": ["components/*"]
+            "@components/*": ["components/*"],
+            "@views/*": ["containers/views/*"],
+            "@shared/*": ["containers/shared/*"]
         },
         "jsx": "react",
         "alwaysStrict": true,

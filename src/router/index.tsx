@@ -6,11 +6,11 @@ import PageLoading from '@components/PageLoading'
 import Error from '@components/Error'
 
 const Home = Loadable({
-    loader: () => import(/* webpackChunkName: "home" */ './../views/Home'),
+    loader: () => import(/* webpackChunkName: "home" */ '@views/Home'),
     loading: PageLoading
 })
 const Login = Loadable({
-    loader: () => import(/* webpackChunkName: "login" */ './../views/Login'),
+    loader: () => import(/* webpackChunkName: "login" */ '@views/Login'),
     loading: PageLoading
 })
 
