@@ -1,21 +1,18 @@
-import * as md5 from 'blueimp-md5'
-import { observable, action, runInAction, computed } from 'mobx'
+import { observable, action, runInAction } from 'mobx'
 
-import { StoreExt } from './../../utils/reactExt'
-import { setCookie } from './../../utils'
-import { COOKIE_KEYS, LOCALSTORAGE_KEYS } from './../../constants'
+import { StoreExt } from '@utils/reactExt'
 
-class UserStore extends StoreExt {
+export class UserStore extends StoreExt {
     @observable loading: boolean = false
 
     @action
     login = async (): Promise<any> => {
         this.loading = true
         try {
-            const res = await this.api.getUserInfo({})
-            this.$message.success(JSON.stringify(res))
+            const res: IUserStore.UserInfo = await this.api.getUserInfo({})
+            this.$message.success(res.msg)
         } catch (err) {}
-        runInAction('hideLoading', () => {
+        runInAction('HIDE_LOGIN_LOADING', () => {
             this.loading = false
         })
     }
@@ -28,6 +25,4 @@ class UserStore extends StoreExt {
     }
 }
 
-const userStore = new UserStore()
-
-export { userStore, UserStore }
+export default new UserStore()

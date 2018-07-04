@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Message, Notification } from 'element-react'
 
-import * as api from './api'
+import * as api from '@services/api'
 
 /**
  * 扩展组件/store类以方便调用

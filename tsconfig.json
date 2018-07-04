@@ -9,9 +9,11 @@
         "rootDirs": ["./src"],
         "baseUrl": "./src",
         "paths": {
+            "@constants/*": ["constants/*"],
+            "@services/*": ["services/*"],
             "@utils/*": ["utils/*"],
             "@assets/*": ["assets/*"],
-            "@components/*": ["components/*"],
+            "@components/*": ["components/*"]
         },
         "jsx": "react",
         "alwaysStrict": true,
@@ -19,16 +21,8 @@
         "noUnusedLocals": true,
         "importHelpers": true,
         "experimentalDecorators": true,
-        "lib": [
-            "esnext",
-            "es7",
-            "es6",
-            "es5",
-            "es2015.promise",
-            "es2015.generator",
-            "dom"
-        ],
+        "lib": ["esnext", "es7", "es6", "es5", "es2015.promise", "es2015.generator", "dom"],
         "skipLibCheck": true,
-        "typeRoots": ["node", "node_modules/@types"]
+        "typeRoots": ["node", "node_modules/@types", "./typings"]
     }
 }

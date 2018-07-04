@@ -1,1 +1,1 @@
-export { userStore } from './userStore'
+export { default as userStore } from './userStore'

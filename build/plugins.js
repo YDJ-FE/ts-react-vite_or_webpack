@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 
 const constants = require('./constants')
 const config = require('./config')
@@ -19,6 +20,9 @@ for (let key in oriEnv) {
 
 const basePlugins = [
     new webpack.DefinePlugin(defineEnv),
+    new MomentLocalesPlugin({
+        localesToKeep: ['es-us', 'zh-cn']
+    })
 ]
 
 const devPlugins = [
@@ -45,9 +49,11 @@ const prodPlugins = [
         // necessary to consistently work with multiple chunks via CommonsChunkPlugin
         chunksSortMode: 'dependency'
     }),
-    new ExtractTextPlugin({
-        allChunks: true,
-        filename: assetsPath('css/[name].[contenthash].css')
+    new MiniCssExtractPlugin({
+        // Options similar to the same options in webpackOptions.output
+        // both options are optional
+        filename: assetsPath('css/[name].[hash].css'),
+        chunkFilename: assetsPath('css/[name].[id].[hash].css')
     })
 ]
 

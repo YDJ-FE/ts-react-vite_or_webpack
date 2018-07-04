@@ -1,3 +1,9 @@
 {
-  "git.ignoreLimitWarning": true
+    "prettier.stylelintIntegration": true,
+    "prettier.tabWidth": 4,
+    "prettier.singleQuote": true,
+    "prettier.semi": false,
+    "prettier.printWidth": 120,
+    "beautify.ignore": ["**/*.css", "**/*.scss", "**/*.js", "**/*.ts", "**/*.tsx"],
+    "typescript.tsdk": "node_modules/typescript/lib"
 }

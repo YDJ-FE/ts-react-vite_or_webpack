@@ -1,5 +1,5 @@
 const path = require('path')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const config = require('./config')
 const { resolve } = require('./utils')
@@ -16,74 +16,33 @@ const typingsForCssModulesLoaderConf = {
     }
 }
 
-function getLoadingWithoutSourceMap(loader) {
-    return {
-        loader,
-        options: { sourceMap: false }
+module.exports = [
+    {
+        test: /\.css$/,
+        include: [resolve('node_modules')],
+        use: [config.extractCss ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader']
+    },
+    {
+        test: /\.css$/,
+        include: [resolve('src')],
+        use: [
+            config.extractCss ? MiniCssExtractPlugin.loader : 'style-loader',
+            typingsForCssModulesLoaderConf,
+            { loader: 'postcss-loader' }
+        ]
+    },
+    {
+        test: /\.scss$/,
+        include: resolve('src/styles'),
+        rules: [
+            {
+                use: [
+                    config.extractCss ? MiniCssExtractPlugin.loader : 'style-loader',
+                    'css-loader',
+                    'sass-loader',
+                    'postcss-loader'
+                ]
+            }
+        ]
     }
-}
-
-module.exports = config.extractCss
-    ? [
-          {
-              test: /\.css$/,
-              include: [resolve('node_modules')],
-              use: ExtractTextPlugin.extract({
-                  fallback: 'style-loader',
-                  use: [getLoadingWithoutSourceMap('css-loader')]
-              })
-          },
-          {
-              test: /\.css$/,
-              include: [resolve('src')],
-              use: ExtractTextPlugin.extract({
-                  fallback: 'style-loader',
-                  use: [
-                      typingsForCssModulesLoaderConf,
-                      getLoadingWithoutSourceMap('postcss-loader')
-                  ]
-              })
-          },
-          {
-              test: /\.scss$/,
-              include: resolve('src/styles'),
-              use: ExtractTextPlugin.extract({
-                  fallback: 'style-loader',
-                  use: [
-                      getLoadingWithoutSourceMap('css-loader'),
-                      getLoadingWithoutSourceMap('sass-loader'),
-                      getLoadingWithoutSourceMap('postcss-loader')
-                  ]
-              })
-          }
-      ]
-    : [
-          {
-              test: /\.css$/,
-              include: [resolve('node_modules')],
-              use: ['style-loader', 'css-loader']
-          },
-          {
-              test: /\.css$/,
-              include: [resolve('src')],
-              use: [
-                  'style-loader',
-                  typingsForCssModulesLoaderConf,
-                  { loader: 'postcss-loader' }
-              ]
-          },
-          {
-              test: /\.scss$/,
-              include: resolve('src/styles'),
-              rules: [
-                  {
-                      use: [
-                          'style-loader',
-                          'css-loader',
-                          'sass-loader',
-                          'postcss-loader'
-                      ]
-                  }
-              ]
-          }
-      ]
+]

@@ -1,4 +1,4 @@
-import http from './http'
+import http from '@utils/http'
 
 export function getUserInfo(data): Promise<any> {
     return http.get('/2412/GET/example/haha', data || {})

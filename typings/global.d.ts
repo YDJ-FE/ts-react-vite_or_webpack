@@ -6,14 +6,6 @@ declare var process: {
     }
 }
 
-declare module '*.css' {
-    interface IClassNames {
-        [className: string]: string
-    }
-    const classNames: IClassNames
-    export = classNames
-}
-
 declare interface PlainObject {
     [propName: string]: any
 }

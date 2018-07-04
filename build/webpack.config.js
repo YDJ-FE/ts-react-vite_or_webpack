@@ -14,24 +14,19 @@ module.exports = {
     },
     output: {
         path: config.assetsRoot,
-        filename:
-            constants.APP_ENV === 'dev'
-                ? '[name].js'
-                : assetsPath('js/[name].[chunkhash].js'),
-        chunkFilename:
-            constants.APP_ENV === 'dev'
-                ? '[name].js'
-                : assetsPath('js/[name].[id].[chunkhash].js'),
+        filename: constants.APP_ENV === 'dev' ? '[name].js' : assetsPath('js/[name].[chunkhash].js'),
+        chunkFilename: constants.APP_ENV === 'dev' ? '[name].js' : assetsPath('js/[name].[id].[chunkhash].js'),
         publicPath: config.assetsPublicPath
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json'],
         modules: [resolve('src'), resolve('node_modules')],
         alias: {
+            '@constants': resolve('src/constants'),
+            '@services': resolve('src/services'),
             '@utils': resolve('src/utils'),
             '@assets': resolve('src/assets'),
-            '@components': resolve('src/components'),
-            '@css-modules': resolve('src/styles/css-modules')
+            '@components': resolve('src/components')
         }
     },
     module: {

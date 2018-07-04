@@ -2,8 +2,8 @@ import * as React from 'react'
 import Loadable from 'react-loadable'
 import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
-import PageLoading from './../components/PageLoading'
-import Error from './../components/Error'
+import PageLoading from '@components/PageLoading'
+import Error from '@components/Error'
 
 const Home = Loadable({
     loader: () => import(/* webpackChunkName: "home" */ './../views/Home'),

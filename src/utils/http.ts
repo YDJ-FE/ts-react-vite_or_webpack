@@ -1,11 +1,10 @@
 import axios from 'axios'
 import * as qs from 'qs'
-import * as md5 from 'blueimp-md5'
 import { Message, Notification } from 'element-react'
 
-import { getCookie } from './../'
-import { COOKIE_KEYS } from './../../constants'
-import { AxiosRequestConfig, HttpResquest } from './../../types/interface'
+import { getCookie } from './'
+import { COOKIE_KEYS } from '@constants/index'
+import { AxiosRequestConfig, HttpResquest } from '../types/http'
 
 enum HTTPERROR {
     LOGICERROR,
@@ -22,8 +21,7 @@ const DEFAULTCONFIG = {
 const http: HttpResquest = {}
 const methods = ['get', 'post', 'put', 'delete']
 
-const isSuccess = res =>
-    res.code !== undefined && res.code !== null && Number(res.code) === 1
+const isSuccess = res => res.code !== undefined && res.code !== null && Number(res.code) === 1
 const resFormat = res => res.response || res.data || {}
 
 methods.forEach(v => {
@@ -40,7 +38,7 @@ methods.forEach(v => {
                 const ts = Date.now() / 1000
                 const queryData = {
                     ts,
-                    token: getCookie(COOKIE_KEYS.token)
+                    token: getCookie(COOKIE_KEYS.TOKEN)
                 }
                 cfg.params = {
                     ...cfg.params,
@@ -75,10 +73,7 @@ methods.forEach(v => {
                     })
                 }
                 let rdata = null
-                if (
-                    typeof response.data === 'object' &&
-                    !isNaN(response.data.length)
-                ) {
+                if (typeof response.data === 'object' && !isNaN(response.data.length)) {
                     rdata = response.data[0]
                 } else {
                     rdata = response.data
@@ -125,9 +120,7 @@ methods.forEach(v => {
                           duration: 0,
                           message: err.msg
                       })
-                    : Message.error(
-                          err.response || err.msg || err.stack || '未知错误'
-                      )
+                    : Message.error(err.response || err.msg || err.stack || '未知错误')
                 if (axiosConfig.url.includes('autoScript.set')) {
                     return Promise.resolve({
                         err
