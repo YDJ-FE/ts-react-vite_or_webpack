@@ -2,12 +2,12 @@
 
 typescript + react + webpack4 starter
 
-## run
+## 运行
 
 1.  npm i
 2.  npm run dev
 
-## joined
+## 功能(包)支持
 
 -   webpack-4
 -   typescript
@@ -16,7 +16,7 @@ typescript + react + webpack4 starter
 -   component hot reload
 -   async component
 -   import .(s)css auto generate .(s)css.d.ts
--   svg icon
+-   import svg icon as a component
 -   Mobx
 -   Antd
 

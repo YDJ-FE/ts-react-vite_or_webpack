@@ -53,7 +53,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                test: /\.(png|jpe?g|gif)(\?.*)?$/,
                 loader: 'url-loader',
                 query: {
                     limit: 10000,
@@ -67,6 +67,10 @@ module.exports = {
                     limit: 10000,
                     name: assetsPath('fonts/[name].[hash:7].[ext]')
                 }
+            },
+            {
+                test: /\.svg$/,
+                loader: '@svgr/webpack'
             }
         ]
     },
