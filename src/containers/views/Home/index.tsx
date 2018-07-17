@@ -1,11 +1,11 @@
 import * as React from 'react'
 
 import * as styles from './index.scss'
-import Icon from '@components/Icons'
+import IconReact from '@assets/svg/react.svg'
 
 const Home = () => (
     <div className={styles.home}>
-        <Icon kind="react" />
+        <IconReact width={180} height={180} color="purple" />
         <div className={styles.home}>home</div>
     </div>
 )

@@ -22,6 +22,7 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js', '.json'],
         modules: [resolve('src'), resolve('node_modules')],
         alias: {
+            mobx: resolve('node_modules/mobx/lib/mobx.es6.js'),
             '@constants': resolve('src/constants'),
             '@services': resolve('src/services'),
             '@utils': resolve('src/utils'),

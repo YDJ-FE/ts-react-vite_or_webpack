@@ -23,7 +23,7 @@
         "noUnusedLocals": true,
         "importHelpers": true,
         "experimentalDecorators": true,
-        "lib": ["esnext", "es7", "es6", "es5", "es2015.promise", "es2015.generator", "dom"],
+        "lib": ["es7", "dom"],
         "skipLibCheck": true,
         "typeRoots": ["node", "node_modules/@types", "./typings"]
     }
