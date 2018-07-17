@@ -19,7 +19,6 @@
         },
         "jsx": "react",
         "alwaysStrict": true,
-        "allowJs": true,
         "noUnusedLocals": true,
         "importHelpers": true,
         "experimentalDecorators": true,
