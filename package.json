@@ -1,7 +1,7 @@
 {
     "name": "ts-react-webpack4",
     "version": "1.0.0",
-    "description": "ts-react-webpack4",
+    "description": "a starter-template with typescript, react and webpack4...",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
