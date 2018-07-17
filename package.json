@@ -12,7 +12,10 @@
         "prod": "cross-env APP_ENV=prod npm run build"
     },
     "keywords": [
-        "ts-react-webpack4"
+        "webpack4",
+        "typescript",
+        "react",
+        "starter-template"
     ],
     "author": "jackple",
     "license": "MIT",
