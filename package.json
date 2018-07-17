@@ -9,8 +9,7 @@
         "dev": "cross-env APP_ENV=dev webpack-dev-server --config build/webpack.config.js --mode development --progress --open --hot",
         "build": "webpack --config build/webpack.config.js --mode production",
         "qa": "cross-env APP_ENV=qa npm run build",
-        "prod": "cross-env APP_ENV=prod npm run build",
-        "svg": "node ./tool/generator-svg.js"
+        "prod": "cross-env APP_ENV=prod npm run build"
     },
     "keywords": [
         "ts-react-webpack4"
