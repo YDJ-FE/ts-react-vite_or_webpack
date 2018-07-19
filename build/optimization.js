@@ -1,4 +1,5 @@
 const constants = require('./constants')
+const config = require('./config')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
