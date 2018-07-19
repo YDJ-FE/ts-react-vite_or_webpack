@@ -28,8 +28,10 @@ module.exports =
                   }),
                   new OptimizeCSSAssetsPlugin({
                       cssProcessor: require('cssnano'),
-                      cssProcessorOptions: { safe: true, discardComments: { removeAll: true } },
-                      canPrint: true
+                      cssProcessorOptions: {
+                          reduceIdents: false,
+                          autoprefixer: false
+                      }
                   })
               ]
           }
