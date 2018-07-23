@@ -3,7 +3,9 @@ const webpack = require('webpack')
 
 const config = require('./config')
 const constants = require('./constants')
-const styleLoaders = require('./style-loaders')
+const styleRules = require('./rules/styleRules')
+const jsRules = require('./rules/jsRules')
+const fileRules = require('./rules/fileRules')
 const plugins = require('./plugins')
 const { assetsPath, resolve } = require('./utils')
 const optimization = require('./optimization')
@@ -33,47 +35,7 @@ module.exports = {
         }
     },
     module: {
-        rules: [
-            ...styleLoaders,
-            {
-                test: /\.(ts(x?)|js(x?))$/,
-                include: [resolve('src')],
-                exclude: /node_modules/,
-                use: [
-                    'cache-loader',
-                    'thread-loader',
-                    'babel-loader',
-                    {
-                        loader: 'ts-loader',
-                        options: {
-                            // IMPORTANT! use happyPackMode mode to speed-up compilation and reduce errors reported to webpack
-                            happyPackMode: true,
-                            transpileOnly: true
-                        }
-                    }
-                ]
-            },
-            {
-                test: /\.(png|jpe?g|gif)(\?.*)?$/,
-                loader: 'url-loader',
-                query: {
-                    limit: 10000,
-                    name: assetsPath('img/[name].[hash:7].[ext]')
-                }
-            },
-            {
-                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-                loader: 'url-loader',
-                query: {
-                    limit: 10000,
-                    name: assetsPath('fonts/[name].[hash:7].[ext]')
-                }
-            },
-            {
-                test: /\.svg$/,
-                loader: '@svgr/webpack'
-            }
-        ]
+        rules: [...styleRules, ...jsRules, ...fileRules]
     },
     plugins,
     optimization,
