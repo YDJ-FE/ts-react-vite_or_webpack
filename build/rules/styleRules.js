@@ -11,18 +11,24 @@ const sassLoader = {
     }
 }
 
-const lessLoader = {
-    loader: 'less-loader',
-    options: {
-        javascriptEnabled: true
-    }
-}
-
 const cacheLoader = {
     loader: 'cache-loader',
     options: {
         // provide a cache directory where cache items should be stored
-        cacheDirectory: resolve('.cache-loader')
+        cacheDirectory: resolve('.awcache')
+    }
+}
+
+const typingsForCssModulesLoader = {
+    loader: 'typings-for-css-modules-loader',
+    options: {
+        localIdentName: '[name]-[local]-[hash:base64:5]',
+        module: true,
+        namedExport: true,
+        camelCase: true,
+        sourceMap: false,
+        importLoaders: 2,
+        sass: true
     }
 }
 
@@ -30,31 +36,25 @@ module.exports = [
     {
         test: /\.css$/,
         include: [resolve('node_modules')],
-        use: [config.extractCss ? MiniCssExtractPlugin.loader : 'style-loader', cacheLoader, 'css-loader']
-    },
-    {
-        test: /\.scss$/,
-        rules: [
-            {
-                use: [
-                    config.extractCss ? MiniCssExtractPlugin.loader : 'style-loader',
-                    cacheLoader,
-                    'css-loader',
-                    sassLoader
-                ]
-            }
+        use: [
+            config.extractCss ? MiniCssExtractPlugin.loader : 'style-loader',
+            cacheLoader,
+            'css-loader'
+            // 'postcss-loader'
         ]
     },
     {
-        // 用于antd按需加载
-        test: /\.less$/,
+        test: /\.scss$/,
+        include: [resolve('src')],
         rules: [
             {
                 use: [
                     config.extractCss ? MiniCssExtractPlugin.loader : 'style-loader',
                     cacheLoader,
                     'css-loader',
-                    lessLoader
+                    typingsForCssModulesLoader,
+                    sassLoader
+                    // 'postcss-loader'
                 ]
             }
         ]

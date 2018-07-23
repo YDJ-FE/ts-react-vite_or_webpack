@@ -1,1 +1,1 @@
-export const login: string;
+export {};

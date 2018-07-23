@@ -1,1 +1,1 @@
-export const home: string;
+export {};
