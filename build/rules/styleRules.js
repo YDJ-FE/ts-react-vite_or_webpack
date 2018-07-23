@@ -15,19 +15,16 @@ const cacheLoader = {
     loader: 'cache-loader',
     options: {
         // provide a cache directory where cache items should be stored
-        cacheDirectory: resolve('.awcache')
+        cacheDirectory: resolve('.cache-loader')
     }
 }
 
 const typingsForCssModulesLoader = {
     loader: 'typings-for-css-modules-loader',
     options: {
-        localIdentName: '[name]-[local]-[hash:base64:5]',
-        module: true,
+        modules: true,
         namedExport: true,
         camelCase: true,
-        sourceMap: false,
-        importLoaders: 2,
         sass: true
     }
 }
@@ -39,8 +36,8 @@ module.exports = [
         use: [
             config.extractCss ? MiniCssExtractPlugin.loader : 'style-loader',
             cacheLoader,
-            'css-loader'
-            // 'postcss-loader'
+            'css-loader',
+            'postcss-loader'
         ]
     },
     {
@@ -50,11 +47,9 @@ module.exports = [
             {
                 use: [
                     config.extractCss ? MiniCssExtractPlugin.loader : 'style-loader',
-                    cacheLoader,
-                    'css-loader',
                     typingsForCssModulesLoader,
+                    'postcss-loader',
                     sassLoader
-                    // 'postcss-loader'
                 ]
             }
         ]

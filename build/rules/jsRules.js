@@ -9,6 +9,7 @@ module.exports = [
             {
                 loader: 'awesome-typescript-loader',
                 options: {
+                    transpileOnly: true,
                     useCache: true,
                     useBabel: true,
                     babelOptions: {
