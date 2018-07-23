@@ -1,0 +1,16 @@
+import * as React from 'react'
+
+import * as styles from './index.scss'
+import { ComponentExt } from '@utils/reactExt'
+
+export interface Props {}
+
+export default class ${TemplateName} extends ComponentExt<Props> {
+    constructor(props) {
+        super(props)
+    }
+
+    render() {
+        return <div>${TemplateName}</div>
+    }
+}

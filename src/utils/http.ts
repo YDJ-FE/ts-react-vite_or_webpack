@@ -1,10 +1,20 @@
-import axios from 'axios'
+import axios, { AxiosRequestConfig as _AxiosRequestConfig} from 'axios'
 import * as qs from 'qs'
 import { message, notification } from 'antd'
 
 import { getCookie } from './'
 import { COOKIE_KEYS } from '@constants/index'
-import { AxiosRequestConfig, HttpResquest } from '../types/http'
+
+export interface AxiosRequestConfig extends _AxiosRequestConfig {
+    startTime?: Date
+}
+
+export interface HttpResquest {
+    get?(url, data, baseUrl?): Promise<any>
+    post?(url, data, baseUrl?): Promise<any>
+    delete?(url, data, baseUrl?): Promise<any>
+    put?(url, data, baseUrl?): Promise<any>
+}
 
 enum HTTPERROR {
     LOGICERROR,

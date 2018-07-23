@@ -1,0 +1,5 @@
+{
+    "templatepath": "tool",
+    "componentPlacementPath": "src",
+    "filterPath": ["src/services", "src/assets", "src/constants", "src/router", "src/store", "src/utils", "src/styles"]
+}
