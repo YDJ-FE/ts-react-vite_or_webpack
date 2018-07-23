@@ -13,12 +13,13 @@ typescript + react + webpack4 starter
 -   typescript
 -   react
 -   react-router-4
+-   Mobx
+-   Antd
 -   component hot reload
 -   async component
 -   import .(s)css auto generate .(s)css.d.ts
 -   import svg icon as a component
--   Mobx
--   Antd
+-   create component folder by `npm run add`
 
 ## 脚手架
 
