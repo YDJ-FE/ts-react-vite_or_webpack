@@ -16,7 +16,7 @@ function Login(props: Props) {
     }
     return (
         <div className={styles.login}>
-            Login
+            Login!
             <div>
                 <Button type="primary" onClick={gotoHome}>
                     直接跳转到首页
