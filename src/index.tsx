@@ -2,7 +2,6 @@ import './index.scss'
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { AppContainer } from 'react-hot-loader'
 import { Provider } from 'mobx-react'
 import { configure } from 'mobx'
 import createHashHistory from 'history/createHashHistory'
@@ -20,11 +19,9 @@ configure({ enforceActions: true })
 const render = Component => {
     ReactDOM.render(
         <Provider {...store}>
-            <AppContainer>
-                <Router history={history}>
-                    <Component />
-                </Router>
-            </AppContainer>
+            <Router history={history}>
+                <Component />
+            </Router>
         </Provider>,
         document.getElementById('app') as HTMLElement
     )
