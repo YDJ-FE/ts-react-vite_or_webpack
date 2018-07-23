@@ -67,7 +67,6 @@
         "stylelint-config-ydj": "^0.1.1",
         "stylelint-order": "^0.8.1",
         "ts-import-plugin": "^1.5.4",
-        "ts-loader": "^4.0.1",
         "tslib": "^1.9.0",
         "tslint": "^5.11.0",
         "tslint-react": "^3.5.1",
