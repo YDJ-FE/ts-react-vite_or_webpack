@@ -1,17 +1,15 @@
-# ts-react-webpack4
-
 typescript + react + webpack4 starter
 
-## 本地开发
+## build for development
 
 1.  npm i
 2.  npm run dev
 
-## 部署打包
+## build for production
 
 1.  npm run qa/prod
 
-## 功能(包)支持
+## characteristics/packages
 
 -   webpack-4
 -   typescript
@@ -26,6 +24,6 @@ typescript + react + webpack4 starter
 -   [import svg icon as a component](https://github.com/YDJ-FE/steamer-react-ts/blob/master/docs/svg.md)
 -   create component folder by `npm run add`
 
-## 脚手架
+## the scaffold
 
 [steamer-react-redux-ts](https://github.com/YDJ-FE/steamer-react-redux-ts)
