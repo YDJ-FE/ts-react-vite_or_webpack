@@ -7,7 +7,8 @@ typescript + react + webpack4 starter
 
 ## build for production
 
-1.  npm run qa/prod
+1.  npm i
+2.  npm run qa/prod
 
 ## characteristics/packages
 
