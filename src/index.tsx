@@ -12,7 +12,7 @@ import AppRouter from './router'
 import * as store from './store'
 
 const hashHistory = createHashHistory()
-const history = syncHistoryWithStore(hashHistory, store.routingStore)
+const history = syncHistoryWithStore(hashHistory, store.routerStore)
 
 configure({ enforceActions: true })
 

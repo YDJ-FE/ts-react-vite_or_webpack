@@ -6,13 +6,13 @@ import * as styles from './index.scss'
 
 interface Props {
     userStore?: IUserStore.UserStore
-    routingStore?: RouterStore
+    routerStore?: RouterStore
 }
 
 function Login(props: Props) {
-    const { userStore, routingStore } = props
+    const { userStore, routerStore } = props
     const gotoHome = () => {
-        routingStore.push('/')
+        routerStore.push('/')
     }
     return (
         <div className={styles.login}>
@@ -32,4 +32,4 @@ function Login(props: Props) {
     )
 }
 
-export default inject('userStore', 'routingStore')(observer(Login))
+export default inject('userStore', 'routerStore')(observer(Login))

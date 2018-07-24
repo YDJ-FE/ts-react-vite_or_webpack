@@ -1,7 +1,7 @@
 import { observable, action, runInAction } from 'mobx'
 
 import { StoreExt } from '@utils/reactExt'
-import { routingStore } from './../'
+import { routerStore } from './../'
 
 export class UserStore extends StoreExt {
     @observable loading: boolean = false
@@ -12,7 +12,7 @@ export class UserStore extends StoreExt {
         try {
             const res: IUserStore.UserInfo = await this.api.getUserInfo({})
             this.$message.success(res.msg)
-            routingStore.push('/')
+            routerStore.push('/')
         } catch (err) {}
         runInAction('HIDE_LOGIN_LOADING', () => {
             this.loading = false
