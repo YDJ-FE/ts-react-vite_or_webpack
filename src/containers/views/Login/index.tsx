@@ -17,15 +17,15 @@ function Login(props: Props) {
     return (
         <div className={styles.login}>
             Login!!!
-            <div>
+            <div className={styles.btnGroup}>
                 <Button type="primary" onClick={gotoHome}>
-                    直接跳转到首页
+                    go to page index directly
                 </Button>
                 <Button type="primary" onClick={userStore.login}>
-                    成功!
+                    go to page index when request successfully
                 </Button>
                 <Button type="danger" onClick={userStore.getError}>
-                    失败
+                    must be error
                 </Button>
             </div>
         </div>

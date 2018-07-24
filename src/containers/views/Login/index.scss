@@ -8,7 +8,13 @@
     align-items: center;
     font-size: 100px;
 
-    button {
-        margin-right: 10px;
+    .btnGroup {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        button {
+            margin-top: 20px;
+        }
     }
 }
