@@ -1,14 +1,22 @@
 typescript + react + webpack4 starter
 
+## setup
+
+```bash
+$ npm i
+```
+
 ## build for development
 
-1.  npm i
-2.  npm run dev
+```bash
+$ npm run dev
+```
 
 ## build for production
 
-1.  npm i
-2.  npm run qa/prod
+```bash
+$ npm run qa/prod
+```
 
 ## characteristics/packages
 
@@ -18,12 +26,77 @@ typescript + react + webpack4 starter
 -   mobx
 -   react-router-4
 -   mobx-react-router
--   ant design
 -   component hot reload
--   async component
--   import .(s)css auto generate .(s)css.d.ts
--   [import svg icon as a component](https://github.com/YDJ-FE/steamer-react-ts/blob/master/docs/svg.md)
--   create component folder by `npm run add`
+-   use [ant design](https://ant.design/index-cn) as UI framework
+-   [import svg icon as a component](https://github.com/YDJ-FE/steamer-react-ts/blob/master/docs/svg.md) by `@svgr/webpack`
+-   async to load component by `react-loadable`
+-   import .(s)css auto generate .(s)css.d.ts by `typings-for-css-modules-loader`
+-   create component folder by `customaddcomponents` which is added to npm script `npm run add`
+
+## functional demo
+
+### mobx-react-router
+
+```jsx
+import * as React from 'react'
+import { inject, observer } from 'mobx-react'
+import { Button } from 'antd'
+
+import * as styles from './index.scss'
+
+interface Props {
+    routerStore?: RouterStore;
+}
+
+function Test(props: Props) {
+    const { routerStore } = props
+    const gotoHome = () => {
+        routerStore.push('/')
+    }
+    return (
+        <div className={styles.login}>
+            Login!!!
+            <div className={styles.btnGroup}>
+                <Button type="primary" onClick={gotoHome}>
+                    go to page index directly
+                </Button>
+            </div>
+        </div>
+    )
+}
+
+export default inject('routerStore')(observer(Login))
+```
+
+[live example](https://github.com/YDJ-FE/ts-react-webpack4/blob/master/src/containers/views/Login/index.tsx?1532570619900)
+
+### async to load component
+
+```jsx
+import * as React from 'react'
+import { hot } from 'react-hot-loader'
+import Loadable from 'react-loadable'
+import { HashRouter as Router, Switch, Route } from 'react-router-dom'
+
+import PageLoading from '@components/PageLoading'
+
+const Test = Loadable({
+    loader: () => import(/* webpackChunkName: "test" */ './Test'),
+    loading: PageLoading
+})
+
+const AppRouter = () => (
+    <Router>
+        <Switch>
+            <Route exact path="/test" component={Test} />
+        </Switch>
+    </Router>
+)
+
+export default hot(module)(AppRouter)
+```
+
+[live example](https://github.com/YDJ-FE/ts-react-webpack4/blob/master/src/router/index.tsx?1532570654913)
 
 ## the scaffold
 
