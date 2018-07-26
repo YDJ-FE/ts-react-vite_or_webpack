@@ -3,6 +3,7 @@ import { hot } from 'react-hot-loader'
 import Loadable from 'react-loadable'
 import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
+import * as styles from './index.scss'
 import PageLoading from '@components/PageLoading'
 import Error from '@components/Error'
 
@@ -34,14 +35,18 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     />
 )
 
+const AppWrapper = props => <div className={styles.appWrapper}>{props.children}</div>
+
 const AppRouter = () => (
-    <Router>
-        <Switch>
-            <PrivateRoute exact path="/" component={Home} />
-            <Route exact path="/login" component={Login} />
-            <Route component={Error} />
-        </Switch>
-    </Router>
+    <AppWrapper>
+        <Router>
+            <Switch>
+                <Route exact path="/login" component={Login} />
+                <PrivateRoute path="/" component={Home} />
+                <Route component={Error} />
+            </Switch>
+        </Router>
+    </AppWrapper>
 )
 
 export default hot(module)(AppRouter)

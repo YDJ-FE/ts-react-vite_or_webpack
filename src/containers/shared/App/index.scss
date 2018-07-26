@@ -1,0 +1,11 @@
+@import '_base.scss';
+
+.appWrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    overflow: auto;
+    min-height: 100%;
+    flex-direction: column;
+}

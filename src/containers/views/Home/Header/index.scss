@@ -1,0 +1,21 @@
+@import '_base.scss';
+
+.header {
+    display: flex;
+    padding: 0;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+}
+
+.trigger {
+    padding: 0 24px;
+    font-size: 18px;
+    line-height: 64px;
+    cursor: pointer;
+    transition: color 0.3s;
+
+    &:hover {
+        color: $primary-color;
+    }
+}

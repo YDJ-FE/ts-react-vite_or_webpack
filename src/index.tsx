@@ -8,7 +8,7 @@ import createHashHistory from 'history/createHashHistory'
 import { syncHistoryWithStore } from 'mobx-react-router'
 import { Router } from 'react-router-dom'
 
-import AppRouter from './router'
+import AppRouter from '@shared/App'
 import * as store from './store'
 
 const hashHistory = createHashHistory()
