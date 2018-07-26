@@ -100,7 +100,7 @@ const AppRouter = () => (
 export default hot(module)(AppRouter)
 ```
 
-[live example](https://github.com/YDJ-FE/ts-react-webpack4/blob/master/src/router/index.tsx?1532570654913)
+[live example](https://github.com/YDJ-FE/ts-react-webpack4/tree/master/src/containers/shared/App?1532589067125)
 
 ## the scaffold
 
