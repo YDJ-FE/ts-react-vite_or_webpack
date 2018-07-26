@@ -33,7 +33,7 @@ $ npm run qa/prod
 -   import .(s)css auto generate .(s)css.d.ts by `typings-for-css-modules-loader`
 -   create component folder by `customaddcomponents` which is added to npm script `npm run add`
 
-## functional demo
+## functional example
 
 ### mobx-react-router
 
