@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const config = require('./../config')
 const { resolve } = require('./../utils')
+const theme = require('./../../theme')
 
 const sassLoader = {
     loader: 'sass-loader',
@@ -11,11 +12,11 @@ const sassLoader = {
     }
 }
 
-const cacheLoader = {
-    loader: 'cache-loader',
+const lessLoader = {
+    loader: 'less-loader',
     options: {
-        // provide a cache directory where cache items should be stored
-        cacheDirectory: resolve('.cache-loader')
+        javascriptEnabled: true,
+        modifyVars: theme
     }
 }
 
@@ -26,6 +27,14 @@ const typingsForCssModulesLoader = {
         namedExport: true,
         camelCase: true,
         sass: true
+    }
+}
+
+const cacheLoader = {
+    loader: 'cache-loader',
+    options: {
+        // provide a cache directory where cache items should be stored
+        cacheDirectory: resolve('.cache-loader')
     }
 }
 
@@ -50,6 +59,20 @@ module.exports = [
                     typingsForCssModulesLoader,
                     'postcss-loader',
                     sassLoader
+                ]
+            }
+        ]
+    },
+    {
+        // for ant design
+        test: /\.less$/,
+        rules: [
+            {
+                use: [
+                    config.extractCss ? MiniCssExtractPlugin.loader : 'style-loader',
+                    'css-loader',
+                    'postcss-loader',
+                    lessLoader
                 ]
             }
         ]

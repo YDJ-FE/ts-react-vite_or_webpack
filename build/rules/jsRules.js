@@ -11,6 +11,7 @@ module.exports = [
                 options: {
                     transpileOnly: true,
                     useCache: true,
+                    cacheDirectory: resolve('.cache-loader'),
                     useBabel: true,
                     babelOptions: {
                         babelrc: false,
@@ -19,9 +20,9 @@ module.exports = [
                     getCustomTransformers: () => ({
                         before: [
                             tsImportPluginFactory({
-                                libraryDirectory: 'es',
                                 libraryName: 'antd',
-                                style: 'css'
+                                libraryDirectory: 'lib',
+                                style: true
                             })
                         ]
                     })
