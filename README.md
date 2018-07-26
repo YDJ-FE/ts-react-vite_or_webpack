@@ -1,5 +1,9 @@
 typescript + react + webpack4 starter
 
+this is a simple starter looks like:
+
+<img src="https://ss.yidejia.com/uploads/ts-react-webpack4/ts-react-webpack4.png" width="720">
+
 ## setup
 
 ```bash
