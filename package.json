@@ -16,6 +16,7 @@
         "webpack4",
         "typescript",
         "react",
+        "mobx",
         "starter-template"
     ],
     "author": "jackple",
