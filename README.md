@@ -102,6 +102,20 @@ export default hot(module)(AppRouter)
 
 [live example](https://github.com/YDJ-FE/ts-react-webpack4/tree/master/src/containers/shared/App?1532589067125)
 
+## how to deploy with nginx
+
+```
+server {
+       listen       9993;
+       server_name  localhost:9993;
+
+       location / {
+             root   ~/Documents/react/ts-react-webpack4/dist/qa/;
+             index  index.html index.htm;
+       }
+ }
+```
+
 ## the scaffold
 
 [steamer-react-redux-ts](https://github.com/YDJ-FE/steamer-react-redux-ts)
