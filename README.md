@@ -1,4 +1,4 @@
-typescript + react + webpack4 starter
+typescript + react + webpack starter
 
 this is a simple starter looks like:
 
@@ -24,10 +24,10 @@ $ npm run qa/prod
 
 ## characteristics/packages
 
--   webpack-4
--   typescript
--   react
--   mobx
+-   webpack-4.x
+-   typescript-2.9.x
+-   react-16.4.x
+-   mobx-5.x
 -   react-router-4
 -   mobx-react-router
 -   component hot reload
