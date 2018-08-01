@@ -1,7 +1,8 @@
 import Loadable from 'react-loadable'
-import { RouteComponentProps } from 'react-router-dom'
+import { IRouteConfig } from 'react-authorized'
 
 import PageLoading from '@components/PageLoading'
+import Error from '@components/Error'
 
 const TestComponentOne = Loadable({
     loader: () => import(/* webpackChunkName: "test-componen-one" */ '@views/TestComponentOne'),
@@ -13,25 +14,57 @@ const TestComponentTwo = Loadable({
     loading: PageLoading
 })
 
-interface IMenuItem {
-    name: string
-    iconType: string
-    pathname: string
-    component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>
+const TestComponentThree = Loadable({
+    loader: () => import(/* webpackChunkName: "test-componen-three" */ '@views/TestComponentThree'),
+    loading: PageLoading
+})
+
+const TestComponentFour = Loadable({
+    loader: () => import(/* webpackChunkName: "test-componen-four" */ '@views/TestComponentFour'),
+    loading: PageLoading
+})
+
+interface IRoute extends IRouteConfig {
+    pathName?: string
+    iconType?: string
 }
 
-const menu: IMenuItem[] = [
+export const menu: IRoute[] = [
     {
-        name: 'test1',
-        iconType: 'mobile',
-        pathname: '/',
-        component: TestComponentOne
+        path: '/',
+        component: TestComponentOne,
+        permissions: [],
+        unauthorized: Error,
+        pathName: 'Test1',
+        exact: true,
+        iconType: 'mobile'
     },
     {
-        name: 'test2',
-        iconType: 'file-text',
-        pathname: '/test2',
-        component: TestComponentTwo
+        path: '/test2',
+        component: TestComponentTwo,
+        permissions: ['user'],
+        unauthorized: Error,
+        pathName: 'Test2',
+        exact: true,
+        iconType: 'retweet'
+    },
+    {
+        path: '/test3',
+        component: TestComponentThree,
+        permissions: [],
+        unauthorized: Error,
+        pathName: 'Test3',
+        exact: true,
+        iconType: 'retweet'
+    },
+    {
+        path: '/test4',
+        component: TestComponentFour,
+        permissions: [],
+        unauthorized: Error,
+        pathName: 'Test4',
+        exact: true,
+        iconType: 'retweet'
     }
 ]
 

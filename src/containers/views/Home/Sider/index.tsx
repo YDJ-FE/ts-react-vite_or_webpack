@@ -15,7 +15,7 @@ interface IP {
 @inject('globalStore', 'routerStore')
 @observer
 class Sider extends React.Component<IP> {
-    @observable private menuKeys: string[] = [menu[0].pathname]
+    @observable private menuKeys: string[] = [menu[0].path]
 
     constructor(props) {
         super(props)
@@ -43,9 +43,9 @@ class Sider extends React.Component<IP> {
                 <h2 className={styles.title}>app</h2>
                 <Menu theme="dark" mode="inline" defaultSelectedKeys={this.menuKeys.slice()} onClick={this.goto}>
                     {menu.map(m => (
-                        <Menu.Item key={m.pathname}>
+                        <Menu.Item key={m.path}>
                             <Icon type={m.iconType} />
-                            <span>{m.name}</span>
+                            <span>{m.pathName}</span>
                         </Menu.Item>
                     ))}
                 </Menu>
