@@ -29,6 +29,7 @@
         "mobx-react": "^5.0.0",
         "mobx-react-router": "^4.0.4",
         "react": "^16.4.1",
+        "react-authorized": "0.0.5",
         "react-dom": "^16.4.1",
         "react-hot-loader": "^4.2.0",
         "react-loadable": "^5.4.0",
