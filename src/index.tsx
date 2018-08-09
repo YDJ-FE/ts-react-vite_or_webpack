@@ -14,7 +14,7 @@ import * as store from './store'
 const hashHistory = createHashHistory()
 const history = syncHistoryWithStore(hashHistory, store.routerStore)
 
-configure({ enforceActions: true})
+configure({ enforceActions: true })
 
 const render = Component => {
     ReactDOM.render(
