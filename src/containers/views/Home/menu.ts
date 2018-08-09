@@ -1,5 +1,4 @@
 import Loadable from 'react-loadable'
-import { IRouteConfig } from 'react-authorized'
 
 import PageLoading from '@components/PageLoading'
 import NotAuthRouteComponent from '@shared/NotAuthRouteComponent'
