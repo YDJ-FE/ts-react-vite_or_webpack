@@ -2,7 +2,7 @@ import Loadable from 'react-loadable'
 import { IRouteConfig } from 'react-authorized'
 
 import PageLoading from '@components/PageLoading'
-import Error from '@components/Error'
+import NotAuthRouteComponent from '@shared/NotAuthRouteComponent'
 
 const TestComponentOne = Loadable({
     loader: () => import(/* webpackChunkName: "test-componen-one" */ '@views/TestComponentOne'),
@@ -24,47 +24,34 @@ const TestComponentFour = Loadable({
     loading: PageLoading
 })
 
-interface IRoute extends IRouteConfig {
-    pathName?: string
-    iconType?: string
-}
-
-export const menu: IRoute[] = [
+export const menu = [
     {
         path: '/',
         component: TestComponentOne,
-        permissions: [],
-        unauthorized: Error,
-        pathName: 'Test1',
-        exact: true,
-        iconType: 'mobile'
+        permissions: ['user', 'admin'],
+        unauthorized: NotAuthRouteComponent,
+        exact: true
     },
     {
         path: '/test2',
         component: TestComponentTwo,
         permissions: ['user'],
-        unauthorized: Error,
-        pathName: 'Test2',
-        exact: true,
-        iconType: 'retweet'
+        unauthorized: NotAuthRouteComponent,
+        exact: true
     },
     {
         path: '/test3',
         component: TestComponentThree,
-        permissions: [],
-        unauthorized: Error,
-        pathName: 'Test3',
-        exact: true,
-        iconType: 'retweet'
+        permissions: ['admin'],
+        unauthorized: NotAuthRouteComponent,
+        exact: true
     },
     {
         path: '/test4',
         component: TestComponentFour,
-        permissions: [],
-        unauthorized: Error,
-        pathName: 'Test4',
-        exact: true,
-        iconType: 'retweet'
+        permissions: ['user'],
+        unauthorized: NotAuthRouteComponent,
+        exact: true
     }
 ]
 

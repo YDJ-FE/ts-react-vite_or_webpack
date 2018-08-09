@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Layout } from 'antd'
+import {inject, observer} from 'mobx-react'
 import { AuthorizedRoute } from 'react-authorized'
 
 import * as styles from './index.scss'
@@ -8,7 +9,13 @@ import Error from '@components/Error'
 import Header from './Header'
 import Sider from './Sider'
 
-class Home extends React.Component {
+interface Props {
+    userStore?: IUserStore.UserStore
+}
+
+@inject('userStore')
+@observer
+class Home extends React.Component<Props> {
     render() {
         return (
             <Layout>
@@ -17,6 +24,7 @@ class Home extends React.Component {
                     <Header />
                     <Layout.Content className={styles.content}>
                         <AuthorizedRoute
+                            authorities={this.props.userStore.loginCategory}
                             authorizedRoutes={menu}
                             notFound={Error}
                         />

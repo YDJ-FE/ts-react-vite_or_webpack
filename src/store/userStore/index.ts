@@ -6,11 +6,19 @@ import { routerStore } from './../'
 export class UserStore extends StoreExt {
     @observable loading: boolean = false
 
+    @observable isLogin: boolean = false
+
+    @observable loginCategory: string = ''
+
     @action
-    login = async (): Promise<any> => {
+    login = async (data): Promise<any> => {
         this.loading = true
         try {
-            const res: IUserStore.UserInfo = await this.api.getUserInfo({})
+            const res: IUserStore.UserInfo = await this.api.login(data)
+            runInAction(() => {
+                this.isLogin = true
+                this.loginCategory = res.category
+            })
             this.$message.success(res.msg)
             routerStore.push('/')
         } catch (err) {}
