@@ -8,6 +8,12 @@ import menu from './sideMenuConfig'
 
 import * as styles from './index.scss'
 
+interface IStoreProps {
+    sideBarCollapsed?: boolean
+    loginCategory?: string
+    routerStore?: RouterStore
+}
+
 @inject(
     (store: IStore): IStoreProps => ({
         routerStore: store.routerStore,
