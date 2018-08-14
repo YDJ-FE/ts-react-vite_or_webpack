@@ -10,7 +10,7 @@ import * as styles from './index.scss'
 
 interface IStoreProps {
     sideBarCollapsed?: boolean
-    loginCategory?: string
+    userInfo?: IUserStore.UserInfo
     routerStore?: RouterStore
 }
 
@@ -18,7 +18,7 @@ interface IStoreProps {
     (store: IStore): IStoreProps => ({
         routerStore: store.routerStore,
         sideBarCollapsed: store.globalStore.sideBarCollapsed,
-        loginCategory: store.userStore.loginCategory
+        userInfo: store.userStore.userInfo
     })
 )
 @observer
@@ -46,10 +46,10 @@ class Sider extends React.Component<IStoreProps> {
     }
 
     render() {
-        const { loginCategory, sideBarCollapsed } = this.props
+        const { userInfo, sideBarCollapsed } = this.props
         const renderMenuItem = menuArray => {
             return menuArray.map(item => {
-                if (!checkPermissions(loginCategory, item.permissions)) {
+                if (!checkPermissions(userInfo.category, item.permissions)) {
                     return false
                 }
 
