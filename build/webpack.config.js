@@ -1,5 +1,4 @@
-const path = require('path')
-const webpack = require('webpack')
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 
 const config = require('./config')
 const constants = require('./constants')
@@ -21,18 +20,17 @@ module.exports = {
         publicPath: config.assetsPublicPath
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.json'],
+        extensions: constants.FILE_EXTENSIONS,
         modules: [resolve('src'), resolve('node_modules')],
         alias: {
-            mobx: resolve('node_modules/mobx/lib/mobx.es6.js'),
-            '@constants': resolve('src/constants'),
-            '@services': resolve('src/services'),
-            '@utils': resolve('src/utils'),
-            '@assets': resolve('src/assets'),
-            '@components': resolve('src/components'),
-            '@views': resolve('src/containers/views'),
-            '@shared': resolve('src/containers/shared')
-        }
+            mobx: resolve('node_modules/mobx/lib/mobx.es6.js')
+        },
+        plugins: [
+            new TsconfigPathsPlugin({
+                configFile: resolve('tsconfig.webpack.json'),
+                extensions: constants.FILE_EXTENSIONS
+            })
+        ]
     },
     module: {
         rules: [...styleRules, ...jsRules, ...fileRules]

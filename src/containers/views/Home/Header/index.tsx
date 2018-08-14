@@ -4,18 +4,19 @@ import { Layout, Icon, Button } from 'antd'
 
 import * as styles from './index.scss'
 
-interface IP {
-    globalStore?: IGlobalStore.GlobalStore
+interface IStoreProps {
+    sideBarCollapsed?: boolean
+    toggleSideBarCollapsed?: () => void
     logout?: () => void
 }
 
-function Header({ globalStore, logout }: IP) {
+function Header({ sideBarCollapsed, toggleSideBarCollapsed, logout }: IStoreProps) {
     return (
         <Layout.Header className={styles.header}>
             <Icon
                 className={styles.trigger}
-                type={globalStore.sideBarCollapsed ? 'menu-unfold' : 'menu-fold'}
-                onClick={globalStore.toggleSideBarCollapsed}
+                type={sideBarCollapsed ? 'menu-unfold' : 'menu-fold'}
+                onClick={toggleSideBarCollapsed}
             />
             <Button onClick={logout}>
                 登出
@@ -24,4 +25,9 @@ function Header({ globalStore, logout }: IP) {
     )
 }
 
-export default inject('globalStore')(observer(Header))
+export default inject(
+    (store: IStore): IStoreProps => {
+        const { sideBarCollapsed, toggleSideBarCollapsed } = store.globalStore
+        return { sideBarCollapsed, toggleSideBarCollapsed }
+    }
+)(observer(Header))

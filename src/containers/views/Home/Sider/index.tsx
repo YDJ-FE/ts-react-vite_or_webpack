@@ -8,16 +8,15 @@ import menu from './sideMenuConfig'
 
 import * as styles from './index.scss'
 
-interface IP {
-    globalStore?: IGlobalStore.GlobalStore
-    routerStore?: RouterStore
-    userStore?: IUserStore.UserStore
-}
-
-@inject('globalStore', 'routerStore', 'userStore')
+@inject(
+    (store: IStore): IStoreProps => ({
+        routerStore: store.routerStore,
+        sideBarCollapsed: store.globalStore.sideBarCollapsed
+    })
+)
 @observer
-class Sider extends React.Component<IP> {
-    @observable private menuKeys: string[] = [menu[0].path]
+class Sider extends React.Component<IStoreProps> {
+    @observable private menuKeys: string[] = [menu[0].pathname]
 
     constructor(props) {
         super(props)
@@ -39,7 +38,6 @@ class Sider extends React.Component<IP> {
     }
 
     render() {
-        const { sideBarCollapsed } = this.props.globalStore
         const {loginCategory} = this.props.userStore
         const renderMenuItem = menuArray => {
             return menuArray.map(item => {
@@ -55,6 +53,7 @@ class Sider extends React.Component<IP> {
                 )
             })
         }
+        const { sideBarCollapsed } = this.props
         return (
             <Layout.Sider trigger={null} collapsible collapsed={sideBarCollapsed}>
                 <h2 className={styles.title}>app</h2>

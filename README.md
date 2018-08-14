@@ -25,7 +25,7 @@ $ npm run qa/prod
 ## characteristics/packages
 
 -   webpack-4.x
--   typescript-2.9.x
+-   typescript-3.0.x
 -   react-16.4.x
 -   mobx-5.x ([5.x makes your application must be running in the browser that support es2015+](https://github.com/mobxjs/mobx#browser-support), if you are not willing, you can use 4.x)
 -   react-router-4
@@ -48,12 +48,11 @@ import { Button } from 'antd'
 
 import * as styles from './index.scss'
 
-interface Props {
+interface IStoreProps {
     routerStore?: RouterStore;
 }
 
-function Test(props: Props) {
-    const { routerStore } = props
+function Test({ routerStore }: IStoreProps) {
     const gotoHome = () => {
         routerStore.push('/')
     }
@@ -69,7 +68,11 @@ function Test(props: Props) {
     )
 }
 
-export default inject('routerStore')(observer(Login))
+export default inject(
+    (store: IStore): IStoreProps => ({
+        routerStore: store.routerStore
+    })
+)(observer(Login))
 ```
 
 [live example](https://github.com/YDJ-FE/ts-react-webpack4/blob/master/src/containers/views/Login/index.tsx?1532570619900)
