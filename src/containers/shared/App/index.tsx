@@ -1,8 +1,7 @@
-
 import * as React from 'react'
 import { hot } from 'react-hot-loader'
 import Loadable from 'react-loadable'
-import {inject, observer} from 'mobx-react'
+import { inject, observer } from 'mobx-react'
 import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 import * as styles from './index.scss'
@@ -18,12 +17,12 @@ const Login = Loadable({
     loading: PageLoading
 })
 
-interface IP {
-    userStore?: IUserStore.UserStore
+interface IStoreProps {
+    isLogin?: boolean
 }
 
 // 权限控制
-const PrivateRoute = ({component: Component, ...rest}) => (
+const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
         {...rest}
         render={props =>
@@ -42,11 +41,15 @@ const PrivateRoute = ({component: Component, ...rest}) => (
 )
 
 const AppWrapper = props => <div className={styles.appWrapper}>{props.children}</div>
-@inject('userStore')
+@inject(
+    (store: IStore): IStoreProps => ({
+        isLogin: store.userStore.isLogin
+    })
+)
 @observer
-class AppRouter extends React.Component<IP> {
+class AppRouter extends React.Component<IStoreProps> {
     render() {
-        const {isLogin} = this.props.userStore
+        const { isLogin } = this.props
         return (
             <AppWrapper>
                 <Router>
