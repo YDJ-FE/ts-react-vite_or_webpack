@@ -14,7 +14,12 @@ export class UserStore extends StoreExt {
     login = async (data): Promise<any> => {
         this.loading = true
         try {
-            const res: IUserStore.UserInfo = await this.api.login(data)
+            let res: IUserStore.UserInfo = null
+            if (data.category === 'user') {
+                res = await this.api.loginUser(data)
+            } else {
+                res = await this.api.loginAdmin(data)
+            }
             runInAction(() => {
                 this.isLogin = true
                 this.loginCategory = res.category
@@ -25,6 +30,13 @@ export class UserStore extends StoreExt {
         runInAction('HIDE_LOGIN_LOADING', () => {
             this.loading = false
         })
+    }
+
+    @action
+    logout = () => {
+        this.isLogin = false
+        this.loginCategory = ''
+        routerStore.replace('/login')
     }
 
     @action

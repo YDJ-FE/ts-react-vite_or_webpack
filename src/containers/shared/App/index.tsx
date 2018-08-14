@@ -61,16 +61,4 @@ class AppRouter extends React.Component<IP> {
     }
 }
 
-// const AppRouter = () => (
-//     <AppWrapper>
-//         <Router>
-//             <Switch>
-//                 <Route exact path="/login" component={Login} />
-//                 <PrivateRoute path="/" component={Home} />
-//                 <Route component={Error} />
-//             </Switch>
-//         </Router>
-//     </AppWrapper>
-// )
-
 export default hot(module)(AppRouter)

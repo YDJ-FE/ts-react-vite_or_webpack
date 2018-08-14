@@ -21,7 +21,7 @@ class Home extends React.Component<Props> {
             <Layout>
                 <Sider />
                 <Layout>
-                    <Header />
+                    <Header logout={this.props.userStore.logout}/>
                     <Layout.Content className={styles.content}>
                         <AuthorizedRoute
                             authorities={this.props.userStore.loginCategory}
