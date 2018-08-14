@@ -4,13 +4,14 @@ import { Button } from 'antd'
 
 import * as styles from './index.scss'
 
-interface Props {
-    userStore?: IUserStore.UserStore
+interface IStoreProps {
     routerStore?: RouterStore
+    login?: () => Promise<any>
+    getError?: () => Promise<any>
 }
 
-function Login(props: Props) {
-    const { userStore, routerStore } = props
+function Login(props: IStoreProps) {
+    const { login, getError, routerStore } = props
     const gotoHome = () => {
         routerStore.push('/')
     }
@@ -21,10 +22,10 @@ function Login(props: Props) {
                 <Button type="primary" onClick={gotoHome}>
                     go to page index directly
                 </Button>
-                <Button type="primary" onClick={userStore.login}>
+                <Button type="primary" onClick={login}>
                     go to page index when request successfully
                 </Button>
-                <Button type="danger" onClick={userStore.getError}>
+                <Button type="danger" onClick={getError}>
                     must be error
                 </Button>
             </div>
@@ -32,4 +33,14 @@ function Login(props: Props) {
     )
 }
 
-export default inject('userStore', 'routerStore')(observer(Login))
+export default inject(
+    (store: IStore): IStoreProps => {
+        const { routerStore, userStore } = store
+        const { login, getError } = userStore
+        return {
+            routerStore,
+            login,
+            getError
+        }
+    }
+)(observer(Login))

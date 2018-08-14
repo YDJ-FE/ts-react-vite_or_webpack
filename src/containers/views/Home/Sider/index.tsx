@@ -7,14 +7,19 @@ import menu from './../menu'
 
 import * as styles from './index.scss'
 
-interface IP {
-    globalStore?: IGlobalStore.GlobalStore
+interface IStoreProps {
     routerStore?: RouterStore
+    sideBarCollapsed?: boolean
 }
 
-@inject('globalStore', 'routerStore')
+@inject(
+    (store: IStore): IStoreProps => ({
+        routerStore: store.routerStore,
+        sideBarCollapsed: store.globalStore.sideBarCollapsed
+    })
+)
 @observer
-class Sider extends React.Component<IP> {
+class Sider extends React.Component<IStoreProps> {
     @observable private menuKeys: string[] = [menu[0].pathname]
 
     constructor(props) {
@@ -37,7 +42,7 @@ class Sider extends React.Component<IP> {
     }
 
     render() {
-        const { sideBarCollapsed } = this.props.globalStore
+        const { sideBarCollapsed } = this.props
         return (
             <Layout.Sider trigger={null} collapsible collapsed={sideBarCollapsed}>
                 <h2 className={styles.title}>app</h2>

@@ -48,12 +48,11 @@ import { Button } from 'antd'
 
 import * as styles from './index.scss'
 
-interface Props {
+interface IStoreProps {
     routerStore?: RouterStore;
 }
 
-function Test(props: Props) {
-    const { routerStore } = props
+function Test({ routerStore }: IStoreProps) {
     const gotoHome = () => {
         routerStore.push('/')
     }
@@ -69,7 +68,11 @@ function Test(props: Props) {
     )
 }
 
-export default inject('routerStore')(observer(Login))
+export default inject(
+    (store: IStore): IStoreProps => ({
+        routerStore: store.routerStore
+    })
+)(observer(Login))
 ```
 
 [live example](https://github.com/YDJ-FE/ts-react-webpack4/blob/master/src/containers/views/Login/index.tsx?1532570619900)
