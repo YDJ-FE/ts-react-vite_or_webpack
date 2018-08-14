@@ -11,12 +11,13 @@ import * as styles from './index.scss'
 @inject(
     (store: IStore): IStoreProps => ({
         routerStore: store.routerStore,
-        sideBarCollapsed: store.globalStore.sideBarCollapsed
+        sideBarCollapsed: store.globalStore.sideBarCollapsed,
+        loginCategory: store.userStore.loginCategory
     })
 )
 @observer
 class Sider extends React.Component<IStoreProps> {
-    @observable private menuKeys: string[] = [menu[0].pathname]
+    @observable private menuKeys: string[] = [menu[0].title]
 
     constructor(props) {
         super(props)
@@ -38,7 +39,7 @@ class Sider extends React.Component<IStoreProps> {
     }
 
     render() {
-        const {loginCategory} = this.props.userStore
+        const {loginCategory} = this.props
         const renderMenuItem = menuArray => {
             return menuArray.map(item => {
                 if (!checkPermissions(loginCategory, item.permissions)) {

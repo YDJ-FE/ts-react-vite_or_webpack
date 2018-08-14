@@ -10,7 +10,7 @@ interface IStoreProps {
     getError?: () => Promise<any>
 }
 
-class Login extends React.Component<Props> {
+class Login extends React.Component<IStoreProps> {
 
     login = (category: string) => {
         this.props.login({
