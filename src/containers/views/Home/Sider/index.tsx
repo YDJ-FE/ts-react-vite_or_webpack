@@ -23,7 +23,8 @@ interface IStoreProps {
 )
 @observer
 class Sider extends React.Component<IStoreProps> {
-    @observable private menuKeys: string[] = [menu[0].title]
+    @observable
+    private menuKeys: string[] = [menu[0].title]
 
     constructor(props) {
         super(props)
@@ -45,7 +46,7 @@ class Sider extends React.Component<IStoreProps> {
     }
 
     render() {
-        const {loginCategory} = this.props
+        const { loginCategory, sideBarCollapsed } = this.props
         const renderMenuItem = menuArray => {
             return menuArray.map(item => {
                 if (!checkPermissions(loginCategory, item.permissions)) {
@@ -60,7 +61,6 @@ class Sider extends React.Component<IStoreProps> {
                 )
             })
         }
-        const { sideBarCollapsed } = this.props
         return (
             <Layout.Sider trigger={null} collapsible collapsed={sideBarCollapsed}>
                 <h2 className={styles.title}>app</h2>
