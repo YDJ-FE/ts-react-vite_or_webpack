@@ -25,7 +25,7 @@ $ npm run qa/prod
 ## characteristics/packages
 
 -   webpack-4.x
--   typescript-2.9.x
+-   typescript-3.0.x
 -   react-16.4.x
 -   mobx-5.x ([5.x makes your application must be running in the browser that support es2015+](https://github.com/mobxjs/mobx#browser-support), if you are not willing, you can use 4.x)
 -   react-router-4
