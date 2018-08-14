@@ -1,6 +1,8 @@
+
 import * as React from 'react'
 import { hot } from 'react-hot-loader'
 import Loadable from 'react-loadable'
+import {inject, observer} from 'mobx-react'
 import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 import * as styles from './index.scss'
@@ -16,12 +18,16 @@ const Login = Loadable({
     loading: PageLoading
 })
 
+interface IP {
+    userStore?: IUserStore.UserStore
+}
+
 // 权限控制
-const PrivateRoute = ({ component: Component, ...rest }) => (
+const PrivateRoute = ({component: Component, ...rest}) => (
     <Route
         {...rest}
         render={props =>
-            true ? (
+            rest.isLogin ? (
                 <Component {...props} />
             ) : (
                 <Redirect
@@ -36,17 +42,23 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 )
 
 const AppWrapper = props => <div className={styles.appWrapper}>{props.children}</div>
-
-const AppRouter = () => (
-    <AppWrapper>
-        <Router>
-            <Switch>
-                <Route exact path="/login" component={Login} />
-                <PrivateRoute path="/" component={Home} />
-                <Route component={Error} />
-            </Switch>
-        </Router>
-    </AppWrapper>
-)
+@inject('userStore')
+@observer
+class AppRouter extends React.Component<IP> {
+    render() {
+        const {isLogin} = this.props.userStore
+        return (
+            <AppWrapper>
+                <Router>
+                    <Switch>
+                        <Route exact path="/login" component={Login} />
+                        <PrivateRoute isLogin={isLogin} path="/" component={Home} />
+                        <Route component={Error} />
+                    </Switch>
+                </Router>
+            </AppWrapper>
+        )
+    }
+}
 
 export default hot(module)(AppRouter)

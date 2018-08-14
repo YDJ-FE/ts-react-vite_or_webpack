@@ -6,4 +6,5 @@ export interface UserStore extends UserStoreModel {}
 
 export interface UserInfo {
     msg: string
+    category: string
 }

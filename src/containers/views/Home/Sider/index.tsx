@@ -2,25 +2,28 @@ import * as React from 'react'
 import { observer, inject } from 'mobx-react'
 import { observable, action } from 'mobx'
 import { Layout, Menu, Icon } from 'antd'
+import { checkPermissions } from 'react-authorized/lib'
 
-import menu from './../menu'
+import menu from './sideMenuConfig'
 
 import * as styles from './index.scss'
 
 interface IStoreProps {
-    routerStore?: RouterStore
     sideBarCollapsed?: boolean
+    loginCategory?: string
+    routerStore?: RouterStore
 }
 
 @inject(
     (store: IStore): IStoreProps => ({
         routerStore: store.routerStore,
-        sideBarCollapsed: store.globalStore.sideBarCollapsed
+        sideBarCollapsed: store.globalStore.sideBarCollapsed,
+        loginCategory: store.userStore.loginCategory
     })
 )
 @observer
 class Sider extends React.Component<IStoreProps> {
-    @observable private menuKeys: string[] = [menu[0].pathname]
+    @observable private menuKeys: string[] = [menu[0].title]
 
     constructor(props) {
         super(props)
@@ -42,17 +45,27 @@ class Sider extends React.Component<IStoreProps> {
     }
 
     render() {
+        const {loginCategory} = this.props
+        const renderMenuItem = menuArray => {
+            return menuArray.map(item => {
+                if (!checkPermissions(loginCategory, item.permissions)) {
+                    return false
+                }
+
+                return (
+                    <Menu.Item key={item.path}>
+                        <Icon type={item.icon} />
+                        <span>{item.title}</span>
+                    </Menu.Item>
+                )
+            })
+        }
         const { sideBarCollapsed } = this.props
         return (
             <Layout.Sider trigger={null} collapsible collapsed={sideBarCollapsed}>
                 <h2 className={styles.title}>app</h2>
                 <Menu theme="dark" mode="inline" defaultSelectedKeys={this.menuKeys.slice()} onClick={this.goto}>
-                    {menu.map(m => (
-                        <Menu.Item key={m.pathname}>
-                            <Icon type={m.iconType} />
-                            <span>{m.name}</span>
-                        </Menu.Item>
-                    ))}
+                    {renderMenuItem(menu)}
                 </Menu>
             </Layout.Sider>
         )

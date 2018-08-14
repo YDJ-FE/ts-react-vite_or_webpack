@@ -1,15 +1,16 @@
 import * as React from 'react'
 import { inject, observer } from 'mobx-react'
-import { Layout, Icon } from 'antd'
+import { Layout, Icon, Button } from 'antd'
 
 import * as styles from './index.scss'
 
 interface IStoreProps {
     sideBarCollapsed?: boolean
     toggleSideBarCollapsed?: () => void
+    logout?: () => void
 }
 
-function Header({ sideBarCollapsed, toggleSideBarCollapsed }: IStoreProps) {
+function Header({ sideBarCollapsed, toggleSideBarCollapsed, logout }: IStoreProps) {
     return (
         <Layout.Header className={styles.header}>
             <Icon
@@ -17,6 +18,9 @@ function Header({ sideBarCollapsed, toggleSideBarCollapsed }: IStoreProps) {
                 type={sideBarCollapsed ? 'menu-unfold' : 'menu-fold'}
                 onClick={toggleSideBarCollapsed}
             />
+            <Button onClick={logout}>
+                登出
+            </Button>
         </Layout.Header>
     )
 }

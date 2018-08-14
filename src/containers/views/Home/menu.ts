@@ -1,7 +1,7 @@
 import Loadable from 'react-loadable'
-import { RouteComponentProps } from 'react-router-dom'
 
 import PageLoading from '@components/PageLoading'
+import NotAuthRouteComponent from '@shared/NotAuthRouteComponent'
 
 const TestComponentOne = Loadable({
     loader: () => import(/* webpackChunkName: "test-componen-one" */ '@views/TestComponentOne'),
@@ -13,25 +13,44 @@ const TestComponentTwo = Loadable({
     loading: PageLoading
 })
 
-interface IMenuItem {
-    name: string
-    iconType: string
-    pathname: string
-    component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>
-}
+const TestComponentThree = Loadable({
+    loader: () => import(/* webpackChunkName: "test-componen-three" */ '@views/TestComponentThree'),
+    loading: PageLoading
+})
 
-const menu: IMenuItem[] = [
+const TestComponentFour = Loadable({
+    loader: () => import(/* webpackChunkName: "test-componen-four" */ '@views/TestComponentFour'),
+    loading: PageLoading
+})
+
+export const menu = [
     {
-        name: 'test1',
-        iconType: 'mobile',
-        pathname: '/',
-        component: TestComponentOne
+        path: '/',
+        component: TestComponentOne,
+        permissions: ['user', 'admin'],
+        unauthorized: NotAuthRouteComponent,
+        exact: true
     },
     {
-        name: 'test2',
-        iconType: 'file-text',
-        pathname: '/test2',
-        component: TestComponentTwo
+        path: '/test2',
+        component: TestComponentTwo,
+        permissions: ['user'],
+        unauthorized: NotAuthRouteComponent,
+        exact: true
+    },
+    {
+        path: '/test3',
+        component: TestComponentThree,
+        permissions: ['admin'],
+        unauthorized: NotAuthRouteComponent,
+        exact: true
+    },
+    {
+        path: '/test4',
+        component: TestComponentFour,
+        permissions: ['user'],
+        unauthorized: NotAuthRouteComponent,
+        exact: true
     }
 ]
 

@@ -6,31 +6,33 @@ import * as styles from './index.scss'
 
 interface IStoreProps {
     routerStore?: RouterStore
-    login?: () => Promise<any>
+    login?: (data: any) => Promise<any>
     getError?: () => Promise<any>
 }
 
-function Login(props: IStoreProps) {
-    const { login, getError, routerStore } = props
-    const gotoHome = () => {
-        routerStore.push('/')
+class Login extends React.Component<IStoreProps> {
+
+    login = (category: string) => {
+        this.props.login({
+            category
+        })
     }
-    return (
-        <div className={styles.login}>
-            Login!!!
-            <div className={styles.btnGroup}>
-                <Button type="primary" onClick={gotoHome}>
-                    go to page index directly
-                </Button>
-                <Button type="primary" onClick={login}>
-                    go to page index when request successfully
-                </Button>
-                <Button type="danger" onClick={getError}>
-                    must be error
-                </Button>
+
+    render() {
+        return (
+            <div className={styles.login}>
+                Login!!!
+                <div className={styles.btnGroup}>
+                    <Button type="primary" onClick={() => this.login('user')}>
+                        用户登录
+                    </Button>
+                    <Button type="primary" onClick={() => this.login('admin')}>
+                        管理员登录
+                    </Button>
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default inject(
