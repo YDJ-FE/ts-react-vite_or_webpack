@@ -1,4 +1,5 @@
 import Loadable from 'react-loadable'
+import { IRouteConfig } from 'react-authorized'
 
 import PageLoading from '@components/PageLoading'
 import NotAuthRouteComponent from '@shared/NotAuthRouteComponent'
@@ -18,14 +19,16 @@ const TestComponentThree = Loadable({
     loading: PageLoading
 })
 
-const TestComponentFour = Loadable({
-    loader: () => import(/* webpackChunkName: "test-componen-four" */ '@views/TestComponentFour'),
-    loading: PageLoading
-})
+interface IRouteConfigInMenu extends IRouteConfig {
+    icon: string
+    title: string
+}
 
-export const menu = [
+export const menu: IRouteConfigInMenu[] = [
     {
         path: '/',
+        title: 'Dashboard',
+        icon: 'laptop',
         component: TestComponentOne,
         permissions: ['user', 'admin'],
         unauthorized: NotAuthRouteComponent,
@@ -33,6 +36,8 @@ export const menu = [
     },
     {
         path: '/test2',
+        title: 'Users',
+        icon: 'user',
         component: TestComponentTwo,
         permissions: ['user'],
         unauthorized: NotAuthRouteComponent,
@@ -40,15 +45,10 @@ export const menu = [
     },
     {
         path: '/test3',
+        title: 'Charts',
+        icon: 'dot-chart',
         component: TestComponentThree,
         permissions: ['admin'],
-        unauthorized: NotAuthRouteComponent,
-        exact: true
-    },
-    {
-        path: '/test4',
-        component: TestComponentFour,
-        permissions: ['user'],
         unauthorized: NotAuthRouteComponent,
         exact: true
     }

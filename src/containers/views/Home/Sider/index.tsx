@@ -4,7 +4,7 @@ import { observable, action } from 'mobx'
 import { Layout, Menu, Icon } from 'antd'
 import { checkPermissions } from 'react-authorized/lib'
 
-import menu from './sideMenuConfig'
+import menu from './../menu'
 
 import * as styles from './index.scss'
 
@@ -47,25 +47,21 @@ class Sider extends React.Component<IStoreProps> {
 
     render() {
         const { userInfo, sideBarCollapsed } = this.props
-        const renderMenuItem = menuArray => {
-            return menuArray.map(item => {
-                if (!checkPermissions(userInfo.category, item.permissions)) {
-                    return false
-                }
-
-                return (
-                    <Menu.Item key={item.path}>
-                        <Icon type={item.icon} />
-                        <span>{item.title}</span>
-                    </Menu.Item>
-                )
-            })
-        }
         return (
             <Layout.Sider trigger={null} collapsible collapsed={sideBarCollapsed}>
-                <h2 className={styles.title}>app</h2>
+                <h2 className={styles.title}>YDJFE</h2>
                 <Menu theme="dark" mode="inline" defaultSelectedKeys={this.menuKeys.slice()} onClick={this.goto}>
-                    {renderMenuItem(menu)}
+                    {menu.map(m => {
+                        if (!checkPermissions(userInfo.category, m.permissions)) {
+                            return null
+                        }
+                        return (
+                            <Menu.Item key={m.path}>
+                                <Icon type={m.icon} />
+                                <span>{m.title}</span>
+                            </Menu.Item>
+                        )
+                    })}
                 </Menu>
             </Layout.Sider>
         )
