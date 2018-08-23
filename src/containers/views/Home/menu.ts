@@ -35,7 +35,7 @@ export const menu: IRouteConfigInMenu[] = [
         exact: true
     },
     {
-        path: '/test2',
+        path: '/users',
         title: 'Users',
         icon: 'user',
         component: TestComponentTwo,
@@ -44,7 +44,7 @@ export const menu: IRouteConfigInMenu[] = [
         exact: true
     },
     {
-        path: '/test3',
+        path: '/charts',
         title: 'Charts',
         icon: 'dot-chart',
         component: TestComponentThree,
