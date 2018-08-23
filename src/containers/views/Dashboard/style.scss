@@ -1,13 +1,9 @@
 @import '_base.scss';
 
-.testComponentOne {
+.dashboard {
     display: flex;
     flex-direction: column;
     flex: 1;
     justify-content: center;
     align-items: center;
-}
-
-.img {
-    height: 100px;
 }

@@ -4,18 +4,18 @@ import { IRouteConfig } from 'react-authorized'
 import PageLoading from '@components/PageLoading'
 import NotAuthRouteComponent from '@shared/NotAuthRouteComponent'
 
-const TestComponentOne = Loadable({
-    loader: () => import(/* webpackChunkName: "test-componen-one" */ '@views/TestComponentOne'),
+const Dashboard = Loadable({
+    loader: () => import(/* webpackChunkName: "dashboard" */ '@views/Dashboard'),
     loading: PageLoading
 })
 
-const TestComponentTwo = Loadable({
-    loader: () => import(/* webpackChunkName: "test-componen-two" */ '@views/TestComponentTwo'),
+const Charts = Loadable({
+    loader: () => import(/* webpackChunkName: "charts" */ '@views/Charts'),
     loading: PageLoading
 })
 
-const TestComponentThree = Loadable({
-    loader: () => import(/* webpackChunkName: "test-componen-three" */ '@views/TestComponentThree'),
+const Users = Loadable({
+    loader: () => import(/* webpackChunkName: "users" */ '@views/Users'),
     loading: PageLoading
 })
 
@@ -29,7 +29,16 @@ export const menu: IRouteConfigInMenu[] = [
         path: '/',
         title: 'Dashboard',
         icon: 'laptop',
-        component: TestComponentOne,
+        component: Dashboard,
+        permissions: ['user', 'admin'],
+        unauthorized: NotAuthRouteComponent,
+        exact: true
+    },
+    {
+        path: '/charts',
+        title: 'Charts',
+        icon: 'dot-chart',
+        component: Charts,
         permissions: ['user', 'admin'],
         unauthorized: NotAuthRouteComponent,
         exact: true
@@ -38,16 +47,7 @@ export const menu: IRouteConfigInMenu[] = [
         path: '/users',
         title: 'Users',
         icon: 'user',
-        component: TestComponentTwo,
-        permissions: ['user'],
-        unauthorized: NotAuthRouteComponent,
-        exact: true
-    },
-    {
-        path: '/charts',
-        title: 'Charts',
-        icon: 'dot-chart',
-        component: TestComponentThree,
+        component: Users,
         permissions: ['admin'],
         unauthorized: NotAuthRouteComponent,
         exact: true
