@@ -1,2 +1,3 @@
 export const login: string;
-export const btnGroup: string;
+export const form: string;
+export const logoBox: string;

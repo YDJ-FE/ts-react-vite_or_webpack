@@ -6,15 +6,15 @@
     flex: 1;
     justify-content: center;
     align-items: center;
-    font-size: 14px;
+}
 
-    .btnGroup {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+.form {
+    width: 320px;
+    padding: 36px 36px 12px;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.08);
+}
 
-        button {
-            margin-top: 20px;
-        }
-    }
+.logoBox {
+    font-size: 40px;
+    text-align: center;
 }
