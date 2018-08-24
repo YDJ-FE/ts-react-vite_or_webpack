@@ -11,7 +11,7 @@ export class GlobalStore extends StoreExt {
      * @memberof GlobalStore
      */
     @observable
-    sideBarCollapsed: boolean = false
+    sideBarCollapsed: boolean = localStorage.getItem(LOCALSTORAGE_KEYS.SIDE_BAR_COLLAPSED) === '1'
     /**
      * 菜单栏主题
      *
@@ -19,7 +19,8 @@ export class GlobalStore extends StoreExt {
      * @memberof GlobalStore
      */
     @observable
-    sideBarTheme: IGlobalStore.SideBarTheme = 'light'
+    sideBarTheme: IGlobalStore.SideBarTheme =
+        (localStorage.getItem(LOCALSTORAGE_KEYS.SIDE_BAR_THEME) as IGlobalStore.SideBarTheme) || 'light'
     /**
      * 打开的菜单key
      *
@@ -32,11 +33,13 @@ export class GlobalStore extends StoreExt {
     @action
     toggleSideBarCollapsed = () => {
         this.sideBarCollapsed = !this.sideBarCollapsed
+        localStorage.setItem(LOCALSTORAGE_KEYS.SIDE_BAR_COLLAPSED, this.sideBarCollapsed ? '1' : '0')
     }
 
     @action
     changeSiderTheme = (theme: IGlobalStore.SideBarTheme) => {
         this.sideBarTheme = theme
+        localStorage.setItem(LOCALSTORAGE_KEYS.SIDE_BAR_THEME, theme)
     }
 
     @action

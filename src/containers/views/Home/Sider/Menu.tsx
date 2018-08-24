@@ -154,19 +154,19 @@ class SiderMenu extends React.Component<IStoreProps> {
                 break
             }
         }
-        let defaultSelectedKeys: string[] = null
+        let selectedKeys: string[] = null
         if (currentMenu) {
-            defaultSelectedKeys = this.getPathArray(menu, currentMenu, 'pid', 'id')
+            selectedKeys = this.getPathArray(menu, currentMenu, 'pid', 'id')
         }
-        if (!defaultSelectedKeys) {
-            defaultSelectedKeys = ['1']
+        if (!selectedKeys) {
+            selectedKeys = ['1']
         }
         return (
             <Menu
                 className={styles.menu}
                 theme={sideBarTheme}
                 mode="inline"
-                defaultSelectedKeys={defaultSelectedKeys}
+                defaultSelectedKeys={selectedKeys}
                 onClick={this.goto}
                 {...this.menuProps}
             >

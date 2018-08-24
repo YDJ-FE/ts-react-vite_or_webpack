@@ -36,7 +36,12 @@ class Sider extends React.Component<IStoreProps> {
         const ChangeTheme = (
             <div className={classnames(styles.changeTheme, sideBarTheme === 'dark' && styles.dark)}>
                 Switch Theme
-                <Switch checkedChildren="dark" unCheckedChildren="light" onChange={this.handleThemeChange} />
+                <Switch
+                    checkedChildren="dark"
+                    unCheckedChildren="light"
+                    checked={sideBarTheme === 'dark'}
+                    onChange={this.handleThemeChange}
+                />
             </div>
         )
         return (
