@@ -1,0 +1,19 @@
+import * as React from 'react'
+import ReactEcharts from 'echarts-for-react'
+
+import * as styles from './style.scss'
+import option from './option'
+
+interface IProps {
+    style?: React.CSSProperties
+}
+
+function ChartLineSmooth({ style }: IProps) {
+    return (
+        <div className={styles.chart} style={style}>
+            <ReactEcharts option={option} style={{ height: '100%', width: 800 }} />
+        </div>
+    )
+}
+
+export default ChartLineSmooth

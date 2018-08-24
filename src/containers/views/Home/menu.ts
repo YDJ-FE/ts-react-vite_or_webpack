@@ -46,41 +46,36 @@ export const menu: IMenu[] = [
     {
         id: 2,
         title: 'Charts',
-        icon: 'dot-chart'
+        icon: 'bar-chart'
     },
     {
         id: 21,
         pid: 2,
-        path: '/charts1',
-        title: 'Charts1',
-        icon: 'dot-chart',
+        title: 'Line-Chart',
+        icon: 'line-chart'
+    },
+    {
+        id: 211,
+        pid: 21,
+        path: '/line-smooth',
+        title: 'Line-Smooth',
+        component: 'Charts',
+        exact: true
+    },
+    {
+        id: 212,
+        pid: 21,
+        path: '/area-stack',
+        title: 'Area-Stack',
         component: 'Charts',
         exact: true
     },
     {
         id: 22,
         pid: 2,
-        path: '/charts2',
-        title: 'Charts2',
-        icon: 'dot-chart',
-        component: 'Charts',
-        exact: true
-    },
-    {
-        id: 41,
-        pid: 22,
-        path: '/charts3',
-        title: 'Charts3',
-        icon: 'dot-chart',
-        component: 'Charts',
-        exact: true
-    },
-    {
-        id: 42,
-        pid: 22,
-        path: '/charts4',
-        title: 'Charts4',
-        icon: 'dot-chart',
+        path: '/pie-chart',
+        title: 'Pie-Chart',
+        icon: 'pie-chart',
         component: 'Charts',
         exact: true
     },
