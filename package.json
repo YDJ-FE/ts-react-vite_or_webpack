@@ -25,6 +25,8 @@
         "antd": "^3.8.1",
         "axios": "^0.18.0",
         "bourbon": "^5.1.0",
+        "echarts": "^4.1.0",
+        "echarts-for-react": "^2.0.14",
         "lodash": "^4.17.10",
         "mobx": "^5.0.3",
         "mobx-react": "^5.2.5",
