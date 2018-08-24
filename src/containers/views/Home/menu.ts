@@ -39,7 +39,7 @@ export const menu: IMenu[] = [
         id: 1,
         path: '/',
         title: 'Dashboard',
-        icon: 'laptop',
+        icon: 'dashboard',
         component: 'Dashboard',
         exact: true
     },
