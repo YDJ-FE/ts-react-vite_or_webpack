@@ -18,9 +18,7 @@ function Header({ sideBarCollapsed, toggleSideBarCollapsed, logout }: IStoreProp
                 type={sideBarCollapsed ? 'menu-unfold' : 'menu-fold'}
                 onClick={toggleSideBarCollapsed}
             />
-            <Button onClick={logout}>
-                登出
-            </Button>
+            <Button onClick={logout}>logout</Button>
         </Layout.Header>
     )
 }

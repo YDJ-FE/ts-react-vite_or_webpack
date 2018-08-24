@@ -63,14 +63,13 @@ class Login extends React.Component<IStoreProps & FormComponentProps> {
                         {getFieldDecorator('account', {
                             rules: [
                                 {
-                                    required: true,
-                                    message: '请输入账户!'
+                                    required: true
                                 }
                             ]
                         })(
                             <Input
                                 prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                placeholder="账户"
+                                placeholder="account"
                             />
                         )}
                     </FormItem>
@@ -78,19 +77,18 @@ class Login extends React.Component<IStoreProps & FormComponentProps> {
                         {getFieldDecorator('password', {
                             rules: [
                                 {
-                                    required: true,
-                                    message: '请输入密码!'
+                                    required: true
                                 }
                             ]
                         })(
                             <Input
                                 prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                                 type="password"
-                                placeholder="密码"
+                                placeholder="password"
                             />
                         )}
                     </FormItem>
-                    <FormItem labelCol={{ span: 7 }} wrapperCol={{ span: 17 }} label="模拟权限">
+                    <FormItem labelCol={{ span: 8 }} wrapperCol={{ span: 16 }} label="mock auth">
                         {getFieldDecorator('category', {
                             initialValue: LOGIN_CATEGORY[0]
                         })(
@@ -105,7 +103,7 @@ class Login extends React.Component<IStoreProps & FormComponentProps> {
                     </FormItem>
                     <FormItem>
                         <Button type="primary" htmlType="submit" block loading={this.loading}>
-                            登录
+                            login
                         </Button>
                     </FormItem>
                 </Form>
