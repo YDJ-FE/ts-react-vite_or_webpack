@@ -57,7 +57,7 @@ class Sider extends React.Component<IStoreProps> {
         return (
             <Layout.Sider trigger={null} theme={sideBarTheme} collapsible collapsed={sideBarCollapsed}>
                 <div className={styles.logoBox}>
-                    <Icon type="medium" />
+                    <Icon type="ant-design" />
                 </div>
                 <Menu
                     theme={sideBarTheme}
