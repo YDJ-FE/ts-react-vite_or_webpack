@@ -6,8 +6,6 @@ import { setCookie, clearCookie } from '@utils/index'
 import { COOKIE_KEYS, LOCALSTORAGE_KEYS } from '@constants/index'
 
 export class UserStore extends StoreExt {
-    @observable
-    loading: boolean = false
     /**
      * 用户信息
      *
@@ -19,7 +17,6 @@ export class UserStore extends StoreExt {
 
     @action
     login = async (params: IUserStore.LoginParams): Promise<any> => {
-        this.loading = true
         try {
             const res = await this.api.login(params)
             runInAction('SET_USERINFO', () => {
@@ -29,9 +26,6 @@ export class UserStore extends StoreExt {
             localStorage.setItem(LOCALSTORAGE_KEYS.USERINFO, JSON.stringify(res))
             routerStore.push('/')
         } catch (err) {}
-        runInAction('HIDE_LOGIN_LOADING', () => {
-            this.loading = false
-        })
     }
 
     @action
