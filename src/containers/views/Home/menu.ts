@@ -7,8 +7,16 @@ export const asyncComponents = {
         loader: () => import(/* webpackChunkName: "dashboard" */ '@views/Dashboard'),
         loading: PageLoading
     }),
-    Charts: Loadable({
-        loader: () => import(/* webpackChunkName: "charts" */ '@views/Charts'),
+    ChartAreaStack: Loadable({
+        loader: () => import(/* webpackChunkName: "chart-area-stack" */ '@views/Charts/AreaStack'),
+        loading: PageLoading
+    }),
+    ChartLineSmooth: Loadable({
+        loader: () => import(/* webpackChunkName: "chart-line-smooth" */ '@views/Charts/LineSmooth'),
+        loading: PageLoading
+    }),
+    ChartPie: Loadable({
+        loader: () => import(/* webpackChunkName: "chart-pie" */ '@views/Charts/Pie'),
         loading: PageLoading
     }),
     Users: Loadable({
@@ -55,19 +63,19 @@ export const menu: IMenu[] = [
         icon: 'line-chart'
     },
     {
-        id: 211,
-        pid: 21,
-        path: '/line-smooth',
-        title: 'Line-Smooth',
-        component: 'Charts',
-        exact: true
-    },
-    {
         id: 212,
         pid: 21,
         path: '/area-stack',
         title: 'Area-Stack',
-        component: 'Charts',
+        component: 'ChartAreaStack',
+        exact: true
+    },
+    {
+        id: 211,
+        pid: 21,
+        path: '/line-smooth',
+        title: 'Line-Smooth',
+        component: 'ChartLineSmooth',
         exact: true
     },
     {
@@ -76,7 +84,7 @@ export const menu: IMenu[] = [
         path: '/pie-chart',
         title: 'Pie-Chart',
         icon: 'pie-chart',
-        component: 'Charts',
+        component: 'ChartPie',
         exact: true
     },
     {

@@ -11,7 +11,7 @@ interface IProps {
 function ChartPie({ style }: IProps) {
     return (
         <div className={styles.chart} style={style}>
-            <ReactEcharts option={option} style={{ height: '100%', width: 800 }} />
+            <ReactEcharts option={option} style={{ height: '100%', width: '100%' }} />
         </div>
     )
 }
