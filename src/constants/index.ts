@@ -3,7 +3,8 @@ export enum COOKIE_KEYS {
 }
 
 export enum LOCALSTORAGE_KEYS {
-    USERINFO = 'userInfo'
+    USERINFO = 'userInfo',
+    NAV_OPEN_KEYS = 'navOpenKeys'
 }
 
 export const LOGIN_CATEGORY = ['user', 'admin']
