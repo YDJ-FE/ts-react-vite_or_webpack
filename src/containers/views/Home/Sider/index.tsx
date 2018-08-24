@@ -10,16 +10,23 @@ import * as styles from './index.scss'
 
 interface IStoreProps {
     sideBarCollapsed?: boolean
+    sideBarTheme?: IGlobalStore.SideBarTheme
     userInfo?: IUserStore.UserInfo
     routerStore?: RouterStore
 }
 
 @inject(
-    (store: IStore): IStoreProps => ({
-        routerStore: store.routerStore,
-        sideBarCollapsed: store.globalStore.sideBarCollapsed,
-        userInfo: store.userStore.userInfo
-    })
+    (store: IStore): IStoreProps => {
+        const { routerStore, globalStore, userStore } = store
+        const { userInfo } = userStore
+        const { sideBarCollapsed, sideBarTheme } = globalStore
+        return {
+            routerStore,
+            sideBarCollapsed,
+            sideBarTheme,
+            userInfo
+        }
+    }
 )
 @observer
 class Sider extends React.Component<IStoreProps> {
@@ -46,11 +53,16 @@ class Sider extends React.Component<IStoreProps> {
     }
 
     render() {
-        const { userInfo, sideBarCollapsed } = this.props
+        const { userInfo, sideBarCollapsed, sideBarTheme } = this.props
         return (
-            <Layout.Sider trigger={null} collapsible collapsed={sideBarCollapsed}>
+            <Layout.Sider trigger={null} theme={sideBarTheme} collapsible collapsed={sideBarCollapsed}>
                 <h2 className={styles.title}>YDJFE</h2>
-                <Menu theme="dark" mode="inline" defaultSelectedKeys={this.menuKeys.slice()} onClick={this.goto}>
+                <Menu
+                    theme={sideBarTheme}
+                    mode="inline"
+                    defaultSelectedKeys={this.menuKeys.slice()}
+                    onClick={this.goto}
+                >
                     {menu.map(m => {
                         if (!checkPermissions(userInfo.category, m.permissions)) {
                             return null
