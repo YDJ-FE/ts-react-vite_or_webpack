@@ -53,7 +53,7 @@ export const menu: IMenu[] = [
     },
     {
         id: 2,
-        title: 'Charts',
+        title: 'ECharts',
         icon: 'bar-chart'
     },
     {
