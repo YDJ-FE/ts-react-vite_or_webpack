@@ -5,7 +5,7 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 
 import * as styles from './index.scss'
 import Error from '@components/Error'
-import menu, { asyncComponents } from './menu'
+import menu, { asynchronousComponents } from './menu'
 import Header from './Header'
 import Sider from './Sider'
 
@@ -31,7 +31,7 @@ function Home({ logout }: IStoreProps) {
                                         key={m.id}
                                         exact={m.exact}
                                         path={m.path}
-                                        component={m.component ? asyncComponents[m.component] : null}
+                                        component={m.component ? asynchronousComponents[m.component] : null}
                                     />
                                 )
                             })}
