@@ -37,6 +37,7 @@
     },
     "devDependencies": {
         "@svgr/webpack": "^2.2.0",
+        "@types/classnames": "^2.2.6",
         "@types/node": "^10.7.0",
         "@types/react": "^16.4.10",
         "@types/react-dom": "^16.0.7",
@@ -51,6 +52,7 @@
         "babel-plugin-transform-class-properties": "^6.24.1",
         "babel-polyfill": "^6.26.0",
         "cache-loader": "^1.2.2",
+        "classnames": "^2.2.6",
         "cross-env": "^5.1.4",
         "css-loader": "^1.0.0",
         "customaddcomponents": "^1.0.35",

@@ -1,7 +1,38 @@
 @import '_base.scss';
 
+.sider {
+    :global(.ant-layout-sider-children) {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
 .logoBox {
     padding: 10px 0;
     font-size: 50px;
     text-align: center;
+
+    &.dark {
+        color: rgba(white, 0.65);
+    }
+}
+
+.menu {
+    flex: 1;
+}
+
+.changeTheme {
+    display: flex;
+    padding: 12px 10px;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid $border-light-color;
+    font-size: $font-size-sm;
+    transition: all 0.3s;
+
+    &.dark {
+        color: rgba(white, 0.65);
+        background-color: $dark-color;
+        border-color: $dark-color;
+    }
 }

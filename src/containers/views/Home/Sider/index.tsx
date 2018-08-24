@@ -1,7 +1,8 @@
 import * as React from 'react'
+import classnames from 'classnames'
 import { observer, inject } from 'mobx-react'
 import { observable, action } from 'mobx'
-import { Layout, Menu, Icon } from 'antd'
+import { Layout, Menu, Icon, Switch } from 'antd'
 import { checkPermissions } from 'react-authorized/lib'
 
 import menu from './../menu'
@@ -11,6 +12,7 @@ import * as styles from './index.scss'
 interface IStoreProps {
     sideBarCollapsed?: boolean
     sideBarTheme?: IGlobalStore.SideBarTheme
+    changeSiderTheme?: (theme: IGlobalStore.SideBarTheme) => void
     userInfo?: IUserStore.UserInfo
     routerStore?: RouterStore
 }
@@ -19,11 +21,12 @@ interface IStoreProps {
     (store: IStore): IStoreProps => {
         const { routerStore, globalStore, userStore } = store
         const { userInfo } = userStore
-        const { sideBarCollapsed, sideBarTheme } = globalStore
+        const { sideBarCollapsed, sideBarTheme, changeSiderTheme } = globalStore
         return {
             routerStore,
             sideBarCollapsed,
             sideBarTheme,
+            changeSiderTheme,
             userInfo
         }
     }
@@ -52,14 +55,31 @@ class Sider extends React.Component<IStoreProps> {
         this.menuKeys = [location.pathname]
     }
 
+    handleThemeChange = (e: boolean) => {
+        this.props.changeSiderTheme(e ? 'dark' : 'light')
+    }
+
     render() {
         const { userInfo, sideBarCollapsed, sideBarTheme } = this.props
+        const ChangeTheme = (
+            <div className={classnames(styles.changeTheme, sideBarTheme === 'dark' && styles.dark)}>
+                Switch Theme
+                <Switch checkedChildren="dark" unCheckedChildren="light" onChange={this.handleThemeChange} />
+            </div>
+        )
         return (
-            <Layout.Sider trigger={null} theme={sideBarTheme} collapsible collapsed={sideBarCollapsed}>
-                <div className={styles.logoBox}>
+            <Layout.Sider
+                className={styles.sider}
+                trigger={null}
+                theme={sideBarTheme}
+                collapsible
+                collapsed={sideBarCollapsed}
+            >
+                <div className={classnames(styles.logoBox, sideBarTheme === 'dark' && styles.dark)}>
                     <Icon type="ant-design" />
                 </div>
                 <Menu
+                    className={styles.menu}
                     theme={sideBarTheme}
                     mode="inline"
                     defaultSelectedKeys={this.menuKeys.slice()}
@@ -77,6 +97,7 @@ class Sider extends React.Component<IStoreProps> {
                         )
                     })}
                 </Menu>
+                {!sideBarCollapsed && ChangeTheme}
             </Layout.Sider>
         )
     }
