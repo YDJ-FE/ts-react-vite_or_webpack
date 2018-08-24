@@ -1,7 +1,7 @@
 {
     "name": "ts-react-webpack4",
     "version": "1.0.0",
-    "description": "a starter-template with typescript, react, mobx and webpack4...",
+    "description": "an admin starter-template with typescript, react, mobx and webpack4...",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,6 +15,7 @@
     "keywords": [
         "webpack4",
         "typescript",
+        "admin",
         "react",
         "mobx",
         "starter-template"
