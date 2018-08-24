@@ -1,11 +1,10 @@
 import * as React from 'react'
 import { inject, observer } from 'mobx-react'
 import { observable, runInAction } from 'mobx'
-import { Form, Icon, Input, Button, Radio } from 'antd'
+import { Form, Icon, Input, Button } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
 
 import * as styles from './index.scss'
-import { LOGIN_CATEGORY } from '@constants/index'
 
 const FormItem = Form.Item
 
@@ -86,19 +85,6 @@ class Login extends React.Component<IStoreProps & FormComponentProps> {
                                 type="password"
                                 placeholder="password"
                             />
-                        )}
-                    </FormItem>
-                    <FormItem labelCol={{ span: 8 }} wrapperCol={{ span: 16 }} label="mock auth">
-                        {getFieldDecorator('category', {
-                            initialValue: LOGIN_CATEGORY[0]
-                        })(
-                            <Radio.Group>
-                                {LOGIN_CATEGORY.map(c => (
-                                    <Radio key={c} value={c}>
-                                        {c}
-                                    </Radio>
-                                ))}
-                            </Radio.Group>
                         )}
                     </FormItem>
                     <FormItem>

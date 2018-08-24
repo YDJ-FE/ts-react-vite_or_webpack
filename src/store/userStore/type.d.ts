@@ -7,7 +7,6 @@ export interface UserStore extends UserStoreModel {}
 export interface LoginParams {
     account: string
     password: string
-    category: string
 }
 
 export interface UserInfo {

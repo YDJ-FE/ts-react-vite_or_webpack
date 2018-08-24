@@ -21,9 +21,7 @@ export class UserStore extends StoreExt {
     login = async (params: IUserStore.LoginParams): Promise<any> => {
         this.loading = true
         try {
-            const { loginUser, loginAdmin } = this.api
-            const api = params.category === 'user' ? loginUser : loginAdmin
-            const res = await api(params)
+            const res = await this.api.login(params)
             runInAction('SET_USERINFO', () => {
                 this.userInfo = res
             })
@@ -57,13 +55,6 @@ export class UserStore extends StoreExt {
         const userInfo: IUserStore.UserInfo = JSON.parse(lcoalUserInfo)
         this.userInfo = userInfo
         return userInfo
-    }
-
-    @action
-    getError = async (): Promise<any> => {
-        try {
-            await this.api.getError({})
-        } catch (err) {}
     }
 }
 
