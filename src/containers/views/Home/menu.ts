@@ -2,31 +2,24 @@ import Loadable from 'react-loadable'
 
 import PageLoading from '@components/PageLoading'
 
-export const asyncComponents = {
-    Dashboard: Loadable({
-        loader: () => import(/* webpackChunkName: "dashboard" */ '@views/Dashboard'),
-        loading: PageLoading
-    }),
-    ChartAreaStack: Loadable({
-        loader: () => import(/* webpackChunkName: "chart-area-stack" */ '@views/Charts/AreaStack'),
-        loading: PageLoading
-    }),
-    ChartLineSmooth: Loadable({
-        loader: () => import(/* webpackChunkName: "chart-line-smooth" */ '@views/Charts/LineSmooth'),
-        loading: PageLoading
-    }),
-    ChartPie: Loadable({
-        loader: () => import(/* webpackChunkName: "chart-pie" */ '@views/Charts/Pie'),
-        loading: PageLoading
-    }),
-    Users: Loadable({
-        loader: () => import(/* webpackChunkName: "users" */ '@views/Users'),
+const loadComponent = (loader: () => Promise<any>) =>
+    Loadable({
+        loader,
         loading: PageLoading
     })
+
+export const asynchronousComponents = {
+    Dashboard: loadComponent(() => import(/* webpackChunkName: "dashboard" */ '@views/Dashboard')),
+    ChartAreaStack: loadComponent(() => import(/* webpackChunkName: "chart-area-stack" */ '@views/Charts/AreaStack')),
+    ChartLineSmooth: loadComponent(() =>
+        import(/* webpackChunkName: "chart-line-smooth" */ '@views/Charts/LineSmooth')
+    ),
+    ChartPie: loadComponent(() => import(/* webpackChunkName: "chart-pie" */ '@views/Charts/Pie')),
+    Users: loadComponent(() => import(/* webpackChunkName: "users" */ '@views/Users'))
 }
 
 // 所有路由的key
-export type AsyncComponentKeys = keyof typeof asyncComponents
+export type AsynchronousComponentKeys = keyof typeof asynchronousComponents
 
 export interface IMenu {
     title: string
@@ -34,7 +27,7 @@ export interface IMenu {
     pid?: number
     path?: string
     icon?: string
-    component?: AsyncComponentKeys
+    component?: AsynchronousComponentKeys
     exact?: boolean
 }
 
