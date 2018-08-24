@@ -1,8 +1,8 @@
-typescript + react + webpack starter
+typescript + react + webpack admin starter
 
-this is a simple starter looks like:
+this is a simple admin starter looks like:
 
-<img src="https://ss.yidejia.com/uploads/ts-react-webpack4/ts-react-webpack4.png" width="900">
+<img src="./screenshot.png" width="900">
 
 ## setup
 
@@ -32,7 +32,6 @@ $ npm run qa/prod
 -   mobx-react-router
 -   component hot reload
 -   use [ant design](https://ant.design/index-cn) as UI framework
--   use [react-authorized](https://github.com/vegawong/react-authorized) to control authority
 -   import svg icon as a component by `@svgr/webpack`, [there is an example in the doc of steamer-react-redux-ts](https://github.com/YDJ-FE/steamer-react-ts/blob/master/docs/svg.md)
 -   async to load component by `react-loadable`
 -   import .(s)css auto generate .(s)css.d.ts by `typings-for-css-modules-loader`
