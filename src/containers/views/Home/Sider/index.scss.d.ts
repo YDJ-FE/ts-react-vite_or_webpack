@@ -1,1 +1,1 @@
-export const title: string;
+export const logoBox: string;

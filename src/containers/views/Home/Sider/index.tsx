@@ -56,7 +56,9 @@ class Sider extends React.Component<IStoreProps> {
         const { userInfo, sideBarCollapsed, sideBarTheme } = this.props
         return (
             <Layout.Sider trigger={null} theme={sideBarTheme} collapsible collapsed={sideBarCollapsed}>
-                <h2 className={styles.title}>YDJFE</h2>
+                <div className={styles.logoBox}>
+                    <Icon type="medium" />
+                </div>
                 <Menu
                     theme={sideBarTheme}
                     mode="inline"
