@@ -36,6 +36,7 @@ interface IStoreProps {
 )
 @observer
 class SiderMenu extends React.Component<IStoreProps> {
+    // 打开的菜单层级记录
     private levelMap: NumberObject = {}
 
     @computed
@@ -81,12 +82,12 @@ class SiderMenu extends React.Component<IStoreProps> {
         setOpenKeys(nextOpenKeys)
     }
 
-    getPathArray = (array: IMenu[], current: IMenu, pid: string, id: string): string[] => {
-        const result = [String(current[id])]
+    getPathArray = (array: IMenu[], current: IMenu): string[] => {
+        const result = [String(current.id)]
         const getPath = (item: IMenu): void => {
-            if (item && item[pid]) {
-                result.unshift(String(item[pid]))
-                getPath(queryArray(array, item[pid], id))
+            if (item && item.pid) {
+                result.unshift(String(item.pid))
+                getPath(queryArray(array, String(item.pid), 'id'))
             }
         }
         getPath(current)
@@ -94,7 +95,7 @@ class SiderMenu extends React.Component<IStoreProps> {
     }
 
     // 保持选中
-    getAncestorKeys = (key: string) => {
+    getAncestorKeys = (key: string): string[] => {
         const map = {}
         const getParent = index => {
             const result = [String(this.levelMap[index])]
@@ -142,7 +143,6 @@ class SiderMenu extends React.Component<IStoreProps> {
     }
 
     render() {
-        // 生成树状
         this.levelMap = {}
         const { sideBarTheme } = this.props
         const menuItems = this.getMenus(this.menuTree)
@@ -156,7 +156,7 @@ class SiderMenu extends React.Component<IStoreProps> {
         }
         let selectedKeys: string[] = null
         if (currentMenu) {
-            selectedKeys = this.getPathArray(menu, currentMenu, 'pid', 'id')
+            selectedKeys = this.getPathArray(menu, currentMenu)
         }
         if (!selectedKeys) {
             selectedKeys = ['1']
