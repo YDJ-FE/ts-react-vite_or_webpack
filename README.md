@@ -1,4 +1,6 @@
-this is a simple admin starter (with typescript, react and webpack) looks like:
+This is a simple (admin) starter with typescript, react and webpack.
+
+Have a quick view:
 
 <img src="./screenshot.png" width="900">
 
