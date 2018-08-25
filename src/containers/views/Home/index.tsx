@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { Layout } from 'antd'
-import { inject, observer } from 'mobx-react'
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 
 import * as styles from './index.scss'
@@ -9,16 +8,12 @@ import menu, { asynchronousComponents } from './menu'
 import Header from './Header'
 import Sider from './Sider'
 
-interface IStoreProps {
-    logout?: () => void
-}
-
-function Home({ logout }: IStoreProps) {
+function Home() {
     return (
         <Layout>
             <Sider />
             <Layout>
-                <Header logout={logout} />
+                <Header />
                 <Layout.Content className={styles.content}>
                     <Router>
                         <Switch>
@@ -44,9 +39,4 @@ function Home({ logout }: IStoreProps) {
     )
 }
 
-export default inject(
-    (store: IStore): IStoreProps => {
-        const { logout } = store.userStore
-        return { logout }
-    }
-)(observer(Home))
+export default Home
