@@ -44,8 +44,6 @@ import * as React from 'react'
 import { inject, observer } from 'mobx-react'
 import { Button } from 'antd'
 
-import * as styles from './index.scss'
-
 interface IStoreProps {
     routerStore?: RouterStore;
 }
@@ -55,14 +53,9 @@ function Test({ routerStore }: IStoreProps) {
         routerStore.push('/')
     }
     return (
-        <div className={styles.login}>
-            Login!!!
-            <div className={styles.btnGroup}>
-                <Button type="primary" onClick={gotoHome}>
-                    go to page index directly
-                </Button>
-            </div>
-        </div>
+        <Button type="primary" onClick={gotoHome}>
+            go to page index directly
+        </Button>
     )
 }
 
@@ -79,7 +72,6 @@ export default inject(
 
 ```jsx
 import * as React from 'react'
-import { hot } from 'react-hot-loader'
 import Loadable from 'react-loadable'
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 
@@ -98,7 +90,7 @@ const AppRouter = () => (
     </Router>
 )
 
-export default hot(module)(AppRouter)
+export default AppRouter
 ```
 
 [live example](https://github.com/YDJ-FE/ts-react-webpack4/tree/master/src/containers/shared/App?1532589067125)
@@ -116,6 +108,10 @@ server {
        }
  }
 ```
+
+## TODO
+
+-   config menu by user with permission
 
 ## the scaffold
 
