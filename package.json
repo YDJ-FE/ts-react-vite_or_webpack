@@ -35,7 +35,7 @@
         "path-to-regexp": "^2.3.0",
         "react": "^16.4.1",
         "react-dom": "^16.4.1",
-        "react-hot-loader": "^4.2.0",
+        "react-hot-loader": "^4.3.5",
         "react-loadable": "^5.4.0",
         "react-router-dom": "^4.2.2"
     },
