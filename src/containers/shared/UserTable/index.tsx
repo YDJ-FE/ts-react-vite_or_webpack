@@ -2,6 +2,8 @@ import * as React from 'react'
 import { Table, Tag, Divider } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 
+import { ComponentExt } from '@utils/reactExt'
+
 interface IUser {
     key: string
     name: string
@@ -80,8 +82,14 @@ const data: IUser[] = [
 
 class TableExtended extends Table<IUser> {}
 
-function UserTable() {
-    return <TableExtended columns={columns} dataSource={data} style={{ width: '100%' }} />
+class UserTable extends ComponentExt {
+    componentDidMount() {
+        this.api.user.getUsers({})
+    }
+
+    render() {
+        return <TableExtended columns={columns} dataSource={data} style={{ width: '100%' }} />
+    }
 }
 
 export default UserTable

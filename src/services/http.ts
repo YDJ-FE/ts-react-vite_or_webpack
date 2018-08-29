@@ -37,21 +37,16 @@ methods.forEach(v => {
         const axiosConfig: AxiosRequestConfig = {
             method: v,
             url,
-            baseURL: baseUrl || DEFAULTCONFIG.baseURL
+            baseURL: baseUrl || DEFAULTCONFIG.baseURL,
+            headers: { Authorization: `Bearer ${getCookie(COOKIE_KEYS.TOKEN)}` }
         }
         const instance = axios.create(DEFAULTCONFIG)
         // Add a request interceptor
         instance.interceptors.request.use(
             cfg => {
                 const ts = Date.now() / 1000
-                const queryData = {
-                    ts,
-                    token: getCookie(COOKIE_KEYS.TOKEN)
-                }
-                cfg.params = {
-                    ...cfg.params,
-                    ...queryData
-                }
+                const queryData = { ts }
+                cfg.params = { ...cfg.params, ...queryData }
                 return cfg
             },
             error => Promise.reject(error)
