@@ -76,6 +76,7 @@
         "node-sass": "^4.9.2",
         "optimize-css-assets-webpack-plugin": "^5.0.0",
         "postcss-loader": "^3.0.0",
+        "react-test-renderer": "^16.4.2",
         "sass-loader": "^7.0.3",
         "style-loader": "^0.21.0",
         "stylelint": "^9.1.1",
@@ -113,13 +114,14 @@
         ],
         "moduleNameMapper": {
             "\\.(css|scss)$": "identity-obj-proxy",
+            "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__jest__/fileMock.js",
             "^@components(.*)$": "<rootDir>/src/components$1",
             "^@constants(.*)$": "<rootDir>/src/constants$1",
             "^@services(.*)$": "<rootDir>/src/services$1",
             "^@utils(.*)$": "<rootDir>/src/utils$1",
             "^@assets(.*)$": "<rootDir>/src/assets$1",
-            "^@views(.*)$": "<rootDir>/src/container/views$1",
-            "^@shared(.*)$": "<rootDir>/src/container/shared$1"
+            "^@views(.*)$": "<rootDir>/src/containers/views$1",
+            "^@shared(.*)$": "<rootDir>/src/containers/shared$1"
         },
         "transform": {
             "^.+\\.tsx?$": "ts-jest"
