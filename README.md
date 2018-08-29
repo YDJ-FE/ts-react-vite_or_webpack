@@ -22,6 +22,10 @@ $ npm run dev
 $ npm run qa/prod
 ```
 
+## server
+
+We do not use any mock tools, all data interaction depends on [a real node service](https://github.com/jackple/showcase). Integration is in our future plan! 😁😁😁
+
 ## characteristics/packages
 
 -   webpack-4.x
