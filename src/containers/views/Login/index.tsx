@@ -53,7 +53,7 @@ class Login extends React.Component<IStoreProps & FormComponentProps> {
                     <div className={styles.logoBox}>
                         <Icon type="ant-design" />
                     </div>
-                    <FormItem>
+                    <FormItem hasFeedback>
                         {getFieldDecorator('account', {
                             rules: [
                                 {
@@ -67,7 +67,7 @@ class Login extends React.Component<IStoreProps & FormComponentProps> {
                             />
                         )}
                     </FormItem>
-                    <FormItem>
+                    <FormItem hasFeedback>
                         {getFieldDecorator('password', {
                             rules: [
                                 {
