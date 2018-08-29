@@ -18,14 +18,16 @@ export class UserStore extends StoreExt {
     @action
     login = async (params: IUserStore.LoginParams): Promise<any> => {
         try {
-            const res = await this.api.login(params)
+            const res = await this.api.auth.login(params)
             runInAction('SET_USERINFO', () => {
                 this.userInfo = res
             })
             setCookie(COOKIE_KEYS.TOKEN, res.token)
             localStorage.setItem(LOCALSTORAGE_KEYS.USERINFO, JSON.stringify(res))
-            routerStore.push('/')
-        } catch (err) {}
+            routerStore.replace('/')
+        } catch (err) {
+            console.error(err)
+        }
     }
 
     @action

@@ -1,8 +1,8 @@
-import axios, { AxiosRequestConfig as _AxiosRequestConfig} from 'axios'
+import axios, { AxiosRequestConfig as _AxiosRequestConfig } from 'axios'
 import * as qs from 'qs'
 import { message, notification } from 'antd'
 
-import { getCookie } from './'
+import { getCookie } from '@utils/index'
 import { COOKIE_KEYS } from '@constants/index'
 
 export interface AxiosRequestConfig extends _AxiosRequestConfig {
@@ -31,7 +31,7 @@ const DEFAULTCONFIG = {
 const http: HttpResquest = {}
 const methods = ['get', 'post', 'put', 'delete']
 
-const isSuccess = res => res.code !== undefined && res.code !== null && Number(res.code) === 1
+const isSuccess = res => res.errCode === 0
 const resFormat = res => res.response || res.data || {}
 
 methods.forEach(v => {
@@ -61,7 +61,7 @@ methods.forEach(v => {
         // Add a response interceptor
         instance.interceptors.response.use(
             response => {
-                if (!showAuthError && response.data.code === 402) {
+                if (!showAuthError && response.data.errCode === 402) {
                     showAuthError = true
                     notification.destroy()
                     notification.error({
@@ -76,7 +76,7 @@ methods.forEach(v => {
                         msg: '登录已过期'
                     })
                 }
-                if (response.data.code === 401) {
+                if (response.data.errCode === 401) {
                     notification.destroy()
                     notification.error({
                         message: '错误',
@@ -95,11 +95,10 @@ methods.forEach(v => {
                 if (!isSuccess(rdata)) {
                     const _err = {
                         msg: rdata.msg,
-                        code: rdata.code,
+                        errCode: rdata.errCode,
                         type: HTTPERROR[HTTPERROR.LOGICERROR],
                         config: response.config
                     }
-                    // cbLogicError && cbLogicError.call(null, _er r);
                     return Promise.reject(_err)
                 }
                 return resFormat(rdata)
@@ -112,7 +111,6 @@ methods.forEach(v => {
                         : HTTPERROR[HTTPERROR.NETWORKERROR],
                     config: error.config
                 }
-                // cbNetworkError && cbNetworkError.call(null, _err);
                 return Promise.reject(_err)
             }
         )

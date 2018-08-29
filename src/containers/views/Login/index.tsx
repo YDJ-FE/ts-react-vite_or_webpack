@@ -36,12 +36,7 @@ class Login extends React.Component<IStoreProps & FormComponentProps> {
                     runInAction('SHOW_LOGIN_LOADING', () => {
                         this.loading = true
                     })
-                    try {
-                        await this.props.login(values)
-                        this.props.routerStore.history.replace('/')
-                    } catch (err) {
-                        console.error(err)
-                    }
+                    await this.props.login(values)
                     runInAction('HIDE_LOGIN_LOADING', () => {
                         this.loading = false
                     })
