@@ -83,6 +83,10 @@ class Login extends React.Component<IStoreProps & FormComponentProps> {
                         )}
                     </FormItem>
                     <FormItem>
+                        <div className={styles.tips}>
+                            <span>username: admin</span>
+                            <span>password: admin</span>
+                        </div>
                         <Button type="primary" htmlType="submit" block loading={this.loading}>
                             login
                         </Button>

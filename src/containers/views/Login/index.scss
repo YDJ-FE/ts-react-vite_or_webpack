@@ -19,3 +19,11 @@
     text-align: center;
     margin-bottom: 15px;
 }
+
+.tips {
+    display: flex;
+    color: $gray-color;
+    justify-content: space-around;
+    font-size: $font-size-sm;
+    margin-top: -20px;
+}
