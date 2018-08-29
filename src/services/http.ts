@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig as _AxiosRequestConfig } from 'axios'
 import * as qs from 'qs'
-import { message, notification } from 'antd'
+import { message } from 'antd'
 
 import { getCookie } from '@utils/index'
 import { COOKIE_KEYS } from '@constants/index'
@@ -21,8 +21,6 @@ enum HTTPERROR {
     TIMEOUTERROR,
     NETWORKERROR
 }
-
-let showAuthError = false
 
 const DEFAULTCONFIG = {
     baseURL: process.env.BASEURL
@@ -61,31 +59,6 @@ methods.forEach(v => {
         // Add a response interceptor
         instance.interceptors.response.use(
             response => {
-                if (!showAuthError && response.data.errCode === 402) {
-                    showAuthError = true
-                    notification.destroy()
-                    notification.error({
-                        message: '错误',
-                        description: '登录已经过期'
-                    })
-                    setTimeout(() => {
-                        showAuthError = false
-                        location.href = '#/login'
-                    }, 300)
-                    return Promise.reject({
-                        msg: '登录已过期'
-                    })
-                }
-                if (response.data.errCode === 401) {
-                    notification.destroy()
-                    notification.error({
-                        message: '错误',
-                        description: '你没有权限访问'
-                    })
-                    return Promise.reject({
-                        msg: '你没有权限访问'
-                    })
-                }
                 let rdata = null
                 if (typeof response.data === 'object' && !isNaN(response.data.length)) {
                     rdata = response.data[0]
@@ -105,7 +78,7 @@ methods.forEach(v => {
             },
             error => {
                 const _err = {
-                    msg: error.message || '网络故障',
+                    msg: error.response.statusText || error.message || '网络故障',
                     type: /^timeout of/.test(error.message)
                         ? HTTPERROR[HTTPERROR.TIMEOUTERROR]
                         : HTTPERROR[HTTPERROR.NETWORKERROR],
