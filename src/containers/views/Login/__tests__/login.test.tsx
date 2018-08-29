@@ -2,7 +2,7 @@ import * as React from 'react'
 import { shallow, configure } from 'enzyme'
 import * as Adapter from 'enzyme-adapter-react-16'
 
-import Login from '../src/containers/views/Login'
+import Login from './../index'
 
 configure({ adapter: new Adapter() })
 

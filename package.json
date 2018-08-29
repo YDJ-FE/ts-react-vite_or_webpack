@@ -125,7 +125,7 @@
             "^.+\\.tsx?$": "ts-jest"
         },
         "testMatch": [
-            "<rootDir>/__test__/**/?(*.)(spec|test).ts?(x)"
+            "<rootDir>/src/**/?(*.)(spec|test).ts?(x)"
         ]
     }
 }
