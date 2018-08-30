@@ -2,7 +2,7 @@ import * as React from 'react'
 import { observer } from 'mobx-react'
 import { observable, action } from 'mobx'
 
-import UserTable from '@shared/UserTable'
+import UserTable from './Table'
 
 @observer
 class Users extends React.Component {

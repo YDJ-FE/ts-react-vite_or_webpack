@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { Table, Tag, Divider } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
+import { observer } from 'mobx-react'
+import { observable, action } from 'mobx'
 
 import { ComponentExt } from '@utils/reactExt'
 
@@ -86,13 +88,18 @@ const data: IUser[] = [
 
 class TableExtended extends Table<IUser> {}
 
+@observer
 class UserTable extends ComponentExt<IProps> {
+    @observable
+    private loading: boolean = false
+
     componentDidMount() {
         this.api.user.getUsers({})
     }
 
     render() {
-        return <TableExtended columns={columns} dataSource={data} style={{ width: '100%' }} />
+        const { scrollY } = this.props
+        return <TableExtended columns={columns} dataSource={data} style={{ width: '100%' }} scroll={{ y: scrollY }} />
     }
 }
 
