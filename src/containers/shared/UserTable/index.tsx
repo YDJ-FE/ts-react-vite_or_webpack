@@ -4,6 +4,10 @@ import { ColumnProps } from 'antd/lib/table'
 
 import { ComponentExt } from '@utils/reactExt'
 
+interface IProps {
+    scrollY: number
+}
+
 interface IUser {
     key: string
     name: string
@@ -82,7 +86,7 @@ const data: IUser[] = [
 
 class TableExtended extends Table<IUser> {}
 
-class UserTable extends ComponentExt {
+class UserTable extends ComponentExt<IProps> {
     componentDidMount() {
         this.api.user.getUsers({})
     }
