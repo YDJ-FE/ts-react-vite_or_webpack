@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { Table, Tag, Divider } from 'antd'
+import { Table, Divider } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 import { observer } from 'mobx-react'
-import { observable, action } from 'mobx'
+import { observable, action, runInAction, toJS } from 'mobx'
 
 import { ComponentExt } from '@utils/reactExt'
 
@@ -11,78 +11,37 @@ interface IProps {
 }
 
 interface IUser {
-    key: string
-    name: string
-    age: number
-    address: string
-    tags: string[]
+    account: string
+    category: string
+    createdAt: string
 }
 
 const columns: Array<ColumnProps<IUser>> = [
     {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-        render: text => <a href="javascript:;">{text}</a>
+        title: 'Account',
+        dataIndex: 'account',
+        key: 'account'
     },
     {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age'
+        title: 'Category',
+        dataIndex: 'category',
+        key: 'category'
     },
     {
-        title: 'Address',
-        dataIndex: 'address',
-        key: 'address'
-    },
-    {
-        title: 'Tags',
-        key: 'tags',
-        dataIndex: 'tags',
-        render: (tags: string[]) => (
-            <span>
-                {tags.map(tag => (
-                    <Tag color="blue" key={tag}>
-                        {tag}
-                    </Tag>
-                ))}
-            </span>
-        )
+        title: 'CreatedAt',
+        dataIndex: 'createdAt',
+        key: 'createdAt'
     },
     {
         title: 'Action',
         key: 'action',
-        render: (text, record) => (
+        render: (_, record) => (
             <span>
-                <a href="javascript:;">Invite {record.name}</a>
+                <a href="javascript:;">Invite {record.account}</a>
                 <Divider type="vertical" />
                 <a href="javascript:;">Delete</a>
             </span>
         )
-    }
-]
-
-const data: IUser[] = [
-    {
-        key: '1',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer']
-    },
-    {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: ['loser']
-    },
-    {
-        key: '3',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        tags: ['cool', 'teacher']
     }
 ]
 
@@ -92,14 +51,41 @@ class TableExtended extends Table<IUser> {}
 class UserTable extends ComponentExt<IProps> {
     @observable
     private loading: boolean = false
+    // datasource
+    @observable
+    private users: IUser[] = []
+
+    @action
+    getUsers = async () => {
+        this.loading = true
+        try {
+            const res = await this.api.user.getUsers({})
+            runInAction('SET_USER_TABLE_DATASOURCE', () => {
+                this.users = res
+            })
+        } catch (err) {}
+        runInAction('HIDE_USER_TABLE_LOADING', () => {
+            this.loading = false
+        })
+    }
 
     componentDidMount() {
-        this.api.user.getUsers({})
+        this.getUsers()
     }
 
     render() {
         const { scrollY } = this.props
-        return <TableExtended columns={columns} dataSource={data} style={{ width: '100%' }} scroll={{ y: scrollY }} />
+        return (
+            <TableExtended
+                className="center-table"
+                style={{ width: '100%' }}
+                rowKey="_id"
+                loading={this.loading}
+                columns={columns}
+                dataSource={toJS(this.users)}
+                scroll={{ y: scrollY }}
+            />
+        )
     }
 }
 
