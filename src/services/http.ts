@@ -22,12 +22,16 @@ enum HTTPERROR {
     NETWORKERROR
 }
 
+const TOKENERROR = [401, 402, 403]
+
 const DEFAULTCONFIG = {
     baseURL: process.env.BASEURL
 }
 
 const http: HttpResquest = {}
 const methods = ['get', 'post', 'put', 'delete']
+
+let authTimer: number = null
 
 const isSuccess = res => res.errCode === 0
 const resFormat = res => res.response || res.data || {}
@@ -72,6 +76,15 @@ methods.forEach(v => {
                 return resFormat(rdata)
             },
             error => {
+                if (TOKENERROR.includes(error.response.status)) {
+                    message.destroy()
+                    message.error('用户认证失败! 请登录重试...')
+                    window.clearTimeout(authTimer)
+                    authTimer = window.setTimeout(() => {
+                        location.replace('/#/login')
+                    }, 300)
+                    return
+                }
                 const _err = {
                     msg: error.response.statusText || error.message || '网络故障',
                     type: /^timeout of/.test(error.message)
