@@ -117,6 +117,8 @@ server {
 
 ## TODO
 
+-   user control
+-   load list with pagination
 -   config menu by user with permission
 
 ## the scaffold
