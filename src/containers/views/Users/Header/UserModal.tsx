@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { inject, observer } from 'mobx-react'
 import { observable, action } from 'mobx'
-import { Modal, Form, Input } from 'antd'
+import { Modal, Form, Input, Select } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
 
 import { ComponentExt } from '@utils/reactExt'
@@ -18,6 +18,8 @@ const formItemLayout = {
         sm: { span: 19 }
     }
 }
+
+const userCategory = ['user', 'admin']
 
 interface IStoreProps {
     createUser?: (user: IUserStore.IUser) => Promise<any>
@@ -36,7 +38,7 @@ interface IProps extends IStoreProps {
     }
 )
 @observer
-class AddUserModal extends ComponentExt<IProps & FormComponentProps> {
+class UserModal extends ComponentExt<IProps & FormComponentProps> {
     @observable
     private loading: boolean = false
 
@@ -71,7 +73,7 @@ class AddUserModal extends ComponentExt<IProps & FormComponentProps> {
         return (
             <Modal title="Add User" visible={visible} onOk={this.submit} onCancel={onCancel}>
                 <Form onSubmit={this.submit}>
-                    <FormItem hasFeedback {...formItemLayout} label="account">
+                    <FormItem {...formItemLayout} label="account">
                         {getFieldDecorator('account', {
                             rules: [
                                 {
@@ -80,7 +82,7 @@ class AddUserModal extends ComponentExt<IProps & FormComponentProps> {
                             ]
                         })(<Input />)}
                     </FormItem>
-                    <FormItem hasFeedback {...formItemLayout} label="password">
+                    <FormItem {...formItemLayout} label="password">
                         {getFieldDecorator('password', {
                             rules: [
                                 {
@@ -89,10 +91,28 @@ class AddUserModal extends ComponentExt<IProps & FormComponentProps> {
                             ]
                         })(<Input />)}
                     </FormItem>
+                    <FormItem {...formItemLayout} label="category">
+                        {getFieldDecorator('category', {
+                            initialValue: userCategory[0],
+                            rules: [
+                                {
+                                    required: true
+                                }
+                            ]
+                        })(
+                            <Select>
+                                {userCategory.map(c => (
+                                    <Select.Option key={c} value={c}>
+                                        {c}
+                                    </Select.Option>
+                                ))}
+                            </Select>
+                        )}
+                    </FormItem>
                 </Form>
             </Modal>
         )
     }
 }
 
-export default Form.create<IProps>()(AddUserModal)
+export default Form.create<IProps>()(UserModal)

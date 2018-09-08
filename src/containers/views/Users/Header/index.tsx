@@ -4,7 +4,7 @@ import { observable, action } from 'mobx'
 import { Button } from 'antd'
 
 import * as styles from './index.scss'
-import AddUserModal from './AddUserModal'
+import UserModal from './UserModal'
 
 @observer
 class Header extends React.Component {
@@ -22,7 +22,7 @@ class Header extends React.Component {
                 <Button type="primary" onClick={this.toggleAddUserModalVisible}>
                     add user
                 </Button>
-                <AddUserModal visible={this.addUserModalVisible} onCancel={this.toggleAddUserModalVisible} />
+                <UserModal visible={this.addUserModalVisible} onCancel={this.toggleAddUserModalVisible} />
             </div>
         )
     }
