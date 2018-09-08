@@ -4,7 +4,7 @@ import { observable, action } from 'mobx'
 import { Button } from 'antd'
 
 import * as styles from './index.scss'
-import UserModal from './UserModal'
+import UserModal from './../UserModal'
 
 @observer
 class Header extends React.Component {
