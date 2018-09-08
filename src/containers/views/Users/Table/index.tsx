@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Table, Divider } from 'antd'
+import { Table, Divider, Popconfirm } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 import { inject, observer } from 'mobx-react'
 import { toJS, observable, action } from 'mobx'
@@ -11,6 +11,7 @@ interface IStoreProps {
     getUsersloading?: boolean
     users?: IUserStore.IUser[]
     getUsers?: (pageIndex?: number) => Promise<any>
+    deleteUser?: (_id: string) => Promise<any>
 }
 
 interface IProps extends IStoreProps {
@@ -39,8 +40,8 @@ class TableExtended extends Table<IUserStore.IUser> {}
 
 @inject(
     (store: IStore): IStoreProps => {
-        const { getUsersloading, users, getUsers } = store.userStore
-        return { getUsersloading, users, getUsers }
+        const { getUsersloading, users, getUsers, deleteUser } = store.userStore
+        return { getUsersloading, users, getUsers, deleteUser }
     }
 )
 @observer
@@ -67,7 +68,7 @@ class UserTable extends ComponentExt<IProps> {
     }
 
     render() {
-        const { scrollY, getUsersloading, users } = this.props
+        const { scrollY, getUsersloading, users, deleteUser } = this.props
         const columns = baseColumns.concat([
             {
                 title: 'Action',
@@ -78,7 +79,15 @@ class UserTable extends ComponentExt<IProps> {
                             Modify
                         </a>
                         <Divider type="vertical" />
-                        <a href="javascript:;">Delete</a>
+                        <Popconfirm
+                            placement="top"
+                            title="确认删除?"
+                            onConfirm={() => deleteUser(record._id)}
+                            okText="Yes"
+                            cancelText="No"
+                        >
+                            <a href="javascript:;">Delete</a>
+                        </Popconfirm>
                     </span>
                 )
             }

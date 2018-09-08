@@ -46,6 +46,11 @@ export class UserStore extends StoreExt {
     modifyUser = async (user: IUserStore.IUser) => {
         await this.api.user.modifyUser(user)
     }
+
+    deleteUser = async (_id: string) => {
+        await this.api.user.deleteUser({ _id })
+        this.getUsers()
+    }
 }
 
 export default new UserStore()
