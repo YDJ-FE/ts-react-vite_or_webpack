@@ -4,7 +4,6 @@ import { StoreExt } from '@utils/reactExt'
 import { routerStore } from './../'
 import { setCookie, clearCookie } from '@utils/index'
 import { COOKIE_KEYS, LOCALSTORAGE_KEYS } from '@constants/index'
-import { IUser } from './type'
 
 export class UserStore extends StoreExt {
     /**

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { observer } from 'mobx-react'
+import { inject, observer } from 'mobx-react'
 import { observable, action } from 'mobx'
 import { Modal, Form, Input } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
@@ -21,6 +21,7 @@ const formItemLayout = {
 
 interface IStoreProps {
     createUser?: (user: IUserStore.IUser) => Promise<any>
+    getUsers?: () => Promise<any>
 }
 
 interface IProps extends IStoreProps {
@@ -28,6 +29,12 @@ interface IProps extends IStoreProps {
     onCancel: () => void
 }
 
+@inject(
+    (store: IStore): IStoreProps => {
+        const { createUser, getUsers } = store.userStore
+        return { createUser, getUsers }
+    }
+)
 @observer
 class AddUserModal extends ComponentExt<IProps & FormComponentProps> {
     @observable
@@ -42,13 +49,14 @@ class AddUserModal extends ComponentExt<IProps & FormComponentProps> {
         if (e) {
             e.preventDefault()
         }
-        this.props.form.validateFields(
+        const { createUser, getUsers, onCancel, form } = this.props
+        form.validateFields(
             async (err, values): Promise<any> => {
                 if (!err) {
                     this.toggleLoading()
                     try {
-                        const { createUser, onCancel } = this.props
                         await createUser(values)
+                        getUsers()
                         onCancel()
                     } catch (err) {}
                     this.toggleLoading()
