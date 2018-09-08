@@ -15,8 +15,6 @@ export interface UserInfo {
     category: string
 }
 
-export interface IUser {
-    account: string
-    category: string
-    createdAt: string
+export interface IUser extends LoginParams {
+    category?: string
 }
