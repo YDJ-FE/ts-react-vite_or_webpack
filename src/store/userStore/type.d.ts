@@ -4,8 +4,9 @@ export as namespace IUserStore
 
 export interface UserStore extends UserStoreModel {}
 
-export interface IUser extends LoginParams {
+export interface IUser {
     account: string
-    password: string
+    password?: string
     category?: string
+    createdAt?: string
 }
