@@ -43,7 +43,6 @@ We do not use any mock tools(Anyway, you can use the data format from server res
 
 ## TODO
 
--   user control
 -   load list with pagination
 -   config menu by user with permission
 
