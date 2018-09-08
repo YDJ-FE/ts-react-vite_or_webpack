@@ -1,22 +1,22 @@
 import * as React from 'react'
 import { Table, Divider } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
-import { observer } from 'mobx-react'
-import { observable, action, runInAction, toJS } from 'mobx'
+import { inject, observer } from 'mobx-react'
+import { toJS } from 'mobx'
 
 import { ComponentExt } from '@utils/reactExt'
 
-interface IProps {
+interface IStoreProps {
+    getUsersloading?: boolean
+    users?: IUserStore.IUser[]
+    getUsers?: (pageIndex?: number) => Promise<any>
+}
+
+interface IProps extends IStoreProps {
     scrollY: number
 }
 
-interface IUser {
-    account: string
-    category: string
-    createdAt: string
-}
-
-const columns: Array<ColumnProps<IUser>> = [
+const columns: Array<ColumnProps<IUserStore.IUser>> = [
     {
         title: 'Account',
         dataIndex: 'account',
@@ -45,45 +45,31 @@ const columns: Array<ColumnProps<IUser>> = [
     }
 ]
 
-class TableExtended extends Table<IUser> {}
+class TableExtended extends Table<IUserStore.IUser> {}
 
+@inject(
+    (store: IStore): IStoreProps => {
+        const { getUsersloading, users, getUsers } = store.userStore
+        return { getUsersloading, users, getUsers }
+    }
+)
 @observer
 class UserTable extends ComponentExt<IProps> {
-    @observable
-    private loading: boolean = false
-    // datasource
-    @observable
-    private users: IUser[] = []
-
-    @action
-    getUsers = async () => {
-        this.loading = true
-        try {
-            const res = await this.api.user.getUsers({})
-            runInAction('SET_USER_TABLE_DATASOURCE', () => {
-                this.users = res
-            })
-        } catch (err) {}
-        runInAction('HIDE_USER_TABLE_LOADING', () => {
-            this.loading = false
-        })
-    }
-
     componentDidMount() {
-        this.getUsers()
+        this.props.getUsers()
     }
 
     render() {
-        const { scrollY } = this.props
+        const { scrollY, getUsersloading, users } = this.props
         return (
             <TableExtended
                 className="center-table"
                 style={{ width: '100%' }}
                 bordered
                 rowKey="_id"
-                loading={this.loading}
+                loading={getUsersloading}
                 columns={columns}
-                dataSource={toJS(this.users)}
+                dataSource={toJS(users)}
                 scroll={{ y: scrollY }}
             />
         )

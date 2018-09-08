@@ -14,6 +14,22 @@ export class UserStore extends StoreExt {
      */
     @observable
     userInfo: IUserStore.UserInfo = null
+    /**
+     * 加载用户列表时的loading
+     *
+     * @type {boolean}
+     * @memberof UserStore
+     */
+    @observable
+    getUsersloading: boolean = false
+    /**
+     * 用户列表
+     *
+     * @type {IUserStore.IUser[]}
+     * @memberof UserStore
+     */
+    @observable
+    users: IUserStore.IUser[] = []
 
     @action
     login = async (params: IUserStore.LoginParams): Promise<any> => {
@@ -51,6 +67,25 @@ export class UserStore extends StoreExt {
         const userInfo: IUserStore.UserInfo = JSON.parse(lcoalUserInfo)
         this.userInfo = userInfo
         return userInfo
+    }
+
+    /**
+     * 加载用户列表
+     *
+     * @memberof UserStore
+     */
+    @action
+    getUsers = async (pageIndex = 1) => {
+        this.getUsersloading = true
+        try {
+            const res = await this.api.user.getUsers({})
+            runInAction('SET_USER_LIST', () => {
+                this.users = res
+            })
+        } catch (err) {}
+        runInAction('HIDE_USER_LIST_LOADING', () => {
+            this.getUsersloading = false
+        })
     }
 }
 

@@ -14,3 +14,9 @@ export interface UserInfo {
     token: string
     category: string
 }
+
+export interface IUser {
+    account: string
+    category: string
+    createdAt: string
+}
