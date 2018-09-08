@@ -41,6 +41,12 @@ We do not use any mock tools(Anyway, you can use the data format from server res
 -   import .(s)css auto generate .(s)css.d.ts by `typings-for-css-modules-loader`
 -   create component folder by `customaddcomponents` which is added to npm script `npm run add`
 
+## TODO
+
+-   user control
+-   load list with pagination
+-   config menu by user with permission
+
 ## functional example
 
 ### mobx-react-router
@@ -114,12 +120,6 @@ server {
        }
  }
 ```
-
-## TODO
-
--   user control
--   load list with pagination
--   config menu by user with permission
 
 ## the scaffold
 
