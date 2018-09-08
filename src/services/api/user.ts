@@ -9,5 +9,10 @@ export default {
     // 创建user
     createUser(data): Promise<any> {
         return http.post('user/create', data || {})
+    },
+
+    // 修改user
+    modifyUser(data): Promise<any> {
+        return http.post('user/modify', data || {})
     }
 }

@@ -23,6 +23,7 @@ const userCategory = ['user', 'admin']
 
 interface IStoreProps {
     createUser?: (user: IUserStore.IUser) => Promise<any>
+    modifyUser?: (user: IUserStore.IUser) => Promise<any>
     getUsers?: () => Promise<any>
 }
 
@@ -34,8 +35,8 @@ interface IProps extends IStoreProps {
 
 @inject(
     (store: IStore): IStoreProps => {
-        const { createUser, getUsers } = store.userStore
-        return { createUser, getUsers }
+        const { createUser, modifyUser, getUsers } = store.userStore
+        return { createUser, modifyUser, getUsers }
     }
 )
 @observer
@@ -62,13 +63,13 @@ class UserModal extends ComponentExt<IProps & FormComponentProps> {
         if (e) {
             e.preventDefault()
         }
-        const { createUser, getUsers, onCancel, form } = this.props
+        const { user, createUser, modifyUser, getUsers, onCancel, form } = this.props
         form.validateFields(
             async (err, values): Promise<any> => {
                 if (!err) {
                     this.toggleLoading()
                     try {
-                        await createUser(values)
+                        this.typeIsAdd ? await createUser(values) : await modifyUser({ ...values, _id: user._id })
                         getUsers()
                         onCancel()
                     } catch (err) {}
