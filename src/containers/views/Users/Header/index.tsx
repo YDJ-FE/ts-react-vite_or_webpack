@@ -9,20 +9,20 @@ import UserModal from './../UserModal'
 @observer
 class Header extends React.Component {
     @observable
-    private addUserModalVisible: boolean = false
+    private userModalVisible: boolean = false
 
     @action
-    toggleAddUserModalVisible = () => {
-        this.addUserModalVisible = !this.addUserModalVisible
+    toggleUserModalVisible = () => {
+        this.userModalVisible = !this.userModalVisible
     }
 
     render() {
         return (
             <div className={styles.header}>
-                <Button type="primary" onClick={this.toggleAddUserModalVisible}>
+                <Button type="primary" onClick={this.toggleUserModalVisible}>
                     add user
                 </Button>
-                <UserModal visible={this.addUserModalVisible} onCancel={this.toggleAddUserModalVisible} />
+                <UserModal visible={this.userModalVisible} onCancel={this.toggleUserModalVisible} />
             </div>
         )
     }

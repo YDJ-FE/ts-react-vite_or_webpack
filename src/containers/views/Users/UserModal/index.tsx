@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { inject, observer } from 'mobx-react'
-import { observable, action } from 'mobx'
+import { observable, action, computed } from 'mobx'
 import { Modal, Form, Input, Select } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
 
@@ -29,6 +29,7 @@ interface IStoreProps {
 interface IProps extends IStoreProps {
     visible: boolean
     onCancel: () => void
+    user?: IUserStore.IUser
 }
 
 @inject(
@@ -41,6 +42,16 @@ interface IProps extends IStoreProps {
 class UserModal extends ComponentExt<IProps & FormComponentProps> {
     @observable
     private loading: boolean = false
+
+    @computed
+    get typeIsAdd() {
+        return this.props.user === undefined
+    }
+
+    @computed
+    get title() {
+        return this.typeIsAdd ? 'Add User' : 'Modify User'
+    }
 
     @action
     toggleLoading = () => {
@@ -68,13 +79,16 @@ class UserModal extends ComponentExt<IProps & FormComponentProps> {
     }
 
     render() {
-        const { visible, onCancel, form } = this.props
+        const { visible, onCancel, user, form } = this.props
         const { getFieldDecorator } = form
+        const initialAccount = user ? user.account : ''
+        const initialCategory = user ? user.category : userCategory[0]
         return (
-            <Modal title="Add User" visible={visible} onOk={this.submit} onCancel={onCancel}>
+            <Modal title={this.title} visible={visible} onOk={this.submit} onCancel={onCancel}>
                 <Form onSubmit={this.submit}>
                     <FormItem {...formItemLayout} label="account">
                         {getFieldDecorator('account', {
+                            initialValue: initialAccount,
                             rules: [
                                 {
                                     required: true
@@ -82,18 +96,20 @@ class UserModal extends ComponentExt<IProps & FormComponentProps> {
                             ]
                         })(<Input />)}
                     </FormItem>
-                    <FormItem {...formItemLayout} label="password">
-                        {getFieldDecorator('password', {
-                            rules: [
-                                {
-                                    required: true
-                                }
-                            ]
-                        })(<Input />)}
-                    </FormItem>
+                    {this.typeIsAdd && (
+                        <FormItem {...formItemLayout} label="password">
+                            {getFieldDecorator('password', {
+                                rules: [
+                                    {
+                                        required: true
+                                    }
+                                ]
+                            })(<Input />)}
+                        </FormItem>
+                    )}
                     <FormItem {...formItemLayout} label="category">
                         {getFieldDecorator('category', {
-                            initialValue: userCategory[0],
+                            initialValue: initialCategory,
                             rules: [
                                 {
                                     required: true
