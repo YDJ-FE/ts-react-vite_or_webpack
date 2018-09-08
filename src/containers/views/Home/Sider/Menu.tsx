@@ -15,14 +15,14 @@ interface IStoreProps {
     sideBarTheme?: IGlobalStore.SideBarTheme
     navOpenKeys?: string[]
     setOpenKeys?: (openKeys: string[]) => void
-    userInfo?: IUserStore.UserInfo
+    userInfo?: IAuthStore.UserInfo
     routerStore?: RouterStore
 }
 
 @inject(
     (store: IStore): IStoreProps => {
-        const { routerStore, globalStore, userStore } = store
-        const { userInfo } = userStore
+        const { routerStore, globalStore, authStore } = store
+        const { userInfo } = authStore
         const { sideBarTheme, sideBarCollapsed, navOpenKeys, setOpenKeys } = globalStore
         return {
             routerStore,

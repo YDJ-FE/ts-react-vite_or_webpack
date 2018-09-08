@@ -4,17 +4,8 @@ export as namespace IUserStore
 
 export interface UserStore extends UserStoreModel {}
 
-export interface LoginParams {
+export interface IUser extends LoginParams {
     account: string
     password: string
-}
-
-export interface UserInfo {
-    msg: string
-    token: string
-    category: string
-}
-
-export interface IUser extends LoginParams {
     category?: string
 }

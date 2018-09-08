@@ -25,9 +25,9 @@ function Header({ sideBarCollapsed, toggleSideBarCollapsed, logout }: IStoreProp
 
 export default inject(
     (store: IStore): IStoreProps => {
-        const { globalStore, userStore } = store
+        const { globalStore, authStore } = store
         const { sideBarCollapsed, toggleSideBarCollapsed } = globalStore
-        const { logout } = userStore
+        const { logout } = authStore
         return { sideBarCollapsed, toggleSideBarCollapsed, logout }
     }
 )(observer(Header))

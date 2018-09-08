@@ -8,14 +8,14 @@ import { COOKIE_KEYS } from '@constants/index'
 
 export interface IStoreProps {
     routerStore?: RouterStore
-    userInfo?: IUserStore.UserInfo
-    initUserInfo?: () => IUserStore.UserInfo
+    userInfo?: IAuthStore.UserInfo
+    initUserInfo?: () => IAuthStore.UserInfo
 }
 
 @inject(
     (store: IStore): IStoreProps => {
-        const { routerStore, userStore } = store
-        const { userInfo, initUserInfo } = userStore
+        const { routerStore, authStore } = store
+        const { userInfo, initUserInfo } = authStore
         return { routerStore, userInfo, initUserInfo }
     }
 )

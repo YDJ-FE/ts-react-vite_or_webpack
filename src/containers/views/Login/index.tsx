@@ -10,13 +10,13 @@ const FormItem = Form.Item
 
 interface IStoreProps {
     routerStore?: RouterStore
-    login?: (data: IUserStore.LoginParams) => Promise<any>
+    login?: (data: IAuthStore.LoginParams) => Promise<any>
 }
 
 @inject(
     (store: IStore): IStoreProps => {
-        const { routerStore, userStore } = store
-        const { login } = userStore
+        const { routerStore, authStore } = store
+        const { login } = authStore
         return {
             routerStore,
             login
