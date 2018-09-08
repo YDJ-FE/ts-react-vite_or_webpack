@@ -2,6 +2,7 @@ import * as React from 'react'
 import { observer } from 'mobx-react'
 import { observable, action } from 'mobx'
 
+import * as styles from './index.scss'
 import UserTable from './Table'
 
 @observer
@@ -38,8 +39,10 @@ class Users extends React.Component {
 
     render() {
         return (
-            <div ref={this.setTableScrollY}>
-                <UserTable scrollY={this.tableScrollY} />
+            <div className={styles.container}>
+                <div className={styles.tableBox} ref={this.setTableScrollY}>
+                    <UserTable scrollY={this.tableScrollY} />
+                </div>
             </div>
         )
     }

@@ -79,6 +79,7 @@ class UserTable extends ComponentExt<IProps> {
             <TableExtended
                 className="center-table"
                 style={{ width: '100%' }}
+                bordered
                 rowKey="_id"
                 loading={this.loading}
                 columns={columns}
