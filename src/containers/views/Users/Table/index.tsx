@@ -16,6 +16,7 @@ interface IStoreProps {
     handleTableChange?: (pagination: PaginationConfig) => void
     pageIndex?: number
     pageSize?: number
+    total?: number
 }
 
 interface IProps extends IStoreProps {
@@ -44,8 +45,17 @@ class TableExtended extends Table<IUserStore.IUser> {}
 
 @inject(
     (store: IStore): IStoreProps => {
-        const { getUsersloading, users, getUsers, deleteUser, handleTableChange, pageIndex, pageSize } = store.userStore
-        return { getUsersloading, users, getUsers, deleteUser, handleTableChange, pageIndex, pageSize }
+        const {
+            getUsersloading,
+            users,
+            getUsers,
+            deleteUser,
+            handleTableChange,
+            pageIndex,
+            pageSize,
+            total
+        } = store.userStore
+        return { getUsersloading, users, getUsers, deleteUser, handleTableChange, pageIndex, pageSize, total }
     }
 )
 @observer
@@ -72,7 +82,16 @@ class UserTable extends ComponentExt<IProps> {
     }
 
     render() {
-        const { scrollY, getUsersloading, users, deleteUser, handleTableChange, pageIndex, pageSize } = this.props
+        const {
+            scrollY,
+            getUsersloading,
+            users,
+            deleteUser,
+            handleTableChange,
+            pageIndex,
+            pageSize,
+            total
+        } = this.props
         const columns = baseColumns.concat([
             {
                 title: 'Action',
@@ -111,7 +130,8 @@ class UserTable extends ComponentExt<IProps> {
                         current: pageIndex,
                         showSizeChanger: true,
                         pageSize,
-                        pageSizeOptions: ['3', '2', '1']
+                        pageSizeOptions: ['3', '2', '1'],
+                        total
                     }}
                     onChange={handleTableChange}
                 />

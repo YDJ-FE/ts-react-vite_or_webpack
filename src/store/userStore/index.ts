@@ -37,6 +37,15 @@ export class UserStore extends StoreExt {
     @observable
     pageSize: number = 3
     /**
+     * users total
+     *
+     * @type {number}
+     * @memberof UserStore
+     */
+    @observable
+    total: number = 0
+
+    /**
      * 加载用户列表
      *
      * @memberof UserStore
@@ -47,7 +56,8 @@ export class UserStore extends StoreExt {
         try {
             const res = await this.api.user.getUsers({ pageIndex: this.pageIndex, pageSize: this.pageSize })
             runInAction('SET_USER_LIST', () => {
-                this.users = res
+                this.users = res.users
+                this.total = res.total
             })
         } catch (err) {}
         runInAction('HIDE_USER_LIST_LOADING', () => {
