@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Table, Divider, Popconfirm } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
+import { PaginationConfig } from 'antd/lib/pagination'
 import { inject, observer } from 'mobx-react'
 import { toJS, observable, action } from 'mobx'
 
@@ -10,8 +11,11 @@ import UserModal from './../UserModal'
 interface IStoreProps {
     getUsersloading?: boolean
     users?: IUserStore.IUser[]
-    getUsers?: (pageIndex?: number) => Promise<any>
+    getUsers?: () => Promise<any>
     deleteUser?: (_id: string) => Promise<any>
+    handleTableChange?: (pagination: PaginationConfig) => void
+    pageIndex?: number
+    pageSize?: number
 }
 
 interface IProps extends IStoreProps {
@@ -40,8 +44,8 @@ class TableExtended extends Table<IUserStore.IUser> {}
 
 @inject(
     (store: IStore): IStoreProps => {
-        const { getUsersloading, users, getUsers, deleteUser } = store.userStore
-        return { getUsersloading, users, getUsers, deleteUser }
+        const { getUsersloading, users, getUsers, deleteUser, handleTableChange, pageIndex, pageSize } = store.userStore
+        return { getUsersloading, users, getUsers, deleteUser, handleTableChange, pageIndex, pageSize }
     }
 )
 @observer
@@ -68,7 +72,7 @@ class UserTable extends ComponentExt<IProps> {
     }
 
     render() {
-        const { scrollY, getUsersloading, users, deleteUser } = this.props
+        const { scrollY, getUsersloading, users, deleteUser, handleTableChange, pageIndex, pageSize } = this.props
         const columns = baseColumns.concat([
             {
                 title: 'Action',
@@ -103,6 +107,13 @@ class UserTable extends ComponentExt<IProps> {
                     columns={columns}
                     dataSource={toJS(users)}
                     scroll={{ y: scrollY }}
+                    pagination={{
+                        current: pageIndex,
+                        showSizeChanger: true,
+                        pageSize,
+                        pageSizeOptions: ['3', '2', '1']
+                    }}
+                    onChange={handleTableChange}
                 />
                 <UserModal
                     visible={this.userModalVisible}

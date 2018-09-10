@@ -1,4 +1,5 @@
 import { observable, action, runInAction } from 'mobx'
+import { PaginationConfig } from 'antd/lib/pagination'
 
 import { StoreExt } from '@utils/reactExt'
 
@@ -19,17 +20,32 @@ export class UserStore extends StoreExt {
      */
     @observable
     users: IUserStore.IUser[] = []
-
+    /**
+     * table pageIndex
+     *
+     * @type {number}
+     * @memberof UserStore
+     */
+    @observable
+    pageIndex: number = 1
+    /**
+     * table pageSize
+     *
+     * @type {number}
+     * @memberof UserStore
+     */
+    @observable
+    pageSize: number = 3
     /**
      * 加载用户列表
      *
      * @memberof UserStore
      */
     @action
-    getUsers = async (pageIndex = 1) => {
+    getUsers = async () => {
         this.getUsersloading = true
         try {
-            const res = await this.api.user.getUsers({})
+            const res = await this.api.user.getUsers({ pageIndex: this.pageIndex, pageSize: this.pageSize })
             runInAction('SET_USER_LIST', () => {
                 this.users = res
             })
@@ -50,6 +66,28 @@ export class UserStore extends StoreExt {
     deleteUser = async (_id: string) => {
         await this.api.user.deleteUser({ _id })
         this.getUsers()
+    }
+
+    @action
+    changePageIndex = (pageIndex: number) => {
+        this.pageIndex = pageIndex
+        this.getUsers()
+    }
+
+    @action
+    changePageSize = (pageSize: number) => {
+        this.pageSize = pageSize
+        this.getUsers()
+    }
+
+    handleTableChange = (pagination: PaginationConfig) => {
+        const { current, pageSize } = pagination
+        if (current !== this.pageIndex) {
+            this.changePageIndex(current)
+        }
+        if (pageSize !== this.pageSize) {
+            this.changePageSize(pageSize)
+        }
     }
 }
 
