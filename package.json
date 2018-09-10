@@ -23,7 +23,7 @@
     "author": "jackple",
     "license": "MIT",
     "dependencies": {
-        "antd": "^3.8.1",
+        "antd": "^3.9.2",
         "axios": "^0.18.0",
         "bourbon": "^5.1.0",
         "echarts": "^4.1.0",
