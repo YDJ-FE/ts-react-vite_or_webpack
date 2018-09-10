@@ -25,6 +25,7 @@ interface IStoreProps {
     createUser?: (user: IUserStore.IUser) => Promise<any>
     modifyUser?: (user: IUserStore.IUser) => Promise<any>
     getUsers?: () => Promise<any>
+    changePageIndex?: (pageIndex: number) => void
 }
 
 interface IProps extends IStoreProps {
@@ -35,8 +36,8 @@ interface IProps extends IStoreProps {
 
 @inject(
     (store: IStore): IStoreProps => {
-        const { createUser, modifyUser, getUsers } = store.userStore
-        return { createUser, modifyUser, getUsers }
+        const { createUser, modifyUser, getUsers, changePageIndex } = store.userStore
+        return { createUser, modifyUser, getUsers, changePageIndex }
     }
 )
 @observer
@@ -63,13 +64,18 @@ class UserModal extends ComponentExt<IProps & FormComponentProps> {
         if (e) {
             e.preventDefault()
         }
-        const { user, createUser, modifyUser, getUsers, onCancel, form } = this.props
+        const { user, createUser, modifyUser, getUsers, changePageIndex, onCancel, form } = this.props
         form.validateFields(
             async (err, values): Promise<any> => {
                 if (!err) {
                     this.toggleLoading()
                     try {
-                        this.typeIsAdd ? await createUser(values) : await modifyUser({ ...values, _id: user._id })
+                        if (this.typeIsAdd) {
+                            await createUser(values)
+                            changePageIndex(1)
+                        } else {
+                            await modifyUser({ ...values, _id: user._id })
+                        }
                         getUsers()
                         onCancel()
                     } catch (err) {}
