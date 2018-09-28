@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { inject, observer } from 'mobx-react'
-import { Layout, Icon, Button } from 'antd'
+import { Layout, Icon } from 'antd'
 
 import * as styles from './index.scss'
+import { GITHUB_LINK } from '@constants/index'
 
 interface IStoreProps {
     sideBarCollapsed?: boolean
@@ -18,7 +19,15 @@ function Header({ sideBarCollapsed, toggleSideBarCollapsed, logout }: IStoreProp
                 type={sideBarCollapsed ? 'menu-unfold' : 'menu-fold'}
                 onClick={toggleSideBarCollapsed}
             />
-            <Button onClick={logout}>logout</Button>
+            <div className={styles.right}>
+                <Icon
+                    className={styles.rightIcon}
+                    type="github"
+                    theme="outlined"
+                    onClick={() => window.open(GITHUB_LINK)}
+                />
+                <Icon className={styles.rightIcon} type="logout" theme="outlined" onClick={logout} />
+            </div>
         </Layout.Header>
     )
 }

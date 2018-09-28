@@ -10,3 +10,5 @@ export enum LOCALSTORAGE_KEYS {
 }
 
 export const LOGIN_CATEGORY = ['user', 'admin']
+
+export const GITHUB_LINK = 'https://github.com/YDJ-FE'

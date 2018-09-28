@@ -20,3 +20,14 @@
         color: $primary-color;
     }
 }
+
+.right {
+    display: flex;
+    align-items: center;
+}
+
+.rightIcon {
+    cursor: pointer;
+    font-size: 24px;
+    margin-left: 20px;
+}
