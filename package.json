@@ -1,7 +1,7 @@
 {
-    "name": "ts-react-webpack4",
+    "name": "ts-react-webpack",
     "version": "1.0.0",
-    "description": "an admin starter-template with typescript, react, mobx and webpack4...",
+    "description": "an admin starter-template with typescript, react, mobx and webpack...",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,7 +13,7 @@
         "build:prod": "cross-env APP_ENV=prod npm run build"
     },
     "keywords": [
-        "webpack4",
+        "webpack",
         "typescript",
         "admin",
         "react",
