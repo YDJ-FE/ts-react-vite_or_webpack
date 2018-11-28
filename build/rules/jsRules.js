@@ -4,7 +4,7 @@ const { cacheLoader } = require('./loaders')
 
 module.exports = [
     {
-        test: /\.(ts(x?)|js(x?))$/,
+        test: /\.(j|t)sx?$/,
         include: [resolve('src')],
         use: [
             cacheLoader,
