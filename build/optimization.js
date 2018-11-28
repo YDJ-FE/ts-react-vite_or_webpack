@@ -15,7 +15,7 @@ module.exports =
                       default: false,
                       commons: {
                           test: /[\\/]node_modules[\\/]/,
-                          name: 'vendor',
+                          name: 'split-vendor',
                           chunks: 'all'
                       }
                   }

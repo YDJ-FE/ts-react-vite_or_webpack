@@ -8,6 +8,7 @@ const fileRules = require('./rules/fileRules')
 const plugins = require('./plugins')
 const { assetsPath, resolve } = require('./utils')
 const optimization = require('./optimization')
+require('./cleanup-folder')
 
 module.exports = {
     entry: {
