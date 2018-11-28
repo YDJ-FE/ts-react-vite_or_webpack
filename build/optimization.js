@@ -1,6 +1,6 @@
 const constants = require('./constants')
 const config = require('./config')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports =
@@ -21,7 +21,7 @@ module.exports =
                   }
               },
               minimizer: [
-                  new UglifyJsPlugin({
+                  new TerserPlugin({
                       cache: true,
                       parallel: true,
                       sourceMap: config.sourceMap

@@ -11,7 +11,8 @@ const optimization = require('./optimization')
 
 module.exports = {
     entry: {
-        app: ['babel-polyfill', './src/index.tsx']
+        vendor: ['@babel/polyfill'],
+        app: ['./src/index.tsx']
     },
     output: {
         path: config.assetsRoot,
