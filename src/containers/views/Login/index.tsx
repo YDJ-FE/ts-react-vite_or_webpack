@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react'
 import { observable, runInAction } from 'mobx'
 import { Form, Icon, Input, Button } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
+import { hot } from 'react-hot-loader'
 
 import * as styles from './index.scss'
 
@@ -97,4 +98,4 @@ class Login extends React.Component<IStoreProps & FormComponentProps> {
     }
 }
 
-export default Form.create<{}>()(Login)
+export default hot(module)(Form.create<{}>()(Login))
