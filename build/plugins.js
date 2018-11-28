@@ -2,6 +2,7 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 
 const constants = require('./constants')
 const config = require('./config')
@@ -30,7 +31,8 @@ const devPlugins = [
         filename: 'index.html',
         template: 'build/tpl/index.html',
         inject: true
-    })
+    }),
+    new CaseSensitivePathsPlugin()
 ]
 
 const prodPlugins = [
