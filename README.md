@@ -106,6 +106,14 @@ export default AppRouter
 
 [live example](https://github.com/YDJ-FE/ts-react-webpack4/tree/master/src/containers/shared/App?1532589067125)
 
+## necessary extensions (on vscode)
+
+-   [TSLint](https://marketplace.visualstudio.com/items?itemName=eg2.tslint)
+
+-   [stylelint](https://marketplace.visualstudio.com/items?itemName=shinnn.stylelint)
+
+-   [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+
 ## how to deploy with nginx
 
 ```
