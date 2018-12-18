@@ -2,6 +2,7 @@ import './index.scss'
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
+import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 import { Provider } from 'mobx-react'
 import { configure } from 'mobx'
 import createHashHistory from 'history/createHashHistory'
@@ -28,3 +29,7 @@ const render = Component => {
 }
 
 render(AppRouter)
+
+// use pwa
+// see https://github.com/NekR/offline-plugin
+OfflinePluginRuntime.install()
