@@ -35,6 +35,7 @@ We do not use any mock tools(Anyway, you can use the data format from server res
 -   mobx-5.x ([5.x makes your application must be running in the browser that support es2015+](https://github.com/mobxjs/mobx#browser-support), if you are not willing, you can use 4.x)
 -   react-router-4
 -   mobx-react-router
+-   support pwa by `offline-plugin`
 -   component hot reload
 -   use [ant design](https://ant.design/index-cn) as UI framework
 -   import svg icon as a component by `@svgr/webpack`, [there is an example in the doc of steamer-react-redux-ts](https://github.com/YDJ-FE/steamer-react-ts/blob/master/docs/svg.md)
