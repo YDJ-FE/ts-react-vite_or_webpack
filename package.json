@@ -64,7 +64,7 @@
         "case-sensitive-paths-webpack-plugin": "^2.1.2",
         "classnames": "^2.2.6",
         "cross-env": "^5.1.4",
-        "css-loader": "^2.0.1",
+        "css-loader": "^1.0.1",
         "customaddcomponents": "^1.0.35",
         "file-loader": "^3.0.1",
         "fs-extra": "^7.0.1",
