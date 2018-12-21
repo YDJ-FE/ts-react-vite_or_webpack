@@ -30,8 +30,8 @@ We do not use any mock tools(Anyway, you can use the data format from server res
 
 -   webpack-4.x
 -   babel-7.x
--   typescript-3.1.x
--   react-16.6.x
+-   typescript-3.x
+-   react-16.x
 -   mobx-5.x ([5.x makes your application must be running in the browser that support es2015+](https://github.com/mobxjs/mobx#browser-support), if you are not willing, you can use 4.x)
 -   react-router-4
 -   mobx-react-router

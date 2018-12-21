@@ -51,7 +51,7 @@ class PrivateRoute extends ComponentExt<IStoreProps & RouteProps> {
 
     render() {
         const { component: Component, ...rest } = this.props
-        return <Route {...rest} render={props => <Component {...rest} />} />
+        return <Route {...rest} render={props => <Component {...props} {...rest} />} />
     }
 }
 
