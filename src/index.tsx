@@ -30,6 +30,9 @@ const render = Component => {
 
 render(AppRouter)
 
-// use pwa
-// see https://github.com/NekR/offline-plugin
-OfflinePluginRuntime.install()
+if (process.env.APP_ENV !== 'dev') {
+    // use pwa
+    // see https://github.com/NekR/offline-plugin
+    OfflinePluginRuntime.install()
+    OfflinePluginRuntime.applyUpdate()
+}

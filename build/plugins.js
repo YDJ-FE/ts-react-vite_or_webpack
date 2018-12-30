@@ -24,8 +24,7 @@ const basePlugins = [
     new webpack.DefinePlugin(defineEnv),
     new MomentLocalesPlugin({
         localesToKeep: ['es-us', 'zh-cn']
-    }),
-    new OfflinePlugin()
+    })
 ]
 
 const devPlugins = [
@@ -58,7 +57,8 @@ const prodPlugins = [
         // both options are optional
         filename: assetsPath('css/[name].[hash].css'),
         chunkFilename: assetsPath('css/[name].[id].[hash].css')
-    })
+    }),
+    new OfflinePlugin()
 ]
 
 if (config.bundleAnalyzerReport) {
