@@ -2,7 +2,6 @@ import './index.scss'
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 import { Provider } from 'mobx-react'
 import { configure } from 'mobx'
 import createHashHistory from 'history/createHashHistory'
@@ -30,9 +29,11 @@ const render = Component => {
 
 render(AppRouter)
 
-if (process.env.APP_ENV !== 'dev') {
-    // use pwa
-    // see https://github.com/NekR/offline-plugin
-    OfflinePluginRuntime.install()
-    OfflinePluginRuntime.applyUpdate()
-}
+// we do not use pwa by default
+// see https://github.com/NekR/offline-plugin
+// if you want it, delete the comments which is about OfflinePlugin in the flowing line and /build/plugins.js
+// import * as OfflinePluginRuntime from 'offline-plugin/runtime'
+// if (process.env.APP_ENV !== 'dev') {
+//     OfflinePluginRuntime.install()
+//     OfflinePluginRuntime.applyUpdate()
+// }

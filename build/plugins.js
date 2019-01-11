@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
-const OfflinePlugin = require('offline-plugin')
+// const OfflinePlugin = require('offline-plugin')
 
 const constants = require('./constants')
 const config = require('./config')
@@ -57,8 +57,8 @@ const prodPlugins = [
         // both options are optional
         filename: assetsPath('css/[name].[hash].css'),
         chunkFilename: assetsPath('css/[name].[id].[hash].css')
-    }),
-    new OfflinePlugin()
+    })
+    // new OfflinePlugin()
 ]
 
 if (config.bundleAnalyzerReport) {
