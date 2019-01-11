@@ -147,7 +147,7 @@ class SiderMenu extends React.Component<IStoreProps> {
         const { sideBarTheme } = this.props
         const menuItems = this.getMenus(this.menuTree)
         // 寻找选中路由
-        let currentMenu
+        let currentMenu: IMenu = null
         for (const item of menu) {
             if (item.path && pathToRegexp(item.path).exec(this.currentRoute)) {
                 currentMenu = item
@@ -166,7 +166,7 @@ class SiderMenu extends React.Component<IStoreProps> {
                 className={styles.menu}
                 theme={sideBarTheme}
                 mode="inline"
-                defaultSelectedKeys={selectedKeys}
+                selectedKeys={selectedKeys}
                 onClick={this.goto}
                 {...this.menuProps}
             >
