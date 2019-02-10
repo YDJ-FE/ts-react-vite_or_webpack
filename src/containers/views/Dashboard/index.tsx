@@ -13,10 +13,9 @@ function Dashboard() {
         setAvatars(newAvatars)
     }
     React.useEffect(() => {
-        if (avatars.length > 1) {
-            document.title = `${avatars.length} avatars!`
-        }
-    }, [avatars])
+        const title = avatars.length > 1 ? `${avatars.length} avatars!` : 'oosh!'
+        document.title = title
+    })
     return (
         <div className={styles.dashboard}>
             <div className={styles.avatarsContainer}>
