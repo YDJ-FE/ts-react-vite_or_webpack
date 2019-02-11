@@ -132,7 +132,7 @@
             "enzyme-to-json"
         ],
         "moduleNameMapper": {
-            "\\.(css|less|scss)$": "identity-obj-proxy",
+            "\\.(css|less|scss|svg|jpg|jpeg|png|gif)$": "identity-obj-proxy",
             "^@constants/(.*)$": "<rootDir>/src/constants//$1",
             "^@services/(.*)$": "<rootDir>/src/services//$1",
             "^@utils/(.*)$": "<rootDir>/src/utils//$1",
