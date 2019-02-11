@@ -35,7 +35,7 @@ export class UserStore extends StoreExt {
      * @memberof UserStore
      */
     @observable
-    pageSize: number = 3
+    pageSize: number = 30
     /**
      * users total
      *

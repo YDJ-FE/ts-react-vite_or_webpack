@@ -116,7 +116,7 @@ class UserTable extends ComponentExt<IProps> {
             }
         ])
         return (
-            <>
+            <React.Fragment>
                 <TableExtended
                     className="center-table"
                     style={{ width: '100%' }}
@@ -130,7 +130,7 @@ class UserTable extends ComponentExt<IProps> {
                         current: pageIndex,
                         showSizeChanger: true,
                         pageSize,
-                        pageSizeOptions: ['3', '2', '1'],
+                        pageSizeOptions: ['30', '20', '10'],
                         total
                     }}
                     onChange={handleTableChange}
@@ -140,7 +140,7 @@ class UserTable extends ComponentExt<IProps> {
                     onCancel={this.hideUserModalVisible}
                     user={this.currentUser}
                 />
-            </>
+            </React.Fragment>
         )
     }
 }
