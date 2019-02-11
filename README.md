@@ -10,6 +10,12 @@ Have a quick view:
 $ npm i
 ```
 
+## test
+
+```bash
+$ npm test
+```
+
 ## build for development
 
 ```bash
