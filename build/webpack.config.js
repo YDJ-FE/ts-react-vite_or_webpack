@@ -19,7 +19,8 @@ module.exports = {
         path: config.assetsRoot,
         filename: constants.APP_ENV === 'dev' ? '[name].js' : assetsPath('js/[name].[chunkhash].js'),
         chunkFilename: constants.APP_ENV === 'dev' ? '[name].js' : assetsPath('js/[name].[id].[chunkhash].chunk.js'),
-        publicPath: config.assetsPublicPath
+        publicPath: config.assetsPublicPath,
+        pathinfo: false
     },
     resolve: {
         extensions: constants.FILE_EXTENSIONS,
