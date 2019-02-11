@@ -57,7 +57,6 @@ class AutoSizer extends React.Component<IP, IS> {
     render() {
         const { className, style, children } = this.props
         const { width, height } = this.state
-        console.log(width, height)
         return (
             <div className={className} style={style} ref={this.setRef}>
                 {children({ width, height })}
