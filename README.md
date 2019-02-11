@@ -25,7 +25,7 @@ $ npm run dev
 ## build for production
 
 ```bash
-$ npm run qa/prod
+$ npm run build:(qa/prod)
 ```
 
 ## server
