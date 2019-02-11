@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { observer, inject } from 'mobx-react'
-import { computed, toJS } from 'mobx'
+import { computed } from 'mobx'
 import { Menu, Icon } from 'antd'
 import pathToRegexp from 'path-to-regexp'
 
@@ -55,7 +55,7 @@ class SiderMenu extends React.Component<IStoreProps> {
         return !sideBarCollapsed
             ? {
                   onOpenChange: this.onOpenChange,
-                  openKeys: toJS(navOpenKeys)
+                  openKeys: navOpenKeys
               }
             : {}
     }

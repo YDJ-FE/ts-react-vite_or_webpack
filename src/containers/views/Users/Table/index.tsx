@@ -3,7 +3,7 @@ import { Table, Divider, Popconfirm } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 import { PaginationConfig } from 'antd/lib/pagination'
 import { inject, observer } from 'mobx-react'
-import { toJS, observable, action } from 'mobx'
+import { observable, action } from 'mobx'
 
 import { ComponentExt } from '@utils/reactExt'
 import UserModal from './../UserModal'
@@ -124,7 +124,7 @@ class UserTable extends ComponentExt<IProps> {
                     rowKey="_id"
                     loading={getUsersloading}
                     columns={columns}
-                    dataSource={toJS(users)}
+                    dataSource={users}
                     scroll={{ y: scrollY }}
                     pagination={{
                         current: pageIndex,
