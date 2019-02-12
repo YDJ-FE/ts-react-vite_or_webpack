@@ -24,7 +24,7 @@ module.exports =
                   new TerserPlugin({
                       cache: true,
                       parallel: true,
-                      sourceMap: config.sourceMap
+                      sourceMap: Boolean(config.sourceMap)
                   }),
                   new OptimizeCSSAssetsPlugin({
                       cssProcessor: require('cssnano'),

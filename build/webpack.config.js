@@ -42,5 +42,5 @@ module.exports = {
     plugins,
     optimization,
     stats: { children: false },
-    devtool: config.sourceMap ? '#source-map' : false
+    devtool: config.sourceMap
 }

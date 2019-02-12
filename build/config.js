@@ -11,7 +11,8 @@ module.exports = {
     assetsPublicPath: constants.APP_ENV === 'dev' ? '/' : `${STATICDOMAIN}/`,
     assetsSubDirectory: 'static',
     // 正式环境接入sentry需要sourceMap
-    sourceMap: constants.APP_ENV !== 'qa',
+    sourceMap:
+        constants.APP_ENV === 'dev' ? 'source-map' : constants.APP_ENV === 'prod' ? 'cheap-module-source-map' : false,
     extractCss: constants.APP_ENV !== 'dev',
     // Run the build command with an extra argument to
     // View the bundle analyzer report after build finishes:
