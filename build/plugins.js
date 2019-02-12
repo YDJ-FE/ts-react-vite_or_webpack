@@ -55,8 +55,8 @@ const prodPlugins = [
     new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output
         // both options are optional
-        filename: assetsPath('css/[name].[hash].css'),
-        chunkFilename: assetsPath('css/[name].[id].[hash].css')
+        filename: assetsPath('css/[name].[contenthash].css'),
+        chunkFilename: assetsPath('css/[name].[id].[contenthash].css')
     })
     // new OfflinePlugin()
 ]
