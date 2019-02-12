@@ -1,6 +1,5 @@
 const { resolve } = require('./../utils')
-const constants = require('./../constants')
-const { cacheLoader } = require('./loaders')
+const { cacheLoader, threadLoader } = require('./loaders')
 
 module.exports = [
     {
@@ -8,10 +7,7 @@ module.exports = [
         include: [resolve('src')],
         use: [
             cacheLoader,
-            {
-                loader: 'thread-loader',
-                options: constants.APP_ENV === 'dev' ? { poolTimeout: Infinity } : {}
-            },
+            threadLoader(),
             {
                 loader: 'babel-loader',
                 options: {

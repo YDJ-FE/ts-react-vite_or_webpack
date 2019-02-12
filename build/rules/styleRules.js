@@ -1,9 +1,9 @@
-const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const config = require('./../config')
 const { resolve } = require('./../utils')
 const theme = require('./../../theme')
+const { threadLoader, cacheLoader } = require('./loaders')
 
 const sassLoader = {
     loader: 'sass-loader',
@@ -30,51 +30,30 @@ const typingsForCssModulesLoader = {
     }
 }
 
-const cacheLoader = {
-    loader: 'cache-loader',
-    options: {
-        // provide a cache directory where cache items should be stored
-        cacheDirectory: resolve('.cache-loader')
+const baseLoaders = workerParallelJobs => {
+    const loaders = [config.extractCss ? MiniCssExtractPlugin.loader : 'style-loader', cacheLoader]
+    if (workerParallelJobs !== 0) {
+        loaders.push(threadLoader(workerParallelJobs))
     }
+    return loaders
 }
 
 module.exports = [
     {
         test: /\.css$/,
         include: [resolve('node_modules')],
-        use: [
-            config.extractCss ? MiniCssExtractPlugin.loader : 'style-loader',
-            cacheLoader,
-            'css-loader',
-            'postcss-loader'
-        ]
+        use: [...baseLoaders(), 'css-loader', 'postcss-loader']
     },
     {
         test: /\.scss$/,
         include: [resolve('src')],
-        rules: [
-            {
-                use: [
-                    config.extractCss ? MiniCssExtractPlugin.loader : 'style-loader',
-                    typingsForCssModulesLoader,
-                    'postcss-loader',
-                    sassLoader
-                ]
-            }
-        ]
+        use: [...baseLoaders(2), typingsForCssModulesLoader, 'postcss-loader', sassLoader]
     },
     {
         // for ant design
         test: /\.less$/,
-        rules: [
-            {
-                use: [
-                    config.extractCss ? MiniCssExtractPlugin.loader : 'style-loader',
-                    'css-loader',
-                    'postcss-loader',
-                    lessLoader
-                ]
-            }
-        ]
+        // less do not use threadLoader
+        // https://github.com/webpack-contrib/thread-loader/issues/10
+        use: [...baseLoaders(0), 'css-loader', 'postcss-loader', lessLoader]
     }
 ]

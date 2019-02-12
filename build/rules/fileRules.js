@@ -1,25 +1,28 @@
 const { assetsPath, resolve } = require('./../utils')
+const { threadLoader, cacheLoader } = require('./loaders')
+
+function getUrlloader(assetsPrefix) {
+    return {
+        loader: 'url-loader',
+        options: {
+            limit: 10000,
+            name: assetsPath(`${assetsPrefix}/[name].[hash:7].[ext]`)
+        }
+    }
+}
 
 module.exports = [
     {
         test: /\.(png|jpe?g|gif)(\?.*)?$/,
-        loader: 'url-loader',
-        query: {
-            limit: 10000,
-            name: assetsPath('img/[name].[hash:7].[ext]')
-        }
+        use: [cacheLoader, getUrlloader('img')]
     },
     {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url-loader',
-        query: {
-            limit: 10000,
-            name: assetsPath('fonts/[name].[hash:7].[ext]')
-        }
+        use: [cacheLoader, getUrlloader('fonts')]
     },
     {
         test: /\.svg$/,
-        loader: '@svgr/webpack',
+        loader: [cacheLoader, threadLoader(), '@svgr/webpack'],
         include: [resolve('src')]
     }
 ]
