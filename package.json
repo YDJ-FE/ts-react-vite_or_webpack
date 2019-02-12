@@ -7,8 +7,8 @@
         "test": "jest",
         "add": "add-component",
         "lint": "tslint --type-check --project ./tsconfig.json",
-        "dev": "cross-env APP_ENV=dev webpack-dev-server --config build/webpack.config.js --mode development --open --hot",
-        "build": "cross-env NODE_ENV=production webpack --config build/webpack.config.js --mode production",
+        "dev": "cross-env NODE_ENV=development APP_ENV=dev webpack-dev-server --config build/webpack.config.js --open --hot",
+        "build": "cross-env NODE_ENV=production webpack --config build/webpack.config.js",
         "build:qa": "cross-env APP_ENV=qa npm run build",
         "build:prod": "cross-env APP_ENV=prod npm run build"
     },

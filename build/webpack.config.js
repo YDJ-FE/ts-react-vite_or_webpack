@@ -11,6 +11,7 @@ const optimization = require('./optimization')
 require('./cleanup-folder')
 
 module.exports = {
+    mode: process.env.NODE_ENV,
     entry: {
         vendor: ['@babel/polyfill'],
         app: ['./src/index.tsx']
