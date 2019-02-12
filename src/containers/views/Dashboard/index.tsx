@@ -4,12 +4,12 @@ import { Avatar, Button } from 'antd'
 import * as styles from './style.scss'
 import ChartAreaStack from '@shared/ChartAreaStack'
 
-const AVATAR_URL = 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
+const AVATAR_URL = 'https://avatars3.githubusercontent.com/u/6183232?s=40&v=4'
 
 function Dashboard() {
     const [avatars, setAvatars] = React.useState([AVATAR_URL])
     function addAvatar() {
-        const newAvatars = [...avatars, `${AVATAR_URL}?t=${Date.now()}`]
+        const newAvatars = [...avatars, `${AVATAR_URL}&t=${Date.now()}`]
         setAvatars(newAvatars)
     }
     React.useEffect(() => {
