@@ -45,7 +45,7 @@ We do not use any mock tools(Anyway, you can use the data format from server res
 -   use [ant design](https://ant.design/index-cn) as UI framework
 -   import svg icon as a component by `@svgr/webpack`, [there is an example in the doc of steamer-react-redux-ts](https://github.com/YDJ-FE/steamer-react-ts/blob/master/docs/svg.md)
 -   async to load component by `react-loadable`
--   import .(s)css auto generate .(s)css.d.ts by `typings-for-css-modules-loader`
+-   import .(s)css auto generate .(s)css.d.ts by `css-modules-typescript-loader`
 -   create component folder by `customaddcomponents` which is added to npm script `npm run add`
 
 ## TODO
