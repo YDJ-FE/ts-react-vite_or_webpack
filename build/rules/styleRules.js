@@ -5,6 +5,11 @@ const { resolve } = require('./../utils')
 const theme = require('./../../theme')
 const { threadLoader, cacheLoader } = require('./loaders')
 
+const cssLoader = modules => ({
+    loader: 'css-loader',
+    options: { modules }
+})
+
 const sassLoader = {
     loader: 'sass-loader',
     options: {
@@ -20,20 +25,18 @@ const lessLoader = {
     }
 }
 
-const typingsForCssModulesLoader = {
-    loader: 'typings-for-css-modules-loader',
-    options: {
-        modules: true,
-        namedExport: true,
-        camelCase: true,
-        sass: true
+const baseLoaders = (workerParallelJobs, modules) => {
+    const loaders = [
+        config.extractCss ? MiniCssExtractPlugin.loader : 'style-loader',
+        cacheLoader,
+        cssLoader(modules),
+        'postcss-loader'
+    ]
+    if (module) {
+        loaders.splice(2, 0, 'css-modules-typescript-loader')
     }
-}
-
-const baseLoaders = workerParallelJobs => {
-    const loaders = [config.extractCss ? MiniCssExtractPlugin.loader : 'style-loader', cacheLoader]
     if (workerParallelJobs !== 0) {
-        loaders.push(threadLoader(workerParallelJobs))
+        loaders.splice(2, 0, threadLoader(workerParallelJobs))
     }
     return loaders
 }
@@ -42,18 +45,18 @@ module.exports = [
     {
         test: /\.css$/,
         include: [resolve('node_modules')],
-        use: [...baseLoaders(), 'css-loader', 'postcss-loader']
+        use: baseLoaders(undefined, false)
     },
     {
         test: /\.scss$/,
         include: [resolve('src')],
-        use: [...baseLoaders(2), typingsForCssModulesLoader, 'postcss-loader', sassLoader]
+        use: [...baseLoaders(0, true), sassLoader]
     },
     {
         // for ant design
         test: /\.less$/,
         // less do not use threadLoader
         // https://github.com/webpack-contrib/thread-loader/issues/10
-        use: [...baseLoaders(0), 'css-loader', 'postcss-loader', lessLoader]
+        use: [...baseLoaders(0, false), lessLoader]
     }
 ]
