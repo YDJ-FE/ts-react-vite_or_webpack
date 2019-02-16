@@ -8,13 +8,15 @@ import createHashHistory from 'history/createHashHistory'
 import { syncHistoryWithStore } from 'mobx-react-router'
 import { Router } from 'react-router-dom'
 
+import registerServiceWorker from './sw'
 import AppRouter from '@shared/App'
 import * as store from './store'
 
+registerServiceWorker()
+configure({ enforceActions: 'observed' })
+
 const hashHistory = createHashHistory()
 const history = syncHistoryWithStore(hashHistory, store.routerStore)
-
-configure({ enforceActions: 'observed' })
 
 const render = Component => {
     ReactDOM.render(
@@ -28,12 +30,3 @@ const render = Component => {
 }
 
 render(AppRouter)
-
-// we do not use pwa by default
-// see https://github.com/NekR/offline-plugin
-// if you want it, delete the comments which is about OfflinePlugin in the flowing line and /build/plugins.js
-// import * as OfflinePluginRuntime from 'offline-plugin/runtime'
-// if (process.env.APP_ENV !== 'dev') {
-//     OfflinePluginRuntime.install()
-//     OfflinePluginRuntime.applyUpdate()
-// }

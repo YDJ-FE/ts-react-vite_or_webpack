@@ -42,6 +42,7 @@ We do not use any mock tools(Anyway, you can use the data format from server res
 -   react-router-4
 -   mobx-react-router
 -   component hot reload
+-   use ServiceWorker by [workbox-webpack-plugin](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin)
 -   use [ant design](https://ant.design/index-cn) as UI framework
 -   import svg icon as a component by `@svgr/webpack`, [there is an example in the doc of steamer-react-redux-ts](https://github.com/YDJ-FE/steamer-react-ts/blob/master/docs/svg.md)
 -   async to load component by `react-loadable`

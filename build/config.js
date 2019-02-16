@@ -2,7 +2,10 @@ const path = require('path')
 
 const constants = require('./constants')
 
-// 静态资源访问域名（CDN）
+// website domain
+const INDEX_DOMAIN = 'https://starter.jackple.com'
+
+// static resource domain（CDN）
 const STATICDOMAIN = constants.APP_ENV === 'prod' ? '.' : ''
 
 module.exports = {
@@ -10,7 +13,11 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, `./../dist/${constants.APP_ENV}`),
     assetsPublicPath: constants.APP_ENV === 'dev' ? '/' : `${STATICDOMAIN}/`,
     assetsSubDirectory: 'static',
-    // 正式环境接入sentry需要sourceMap
+    // domain for workbox
+    indexDomain: INDEX_DOMAIN,
+    // id you use CDN, change it!!!
+    assetsDomain: `${INDEX_DOMAIN}/static`,
+    // production sourceMap for monitoring
     sourceMap:
         constants.APP_ENV === 'dev' ? 'source-map' : constants.APP_ENV === 'prod' ? 'cheap-module-source-map' : false,
     extractCss: constants.APP_ENV !== 'dev',

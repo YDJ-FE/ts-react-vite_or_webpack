@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
-// const OfflinePlugin = require('offline-plugin')
+const WorkboxPlugin = require('workbox-webpack-plugin')
 
 const constants = require('./constants')
 const config = require('./config')
@@ -57,8 +57,30 @@ const prodPlugins = [
         // both options are optional
         filename: assetsPath('css/[name].[contenthash].css'),
         chunkFilename: assetsPath('css/[name].[id].[contenthash].css')
+    }),
+    new WorkboxPlugin.GenerateSW({
+        cacheId: 'ts-react-webpack',
+        clientsClaim: true,
+        skipWaiting: true,
+        offlineGoogleAnalytics: false,
+        // do not use google cdn
+        importWorkboxFrom: 'local',
+        // precache ignore
+        exclude: [/index\.html$/],
+        // dynamic update
+        runtimeCaching: [
+            {
+                // match html
+                urlPattern: new RegExp(config.indexDomain),
+                handler: 'networkFirst'
+            },
+            {
+                // match static resource
+                urlPattern: new RegExp(config.assetsDomain),
+                handler: 'staleWhileRevalidate'
+            }
+        ]
     })
-    // new OfflinePlugin()
 ]
 
 if (config.bundleAnalyzerReport) {
