@@ -28,7 +28,7 @@ function Dashboard() {
                     ))}
                 </div>
             </div>
-            <ChartAreaStack style={{ height: 600, margin: '20px 0' }} />
+            <ChartAreaStack style={{ height: 500, margin: '20px 0' }} />
         </div>
     )
 }
