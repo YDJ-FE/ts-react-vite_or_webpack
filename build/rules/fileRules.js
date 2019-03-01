@@ -14,11 +14,11 @@ function getUrlloader(assetsPrefix) {
 module.exports = [
     {
         test: /\.(png|jpe?g|gif)(\?.*)?$/,
-        use: [cacheLoader, getUrlloader('img')]
+        use: [getUrlloader('img')]
     },
     {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        use: [cacheLoader, getUrlloader('fonts')]
+        use: [getUrlloader('fonts')]
     },
     {
         test: /\.svg$/,
