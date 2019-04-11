@@ -34,7 +34,7 @@ We do not use any mock tools(Anyway, you can use the data format from server res
 
 ## characteristics/packages
 
--   webpack-4.x
+-   webpack-4.x (fixing on 4.28.4 avoid dynamic import error)
 -   babel-7.x
 -   typescript-3.x
 -   react-16.x
@@ -48,6 +48,7 @@ We do not use any mock tools(Anyway, you can use the data format from server res
 -   async to load component by `react-loadable`
 -   import .(s)css auto generate .(s)css.d.ts by `css-modules-typescript-loader`
 -   create component folder by `customaddcomponents` which is added to npm script `npm run add`
+-   use husky{pre-commit/commit-msg} hooks
 
 ## TODO
 
