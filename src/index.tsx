@@ -4,7 +4,7 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { Provider } from 'mobx-react'
 import { configure } from 'mobx'
-import createHashHistory from 'history/createHashHistory'
+import { createHashHistory } from 'history'
 import { syncHistoryWithStore } from 'mobx-react-router'
 import { Router } from 'react-router-dom'
 
@@ -19,14 +19,14 @@ const hashHistory = createHashHistory()
 const history = syncHistoryWithStore(hashHistory, store.routerStore)
 
 const render = Component => {
-    ReactDOM.render(
+    const element = (
         <Provider {...store}>
             <Router history={history}>
                 <Component />
             </Router>
-        </Provider>,
-        document.getElementById('app') as HTMLElement
+        </Provider>
     )
+    ReactDOM.render(element, document.getElementById('app') as HTMLElement)
 }
 
 render(AppRouter)
