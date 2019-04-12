@@ -32,7 +32,7 @@ $ npm run build:(qa/prod)
 
 We do not use any mock tools(Anyway, you can use the data format from server response to achieve it!), all data interaction depends on [a real node service with nest and mongodb](https://github.com/jackple/showcase). Integration is in our future plan! We will make sure that you still can fully separate client and server side. 😁😁😁
 
-## characteristics/packages
+## primary packages
 
 -   webpack-4.x (fixing on 4.28.4 avoid dynamic import error)
 -   babel-7.x
@@ -41,12 +41,14 @@ We do not use any mock tools(Anyway, you can use the data format from server res
 -   mobx-5.x ([5.x makes your application must be running in the browser that support es2015+](https://github.com/mobxjs/mobx#browser-support), if you are not willing, you can use 4.x)
 -   react-router-4
 -   mobx-react-router
--   component hot reload
--   use ServiceWorker by [workbox-webpack-plugin](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin)
+
+## characteristics
+
 -   use [ant design](https://ant.design/index-cn) as UI framework
+-   import .(s)css auto generate .(s)css.d.ts by `css-modules-typescript-loader`
+-   use ServiceWorker by [workbox-webpack-plugin](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin)
 -   import svg icon as a component by `@svgr/webpack`, [there is an example in the doc of steamer-react-redux-ts](https://github.com/YDJ-FE/steamer-react-ts/blob/master/docs/svg.md)
 -   async to load component by `react-loadable`
--   import .(s)css auto generate .(s)css.d.ts by `css-modules-typescript-loader`
 -   create component folder by `customaddcomponents` which is added to npm script `npm run add`
 -   use husky{pre-commit/commit-msg} hooks
 
