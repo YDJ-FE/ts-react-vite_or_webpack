@@ -12,10 +12,7 @@ require('./cleanup-folder')
 
 module.exports = {
     mode: process.env.NODE_ENV,
-    entry: {
-        vendor: ['@babel/polyfill'],
-        app: ['./src/index.tsx']
-    },
+    entry: { app: ['./src/index.tsx'] },
     output: {
         path: config.assetsRoot,
         filename: constants.APP_ENV === 'dev' ? '[name].js' : assetsPath('js/[name].[chunkhash].js'),
@@ -26,9 +23,6 @@ module.exports = {
     resolve: {
         extensions: constants.FILE_EXTENSIONS,
         modules: [resolve('src'), resolve('node_modules')],
-        alias: {
-            mobx: resolve('node_modules/mobx/lib/mobx.es6.js')
-        },
         plugins: [
             new TsconfigPathsPlugin({
                 configFile: resolve('tsconfig.webpack.json'),

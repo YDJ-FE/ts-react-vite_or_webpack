@@ -2,9 +2,6 @@ const path = require('path')
 
 const constants = require('./constants')
 
-// website domain
-const INDEX_DOMAIN = 'https://starter.jackple.com'
-
 // static resource domain（CDN）
 const STATICDOMAIN = constants.APP_ENV === 'prod' ? '.' : ''
 
@@ -13,10 +10,10 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, `./../dist/${constants.APP_ENV}`),
     assetsPublicPath: constants.APP_ENV === 'dev' ? '/' : `${STATICDOMAIN}/`,
     assetsSubDirectory: 'static',
-    // domain for workbox
-    indexDomain: INDEX_DOMAIN,
+    // page Pattern for workbox
+    pagePattern: /https:\/\/starter.jackple.com/,
     // id you use CDN, change it!!!
-    assetsDomain: `${INDEX_DOMAIN}/static`,
+    assetsPattern: /https:\/\/starter.jackple.com\/(static|vendor.dll)/,
     // production sourceMap for monitoring
     sourceMap:
         constants.APP_ENV === 'dev' ? 'source-map' : constants.APP_ENV === 'prod' ? 'cheap-module-source-map' : false,

@@ -1,9 +1,10 @@
+const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const WorkboxPlugin = require('workbox-webpack-plugin')
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 
 const constants = require('./constants')
 const config = require('./config')
@@ -14,18 +15,15 @@ const oriEnv = env[constants.APP_ENV]
 Object.assign(oriEnv, {
     APP_ENV: constants.APP_ENV
 })
-// 照旧将webpack下发变量置于process.env
+// webpack process.env
 const defineEnv = {}
 for (let key in oriEnv) {
     defineEnv[`process.env.${key}`] = JSON.stringify(oriEnv[key])
 }
 
-const basePlugins = [
-    new webpack.DefinePlugin(defineEnv),
-    new MomentLocalesPlugin({
-        localesToKeep: ['es-us', 'zh-cn']
-    })
-]
+const DLL_PATH = './../dll'
+
+const basePlugins = [new webpack.DefinePlugin(defineEnv)]
 
 const devPlugins = [
     new HtmlWebpackPlugin({
@@ -38,6 +36,9 @@ const devPlugins = [
 
 const prodPlugins = [
     new webpack.WatchIgnorePlugin([/css\.d\.ts$/]),
+    new webpack.DllReferencePlugin({
+        manifest: require(`${DLL_PATH}/vendor.manifest.json`)
+    }),
     new HtmlWebpackPlugin({
         filename: config.index,
         template: 'build/tpl/index.html',
@@ -51,6 +52,10 @@ const prodPlugins = [
         },
         // necessary to consistently work with multiple chunks via CommonsChunkPlugin
         chunksSortMode: 'dependency'
+    }),
+    new AddAssetHtmlPlugin({
+        filepath: path.resolve(__dirname, `${DLL_PATH}/**/*.js`),
+        includeSourcemap: false
     }),
     new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output
@@ -71,12 +76,12 @@ const prodPlugins = [
         runtimeCaching: [
             {
                 // match html
-                urlPattern: new RegExp(config.indexDomain),
+                urlPattern: config.pagePattern,
                 handler: 'networkFirst'
             },
             {
                 // match static resource
-                urlPattern: new RegExp(config.assetsDomain),
+                urlPattern: config.assetsPattern,
                 handler: 'staleWhileRevalidate'
             }
         ]

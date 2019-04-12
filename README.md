@@ -51,6 +51,7 @@ We do not use any mock tools(Anyway, you can use the data format from server res
 -   async to load component by `react-loadable`
 -   create component folder by `customaddcomponents` which is added to npm script `npm run add`
 -   use husky{pre-commit/commit-msg} hooks
+-   use [webpack dll](https://webpack.js.org/plugins/dll-plugin/) when you are running in production mode
 
 ## TODO
 
