@@ -57,6 +57,11 @@ We do not use any mock tools(Anyway, you can use the data format from server res
 
 -   config menu by user with permission
 
+## About `mobx-react-lite`
+
+-   When using React hooks, You must use `observer` from `mobx-react-lite` instead of `mobx-react`
+-   [see more](https://github.com/mobxjs/mobx-react-lite)
+
 ## functional example
 
 ### mobx-react-router
