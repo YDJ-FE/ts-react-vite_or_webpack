@@ -17,7 +17,6 @@ function Login({ login, form }: IStoreProps & FormComponentProps) {
     const [loading, setLoading] = React.useState(false)
 
     const submit = (e: React.FormEvent<any>): void => {
-        // test.status = true
         e.preventDefault()
         form.validateFields(
             async (err, values): Promise<any> => {
