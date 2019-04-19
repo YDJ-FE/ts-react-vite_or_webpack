@@ -39,6 +39,7 @@
         "lodash": "^4.17.11",
         "mobx": "^5.9.4",
         "mobx-react": "^5.4.3",
+        "mobx-react-lite": "^1.2.0",
         "mobx-react-router": "^4.0.7",
         "path-to-regexp": "^3.0.0",
         "react": "^16.8.6",

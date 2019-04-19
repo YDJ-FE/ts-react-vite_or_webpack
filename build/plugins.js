@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const WorkboxPlugin = require('workbox-webpack-plugin')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 
 const constants = require('./constants')
 const config = require('./config')
@@ -23,7 +24,12 @@ for (let key in oriEnv) {
 
 const DLL_PATH = './../dll'
 
-const basePlugins = [new webpack.DefinePlugin(defineEnv)]
+const basePlugins = [
+    new MomentLocalesPlugin({
+        localesToKeep: ['es-us', 'zh-cn']
+    }),
+    new webpack.DefinePlugin(defineEnv)
+]
 
 const devPlugins = [
     new HtmlWebpackPlugin({

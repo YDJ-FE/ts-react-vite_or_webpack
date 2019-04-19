@@ -1,12 +1,11 @@
 const webpack = require('webpack')
-const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 
 const { resolve } = require('./utils')
 require('./cleanup-dll')
 
 module.exports = {
     entry: {
-        vendor: ['@babel/polyfill', 'react', 'react-dom', 'mobx', 'mobx-react', 'lodash', 'immutable', 'moment']
+        vendor: ['@babel/polyfill', 'react', 'react-dom', 'mobx', 'mobx-react', 'mobx-react-lite']
     },
     output: {
         filename: '[name].dll.[hash:8].js',
@@ -22,9 +21,6 @@ module.exports = {
         }
     },
     plugins: [
-        new MomentLocalesPlugin({
-            localesToKeep: ['es-us', 'zh-cn']
-        }),
         new webpack.DllPlugin({
             // path 指定manifest文件的输出路径
             path: resolve('dll/[name].manifest.json'),
