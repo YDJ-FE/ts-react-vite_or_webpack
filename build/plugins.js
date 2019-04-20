@@ -77,7 +77,7 @@ const prodPlugins = [
         // do not use google cdn
         importWorkboxFrom: 'local',
         // precache ignore
-        exclude: [/index\.html$/],
+        exclude: [/index\.html$/, /\.map$/, /^manifest.*\.js$/],
         // dynamic update
         runtimeCaching: [
             {
@@ -88,7 +88,12 @@ const prodPlugins = [
             {
                 // match static resource
                 urlPattern: config.assetsPattern,
-                handler: 'staleWhileRevalidate'
+                handler: 'staleWhileRevalidate',
+                options: {
+                    cacheableResponse: { statuses: [0, 200] },
+                    fetchOptions: { mode: 'cors' },
+                    matchOptions: { ignoreSearch: true }
+                }
             }
         ]
     })

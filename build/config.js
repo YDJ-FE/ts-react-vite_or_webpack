@@ -15,7 +15,7 @@ module.exports = {
     // page Pattern for workbox
     pagePattern: new RegExp(DOMAIN),
     // id you use CDN, change it!!!
-    assetsPattern: new RegExp(`${DOMAIN.replace(/\//g, '\\/')}\\/(static|vendor.dll).*(?<!.(js|css).map)$`),
+    assetsPattern: new RegExp(`${DOMAIN.replace(/\//g, '\\/')}\\/(static|vendor.dll)`),
     // production sourceMap for monitoring
     sourceMap:
         constants.APP_ENV === 'dev' ? 'source-map' : constants.APP_ENV === 'prod' ? 'cheap-module-source-map' : false,
