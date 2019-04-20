@@ -17,8 +17,7 @@ module.exports = {
     // id you use CDN, change it!!!
     assetsPattern: new RegExp(`${DOMAIN.replace(/\//g, '\\/')}\\/(static|vendor.dll)`),
     // production sourceMap for monitoring
-    sourceMap:
-        constants.APP_ENV === 'dev' ? 'source-map' : constants.APP_ENV === 'prod' ? 'cheap-module-source-map' : false,
+    sourceMap: constants.APP_ENV === 'dev' ? 'eval-source-map' : constants.APP_ENV === 'prod' ? 'source-map' : false,
     extractCss: constants.APP_ENV !== 'dev',
     // Run the build command with an extra argument to
     // View the bundle analyzer report after build finishes:
