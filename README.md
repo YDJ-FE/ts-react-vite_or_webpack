@@ -53,14 +53,14 @@ We do not use any mock tools(Anyway, you can use the data format from server res
 -   use husky{pre-commit/commit-msg} hooks
 -   use [webpack dll](https://webpack.js.org/plugins/dll-plugin/) when you are running in production mode
 
-## TODO
-
--   config menu by user with permission
-
 ## About `mobx-react-lite`
 
 -   When using React hooks, You must use `observer` from `mobx-react-lite` instead of `mobx-react`
 -   [see more](https://github.com/mobxjs/mobx-react-lite)
+
+## TODO
+
+-   config menu by user with permission
 
 ## functional example
 
