@@ -5,7 +5,7 @@ require('./cleanup-dll')
 
 module.exports = {
     entry: {
-        vendor: ['@babel/polyfill', 'react', 'react-dom', 'mobx', 'mobx-react', 'mobx-react-lite']
+        vendor: ['@babel/polyfill', 'react', 'react-dom']
     },
     output: {
         filename: '[name].dll.[hash:8].js',
@@ -14,11 +14,6 @@ module.exports = {
         libraryTarget: 'var',
         // 全局变量名称 导出库将被以var的形式赋给这个全局变量 通过这个变量获取到里面模块
         library: '_dll_[name]_[hash:8]'
-    },
-    resolve: {
-        alias: {
-            mobx: resolve('node_modules/mobx/lib/mobx.es6.js')
-        }
     },
     plugins: [
         new webpack.DllPlugin({

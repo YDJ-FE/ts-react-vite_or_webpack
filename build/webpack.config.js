@@ -28,7 +28,10 @@ module.exports = {
                 configFile: resolve('tsconfig.webpack.json'),
                 extensions: constants.FILE_EXTENSIONS
             })
-        ]
+        ],
+        alias: {
+            mobx: resolve('node_modules/mobx/lib/mobx.es6.js')
+        }
     },
     module: {
         rules: [...styleRules, ...jsRules, ...fileRules]
