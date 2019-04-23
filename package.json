@@ -59,6 +59,7 @@
         "@babel/preset-typescript": "^7.3.3",
         "@commitlint/cli": "^7.5.2",
         "@commitlint/config-conventional": "^7.5.0",
+        "@hot-loader/react-dom": "^16.8.6",
         "@svgr/webpack": "^4.1.0",
         "@types/classnames": "^2.2.7",
         "@types/enzyme": "^3.9.1",
