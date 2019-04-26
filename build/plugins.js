@@ -83,17 +83,12 @@ const prodPlugins = [
             {
                 // match html
                 urlPattern: config.pagePattern,
-                handler: 'networkFirst'
+                handler: 'NetworkFirst'
             },
             {
                 // match static resource
                 urlPattern: config.assetsPattern,
-                handler: 'staleWhileRevalidate',
-                options: {
-                    cacheableResponse: { statuses: [0, 200] },
-                    fetchOptions: { mode: 'cors' },
-                    matchOptions: { ignoreSearch: true }
-                }
+                handler: 'StaleWhileRevalidate'
             }
         ]
     })
