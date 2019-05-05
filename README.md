@@ -15,7 +15,11 @@ $ npm i
 ```bash
 $ npm test
 ```
+## extract messages (i18n)
 
+```bash
+$  npm run manage:translations
+```
 ## build for development
 
 ```bash
@@ -41,6 +45,7 @@ We do not use any mock tools(Anyway, you can use the data format from server res
 -   mobx-5.x ([5.x makes your application must be running in the browser that support es2015+](https://github.com/mobxjs/mobx#browser-support), if you are not willing, you can use 4.x)
 -   react-router-4
 -   mobx-react-router
+-   react-intl
 
 ## characteristics
 
@@ -52,6 +57,7 @@ We do not use any mock tools(Anyway, you can use the data format from server res
 -   create component folder by `customaddcomponents` which is added to npm script `npm run add`
 -   use husky{pre-commit/commit-msg} hooks
 -   use [webpack dll](https://webpack.js.org/plugins/dll-plugin/) when you are running in production mode
+-   use [typescript-react-intl](https://github.com/bang88/typescript-react-intl) to extracts string messages from TypeScript React components or ts files that use React Int
 
 ## About `mobx-react-lite`
 
@@ -61,6 +67,7 @@ We do not use any mock tools(Anyway, you can use the data format from server res
 ## TODO
 
 -   config menu by user with permission
+-   use mobx to manage intl state
 
 ## functional example
 

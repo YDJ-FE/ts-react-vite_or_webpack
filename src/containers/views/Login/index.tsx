@@ -1,12 +1,11 @@
 import * as React from 'react'
+import * as styles from './index.scss'
 import { inject } from 'mobx-react'
 import { observer } from 'mobx-react-lite'
 import { Form, Icon, Input, Button } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
 import { hot } from 'react-hot-loader'
-
-import * as styles from './index.scss'
-
+import { FormattedMessage } from 'react-intl'
 const FormItem = Form.Item
 
 interface IStoreProps {
@@ -44,7 +43,7 @@ function Login({ login, form }: IStoreProps & FormComponentProps) {
                     })(
                         <Input
                             prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            placeholder="account"
+                            placeholder={'username'}
                         />
                     )}
                 </FormItem>
@@ -55,7 +54,7 @@ function Login({ login, form }: IStoreProps & FormComponentProps) {
                         <Input
                             prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             type="password"
-                            placeholder="password"
+                            placeholder={'password'}
                         />
                     )}
                 </FormItem>
@@ -65,7 +64,7 @@ function Login({ login, form }: IStoreProps & FormComponentProps) {
                         <span>password: admin</span>
                     </div>
                     <Button type="primary" htmlType="submit" block loading={loading}>
-                        login
+                        <FormattedMessage id="login_button" defaultMessage="Log In" />
                     </Button>
                 </FormItem>
             </Form>

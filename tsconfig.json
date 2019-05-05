@@ -24,6 +24,7 @@
         "experimentalDecorators": true,
         "lib": ["es7", "dom"],
         "skipLibCheck": true,
-        "typeRoots": ["node", "node_modules/@types", "./typings"]
+        "typeRoots": ["node", "node_modules/@types", "./typings"],
+        "resolveJsonModule": true
     }
 }
