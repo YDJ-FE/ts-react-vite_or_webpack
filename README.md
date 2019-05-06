@@ -52,6 +52,7 @@ We do not use any mock tools(Anyway, you can use the data format from server res
 -   create component folder by `customaddcomponents` which is added to npm script `npm run add`
 -   use husky{pre-commit/commit-msg} hooks
 -   use [webpack dll](https://webpack.js.org/plugins/dll-plugin/) when you are running in production mode
+-   use [react-intl-universal](https://github.com/alibaba/react-intl-universal) for i18n.
 
 ## About `mobx-react-lite`
 
@@ -62,9 +63,7 @@ We do not use any mock tools(Anyway, you can use the data format from server res
 
 -   config menu by user with permission
 
-## functional example
-
-### mobx-react-router
+## component example
 
 ```jsx
 import * as React from 'react'
@@ -86,41 +85,10 @@ function Test({ routerStore }: IStoreProps) {
     )
 }
 
-export default inject(
-    (store: IStore): IStoreProps => ({
-        routerStore: store.routerStore
-    })
-)(observer(Login))
+export default inject((store: IStore): IStoreProps => ({ routerStore: store.routerStore }))(observer(Test))
 ```
 
 [live example](https://github.com/YDJ-FE/ts-react-webpack4/blob/master/src/containers/views/Login/index.tsx?1532570619900)
-
-### async to load component
-
-```jsx
-import * as React from 'react'
-import Loadable from 'react-loadable'
-import { HashRouter as Router, Switch, Route } from 'react-router-dom'
-
-import PageLoading from '@components/PageLoading'
-
-const Test = Loadable({
-    loader: () => import(/* webpackChunkName: "test" */ './Test'),
-    loading: PageLoading
-})
-
-const AppRouter = () => (
-    <Router>
-        <Switch>
-            <Route exact path="/test" component={Test} />
-        </Switch>
-    </Router>
-)
-
-export default AppRouter
-```
-
-[live example](https://github.com/YDJ-FE/ts-react-webpack4/tree/master/src/containers/shared/App?1532589067125)
 
 ## necessary extensions (on vscode)
 
@@ -130,9 +98,36 @@ export default AppRouter
 
 -   [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
+## how to upload file to server
+
+```bash
+#!/bin/bash
+
+TIMESPAN=$(date '+%s')
+DEPLOYNAME=ts-react-webpack.qa.${TIMESPAN}
+DEPLOYFILES=${DEPLOYNAME}.tar.gz
+SERVER=0.0.0.0
+
+# make compression
+cd dist/qa
+tar -zcvf ${DEPLOYFILES} ./*
+
+# upload
+scp -P 22 -o StrictHostKeyChecking=no ${DEPLOYFILES} node@${SERVER}:/home/pages/ts-react-webpack/tarfiles
+
+# make decompression
+ssh -p 22 -o StrictHostKeyChecking=no node@${SERVER} tar xzf /home/pages/ts-react-webpack/tarfiles/${DEPLOYFILES} -C /home/pages/ts-react-webpack
+
+if [ $? -ne 0 ]; then
+    echo "success"
+else
+    echo "fail"
+fi
+```
+
 ## how to deploy with nginx
 
-```
+```nginx
 server {
        listen       9993;
        server_name  localhost:9993;
