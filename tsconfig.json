@@ -13,6 +13,7 @@
             "@services/*": ["services/*"],
             "@utils/*": ["utils/*"],
             "@assets/*": ["assets/*"],
+            "@locales/*": ["locales/*"],
             "@components/*": ["components/*"],
             "@views/*": ["containers/views/*"],
             "@shared/*": ["containers/shared/*"]

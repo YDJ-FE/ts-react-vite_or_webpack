@@ -30,13 +30,9 @@ export default class IntlWrapper extends React.Component {
     getLangLoader(locale: string): Promise<StringObject> {
         switch (locale) {
             case LOCALES.ZH_CN:
-                return import(/* webpackChunkName: "zh-CN" */ '@assets/locales/zh-CN.json').then(m => {
-                    return m.default
-                })
+                return import(/* webpackChunkName: "zh-CN" */ '@locales/zh-CN.json').then(m => m.default)
             default:
-                return import(/* webpackChunkName: "en-US" */ '@assets/locales/en-US.json').then(m => {
-                    return m.default
-                })
+                return import(/* webpackChunkName: "en-US" */ '@locales/en-US.json').then(m => m.default)
         }
     }
 
