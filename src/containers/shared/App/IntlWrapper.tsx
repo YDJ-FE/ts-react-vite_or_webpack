@@ -1,26 +1,44 @@
 import * as React from 'react'
 import intl from 'react-intl-universal'
 import { find } from 'lodash'
-import axios from 'axios'
 import { Select } from 'antd'
 
 import * as styles from './index.scss'
 import { setCookie } from '@utils/index'
 import { COOKIE_KEYS } from '@constants/index'
+import PageLoading from '@components/PageLoading'
+
+enum LOCALES {
+    EN_US = 'en-US',
+    ZH_CN = 'zh-CN'
+}
 
 const SUPPOER_LOCALES = [
     {
         name: 'English',
-        value: 'en-US'
+        value: LOCALES.EN_US
     },
     {
         name: '简体中文',
-        value: 'zh-CN'
+        value: LOCALES.ZH_CN
     }
 ]
 
 export default class IntlWrapper extends React.Component {
     state = { currentLocale: '' }
+
+    getLangLoader(locale: string): Promise<StringObject> {
+        switch (locale) {
+            case LOCALES.ZH_CN:
+                return import(/* webpackChunkName: "zh-CN" */ '@assets/locales/zh-CN.json').then(m => {
+                    return m.default
+                })
+            default:
+                return import(/* webpackChunkName: "en-US" */ '@assets/locales/en-US.json').then(m => {
+                    return m.default
+                })
+        }
+    }
 
     loadLocales() {
         let currentLocale = intl.determineLocale({
@@ -29,16 +47,11 @@ export default class IntlWrapper extends React.Component {
         })
         // default is English
         if (!find(SUPPOER_LOCALES, { value: currentLocale })) {
-            currentLocale = 'en-US'
+            currentLocale = LOCALES.EN_US
         }
-        axios
-            .get(`public/locales/${currentLocale}.json`)
-            .then(res => {
-                // init 方法将根据 currentLocale 来加载当前语言环境的数据
-                return intl.init({
-                    currentLocale,
-                    locales: { [currentLocale]: res.data }
-                })
+        this.getLangLoader(currentLocale)
+            .then(data => {
+                return intl.init({ currentLocale, locales: { [currentLocale]: data } })
             })
             .then(() => {
                 // After loading CLDR locale data, start to render
@@ -57,7 +70,10 @@ export default class IntlWrapper extends React.Component {
 
     render() {
         const { currentLocale } = this.state
-        const selectLanguage = currentLocale ? (
+        if (!currentLocale) {
+            return <PageLoading />
+        }
+        const selectLanguage = (
             <Select className={styles.intlSelect} onChange={this.onSelectLocale} value={currentLocale}>
                 {SUPPOER_LOCALES.map(locale => (
                     <Select.Option key={locale.value} value={locale.value}>
@@ -65,7 +81,7 @@ export default class IntlWrapper extends React.Component {
                     </Select.Option>
                 ))}
             </Select>
-        ) : null
+        )
         return (
             <React.Fragment>
                 {selectLanguage}

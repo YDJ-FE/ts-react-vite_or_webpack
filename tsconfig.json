@@ -22,6 +22,7 @@
         "noUnusedLocals": true,
         "importHelpers": true,
         "experimentalDecorators": true,
+        "resolveJsonModule": true,
         "lib": ["es7", "dom"],
         "skipLibCheck": true,
         "typeRoots": ["node", "node_modules/@types", "./typings"]
