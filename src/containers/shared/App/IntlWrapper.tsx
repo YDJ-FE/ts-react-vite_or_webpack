@@ -37,10 +37,7 @@ export default class IntlWrapper extends React.Component {
     }
 
     loadLocales() {
-        let currentLocale = intl.determineLocale({
-            urlLocaleKey: 'lang',
-            cookieLocaleKey: 'lang'
-        })
+        let currentLocale = intl.determineLocale({ cookieLocaleKey: COOKIE_KEYS.LANG })
         // default is English
         if (!find(SUPPOER_LOCALES, { value: currentLocale })) {
             currentLocale = LOCALES.EN_US
