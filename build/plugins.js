@@ -77,7 +77,7 @@ const prodPlugins = [
         // do not use google cdn
         importWorkboxFrom: 'local',
         // precache ignore
-        exclude: [/index\.html$/, /\.map$/],
+        exclude: [/index\.html$/, /\.map$/, /\.json$/],
         // dynamic update
         runtimeCaching: [
             {
