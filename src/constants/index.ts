@@ -1,5 +1,6 @@
 export enum COOKIE_KEYS {
-    TOKEN = 'token'
+    TOKEN = 'token',
+    LANG = 'lang'
 }
 
 export enum LOCALSTORAGE_KEYS {

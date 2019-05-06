@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite'
 import { Form, Icon, Input, Button } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
 import { hot } from 'react-hot-loader'
+import intl from 'react-intl-universal'
 
 import * as styles from './index.scss'
 
@@ -61,11 +62,11 @@ function Login({ login, form }: IStoreProps & FormComponentProps) {
                 </FormItem>
                 <FormItem>
                     <div className={styles.tips}>
-                        <span>username: admin</span>
-                        <span>password: admin</span>
+                        <span>{intl.get('USERNAME')}: admin</span>
+                        <span>{intl.get('PASSWORD')}: admin</span>
                     </div>
                     <Button type="primary" htmlType="submit" block loading={loading}>
-                        login
+                        {intl.get('LOGIN')}
                     </Button>
                 </FormItem>
             </Form>

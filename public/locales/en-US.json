@@ -1,3 +1,5 @@
 {
-    "HELLO": "Hello, {name}. Welcome to {where}!"
+    "USERNAME": "username",
+    "PASSWORD": "password",
+    "LOGIN": "Login"
 }

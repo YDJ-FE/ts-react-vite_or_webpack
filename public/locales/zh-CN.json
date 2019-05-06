@@ -1,3 +1,5 @@
 {
-    "HELLO": "你好, {name}。欢迎来到{where}!"
+    "USERNAME": "用户名",
+    "PASSWORD": "密码",
+    "LOGIN": "登录"
 }
