@@ -17,16 +17,9 @@ interface IStoreProps {
 }
 
 const localSocketIOEvents = localStorage.getItem(LOCALSTORAGE_KEYS.SOCKET_IO_EVENTS)
-let initialLocalSocketIOEvents: string[] = localSocketIOEvents ? JSON.parse(localSocketIOEvents) : []
-if (initialLocalSocketIOEvents.length > 30) {
-    initialLocalSocketIOEvents = initialLocalSocketIOEvents.slice(0, 30)
-}
-// 处理空数据(修复bug)
-const initialSocketIOEvents: string[] = []
-for (const e of initialLocalSocketIOEvents) {
-    if (e) {
-        initialSocketIOEvents.push(e)
-    }
+let initialSocketIOEvents: string[] = localSocketIOEvents ? JSON.parse(localSocketIOEvents) : []
+if (initialSocketIOEvents.length > 30) {
+    initialSocketIOEvents = initialSocketIOEvents.slice(0, 30)
 }
 
 @inject(
@@ -92,7 +85,7 @@ class Send extends React.Component<IStoreProps> {
         } catch (err) {
             console.error(err)
             message.destroy()
-            message.error('请输入json格式的字符串!!!')
+            message.error('Please input json string!')
         }
     }
 
@@ -117,7 +110,7 @@ class Send extends React.Component<IStoreProps> {
             return send(null, this.sendingContent)
         } else if (!this.socketIOEvent) {
             message.destroy()
-            return message.error('请输入事件名称!!!')
+            return message.error('Please input event name!')
         }
         if (!this.socketIOEvents.includes(this.socketIOEvent)) {
             this.socketIOEvents.unshift(this.socketIOEvent)
@@ -134,7 +127,7 @@ class Send extends React.Component<IStoreProps> {
                     <AutoComplete
                         className={styles.autoComplete}
                         dataSource={toJS(this.socketIOEvents)}
-                        placeholder="输入事件名称"
+                        placeholder="Input event name"
                         value={this.socketIOEvent}
                         onChange={this.handleSocketEventChange}
                         filterOption={(inputValue, option) =>
@@ -145,21 +138,21 @@ class Send extends React.Component<IStoreProps> {
                 {dataFormat === DATA_FORMATS[0] ? (
                     <div className={styles.content}>
                         <div className={styles.reset}>
-                            <Popconfirm placement="topLeft" title="确认重置为空?" onConfirm={this.reset}>
-                                <Button>重置为空</Button>
+                            <Popconfirm placement="topLeft" title="Confirm to reset?" onConfirm={this.reset}>
+                                <Button>Reset</Button>
                             </Popconfirm>
                             <Button className={styles.btnCover} type="primary" onClick={this.toggleModalVisible}>
-                                自定义覆盖
+                                Custom
                             </Button>
                             <Modal
-                                title="定义值"
+                                title="Custom data"
                                 style={{ top: 20 }}
                                 visible={this.modalVisible}
                                 onOk={this.handleOK}
                                 onCancel={this.toggleModalVisible}
                             >
                                 <Input.TextArea
-                                    placeholder="请输入json格式的字符串"
+                                    placeholder="Please input json string"
                                     autosize={{ minRows: 4, maxRows: 10 }}
                                     value={this.content}
                                     onChange={this.handleContentChange}
@@ -187,15 +180,14 @@ class Send extends React.Component<IStoreProps> {
                 ) : (
                     <Input.TextArea
                         className={styles.textContent}
-                        placeholder="请输入传输内容"
+                        placeholder="Input your sending content"
                         autosize={{ minRows: 4, maxRows: 10 }}
                         value={this.textContent}
                         onChange={this.handleTextContentChange}
                     />
                 )}
-
                 <Button block size="large" disabled={!this.canSend} type="primary" onClick={this.handleSubmit}>
-                    发送
+                    Send
                 </Button>
             </div>
         )

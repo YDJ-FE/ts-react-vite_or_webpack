@@ -54,7 +54,7 @@ class Connect extends React.Component<IStoreProps> {
     handleConnect = () => {
         if (!this.url) {
             message.destroy()
-            return message.error('请先输入socket链接!!!')
+            return message.error('Please input socket url!')
         }
         socketConnect(this.url)
         this.props.clearMessages()
@@ -91,7 +91,7 @@ class Connect extends React.Component<IStoreProps> {
                         onClick={this.handleConnect}
                         disabled={socketIsConnected}
                     >
-                        连接
+                        connect
                     </Button>
                     <Button
                         className={styles.btn}
@@ -99,12 +99,10 @@ class Connect extends React.Component<IStoreProps> {
                         onClick={this.handleDisconnect}
                         disabled={!socketIsConnected}
                     >
-                        断开
+                        disconnect
                     </Button>
                 </div>
-                <blockquote className={styles.tips}>
-                    连接格式为 protocol//ip或域名:端口 (示例 {this.urlExample})
-                </blockquote>
+                <blockquote className={styles.tips}>protocol//ip or domain:host (example {this.urlExample})</blockquote>
             </div>
         )
     }

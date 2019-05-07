@@ -10,31 +10,25 @@ interface IStoreProps {
     setDataFormat?: (dataFormat: string) => void
 }
 
-@inject(
+function DataFormat({ dataFormat, setDataFormat }: IStoreProps) {
+    const handleChange = (val: string) => {
+        setDataFormat(val)
+        localStorage.setItem(LOCALSTORAGE_KEYS.DATA_FORMAT, val)
+    }
+    return (
+        <Select value={dataFormat} style={{ width: 120 }} onChange={handleChange}>
+            {DATA_FORMATS.map(d => (
+                <Select.Option key={d} value={d}>
+                    {d}
+                </Select.Option>
+            ))}
+        </Select>
+    )
+}
+
+export default inject(
     (store: IStore): IStoreProps => {
         const { dataFormat, setDataFormat } = store.socketStore
         return { dataFormat, setDataFormat }
     }
-)
-@observer
-class DataFormat extends React.Component<IStoreProps> {
-    handleChange = (val: string) => {
-        this.props.setDataFormat(val)
-        localStorage.setItem(LOCALSTORAGE_KEYS.DATA_FORMAT, val)
-    }
-
-    render() {
-        const { dataFormat } = this.props
-        return (
-            <Select value={dataFormat} style={{ width: 120 }} onChange={this.handleChange}>
-                {DATA_FORMATS.map(d => (
-                    <Select.Option key={d} value={d}>
-                        {d}
-                    </Select.Option>
-                ))}
-            </Select>
-        )
-    }
-}
-
-export default DataFormat
+)(observer(DataFormat))

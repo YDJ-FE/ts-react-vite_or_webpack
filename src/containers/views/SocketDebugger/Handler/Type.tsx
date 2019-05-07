@@ -12,32 +12,26 @@ interface IStoreProps {
     setSocketType?: (type: ISocketStore.SocketType) => void
 }
 
-@inject(
+function Type({ socketType, socketIsConnected, setSocketType }: IStoreProps) {
+    const handleTypeChange = (e: RadioChangeEvent) => {
+        const { value } = e.target
+        setSocketType(value)
+        localStorage.setItem(LOCALSTORAGE_KEYS.SOCKET_TYPE, value)
+    }
+    return (
+        <Radio.Group onChange={handleTypeChange} value={socketType} disabled={socketIsConnected}>
+            {SOCKER_TYPES.map(s => (
+                <Radio.Button value={s} key={s}>
+                    {s}
+                </Radio.Button>
+            ))}
+        </Radio.Group>
+    )
+}
+
+export default inject(
     (store: IStore): IStoreProps => {
         const { socketIsConnected, socketType, setSocketType } = store.socketStore
         return { socketIsConnected, socketType, setSocketType }
     }
-)
-@observer
-class Type extends React.Component<IStoreProps> {
-    handleTypeChange = (e: RadioChangeEvent) => {
-        const { value } = e.target
-        this.props.setSocketType(value)
-        localStorage.setItem(LOCALSTORAGE_KEYS.SOCKET_TYPE, value)
-    }
-
-    render() {
-        const { socketType, socketIsConnected } = this.props
-        return (
-            <Radio.Group onChange={this.handleTypeChange} value={socketType} disabled={socketIsConnected}>
-                {SOCKER_TYPES.map(s => (
-                    <Radio.Button value={s} key={s}>
-                        {s}
-                    </Radio.Button>
-                ))}
-            </Radio.Group>
-        )
-    }
-}
-
-export default Type
+)(observer(Type))
