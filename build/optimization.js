@@ -14,7 +14,7 @@ module.exports =
                   cacheGroups: {
                       default: false,
                       commons: {
-                          test: /[\\/]node_modules[\\/]/,
+                          test: /moment|lodash|mobx/,
                           name: 'split-vendor',
                           chunks: 'all'
                       }
