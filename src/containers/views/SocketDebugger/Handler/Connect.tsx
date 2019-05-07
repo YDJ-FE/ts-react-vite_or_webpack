@@ -74,7 +74,7 @@ class Connect extends React.Component<IStoreProps> {
         return (
             <div className={styles.container}>
                 <div className={styles.connect}>
-                    <Input value={this.url} onChange={this.handleChange} />
+                    <Input className={styles.socketUrlInput} value={this.url} onChange={this.handleChange} />
                     {isSocketIO && (
                         <Checkbox
                             disabled={socketIsConnected}
@@ -102,7 +102,9 @@ class Connect extends React.Component<IStoreProps> {
                         disconnect
                     </Button>
                 </div>
-                <blockquote className={styles.tips}>protocol//ip or domain:host (example {this.urlExample})</blockquote>
+                <blockquote className={styles.tips}>
+                    protocol//ip or domain:host (example: {this.urlExample})
+                </blockquote>
             </div>
         )
     }

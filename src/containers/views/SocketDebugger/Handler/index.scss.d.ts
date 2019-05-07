@@ -11,6 +11,7 @@ interface CssExports {
   'handler': string;
   'head': string;
   'reset': string;
+  'socketUrlInput': string;
   'textContent': string;
   'tips': string;
 }

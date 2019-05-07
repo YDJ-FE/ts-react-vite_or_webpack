@@ -6,7 +6,7 @@ import Browse from './Browse'
 
 function SocketDebugger() {
     return (
-        <div className={styles.home}>
+        <div className={styles.container}>
             <Handler />
             <Browse />
         </div>
