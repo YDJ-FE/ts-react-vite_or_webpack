@@ -31,12 +31,12 @@ export const menu: IMenu[] = [
         id: 1,
         path: '/',
         title: 'SocketDebugger',
-        icon: 'dashboard',
+        icon: 'coffee',
         component: 'SocketDebugger',
         exact: true
     },
     {
-        id: 3,
+        id: 2,
         path: '/users',
         title: 'Users',
         icon: 'user',
