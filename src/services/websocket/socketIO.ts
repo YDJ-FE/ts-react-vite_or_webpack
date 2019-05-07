@@ -129,7 +129,7 @@ class Socket {
         })
 
         this.socket.on('*', pkg => {
-            console.log('监听所有socket事件的回调: ', pkg)
+            console.log('on all socket callback: ', pkg)
             if (pkg && pkg.data instanceof Array && pkg.data.length > 1) {
                 const event = pkg.data[0]
                 const data = pkg.data[1]

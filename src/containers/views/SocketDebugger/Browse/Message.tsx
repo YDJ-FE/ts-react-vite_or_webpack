@@ -37,7 +37,7 @@ function Message({ message, style }: IProps) {
 
     return (
         <div className={styles.message} style={style}>
-            <div className={styles.messageHeader}>
+            <div className={styles.messageHeader} style={{ marginBottom: !!content ? 5 : 0 }}>
                 {message.event && <Tag color="#f50">{message.event}</Tag>}
                 <Tag color={color}>{fromText}</Tag>
                 <span>{time}</span>

@@ -20,7 +20,7 @@ class Browse extends React.Component<IStoreProps> {
 
     private measureCache = new CellMeasurerCache({
         fixedWidth: true,
-        minHeight: 48
+        minHeight: 43
     })
 
     private messagesDisposer = reaction(
@@ -86,7 +86,7 @@ class Browse extends React.Component<IStoreProps> {
                             width={width}
                             height={height}
                             ref={this.setVListRef}
-                            overscanRowCount={6}
+                            overscanRowCount={0}
                             rowCount={rowCount}
                             deferredMeasurementCache={this.measureCache}
                             rowHeight={this.measureCache.rowHeight}
