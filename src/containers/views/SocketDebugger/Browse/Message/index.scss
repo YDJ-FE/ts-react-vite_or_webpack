@@ -1,0 +1,20 @@
+@import '_base.scss';
+
+.message {
+    padding: 0 15px;
+    margin: 10px 0;
+}
+
+.messageHeader {
+    display: flex;
+    margin-bottom: 5px;
+    align-items: center;
+}
+
+.content {
+    word-break: break-all;
+    word-wrap: break-word;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px dotted #cac5c5;
+}

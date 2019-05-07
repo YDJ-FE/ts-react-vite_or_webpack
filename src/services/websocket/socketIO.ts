@@ -5,7 +5,7 @@ import socketioWildcard from 'socketio-wildcard'
 import { message } from 'antd'
 import { reaction } from 'mobx'
 
-import * as store from 'store'
+import { socketStore } from 'store'
 
 const patch = socketioWildcard(io.Manager)
 
@@ -30,7 +30,7 @@ class Socket {
 
     open(url: string) {
         const transports = ['websocket']
-        if (!store.globalStore.notSupportPolling) {
+        if (!socketStore.notSupportPolling) {
             transports.unshift('polling')
         }
         this.socket = io.connect(url, {
@@ -43,7 +43,7 @@ class Socket {
         patch(this.socket)
 
         reaction(
-            () => store.globalStore.socketType,
+            () => socketStore.socketType,
             (_, r) => {
                 this.socket.close()
                 r.dispose()
@@ -52,7 +52,7 @@ class Socket {
 
         this.socket.on('reconnect', attemptNumber => {
             const text = `socket reconnect after attempt ${attemptNumber} times !!!`
-            store.globalStore.addMessage({
+            socketStore.addMessage({
                 event: 'reconnect',
                 from: 'console',
                 data: text
@@ -61,9 +61,9 @@ class Socket {
 
         // 被断开, 不重连
         this.socket.on('disconnect', reason => {
-            store.globalStore.changeSocketIsConnected(false)
+            socketStore.setSocketIsConnected(false)
             const text = `socket disconnect because: ${reason} !!!`
-            store.globalStore.addMessage({
+            socketStore.addMessage({
                 event: 'disconnect',
                 from: 'console',
                 data: text
@@ -72,7 +72,7 @@ class Socket {
 
         this.socket.on('connect_timeout', timeout => {
             const text = `socket connect_timeout: ${timeout} !!!`
-            store.globalStore.addMessage({
+            socketStore.addMessage({
                 event: 'connect_timeout',
                 from: 'console',
                 data: text
@@ -82,7 +82,7 @@ class Socket {
         // 连接错误
         this.socket.on('connect_error', err => {
             const text = 'socket connect_error !!!'
-            store.globalStore.addMessage({
+            socketStore.addMessage({
                 event: 'connect_error',
                 from: 'console',
                 data: text
@@ -92,9 +92,9 @@ class Socket {
 
         // 错误捕获
         this.socket.on('error', err => {
-            store.globalStore.changeSocketIsConnected(false)
+            socketStore.setSocketIsConnected(false)
             const text = 'socket error !!!'
-            store.globalStore.addMessage({
+            socketStore.addMessage({
                 event: 'error',
                 from: 'console',
                 data: text
@@ -103,9 +103,9 @@ class Socket {
         })
 
         this.socket.on('connect', () => {
-            store.globalStore.changeSocketIsConnected(true)
+            socketStore.setSocketIsConnected(true)
             const text = 'socket connected !!!'
-            store.globalStore.addMessage({
+            socketStore.addMessage({
                 event: 'connect',
                 from: 'console',
                 data: text
@@ -113,7 +113,7 @@ class Socket {
         })
 
         this.socket.on('ping', () => {
-            store.globalStore.addMessage({
+            socketStore.addMessage({
                 event: 'ping',
                 from: 'browser',
                 data: null
@@ -121,7 +121,7 @@ class Socket {
         })
 
         this.socket.on('pong', () => {
-            store.globalStore.addMessage({
+            socketStore.addMessage({
                 event: 'pong',
                 from: 'server',
                 data: null
@@ -133,7 +133,7 @@ class Socket {
             if (pkg && pkg.data instanceof Array && pkg.data.length > 1) {
                 const event = pkg.data[0]
                 const data = pkg.data[1]
-                store.globalStore.addMessage({
+                socketStore.addMessage({
                     event,
                     from: 'server',
                     data
@@ -170,7 +170,7 @@ export function send(event: string, data: any) {
         return message.error('请先连接socket!!!')
     }
     socketInstance.send(event, data)
-    store.globalStore.addMessage({
+    socketStore.addMessage({
         event,
         from: 'browser',
         data

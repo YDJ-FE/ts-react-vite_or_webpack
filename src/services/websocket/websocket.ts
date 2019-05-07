@@ -4,7 +4,7 @@ import { EventEmitter } from 'eventemitter3'
 import { message } from 'antd'
 import { reaction } from 'mobx'
 
-import * as store from 'store'
+import { socketStore } from 'store'
 
 let reopenTimer: number = null
 // 是否主动断开
@@ -29,8 +29,8 @@ class Socket extends EventEmitter {
     run() {
         this.onopen = () => {
             const text = 'socket connected !!!'
-            store.globalStore.changeSocketIsConnected(true)
-            store.globalStore.addMessage({
+            socketStore.setSocketIsConnected(true)
+            socketStore.addMessage({
                 event: 'connect',
                 from: 'console',
                 data: text
@@ -41,7 +41,7 @@ class Socket extends EventEmitter {
             if (!msg || !msg.data) {
                 return
             }
-            store.globalStore.addMessage({
+            socketStore.addMessage({
                 event: 'message',
                 from: 'server',
                 data: typeof msg.data === 'object' ? JSON.stringify(msg.data) : msg.data
@@ -62,9 +62,9 @@ class Socket extends EventEmitter {
     open(url: string) {
         this.conn = new WebSocket(url)
         this.conn.onclose = evt => {
-            store.globalStore.changeSocketIsConnected(false)
+            socketStore.setSocketIsConnected(false)
             const text = `socket close: ${typeof evt === 'object' ? evt.code : ''}`
-            store.globalStore.addMessage({
+            socketStore.addMessage({
                 event: 'close',
                 from: 'console',
                 data: text
@@ -78,9 +78,9 @@ class Socket extends EventEmitter {
             disconnectInitiative = false
         }
         this.conn.onerror = evt => {
-            store.globalStore.changeSocketIsConnected(false)
+            socketStore.setSocketIsConnected(false)
             const text = `socket error: ${typeof evt === 'object' ? JSON.stringify(evt.code) : ''}`
-            store.globalStore.addMessage({
+            socketStore.addMessage({
                 event: 'error',
                 from: 'console',
                 data: text
@@ -88,7 +88,7 @@ class Socket extends EventEmitter {
         }
 
         reaction(
-            () => store.globalStore.socketType,
+            () => socketStore.socketType,
             (_, r) => {
                 clearTimeout(reopenTimer)
                 r.dispose()
@@ -133,7 +133,7 @@ export function send(_, data: any) {
         return message.error('请先连接socket!!!')
     }
     socketInstance.send(data)
-    store.globalStore.addMessage({
+    socketStore.addMessage({
         event: null,
         from: 'browser',
         data

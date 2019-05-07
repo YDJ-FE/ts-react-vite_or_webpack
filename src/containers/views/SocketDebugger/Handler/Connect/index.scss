@@ -1,0 +1,38 @@
+@import '_base.scss';
+
+.container {
+    margin: 20px 0 50px;
+}
+
+.connect {
+    display: flex;
+    align-items: center;
+}
+
+.btn {
+    margin-left: 15px;
+}
+
+.checkbox {
+    display: flex;
+    composes: btn;
+    align-items: center;
+
+    :global {
+        .ant-checkbox {
+            top: 0;
+
+            & + span {
+                white-space: nowrap;
+            }
+        }
+    }
+}
+
+.tips {
+    margin: 1em 0;
+    color: #697b8c;
+    font-size: 90%;
+    border-left: 4px solid #ebedf0;
+    padding-left: 0.8em;
+}

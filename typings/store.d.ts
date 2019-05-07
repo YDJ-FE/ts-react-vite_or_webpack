@@ -18,6 +18,7 @@ declare global {
         authStore: IAuthStore.AuthStore
         userStore: IUserStore.UserStore
         globalStore: IGlobalStore.GlobalStore
+        socketStore: ISocketStore.SocketStore
         routerStore: RouterStore
     }
 }
