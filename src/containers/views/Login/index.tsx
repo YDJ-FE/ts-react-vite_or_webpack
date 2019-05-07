@@ -75,13 +75,5 @@ function Login({ login, form }: IStoreProps & FormComponentProps) {
 }
 
 export default hot(module)(
-    Form.create<{}>()(
-        inject(
-            (store: IStore): IStoreProps => {
-                const { authStore } = store
-                const { login } = authStore
-                return { login }
-            }
-        )(observer(Login))
-    )
+    Form.create<{}>()(inject((store: IStore): IStoreProps => ({ login: store.authStore.login }))(observer(Login)))
 )
