@@ -53,6 +53,11 @@ We do not use any mock tools(Anyway, you can use the data format from server res
 -   use husky{pre-commit/commit-msg} hooks
 -   use [webpack dll](https://webpack.js.org/plugins/dll-plugin/) when you are running in production mode
 -   use [react-intl-universal](https://github.com/alibaba/react-intl-universal) for i18n.
+-   use [react-virtualized](https://github.com/bvaughn/react-virtualized) for fat list.
+
+## pages
+
+-   The Index page became a [Socket Debugger](https://starter.jackple.com/#/)
 
 ## About `mobx-react-lite`
 
@@ -62,6 +67,7 @@ We do not use any mock tools(Anyway, you can use the data format from server res
 ## TODO
 
 -   config menu by user with permission
+-   more functional pages like Socket Debugger
 
 ## component example
 
