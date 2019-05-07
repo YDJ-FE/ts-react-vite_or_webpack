@@ -34,8 +34,7 @@
         "antd": "^3.16.2",
         "axios": "^0.18.0",
         "bourbon": "^5.1.0",
-        "echarts": "^4.2.1",
-        "echarts-for-react": "^2.0.14",
+        "eventemitter3": "^3.1.2",
         "lodash": "^4.17.11",
         "mobx": "^5.9.4",
         "mobx-react": "^5.4.3",
@@ -47,7 +46,10 @@
         "react-hot-loader": "^4.8.3",
         "react-intl-universal": "^1.16.1",
         "react-loadable": "^5.5.0",
-        "react-router-dom": "^5.0.0"
+        "react-router-dom": "^5.0.0",
+        "react-virtualized": "^9.21.0",
+        "socket.io-client": "^2.2.0",
+        "socketio-wildcard": "^2.0.0"
     },
     "devDependencies": {
         "@babel/core": "^7.4.3",
@@ -72,6 +74,8 @@
         "@types/react-dom": "^16.8.3",
         "@types/react-loadable": "^5.5.1",
         "@types/react-router-dom": "^4.3.1",
+        "@types/react-virtualized": "^9.21.1",
+        "@types/socket.io-client": "^1.4.32",
         "@types/webpack-env": "^1.13.9",
         "add-asset-html-webpack-plugin": "^3.1.3",
         "autoprefixer": "^9.5.1",
