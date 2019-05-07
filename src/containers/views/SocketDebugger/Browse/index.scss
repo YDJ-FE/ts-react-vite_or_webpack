@@ -7,3 +7,22 @@
     border-radius: 5px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
 }
+
+.message {
+    padding: 0 15px;
+    margin: 10px 0;
+}
+
+.messageHeader {
+    display: flex;
+    margin-bottom: 5px;
+    align-items: center;
+}
+
+.content {
+    word-break: break-all;
+    word-wrap: break-word;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px dotted #cac5c5;
+}
