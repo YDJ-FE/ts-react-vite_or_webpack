@@ -16,7 +16,7 @@ const patch = socketioWildcard(io.Manager)
 class Socket {
     socket: SocketIOClient.Socket
 
-    send(event: string, data, retry = 0) {
+    send(event: string, data: any, retry = 0) {
         if (this.socket && this.socket.connected) {
             this.socket.emit(event, data)
         } else if (retry < 3) {
@@ -144,10 +144,7 @@ class Socket {
 const socketInstance = new Socket()
 
 function canSocketOpen() {
-    if (socketInstance.socket && socketInstance.socket.connected) {
-        return false
-    }
-    return true
+    return !(socketInstance.socket && socketInstance.socket.connected)
 }
 
 export function socketConnect(url: string) {

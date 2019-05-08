@@ -8,6 +8,10 @@ let reopenTimer: number = null
 // 是否主动断开
 let disconnectInitiative = false
 
+interface SocketMsg {
+    data: any
+}
+
 /**
  * socket 通信
  *
@@ -15,9 +19,9 @@ let disconnectInitiative = false
  * @class Socket
  */
 class Socket extends EventEmitter {
-    onopen
-    onmessage
-    conn
+    onopen: () => void
+    onmessage: (msg: SocketMsg) => void
+    conn: WebSocket = null
 
     constructor() {
         super()
@@ -35,7 +39,7 @@ class Socket extends EventEmitter {
             })
         }
 
-        this.onmessage = msg => {
+        this.onmessage = (msg: SocketMsg) => {
             if (!msg || !msg.data) {
                 return
             }
@@ -47,7 +51,7 @@ class Socket extends EventEmitter {
         }
     }
 
-    send(data, retry = 0) {
+    send(data: any, retry = 0) {
         if (this.conn && this.conn.readyState === this.conn.OPEN) {
             this.conn.send(typeof data === 'object' ? JSON.stringify(data) : data)
         } else if (retry < 3) {
@@ -77,7 +81,7 @@ class Socket extends EventEmitter {
         }
         this.conn.onerror = evt => {
             socketStore.setSocketIsConnected(false)
-            const text = `socket error: ${typeof evt === 'object' ? JSON.stringify(evt.code) : ''}`
+            const text = `socket error: ${typeof evt === 'object' ? JSON.stringify((evt as any).code) : ''}`
             socketStore.addMessage({
                 event: 'error',
                 from: 'console',
@@ -106,10 +110,7 @@ class Socket extends EventEmitter {
 const socketInstance = new Socket()
 
 function canSocketOpen() {
-    if (socketInstance.conn && socketInstance.conn.readyState === socketInstance.conn.OPEN) {
-        return false
-    }
-    return true
+    return !(socketInstance.conn && socketInstance.conn.readyState === socketInstance.conn.OPEN)
 }
 
 export function socketConnect(url: string) {
