@@ -1,5 +1,3 @@
-/* tslint:disable:no-console */
-
 import { EventEmitter } from 'eventemitter3'
 import { message } from 'antd'
 import { reaction } from 'mobx'
@@ -116,7 +114,7 @@ function canSocketOpen() {
 
 export function socketConnect(url: string) {
     if (!canSocketOpen()) {
-        return message.error('请先断开已存在的websocket连接!!!')
+        return message.error('Please disconnect the existing instance!!!')
     }
     socketInstance.open(url)
 }
@@ -130,7 +128,7 @@ export function socketDisconnect() {
 
 export function send(_, data: any) {
     if (!socketInstance.conn && socketInstance.conn.readyState !== socketInstance.conn.OPEN) {
-        return message.error('请先连接socket!!!')
+        return message.error('Please connect to server!!!')
     }
     socketInstance.send(data)
     socketStore.addMessage({

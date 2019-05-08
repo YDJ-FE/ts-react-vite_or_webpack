@@ -1,5 +1,3 @@
-/* tslint:disable:no-console */
-
 import io from 'socket.io-client'
 import socketioWildcard from 'socketio-wildcard'
 import { message } from 'antd'
@@ -154,7 +152,7 @@ function canSocketOpen() {
 
 export function socketConnect(url: string) {
     if (!canSocketOpen()) {
-        return message.error('请先断开已存在的socketIO连接!!!')
+        return message.error('Please disconnect the existing instance!!!')
     }
     socketInstance.open(url)
 }
@@ -167,7 +165,7 @@ export function socketDisconnect() {
 
 export function send(event: string, data: any) {
     if (!socketInstance.socket || !socketInstance.socket.connected) {
-        return message.error('请先连接socket!!!')
+        return message.error('Please connect to server!!!')
     }
     socketInstance.send(event, data)
     socketStore.addMessage({
