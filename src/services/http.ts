@@ -10,10 +10,10 @@ export interface AxiosRequestConfig extends _AxiosRequestConfig {
 }
 
 export interface HttpResquest {
-    get?(url, data, baseUrl?): Promise<any>
-    post?(url, data, baseUrl?): Promise<any>
-    delete?(url, data, baseUrl?): Promise<any>
-    put?(url, data, baseUrl?): Promise<any>
+    get?(url: string, data: object, baseUrl?: string): Promise<any>
+    post?(url: string, data: object, baseUrl?: string): Promise<any>
+    delete?(url: string, data: object, baseUrl?: string): Promise<any>
+    put?(url: string, data: object, baseUrl?: string): Promise<any>
 }
 
 enum HTTPERROR {
@@ -31,13 +31,13 @@ const DEFAULTCONFIG = {
 const http: HttpResquest = {}
 const methods = ['get', 'post', 'put', 'delete']
 
-let authTimer: number = null
+let authTimer: NodeJS.Timer = null
 
 const isSuccess = res => res.errCode === 0
 const resFormat = res => res.response || res.data || {}
 
 methods.forEach(v => {
-    http[v] = (url, data, baseUrl?) => {
+    http[v] = (url: string, data: object, baseUrl?: string) => {
         const axiosConfig: AxiosRequestConfig = {
             method: v,
             url,
@@ -48,9 +48,7 @@ methods.forEach(v => {
         // Add a request interceptor
         instance.interceptors.request.use(
             cfg => {
-                const ts = Date.now() / 1000
-                const queryData = { ts }
-                cfg.params = { ...cfg.params, ...queryData }
+                cfg.params = { ...cfg.params, ts: Date.now() / 1000 }
                 return cfg
             },
             error => Promise.reject(error)
@@ -58,41 +56,35 @@ methods.forEach(v => {
         // Add a response interceptor
         instance.interceptors.response.use(
             response => {
-                let rdata = null
-                if (typeof response.data === 'object' && !isNaN(response.data.length)) {
-                    rdata = response.data[0]
-                } else {
-                    rdata = response.data
-                }
+                const rdata =
+                    typeof response.data === 'object' && !isNaN(response.data.length) ? response.data[0] : response.data
                 if (!isSuccess(rdata)) {
-                    const _err = {
+                    return Promise.reject({
                         msg: rdata.msg,
                         errCode: rdata.errCode,
                         type: HTTPERROR[HTTPERROR.LOGICERROR],
                         config: response.config
-                    }
-                    return Promise.reject(_err)
+                    })
                 }
                 return resFormat(rdata)
             },
             error => {
                 if (TOKENERROR.includes(error.response.status)) {
                     message.destroy()
-                    message.error('用户认证失败! 请登录重试...')
-                    window.clearTimeout(authTimer)
-                    authTimer = window.setTimeout(() => {
+                    message.error('Authentication failure, Please relogin!')
+                    clearTimeout(authTimer)
+                    authTimer = setTimeout(() => {
                         location.replace('/#/login')
                     }, 300)
                     return
                 }
-                const _err = {
-                    msg: error.response.statusText || error.message || '网络故障',
+                return Promise.reject({
+                    msg: error.response.statusText || error.message || 'network error',
                     type: /^timeout of/.test(error.message)
                         ? HTTPERROR[HTTPERROR.TIMEOUTERROR]
                         : HTTPERROR[HTTPERROR.NETWORKERROR],
                     config: error.config
-                }
-                return Promise.reject(_err)
+                })
             }
         )
         if (v === 'get') {
@@ -108,17 +100,10 @@ methods.forEach(v => {
             .then(res => res)
             .catch(err => {
                 message.destroy()
-                message.error(err.response || err.msg || err.stack || '未知错误')
-                if (axiosConfig.url.includes('autoScript.set')) {
-                    return Promise.resolve({
-                        err
-                    })
-                } else {
-                    return Promise.reject({
-                        err,
-                        stack: err.msg || err.stack || ''
-                    })
-                }
+                message.error(err.response || err.msg || err.stack || 'unknown error')
+                return Promise.resolve(
+                    axiosConfig.url.includes('autoScript.set') ? { err } : { err, stack: err.msg || err.stack || '' }
+                )
             })
     }
 })
