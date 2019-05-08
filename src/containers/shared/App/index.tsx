@@ -6,7 +6,6 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 import * as styles from './index.scss'
 import PageLoading from '@components/PageLoading'
 import Error from '@components/Error'
-import PrivateRoute from '@shared/PrivateRoute'
 import IntlWrapper from './IntlWrapper'
 
 const Home = Loadable({
@@ -28,7 +27,7 @@ class AppRouter extends React.Component<{}> {
                     <Router>
                         <Switch>
                             <Route exact path="/login" component={Login} />
-                            <PrivateRoute path="/" component={Home} />
+                            <Route path="/" component={Home} />
                             <Route component={Error} />
                         </Switch>
                     </Router>
