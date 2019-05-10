@@ -1,8 +1,7 @@
 import * as React from 'react'
-import { observer, inject } from 'mobx-react'
-import { action, observable, computed } from 'mobx'
+import { inject } from 'mobx-react'
+import { observer, useComputed } from 'mobx-react-lite'
 import { message, Input, Button, Checkbox } from 'antd'
-import { CheckboxChangeEvent } from 'antd/lib/checkbox'
 
 import * as styles from './index.scss'
 import { socketConnect, socketDisconnect } from '@services/websocket'
@@ -16,7 +15,60 @@ interface IStoreProps {
     clearMessages?: () => void
 }
 
-@inject(
+function Connect({
+    setNotSupportPolling,
+    notSupportPolling,
+    isSocketIO,
+    socketIsConnected,
+    clearMessages
+}: IStoreProps) {
+    const [url, setUrl] = React.useState(localStorage.getItem(LOCALSTORAGE_KEYS.SOCKET_URL))
+    const urlExample = useComputed(() => (isSocketIO ? 'wss://showcase.jackple.com' : 'ws://127.0.0.1:3001'), [
+        isSocketIO
+    ])
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target
+        setUrl(value)
+        localStorage.setItem(LOCALSTORAGE_KEYS.SOCKET_URL, value)
+    }
+
+    const handleConnect = () => {
+        if (!url) {
+            message.destroy()
+            return message.error('Please input socket url!')
+        }
+        socketConnect(url)
+        clearMessages()
+    }
+
+    return (
+        <div className={styles.container}>
+            <div className={styles.connect}>
+                <Input className={styles.socketUrlInput} value={url} onChange={handleChange} />
+                {isSocketIO && (
+                    <Checkbox
+                        disabled={socketIsConnected}
+                        className={styles.checkbox}
+                        checked={notSupportPolling}
+                        onChange={e => setNotSupportPolling(e.target.checked)}
+                    >
+                        no polling
+                    </Checkbox>
+                )}
+                <Button className={styles.btn} type="primary" onClick={handleConnect} disabled={socketIsConnected}>
+                    connect
+                </Button>
+                <Button className={styles.btn} type="danger" onClick={socketDisconnect} disabled={!socketIsConnected}>
+                    disconnect
+                </Button>
+            </div>
+            <blockquote className={styles.tips}>protocol//ip or domain:host (example: {urlExample})</blockquote>
+        </div>
+    )
+}
+
+export default inject(
     (store: IStore): IStoreProps => {
         const {
             setNotSupportPolling,
@@ -33,81 +85,4 @@ interface IStoreProps {
             clearMessages
         }
     }
-)
-@observer
-class Connect extends React.Component<IStoreProps> {
-    @observable
-    private url: string = localStorage.getItem(LOCALSTORAGE_KEYS.SOCKET_URL)
-
-    @computed
-    get urlExample() {
-        return this.props.isSocketIO ? 'wss://showcase.jackple.com' : 'ws://127.0.0.1:3001'
-    }
-
-    @action
-    handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { value } = e.target
-        this.url = value
-        localStorage.setItem(LOCALSTORAGE_KEYS.SOCKET_URL, value)
-    }
-
-    handleConnect = () => {
-        if (!this.url) {
-            message.destroy()
-            return message.error('Please input socket url!')
-        }
-        socketConnect(this.url)
-        this.props.clearMessages()
-    }
-
-    handleDisconnect = () => {
-        socketDisconnect()
-    }
-
-    handleCheckBoxChange = (e: CheckboxChangeEvent) => {
-        const { setNotSupportPolling } = this.props
-        setNotSupportPolling(e.target.checked)
-    }
-
-    render() {
-        const { notSupportPolling, isSocketIO, socketIsConnected } = this.props
-        return (
-            <div className={styles.container}>
-                <div className={styles.connect}>
-                    <Input className={styles.socketUrlInput} value={this.url} onChange={this.handleChange} />
-                    {isSocketIO && (
-                        <Checkbox
-                            disabled={socketIsConnected}
-                            className={styles.checkbox}
-                            checked={notSupportPolling}
-                            onChange={this.handleCheckBoxChange}
-                        >
-                            no polling
-                        </Checkbox>
-                    )}
-                    <Button
-                        className={styles.btn}
-                        type="primary"
-                        onClick={this.handleConnect}
-                        disabled={socketIsConnected}
-                    >
-                        connect
-                    </Button>
-                    <Button
-                        className={styles.btn}
-                        type="danger"
-                        onClick={this.handleDisconnect}
-                        disabled={!socketIsConnected}
-                    >
-                        disconnect
-                    </Button>
-                </div>
-                <blockquote className={styles.tips}>
-                    protocol//ip or domain:host (example: {this.urlExample})
-                </blockquote>
-            </div>
-        )
-    }
-}
-
-export default Connect
+)(observer(Connect))
