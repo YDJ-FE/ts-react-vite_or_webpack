@@ -66,8 +66,9 @@ function Send({ isSocketIO, socketIsConnected, dataFormat }: IStoreProps) {
             return message.error('Please input event name!')
         }
         if (!socketIOEvents.includes(socketIOEvent)) {
-            setSocketIOEvents([socketIOEvent, ...socketIOEvents])
-            localStorage.setItem(LOCALSTORAGE_KEYS.SOCKET_IO_EVENTS, JSON.stringify(socketIOEvents))
+            const newSocketIOEvents = [socketIOEvent, ...socketIOEvents]
+            setSocketIOEvents(newSocketIOEvents)
+            localStorage.setItem(LOCALSTORAGE_KEYS.SOCKET_IO_EVENTS, JSON.stringify(newSocketIOEvents))
         }
         send(socketIOEvent, sendingContent)
     }
