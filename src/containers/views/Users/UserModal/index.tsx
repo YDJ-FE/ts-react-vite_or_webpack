@@ -26,22 +26,13 @@ interface IStoreProps {
     changePageIndex?: (pageIndex: number) => void
 }
 
-interface IProps extends IStoreProps {
+interface IProps extends IStoreProps, FormComponentProps {
     visible: boolean
     onCancel: () => void
     user?: IUserStore.IUser
 }
 
-function UserModal({
-    visible,
-    onCancel,
-    user,
-    form,
-    createUser,
-    modifyUser,
-    getUsers,
-    changePageIndex
-}: IProps & FormComponentProps) {
+function UserModal({ visible, onCancel, user, form, createUser, modifyUser, getUsers, changePageIndex }: IProps) {
     const [loading, setLoading] = React.useState(false)
 
     const typeIsAdd = useComputed(() => user === undefined, [user])

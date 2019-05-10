@@ -32,7 +32,7 @@ const baseLoaders = (workerParallelJobs, modules) => {
         cssLoader(modules),
         'postcss-loader'
     ]
-    if (module) {
+    if (modules) {
         loaders.splice(2, 0, 'css-modules-typescript-loader')
     }
     if (workerParallelJobs !== 0) {

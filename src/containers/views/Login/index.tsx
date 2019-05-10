@@ -13,8 +13,9 @@ const FormItem = Form.Item
 interface IStoreProps {
     login?: (data: IAuthStore.LoginParams) => Promise<any>
 }
+interface IProps extends IStoreProps, FormComponentProps {}
 
-function Login({ login, form }: IStoreProps & FormComponentProps) {
+function Login({ login, form }: IProps) {
     const [loading, setLoading] = React.useState(false)
 
     const submit = (e: React.FormEvent<any>): void => {
@@ -75,5 +76,5 @@ function Login({ login, form }: IStoreProps & FormComponentProps) {
 }
 
 export default hot(module)(
-    Form.create<{}>()(inject((store: IStore): IStoreProps => ({ login: store.authStore.login }))(observer(Login)))
+    Form.create<IProps>()(inject((store: IStore): IStoreProps => ({ login: store.authStore.login }))(observer(Login)))
 )
