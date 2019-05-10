@@ -1,9 +1,8 @@
 import * as React from 'react'
 import { inject } from 'mobx-react'
 import { observer, useComputed } from 'mobx-react-lite'
-import { observable, action, toJS, computed } from 'mobx'
 import { Button, AutoComplete, Popconfirm, Modal, Input, message } from 'antd'
-import ReactJson, { InteractionProps } from 'react-json-view'
+import ReactJson from 'react-json-view'
 
 import * as styles from './index.scss'
 import { LOCALSTORAGE_KEYS } from '@constants/index'
@@ -44,11 +43,11 @@ function Send({ isSocketIO, socketIsConnected, dataFormat }: IStoreProps) {
         return textContent
     }, [dataFormat, jsonContent, textContent])
 
-    const toggleModalVisible = () => {
+    function toggleModalVisible() {
         setModalVisible(visible => !visible)
     }
 
-    const handleOK = () => {
+    function handleOK() {
         try {
             setJsonContent(JSON.parse(content))
             toggleModalVisible()
@@ -59,7 +58,7 @@ function Send({ isSocketIO, socketIsConnected, dataFormat }: IStoreProps) {
         }
     }
 
-    const handleSubmit = () => {
+    function handleSubmit() {
         if (!isSocketIO) {
             return send(null, sendingContent)
         } else if (!socketIOEvent) {
@@ -78,7 +77,7 @@ function Send({ isSocketIO, socketIsConnected, dataFormat }: IStoreProps) {
             {isSocketIO && (
                 <AutoComplete
                     className={styles.autoComplete}
-                    dataSource={toJS(socketIOEvents)}
+                    dataSource={socketIOEvents}
                     placeholder="Input event name"
                     value={socketIOEvent}
                     onChange={e => setSocketIOEvent(e as string)}

@@ -13,7 +13,7 @@ interface IStoreProps {
 }
 
 function Type({ socketType, socketIsConnected, setSocketType }: IStoreProps) {
-    const handleTypeChange = (e: RadioChangeEvent) => {
+    function handleTypeChange(e: RadioChangeEvent) {
         const { value } = e.target
         setSocketType(value)
         localStorage.setItem(LOCALSTORAGE_KEYS.SOCKET_TYPE, value)

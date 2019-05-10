@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { observer, inject } from 'mobx-react'
+import { inject } from 'mobx-react'
+import { observer, useDisposable } from 'mobx-react-lite'
 import { reaction } from 'mobx'
 import { AutoSizer } from 'react-virtualized/dist/es/AutoSizer'
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized/dist/es/CellMeasurer'
@@ -12,32 +13,14 @@ interface IStoreProps {
     messages?: ISocketStore.Message[]
 }
 
-@inject((store: IStore): IStoreProps => ({ messages: store.socketStore.messages }))
-@observer
-class Browse extends React.Component<IStoreProps> {
-    // list ref
-    private vList: VList = null
-
-    private measureCache = new CellMeasurerCache({
+function Browse({ messages }: IStoreProps) {
+    const vList = React.useRef<VList>(null)
+    const measureCache = new CellMeasurerCache({
         fixedWidth: true,
         minHeight: 43
     })
 
-    private messagesDisposer = reaction(
-        () => this.props.messages.length,
-        messagesLength => {
-            if (messagesLength === 0) {
-                return this.measureCache.clearAll()
-            }
-            this.scrollToRow()
-        }
-    )
-
-    setVListRef = (ref: VList): void => {
-        this.vList = ref
-    }
-
-    sleep = async (ms = 10): Promise<any> => {
+    async function sleep(ms = 10): Promise<any> {
         return new Promise(resolve => {
             setTimeout(() => {
                 resolve()
@@ -45,58 +28,61 @@ class Browse extends React.Component<IStoreProps> {
         })
     }
 
-    scrollToRow = async (rowIndex?: number): Promise<any> => {
+    async function scrollToRow(rowIndex?: number): Promise<any> {
         if (rowIndex === undefined) {
-            const { messages } = this.props
             rowIndex = messages.length - 1
         }
         const arr = new Array(3).fill(0)
         for (let i = 0; i < arr.length; i++) {
             if (i !== 0) {
-                await this.sleep()
+                await sleep()
             }
-            if (!this.vList) {
+            if (!vList) {
                 break
             }
-            this.vList.scrollToRow(rowIndex)
+            vList.current.scrollToRow(rowIndex)
         }
     }
 
-    componentWillUnmount() {
-        this.messagesDisposer()
-    }
+    useDisposable(() =>
+        reaction(
+            () => messages.length,
+            messagesLength => {
+                if (messagesLength === 0) {
+                    return measureCache.clearAll()
+                }
+                scrollToRow()
+            }
+        )
+    )
 
-    render() {
-        const { messages } = this.props
-        const renderItem = ({ index, key, parent, style }) => {
-            const messagesC = messages.slice()
-            const item = messagesC[index]
-            return (
-                <CellMeasurer cache={this.measureCache} columnIndex={0} key={key} parent={parent} rowIndex={index}>
-                    <Message style={style} message={item} />
-                </CellMeasurer>
-            )
-        }
-        const rowCount = messages.length
+    function renderItem({ index, key, parent, style }) {
+        const item = messages.slice()[index]
         return (
-            <div className={styles.browse}>
-                <AutoSizer>
-                    {({ width, height }) => (
-                        <VList
-                            width={width}
-                            height={height}
-                            ref={this.setVListRef}
-                            overscanRowCount={0}
-                            rowCount={rowCount}
-                            deferredMeasurementCache={this.measureCache}
-                            rowHeight={this.measureCache.rowHeight}
-                            rowRenderer={renderItem}
-                        />
-                    )}
-                </AutoSizer>
-            </div>
+            <CellMeasurer cache={measureCache} columnIndex={0} key={key} parent={parent} rowIndex={index}>
+                <Message style={style} message={item} />
+            </CellMeasurer>
         )
     }
+    const rowCount = messages.length
+    return (
+        <div className={styles.browse}>
+            <AutoSizer>
+                {({ width, height }) => (
+                    <VList
+                        width={width}
+                        height={height}
+                        ref={vList}
+                        overscanRowCount={0}
+                        rowCount={rowCount}
+                        deferredMeasurementCache={measureCache}
+                        rowHeight={measureCache.rowHeight}
+                        rowRenderer={renderItem}
+                    />
+                )}
+            </AutoSizer>
+        </div>
+    )
 }
 
-export default Browse
+export default inject((store: IStore): IStoreProps => ({ messages: store.socketStore.messages }))(observer(Browse))

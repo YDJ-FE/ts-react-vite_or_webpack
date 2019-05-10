@@ -27,13 +27,13 @@ function Connect({
         isSocketIO
     ])
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         const { value } = e.target
         setUrl(value)
         localStorage.setItem(LOCALSTORAGE_KEYS.SOCKET_URL, value)
     }
 
-    const handleConnect = () => {
+    function handleConnect() {
         if (!url) {
             message.destroy()
             return message.error('Please input socket url!')

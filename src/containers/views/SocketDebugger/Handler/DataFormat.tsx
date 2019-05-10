@@ -11,7 +11,7 @@ interface IStoreProps {
 }
 
 function DataFormat({ dataFormat, setDataFormat }: IStoreProps) {
-    const handleChange = (val: string) => {
+    function handleChange(val: string) {
         setDataFormat(val)
         localStorage.setItem(LOCALSTORAGE_KEYS.DATA_FORMAT, val)
     }
