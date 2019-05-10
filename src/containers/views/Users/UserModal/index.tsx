@@ -1,10 +1,8 @@
 import * as React from 'react'
-import { inject, observer } from 'mobx-react'
-import { observable, action, computed } from 'mobx'
+import { inject } from 'mobx-react'
+import { observer, useComputed } from 'mobx-react-lite'
 import { Modal, Form, Input, Select } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
-
-import { ComponentExt } from '@utils/reactExt'
 
 const FormItem = Form.Item
 
@@ -34,43 +32,35 @@ interface IProps extends IStoreProps {
     user?: IUserStore.IUser
 }
 
-@inject(
-    (store: IStore): IStoreProps => {
-        const { createUser, modifyUser, getUsers, changePageIndex } = store.userStore
-        return { createUser, modifyUser, getUsers, changePageIndex }
-    }
-)
-@observer
-class UserModal extends ComponentExt<IProps & FormComponentProps> {
-    @observable
-    private loading: boolean = false
+function UserModal({
+    visible,
+    onCancel,
+    user,
+    form,
+    createUser,
+    modifyUser,
+    getUsers,
+    changePageIndex
+}: IProps & FormComponentProps) {
+    const [loading, setLoading] = React.useState(false)
 
-    @computed
-    get typeIsAdd() {
-        return this.props.user === undefined
-    }
+    const typeIsAdd = useComputed(() => user === undefined, [user])
+    const title = useComputed(() => (typeIsAdd ? 'Add User' : 'Modify User'), [typeIsAdd])
 
-    @computed
-    get title() {
-        return this.typeIsAdd ? 'Add User' : 'Modify User'
+    function toggleLoading() {
+        setLoading(l => !l)
     }
 
-    @action
-    toggleLoading = () => {
-        this.loading = !this.loading
-    }
-
-    submit = (e?: React.FormEvent<any>): void => {
+    function submit(e?: React.FormEvent<any>) {
         if (e) {
             e.preventDefault()
         }
-        const { user, createUser, modifyUser, getUsers, changePageIndex, onCancel, form } = this.props
         form.validateFields(
             async (err, values): Promise<any> => {
                 if (!err) {
-                    this.toggleLoading()
+                    toggleLoading()
                     try {
-                        if (this.typeIsAdd) {
+                        if (typeIsAdd) {
                             await createUser(values)
                             changePageIndex(1)
                         } else {
@@ -79,63 +69,53 @@ class UserModal extends ComponentExt<IProps & FormComponentProps> {
                         getUsers()
                         onCancel()
                     } catch (err) {}
-                    this.toggleLoading()
+                    toggleLoading()
                 }
             }
         )
     }
 
-    render() {
-        const { visible, onCancel, user, form } = this.props
-        const { getFieldDecorator } = form
-        const initialAccount = user ? user.account : ''
-        const initialCategory = user ? user.category : userCategory[0]
-        return (
-            <Modal title={this.title} visible={visible} onOk={this.submit} onCancel={onCancel}>
-                <Form onSubmit={this.submit}>
-                    <FormItem {...formItemLayout} label="account">
-                        {getFieldDecorator('account', {
-                            initialValue: initialAccount,
-                            rules: [
-                                {
-                                    required: true
-                                }
-                            ]
+    const { getFieldDecorator } = form
+    return (
+        <Modal title={title} visible={visible} onOk={submit} onCancel={onCancel} okButtonProps={{ loading }}>
+            <Form onSubmit={submit}>
+                <FormItem {...formItemLayout} label="account">
+                    {getFieldDecorator('account', {
+                        initialValue: user ? user.account : '',
+                        rules: [{ required: true }]
+                    })(<Input />)}
+                </FormItem>
+                {typeIsAdd && (
+                    <FormItem {...formItemLayout} label="password">
+                        {getFieldDecorator('password', {
+                            rules: [{ required: true }]
                         })(<Input />)}
                     </FormItem>
-                    {this.typeIsAdd && (
-                        <FormItem {...formItemLayout} label="password">
-                            {getFieldDecorator('password', {
-                                rules: [
-                                    {
-                                        required: true
-                                    }
-                                ]
-                            })(<Input />)}
-                        </FormItem>
+                )}
+                <FormItem {...formItemLayout} label="category">
+                    {getFieldDecorator('category', {
+                        initialValue: user ? user.category : userCategory[0],
+                        rules: [{ required: true }]
+                    })(
+                        <Select>
+                            {userCategory.map(c => (
+                                <Select.Option key={c} value={c}>
+                                    {c}
+                                </Select.Option>
+                            ))}
+                        </Select>
                     )}
-                    <FormItem {...formItemLayout} label="category">
-                        {getFieldDecorator('category', {
-                            initialValue: initialCategory,
-                            rules: [
-                                {
-                                    required: true
-                                }
-                            ]
-                        })(
-                            <Select>
-                                {userCategory.map(c => (
-                                    <Select.Option key={c} value={c}>
-                                        {c}
-                                    </Select.Option>
-                                ))}
-                            </Select>
-                        )}
-                    </FormItem>
-                </Form>
-            </Modal>
-        )
-    }
+                </FormItem>
+            </Form>
+        </Modal>
+    )
 }
 
-export default Form.create<IProps>()(UserModal)
+export default Form.create<IProps>()(
+    inject(
+        (store: IStore): IStoreProps => {
+            const { createUser, modifyUser, getUsers, changePageIndex } = store.userStore
+            return { createUser, modifyUser, getUsers, changePageIndex }
+        }
+    )(observer(UserModal))
+)
