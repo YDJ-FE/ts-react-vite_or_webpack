@@ -1,31 +1,25 @@
 import * as React from 'react'
-import { observer } from 'mobx-react'
-import { observable, action } from 'mobx'
+import { observer } from 'mobx-react-lite'
 import { Button } from 'antd'
 
 import * as styles from './index.scss'
 import UserModal from './../UserModal'
 
-@observer
-class Header extends React.Component {
-    @observable
-    private userModalVisible: boolean = false
+function Header() {
+    const [modalVisible, setModalVisible] = React.useState(false)
 
-    @action
-    toggleUserModalVisible = () => {
-        this.userModalVisible = !this.userModalVisible
+    function toggleModalVisible() {
+        setModalVisible(visible => !visible)
     }
 
-    render() {
-        return (
-            <div className={styles.header}>
-                <Button type="primary" onClick={this.toggleUserModalVisible}>
-                    add user
-                </Button>
-                <UserModal visible={this.userModalVisible} onCancel={this.toggleUserModalVisible} />
-            </div>
-        )
-    }
+    return (
+        <div className={styles.header}>
+            <Button type="primary" onClick={toggleModalVisible}>
+                add user
+            </Button>
+            <UserModal visible={modalVisible} onCancel={toggleModalVisible} />
+        </div>
+    )
 }
 
-export default Header
+export default observer(Header)
