@@ -17,7 +17,7 @@ const Login = Loadable({
     loading: PageLoading
 })
 
-const AppWrapper = props => <div className={styles.appWrapper}>{props.children}</div>
+const AppWrapper = ({ children }: { children?: React.ReactNode }) => <div className={styles.appWrapper}>{children}</div>
 
 function AppRouter() {
     return (
