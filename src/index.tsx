@@ -19,7 +19,7 @@ configure({ enforceActions: 'observed' })
 const hashHistory = createHashHistory()
 const history = syncHistoryWithStore(hashHistory, store.routerStore)
 
-const render = Component => {
+const render = (Component: React.ComponentType) => {
     const element = (
         <Provider {...store}>
             <Router history={history}>

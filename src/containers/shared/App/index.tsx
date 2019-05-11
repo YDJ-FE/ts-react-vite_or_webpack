@@ -19,22 +19,20 @@ const Login = Loadable({
 
 const AppWrapper = props => <div className={styles.appWrapper}>{props.children}</div>
 
-class AppRouter extends React.Component<{}> {
-    render() {
-        return (
-            <IntlWrapper>
-                <AppWrapper>
-                    <Router>
-                        <Switch>
-                            <Route exact path="/login" component={Login} />
-                            <Route path="/" component={Home} />
-                            <Route component={Error} />
-                        </Switch>
-                    </Router>
-                </AppWrapper>
-            </IntlWrapper>
-        )
-    }
+function AppRouter() {
+    return (
+        <IntlWrapper>
+            <AppWrapper>
+                <Router>
+                    <Switch>
+                        <Route exact path="/login" component={Login} />
+                        <Route path="/" component={Home} />
+                        <Route component={Error} />
+                    </Switch>
+                </Router>
+            </AppWrapper>
+        </IntlWrapper>
+    )
 }
 
 export default hot(module)(AppRouter)
