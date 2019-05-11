@@ -4,7 +4,7 @@ import { PaginationConfig } from 'antd/lib/pagination'
 import { inject } from 'mobx-react'
 import { observer } from 'mobx-react-lite'
 
-import UserModal from './../UserModal'
+import UserModal from './UserModal'
 
 interface IStoreProps {
     getUsersloading?: boolean

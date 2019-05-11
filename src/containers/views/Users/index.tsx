@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import * as styles from './index.scss'
 import Header from './Header'
-import UserTable from './Table'
+import UserTable from './UserTable'
 import AutoSizer from '@components/AutoSizer'
 
 export default function Users() {

@@ -56,8 +56,8 @@ function UserModal({ visible, onCancel, user, form, createUser, modifyUser, getU
                             changePageIndex(1)
                         } else {
                             await modifyUser({ ...values, _id: user._id })
+                            getUsers()
                         }
-                        getUsers()
                         onCancel()
                     } catch (err) {}
                     toggleLoading()
