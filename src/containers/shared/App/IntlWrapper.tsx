@@ -2,64 +2,62 @@ import * as React from 'react'
 import intl from 'react-intl-universal'
 import { find } from 'lodash'
 import { Select, LocaleProvider } from 'antd'
+import { Locale } from 'antd/lib/locale-provider'
 
 import * as styles from './index.scss'
+import { useOnMount } from '@utils/reactExt'
 import { setCookie } from '@utils/index'
 import { COOKIE_KEYS } from '@constants/index'
 import PageLoading from '@components/PageLoading'
 import { SUPPOER_LOCALES, LOCALES_KEYS, getLocaleLoader } from '@locales/loader'
 
-interface IS {
-    currentLocale: string
-    antdLocaleData: PlainObject
+interface IProps {
+    children?: React.ReactNode
 }
 
-export default class IntlWrapper extends React.Component<{}, IS> {
-    state = { currentLocale: '', antdLocaleData: null }
+export default function IntlWrapper({ children }: IProps) {
+    const [currentLocale, setCurrentLocale] = React.useState('')
+    const [antdLocaleData, setAntdLocaleData] = React.useState<Locale>(null)
 
-    loadLocales() {
-        let currentLocale = intl.determineLocale({ cookieLocaleKey: COOKIE_KEYS.LANG })
+    function loadLocales() {
+        let targetLocale = intl.determineLocale({ cookieLocaleKey: COOKIE_KEYS.LANG })
         // default is English
-        if (!find(SUPPOER_LOCALES, { value: currentLocale })) {
-            currentLocale = LOCALES_KEYS.EN_US
+        if (!find(SUPPOER_LOCALES, { value: targetLocale })) {
+            targetLocale = LOCALES_KEYS.EN_US
         }
-        getLocaleLoader(currentLocale).then(({ localeData, antdLocaleData }) => {
-            intl.init({ currentLocale, locales: { [currentLocale]: localeData } }).then(() => {
-                this.setState({ antdLocaleData, currentLocale })
+        getLocaleLoader(targetLocale).then(res => {
+            intl.init({ currentLocale: targetLocale, locales: { [targetLocale]: res.localeData } }).then(() => {
+                setCurrentLocale(targetLocale)
+                setAntdLocaleData(res.antdLocaleData)
             })
         })
     }
 
-    onSelectLocale = (val: string) => {
+    function onSelectLocale(val: string) {
         setCookie(COOKIE_KEYS.LANG, val)
         location.reload()
     }
 
-    componentDidMount() {
-        this.loadLocales()
-    }
+    useOnMount(loadLocales)
 
-    render() {
-        const { currentLocale, antdLocaleData } = this.state
-        if (!currentLocale) {
-            return <PageLoading />
-        }
-        const selectLanguage = (
-            <Select className={styles.intlSelect} onChange={this.onSelectLocale} value={currentLocale}>
-                {SUPPOER_LOCALES.map(l => (
-                    <Select.Option key={l.value} value={l.value}>
-                        {l.name}
-                    </Select.Option>
-                ))}
-            </Select>
-        )
-        return (
-            <LocaleProvider locale={antdLocaleData}>
-                <React.Fragment>
-                    {selectLanguage}
-                    {this.props.children}
-                </React.Fragment>
-            </LocaleProvider>
-        )
+    if (!currentLocale) {
+        return <PageLoading />
     }
+    const selectLanguage = (
+        <Select className={styles.intlSelect} onChange={onSelectLocale} value={currentLocale}>
+            {SUPPOER_LOCALES.map(l => (
+                <Select.Option key={l.value} value={l.value}>
+                    {l.name}
+                </Select.Option>
+            ))}
+        </Select>
+    )
+    return (
+        <LocaleProvider locale={antdLocaleData}>
+            <React.Fragment>
+                {selectLanguage}
+                {children}
+            </React.Fragment>
+        </LocaleProvider>
+    )
 }

@@ -4,6 +4,7 @@ import { PaginationConfig } from 'antd/lib/pagination'
 import { inject } from 'mobx-react'
 import { observer } from 'mobx-react-lite'
 
+import { useOnMount } from '@utils/reactExt'
 import UserModal from './UserModal'
 
 interface IStoreProps {
@@ -32,15 +33,6 @@ function UserTable({
     pageSize,
     total
 }: IProps) {
-    const useOnMount = (onMount: () => void) =>
-        React.useEffect(() => {
-            if (onMount) {
-                onMount()
-            }
-        }, [])
-
-    useOnMount(getUsers)
-
     const [modalVisible, setModalVisible] = React.useState(false)
     const [currentUser, setCurrentUser] = React.useState<IUserStore.IUser>(null)
 
@@ -48,6 +40,8 @@ function UserTable({
         setCurrentUser(user)
         setModalVisible(true)
     }
+
+    useOnMount(getUsers)
 
     return (
         <React.Fragment>
