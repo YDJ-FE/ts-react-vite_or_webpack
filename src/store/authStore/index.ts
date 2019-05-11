@@ -1,9 +1,10 @@
-import { observable, action, runInAction } from 'mobx'
+import { observable, action, reaction } from 'mobx'
+import { isPlainObject } from 'lodash'
 
 import { StoreExt } from '@utils/reactExt'
 import { routerStore } from './../'
-import { setCookie, clearCookie } from '@utils/index'
-import { COOKIE_KEYS, LOCALSTORAGE_KEYS } from '@constants/index'
+import { initialUserInfo, syncUserInfo } from './syncUserInfo'
+import { LOCALSTORAGE_KEYS } from '@constants/index'
 
 export class AuthStore extends StoreExt {
     /**
@@ -13,16 +14,18 @@ export class AuthStore extends StoreExt {
      * @memberof AuthStore
      */
     @observable
-    userInfo: IAuthStore.UserInfo = null
+    userInfo: IAuthStore.UserInfo = initialUserInfo
+
+    constructor() {
+        super()
+        reaction(() => this.userInfo, userInfo => syncUserInfo(userInfo))
+    }
 
     @action
     login = async (params: IAuthStore.LoginParams): Promise<any> => {
         try {
             const res = await this.api.auth.login(params)
-            runInAction('SET_USERINFO', () => {
-                this.userInfo = res
-            })
-            setCookie(COOKIE_KEYS.TOKEN, res.token)
+            this.setUserInfo(isPlainObject(res) ? res : {})
             localStorage.setItem(LOCALSTORAGE_KEYS.USERINFO, JSON.stringify(res))
             routerStore.replace('/')
         } catch (err) {
@@ -32,7 +35,6 @@ export class AuthStore extends StoreExt {
 
     @action
     logout = () => {
-        clearCookie(COOKIE_KEYS.TOKEN)
         localStorage.removeItem(LOCALSTORAGE_KEYS.USERINFO)
         routerStore.replace('/login')
     }
@@ -43,12 +45,7 @@ export class AuthStore extends StoreExt {
      * @memberof AuthStore
      */
     @action
-    initUserInfo = (): IAuthStore.UserInfo => {
-        const lcoalUserInfo = localStorage.getItem(LOCALSTORAGE_KEYS.USERINFO)
-        if (!lcoalUserInfo) {
-            throw new Error('no local userinfo!!')
-        }
-        const userInfo: IAuthStore.UserInfo = JSON.parse(lcoalUserInfo)
+    setUserInfo = (userInfo: IAuthStore.UserInfo): IAuthStore.UserInfo => {
         this.userInfo = userInfo
         return userInfo
     }

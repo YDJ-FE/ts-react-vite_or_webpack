@@ -1,4 +1,4 @@
-import { socketStore } from 'store'
+import { socketStore } from '@store/index'
 import {
     socketConnect as socketConnectFromSocketIO,
     socketDisconnect as socketDisconnectFromSocketIO,

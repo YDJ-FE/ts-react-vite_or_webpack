@@ -2,7 +2,7 @@ import { EventEmitter } from 'eventemitter3'
 import { message } from 'antd'
 import { reaction } from 'mobx'
 
-import { socketStore } from 'store'
+import { socketStore } from '@store/index'
 
 let reopenTimer: number = null
 // 是否主动断开

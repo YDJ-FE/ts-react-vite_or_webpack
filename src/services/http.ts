@@ -2,8 +2,7 @@ import axios, { AxiosRequestConfig as _AxiosRequestConfig } from 'axios'
 import * as qs from 'qs'
 import { message } from 'antd'
 
-import { getCookie } from '@utils/index'
-import { COOKIE_KEYS } from '@constants/index'
+import userInfo from '@store/authStore/syncUserInfo'
 
 export interface AxiosRequestConfig extends _AxiosRequestConfig {
     startTime?: Date
@@ -42,7 +41,7 @@ methods.forEach(v => {
             method: v,
             url,
             baseURL: baseUrl || DEFAULTCONFIG.baseURL,
-            headers: { Authorization: `Bearer ${getCookie(COOKIE_KEYS.TOKEN)}` }
+            headers: { Authorization: `Bearer ${userInfo.token}` }
         }
         const instance = axios.create(DEFAULTCONFIG)
         // Add a request interceptor

@@ -11,6 +11,7 @@
         "paths": {
             "@constants/*": ["constants/*"],
             "@services/*": ["services/*"],
+            "@store/*": ["store/*"],
             "@utils/*": ["utils/*"],
             "@assets/*": ["assets/*"],
             "@locales/*": ["locales/*"],
