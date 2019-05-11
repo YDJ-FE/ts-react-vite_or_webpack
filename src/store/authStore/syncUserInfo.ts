@@ -15,7 +15,6 @@ let userInfo: IAuthStore.UserInfo = initialUserInfo
  * @param {IAuthStore.UserInfo} data
  */
 export function syncUserInfo(data: IAuthStore.UserInfo) {
-    console.log(data)
     userInfo = data
 }
 
