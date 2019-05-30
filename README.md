@@ -6,6 +6,8 @@ Have a quick view:
 
 ## setup
 
+> 国内用户在.npmrc 中设置源`https://registry.npm.taobao.org/`
+
 ```bash
 $ npm i
 ```
