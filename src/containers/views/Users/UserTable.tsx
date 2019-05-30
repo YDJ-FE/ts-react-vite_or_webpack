@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { Table, Divider, Popconfirm } from 'antd'
 import { PaginationConfig } from 'antd/lib/pagination'
-import { inject } from 'mobx-react'
-import { observer } from 'mobx-react-lite'
+import { inject, observer } from 'mobx-react'
 
 import { useOnMount } from '@utils/reactExt'
 import UserModal from './UserModal'

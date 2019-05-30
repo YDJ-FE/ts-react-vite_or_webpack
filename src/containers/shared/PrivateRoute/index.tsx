@@ -1,6 +1,5 @@
 import * as React from 'react'
-import { inject } from 'mobx-react'
-import { observer } from 'mobx-react-lite'
+import { inject, observer } from 'mobx-react'
 import { Route, RouteProps } from 'react-router-dom'
 
 import { useOnMount } from '@utils/reactExt'

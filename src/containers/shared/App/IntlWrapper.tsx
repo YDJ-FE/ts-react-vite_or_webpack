@@ -20,7 +20,7 @@ export default function IntlWrapper({ children }: IProps) {
     const [antdLocaleData, setAntdLocaleData] = React.useState<Locale>(null)
 
     function loadLocales() {
-        let targetLocale = intl.determineLocale({ cookieLocaleKey: COOKIE_KEYS.LANG })
+        let targetLocale = intl.determineLocale({ cookieLocaleKey: COOKIE_KEYS.LANG }) as LOCALES_KEYS
         // default is English
         if (!find(SUPPOER_LOCALES, { value: targetLocale })) {
             targetLocale = LOCALES_KEYS.EN_US

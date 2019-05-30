@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { inject } from 'mobx-react'
-import { observer, useComputed } from 'mobx-react-lite'
+import { inject, observer } from 'mobx-react'
+import { useComputed } from 'mobx-react-lite'
 import { message, Input, Button, Checkbox } from 'antd'
 
 import * as styles from './index.scss'

@@ -100,7 +100,7 @@ methods.forEach(v => {
             .catch(err => {
                 message.destroy()
                 message.error(err.response || err.msg || err.stack || 'unknown error')
-                return Promise.resolve(
+                return Promise.reject(
                     axiosConfig.url.includes('autoScript.set') ? { err } : { err, stack: err.msg || err.stack || '' }
                 )
             })

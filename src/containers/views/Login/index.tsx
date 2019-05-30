@@ -1,6 +1,5 @@
 import * as React from 'react'
-import { inject } from 'mobx-react'
-import { observer } from 'mobx-react-lite'
+import { inject, observer } from 'mobx-react'
 import { Form, Icon, Input, Button } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
 import { hot } from 'react-hot-loader'
@@ -26,8 +25,9 @@ function Login({ login, form }: IProps) {
                     setLoading(true)
                     try {
                         await login(values)
-                    } catch (err) {}
-                    setLoading(false)
+                    } finally {
+                        setLoading(false)
+                    }
                 }
             }
         )
