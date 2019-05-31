@@ -20,34 +20,13 @@ function Browse({ messages }: IStoreProps) {
         minHeight: 43
     })
 
-    async function sleep(ms = 10): Promise<any> {
-        return new Promise(resolve => {
-            setTimeout(() => {
-                resolve()
-            }, ms)
-        })
-    }
-
     function handleMessagesChanged(len: number) {
         if (len === 0) {
             return measureCache.clearAll()
         }
-        async function scrollToRow(rowIndex?: number) {
-            if (rowIndex === undefined) {
-                rowIndex = len - 1
-            }
-            const arr = new Array(3).fill(0)
-            for (let i = 0; i < arr.length; i++) {
-                if (i !== 0) {
-                    await sleep()
-                }
-                if (!vList.current) {
-                    break
-                }
-                vList.current.scrollToRow(rowIndex)
-            }
+        if (vList.current) {
+            vList.current.scrollToRow(len - 1)
         }
-        scrollToRow()
     }
 
     function listenMessagesLen() {
