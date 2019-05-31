@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { inject, observer } from 'mobx-react'
-import { useComputed } from 'mobx-react-lite'
 import { Button, AutoComplete, Popconfirm, Modal, Input, message } from 'antd'
 import ReactJson from 'react-json-view'
 
@@ -29,14 +28,14 @@ function Send({ isSocketIO, socketIsConnected, dataFormat }: IStoreProps) {
     const [socketIOEvents, setSocketIOEvents] = React.useState(initialSocketIOEvents)
     const [modalVisible, setModalVisible] = React.useState(false)
 
-    const canSend = useComputed(() => {
+    const canSend = React.useMemo(() => {
         if (isSocketIO && !socketIOEvent) {
             return false
         }
         return socketIsConnected
     }, [isSocketIO, socketIOEvent, socketIsConnected])
 
-    const sendingContent = useComputed(() => {
+    const sendingContent = React.useMemo(() => {
         if (dataFormat === DATA_FORMATS[0]) {
             return jsonContent
         }

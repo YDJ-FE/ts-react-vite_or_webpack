@@ -1,12 +1,12 @@
 import * as React from 'react'
-import { inject, observer } from 'mobx-react'
-import { useDisposable } from 'mobx-react-lite'
 import { reaction } from 'mobx'
+import { inject, observer } from 'mobx-react'
 import { AutoSizer } from 'react-virtualized/dist/es/AutoSizer'
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized/dist/es/CellMeasurer'
 import { List as VList } from 'react-virtualized/dist/es/List'
 
 import * as styles from './index.scss'
+import { useOnMount } from '@utils/reactExt'
 import Message from './Message'
 
 interface IStoreProps {
@@ -28,36 +28,36 @@ function Browse({ messages }: IStoreProps) {
         })
     }
 
-    async function scrollToRow(rowIndex?: number): Promise<any> {
-        if (rowIndex === undefined) {
-            rowIndex = messages.length - 1
+    function handleMessagesChanged(len: number) {
+        if (len === 0) {
+            return measureCache.clearAll()
         }
-        const arr = new Array(3).fill(0)
-        for (let i = 0; i < arr.length; i++) {
-            if (i !== 0) {
-                await sleep()
+        async function scrollToRow(rowIndex?: number) {
+            if (rowIndex === undefined) {
+                rowIndex = len - 1
             }
-            if (!vList) {
-                break
+            const arr = new Array(3).fill(0)
+            for (let i = 0; i < arr.length; i++) {
+                if (i !== 0) {
+                    await sleep()
+                }
+                if (!vList.current) {
+                    break
+                }
+                vList.current.scrollToRow(rowIndex)
             }
-            vList.current.scrollToRow(rowIndex)
         }
+        scrollToRow()
     }
 
-    useDisposable(() =>
-        reaction(
-            () => messages.length,
-            messagesLength => {
-                if (messagesLength === 0) {
-                    return measureCache.clearAll()
-                }
-                scrollToRow()
-            }
-        )
-    )
+    function listenMessagesLen() {
+        return reaction(() => messages.length, handleMessagesChanged)
+    }
+
+    useOnMount(listenMessagesLen)
 
     function renderItem({ index, key, parent, style }) {
-        const item = messages.slice()[index]
+        const item = messages[index]
         return (
             <CellMeasurer cache={measureCache} columnIndex={0} key={key} parent={parent} rowIndex={index}>
                 <Message style={style} message={item} />

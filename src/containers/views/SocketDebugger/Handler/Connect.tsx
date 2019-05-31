@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { inject, observer } from 'mobx-react'
-import { useComputed } from 'mobx-react-lite'
 import { message, Input, Button, Checkbox } from 'antd'
 
 import * as styles from './index.scss'
@@ -23,7 +22,7 @@ function Connect({
     clearMessages
 }: IStoreProps) {
     const [url, setUrl] = React.useState(localStorage.getItem(LOCALSTORAGE_KEYS.SOCKET_URL))
-    const urlExample = useComputed(() => (isSocketIO ? 'wss://showcase.jackple.com' : 'ws://127.0.0.1:3001'), [
+    const urlExample = React.useMemo(() => (isSocketIO ? 'wss://showcase.jackple.com' : 'ws://127.0.0.1:3001'), [
         isSocketIO
     ])
 

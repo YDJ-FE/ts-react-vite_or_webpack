@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { inject, observer } from 'mobx-react'
-import { useComputed } from 'mobx-react-lite'
 import { Modal, Form, Input, Select } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
 
@@ -35,8 +34,7 @@ interface IProps extends IStoreProps, FormComponentProps {
 function UserModal({ visible, onCancel, user, form, createUser, modifyUser, getUsers, changePageIndex }: IProps) {
     const [loading, setLoading] = React.useState(false)
 
-    const typeIsAdd = useComputed(() => user === undefined, [user])
-    const title = useComputed(() => (typeIsAdd ? 'Add User' : 'Modify User'), [typeIsAdd])
+    const typeIsAdd = user === undefined
 
     function toggleLoading() {
         setLoading(l => !l)
@@ -68,7 +66,13 @@ function UserModal({ visible, onCancel, user, form, createUser, modifyUser, getU
 
     const { getFieldDecorator } = form
     return (
-        <Modal title={title} visible={visible} onOk={submit} onCancel={onCancel} okButtonProps={{ loading }}>
+        <Modal
+            title={typeIsAdd ? 'Add User' : 'Modify User'}
+            visible={visible}
+            onOk={submit}
+            onCancel={onCancel}
+            okButtonProps={{ loading }}
+        >
             <Form onSubmit={submit}>
                 <FormItem {...formItemLayout} label="account">
                     {getFieldDecorator('account', {

@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { observer } from 'mobx-react-lite'
 import { Button } from 'antd'
 
 import * as styles from './index.scss'
@@ -22,4 +21,4 @@ function Header() {
     )
 }
 
-export default observer(Header)
+export default Header
