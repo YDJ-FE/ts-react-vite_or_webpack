@@ -1,20 +1,20 @@
 import * as React from 'react'
-import { inject, observer } from 'mobx-react'
+import { observer } from 'mobx-react'
 import { Form, Icon, Input, Button } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
 import { hot } from 'react-hot-loader'
 import intl from 'react-intl-universal'
 
 import * as styles from './index.scss'
+import useRootStore from '@store/useRootStore'
 
 const FormItem = Form.Item
 
-interface IStoreProps {
-    login?: (data: IAuthStore.LoginParams) => Promise<any>
-}
-interface IProps extends IStoreProps, FormComponentProps {}
+interface IProps extends FormComponentProps {}
 
-function Login({ login, form }: IProps) {
+function Login({ form }: IProps) {
+    const { authStore } = useRootStore()
+
     const [loading, setLoading] = React.useState(false)
 
     const submit = (e: React.FormEvent<any>): void => {
@@ -24,7 +24,7 @@ function Login({ login, form }: IProps) {
                 if (!err) {
                     setLoading(true)
                     try {
-                        await login(values)
+                        await authStore.login(values)
                     } finally {
                         setLoading(false)
                     }
@@ -75,6 +75,4 @@ function Login({ login, form }: IProps) {
     )
 }
 
-export default hot(module)(
-    Form.create<IProps>()(inject((store: IStore): IStoreProps => ({ login: store.authStore.login }))(observer(Login)))
-)
+export default hot(module)(Form.create<IProps>()(observer(Login)))

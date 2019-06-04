@@ -1,41 +1,27 @@
 import * as React from 'react'
-import { observer, inject } from 'mobx-react'
+import { observer } from 'mobx-react'
 import { computed } from 'mobx'
 import { Menu, Icon } from 'antd'
 import pathToRegexp from 'path-to-regexp'
 
 import * as styles from './index.scss'
-import menu, { IMenu, IMenuInTree } from './../menu'
+import { RootConsumer } from '@shared/App/Provider'
 import { arrayToTree, queryArray } from '@utils/index'
+import menu, { IMenu, IMenuInTree } from './../menu'
 
 const { SubMenu } = Menu
 
-interface IStoreProps {
-    sideBarCollapsed?: boolean
-    sideBarTheme?: IGlobalStore.SideBarTheme
-    navOpenKeys?: string[]
-    setOpenKeys?: (openKeys: string[]) => void
-    userInfo?: IAuthStore.UserInfo
-    routerStore?: RouterStore
+interface IProps {
+    sideBarCollapsed: boolean
+    sideBarTheme: IGlobalStore.SideBarTheme
+    navOpenKeys: string[]
+    setOpenKeys: (openKeys: string[]) => void
+    userInfo: IAuthStore.UserInfo
+    routerStore: RouterStore
 }
 
-@inject(
-    (store: IStore): IStoreProps => {
-        const { routerStore, globalStore, authStore } = store
-        const { userInfo } = authStore
-        const { sideBarTheme, sideBarCollapsed, navOpenKeys, setOpenKeys } = globalStore
-        return {
-            routerStore,
-            userInfo,
-            sideBarTheme,
-            sideBarCollapsed,
-            navOpenKeys,
-            setOpenKeys
-        }
-    }
-)
 @observer
-class SiderMenu extends React.Component<IStoreProps> {
+class SiderMenu extends React.Component<IProps> {
     // 打开的菜单层级记录
     private levelMap: NumberObject = {}
 
@@ -176,4 +162,21 @@ class SiderMenu extends React.Component<IStoreProps> {
     }
 }
 
-export default SiderMenu
+function Wrapper() {
+    return (
+        <RootConsumer>
+            {({ routerStore, authStore, globalStore }) => (
+                <SiderMenu
+                    routerStore={routerStore}
+                    userInfo={authStore.userInfo}
+                    sideBarCollapsed={globalStore.sideBarCollapsed}
+                    sideBarTheme={globalStore.sideBarTheme}
+                    navOpenKeys={globalStore.navOpenKeys}
+                    setOpenKeys={globalStore.setOpenKeys}
+                />
+            )}
+        </RootConsumer>
+    )
+}
+
+export default Wrapper

@@ -1,22 +1,24 @@
 import * as React from 'react'
-import { observer, inject } from 'mobx-react'
+import { observer } from 'mobx-react'
 import { Select } from 'antd'
 
+import useRootStore from '@store/useRootStore'
 import { LOCALSTORAGE_KEYS } from '@constants/index'
 import { DATA_FORMATS } from '@constants/socket'
 
-interface IStoreProps {
-    dataFormat?: string
-    setDataFormat?: (dataFormat: string) => void
-}
+function DataFormat() {
+    const { socketStore } = useRootStore()
 
-function DataFormat({ dataFormat, setDataFormat }: IStoreProps) {
-    function handleChange(val: string) {
-        setDataFormat(val)
+    function handleChange(val: ISocketStore.DataFormatType) {
+        socketStore.setDataFormat(val)
         localStorage.setItem(LOCALSTORAGE_KEYS.DATA_FORMAT, val)
     }
     return (
-        <Select value={dataFormat} style={{ width: 120 }} onChange={handleChange}>
+        <Select<ISocketStore.DataFormatType>
+            value={socketStore.dataFormat}
+            style={{ width: 120 }}
+            onChange={handleChange}
+        >
             {DATA_FORMATS.map(d => (
                 <Select.Option key={d} value={d}>
                     {d}
@@ -26,9 +28,4 @@ function DataFormat({ dataFormat, setDataFormat }: IStoreProps) {
     )
 }
 
-export default inject(
-    (store: IStore): IStoreProps => {
-        const { dataFormat, setDataFormat } = store.socketStore
-        return { dataFormat, setDataFormat }
-    }
-)(observer(DataFormat))
+export default observer(DataFormat)

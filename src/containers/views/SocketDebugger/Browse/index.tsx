@@ -1,19 +1,18 @@
 import * as React from 'react'
 import { reaction } from 'mobx'
-import { inject, observer } from 'mobx-react'
+import { observer } from 'mobx-react'
 import { AutoSizer } from 'react-virtualized/dist/es/AutoSizer'
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized/dist/es/CellMeasurer'
 import { List as VList } from 'react-virtualized/dist/es/List'
 
 import * as styles from './index.scss'
+import useRootStore from '@store/useRootStore'
 import { useOnMount } from '@utils/reactExt'
 import Message from './Message'
 
-interface IStoreProps {
-    messages?: ISocketStore.Message[]
-}
+function Browse() {
+    const { socketStore } = useRootStore()
 
-function Browse({ messages }: IStoreProps) {
     const vList = React.useRef<VList>(null)
     const measureCache = new CellMeasurerCache({
         fixedWidth: true,
@@ -30,20 +29,20 @@ function Browse({ messages }: IStoreProps) {
     }
 
     function listenMessagesLen() {
-        return reaction(() => messages.length, handleMessagesChanged)
+        return reaction(() => socketStore.messages.length, handleMessagesChanged)
     }
 
     useOnMount(listenMessagesLen)
 
     function renderItem({ index, key, parent, style }) {
-        const item = messages[index]
+        const item = socketStore.messages[index]
         return (
             <CellMeasurer cache={measureCache} columnIndex={0} key={key} parent={parent} rowIndex={index}>
                 <Message style={style} message={item} />
             </CellMeasurer>
         )
     }
-    const rowCount = messages.length
+    const rowCount = socketStore.messages.length
     return (
         <div className={styles.browse}>
             <AutoSizer>
@@ -64,4 +63,4 @@ function Browse({ messages }: IStoreProps) {
     )
 }
 
-export default inject((store: IStore): IStoreProps => ({ messages: store.socketStore.messages }))(observer(Browse))
+export default observer(Browse)

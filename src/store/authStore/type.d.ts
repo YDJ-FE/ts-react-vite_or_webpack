@@ -10,7 +10,7 @@ export interface LoginParams {
 }
 
 export interface UserInfo {
-    msg: string
-    token: string
-    category: string
+    msg?: string
+    token?: string
+    category?: string
 }

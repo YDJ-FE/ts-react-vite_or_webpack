@@ -1,18 +1,13 @@
 import * as React from 'react'
-import { inject, observer } from 'mobx-react'
+import { observer } from 'mobx-react'
 import { Button, AutoComplete, Popconfirm, Modal, Input, message } from 'antd'
 import ReactJson from 'react-json-view'
 
 import * as styles from './index.scss'
+import useRootStore from '@store/useRootStore'
 import { LOCALSTORAGE_KEYS } from '@constants/index'
 import { DATA_FORMATS } from '@constants/socket'
 import { send } from '@services/websocket'
-
-interface IStoreProps {
-    isSocketIO?: boolean
-    socketIsConnected?: boolean
-    dataFormat?: ISocketStore.DataFormatType
-}
 
 const localSocketIOEvents = localStorage.getItem(LOCALSTORAGE_KEYS.SOCKET_IO_EVENTS)
 let initialSocketIOEvents: string[] = localSocketIOEvents ? JSON.parse(localSocketIOEvents) : []
@@ -20,7 +15,9 @@ if (initialSocketIOEvents.length > 30) {
     initialSocketIOEvents = initialSocketIOEvents.slice(0, 30)
 }
 
-function Send({ isSocketIO, socketIsConnected, dataFormat }: IStoreProps) {
+function Send() {
+    const { socketStore } = useRootStore()
+
     const [content, setContent] = React.useState('')
     const [textContent, setTextContent] = React.useState('')
     const [jsonContent, setJsonContent] = React.useState<PlainObject>({})
@@ -29,18 +26,16 @@ function Send({ isSocketIO, socketIsConnected, dataFormat }: IStoreProps) {
     const [modalVisible, setModalVisible] = React.useState(false)
 
     const canSend = React.useMemo(() => {
-        if (isSocketIO && !socketIOEvent) {
+        if (socketStore.isSocketIO && !socketIOEvent) {
             return false
         }
-        return socketIsConnected
-    }, [isSocketIO, socketIOEvent, socketIsConnected])
+        return socketStore.socketIsConnected
+    }, [socketStore.isSocketIO, socketIOEvent, socketStore.socketIsConnected])
 
-    const sendingContent = React.useMemo(() => {
-        if (dataFormat === DATA_FORMATS[0]) {
-            return jsonContent
-        }
-        return textContent
-    }, [dataFormat, jsonContent, textContent])
+    const sendingContent = React.useMemo(
+        () => (socketStore.dataFormat === DATA_FORMATS[0] ? jsonContent : textContent),
+        [socketStore.dataFormat, jsonContent, textContent]
+    )
 
     function toggleModalVisible() {
         setModalVisible(visible => !visible)
@@ -58,7 +53,7 @@ function Send({ isSocketIO, socketIsConnected, dataFormat }: IStoreProps) {
     }
 
     function handleSubmit() {
-        if (!isSocketIO) {
+        if (!socketStore.isSocketIO) {
             return send(null, sendingContent)
         } else if (!socketIOEvent) {
             message.destroy()
@@ -74,7 +69,7 @@ function Send({ isSocketIO, socketIsConnected, dataFormat }: IStoreProps) {
 
     return (
         <div>
-            {isSocketIO && (
+            {socketStore.isSocketIO && (
                 <AutoComplete
                     className={styles.autoComplete}
                     dataSource={socketIOEvents}
@@ -86,7 +81,7 @@ function Send({ isSocketIO, socketIsConnected, dataFormat }: IStoreProps) {
                     }
                 />
             )}
-            {dataFormat === DATA_FORMATS[0] ? (
+            {socketStore.dataFormat === DATA_FORMATS[0] ? (
                 <div className={styles.content}>
                     <div className={styles.reset}>
                         <Popconfirm placement="topLeft" title="Confirm to reset?" onConfirm={() => setJsonContent({})}>
@@ -144,9 +139,4 @@ function Send({ isSocketIO, socketIsConnected, dataFormat }: IStoreProps) {
     )
 }
 
-export default inject(
-    (store: IStore): IStoreProps => {
-        const { socketIsConnected, isSocketIO, dataFormat } = store.socketStore
-        return { socketIsConnected, isSocketIO, dataFormat }
-    }
-)(observer(Send))
+export default observer(Send)

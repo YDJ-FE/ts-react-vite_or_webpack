@@ -1,18 +1,15 @@
 import * as React from 'react'
 import classnames from 'classnames'
-import { observer, inject } from 'mobx-react'
+import { observer } from 'mobx-react'
 import { Layout, Icon, Switch } from 'antd'
 
 import * as styles from './index.scss'
+import useRootStore from '@store/useRootStore'
 import SiderMenu from './Menu'
 
-interface IStoreProps {
-    sideBarCollapsed?: boolean
-    sideBarTheme?: IGlobalStore.SideBarTheme
-    changeSiderTheme?: (theme: IGlobalStore.SideBarTheme) => void
-}
+function Sider() {
+    const { sideBarCollapsed, sideBarTheme, changeSiderTheme } = useRootStore().globalStore
 
-function Sider({ sideBarCollapsed, sideBarTheme, changeSiderTheme }: IStoreProps) {
     const ChangeTheme = (
         <div className={classnames(styles.changeTheme, sideBarTheme === 'dark' && styles.dark)}>
             Switch Theme
@@ -41,14 +38,4 @@ function Sider({ sideBarCollapsed, sideBarTheme, changeSiderTheme }: IStoreProps
     )
 }
 
-export default inject(
-    (store: IStore): IStoreProps => {
-        const { globalStore } = store
-        const { sideBarCollapsed, sideBarTheme, changeSiderTheme } = globalStore
-        return {
-            sideBarCollapsed,
-            sideBarTheme,
-            changeSiderTheme
-        }
-    }
-)(observer(Sider))
+export default observer(Sider)

@@ -1,18 +1,16 @@
 import * as React from 'react'
-import { inject, observer } from 'mobx-react'
+import { observer } from 'mobx-react'
 import { Route, RouteProps } from 'react-router-dom'
 
 import { useOnMount } from '@utils/reactExt'
+import useRootStore from '@store/useRootStore'
 
-export interface IStoreProps {
-    routerStore?: RouterStore
-    userInfo?: IAuthStore.UserInfo
-}
+function PrivateRoute({ component: Component, ...rest }: RouteProps) {
+    const { routerStore, authStore } = useRootStore()
 
-function PrivateRoute({ userInfo, component: Component, ...rest }: IStoreProps & RouteProps) {
     function checkLocalUserInfo() {
-        if (!userInfo.token) {
-            rest.routerStore.history.replace('/login')
+        if (!authStore.userInfo.token) {
+            routerStore.history.replace('/login')
         }
     }
 
@@ -21,10 +19,4 @@ function PrivateRoute({ userInfo, component: Component, ...rest }: IStoreProps &
     return <Route {...rest} render={props => <Component {...props} {...rest} />} />
 }
 
-export default inject(
-    (store: IStore): IStoreProps => {
-        const { routerStore, authStore } = store
-        const { userInfo } = authStore
-        return { routerStore, userInfo }
-    }
-)(observer(PrivateRoute))
+export default observer(PrivateRoute)

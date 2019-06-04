@@ -1,7 +1,9 @@
 import * as React from 'react'
-import { inject, observer } from 'mobx-react'
+import { observer } from 'mobx-react'
 import { Modal, Form, Input, Select } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
+
+import useRootStore from '@store/useRootStore'
 
 const FormItem = Form.Item
 
@@ -18,20 +20,15 @@ const formItemLayout = {
 
 const userCategory = ['user', 'admin']
 
-interface IStoreProps {
-    createUser?: (user: IUserStore.IUser) => Promise<any>
-    modifyUser?: (user: IUserStore.IUser) => Promise<any>
-    getUsers?: () => Promise<any>
-    changePageIndex?: (pageIndex: number) => void
-}
-
-interface IProps extends IStoreProps, FormComponentProps {
+interface IProps extends FormComponentProps {
     visible: boolean
     onCancel: () => void
     user?: IUserStore.IUser
 }
 
-function UserModal({ visible, onCancel, user, form, createUser, modifyUser, getUsers, changePageIndex }: IProps) {
+function UserModal({ visible, onCancel, user, form }: IProps) {
+    const { userStore } = useRootStore()
+
     const [loading, setLoading] = React.useState(false)
 
     const typeIsAdd = user === undefined
@@ -50,11 +47,11 @@ function UserModal({ visible, onCancel, user, form, createUser, modifyUser, getU
                     toggleLoading()
                     try {
                         if (typeIsAdd) {
-                            await createUser(values)
-                            changePageIndex(1)
+                            await userStore.createUser(values)
+                            userStore.changePageIndex(1)
                         } else {
-                            await modifyUser({ ...values, _id: user._id })
-                            getUsers()
+                            await userStore.modifyUser({ ...values, _id: user._id })
+                            userStore.getUsers()
                         }
                         onCancel()
                     } catch (err) {}
@@ -106,11 +103,4 @@ function UserModal({ visible, onCancel, user, form, createUser, modifyUser, getU
     )
 }
 
-export default Form.create<IProps>()(
-    inject(
-        (store: IStore): IStoreProps => {
-            const { createUser, modifyUser, getUsers, changePageIndex } = store.userStore
-            return { createUser, modifyUser, getUsers, changePageIndex }
-        }
-    )(observer(UserModal))
-)
+export default Form.create<IProps>()(observer(UserModal))

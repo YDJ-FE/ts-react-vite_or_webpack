@@ -6,7 +6,7 @@ export const initialUserInfo = (() => {
     return _userInfo
 })()
 
-let userInfo: IAuthStore.UserInfo = initialUserInfo
+export let userInfo: IAuthStore.UserInfo = initialUserInfo
 
 /**
  * syncUserInfo for http
@@ -17,5 +17,3 @@ let userInfo: IAuthStore.UserInfo = initialUserInfo
 export function syncUserInfo(data: IAuthStore.UserInfo) {
     userInfo = data
 }
-
-export default userInfo

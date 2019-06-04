@@ -1,23 +1,19 @@
 import * as React from 'react'
-import { inject, observer } from 'mobx-react'
+import { observer } from 'mobx-react'
 import { Layout, Icon } from 'antd'
 
 import * as styles from './index.scss'
+import useRootStore from '@store/useRootStore'
 import { GITHUB_LINK } from '@constants/index'
 
-interface IStoreProps {
-    sideBarCollapsed?: boolean
-    toggleSideBarCollapsed?: () => void
-    logout?: () => void
-}
-
-function Header({ sideBarCollapsed, toggleSideBarCollapsed, logout }: IStoreProps) {
+function Header() {
+    const { globalStore, authStore } = useRootStore()
     return (
         <Layout.Header className={styles.header}>
             <Icon
                 className={styles.trigger}
-                type={sideBarCollapsed ? 'menu-unfold' : 'menu-fold'}
-                onClick={toggleSideBarCollapsed}
+                type={globalStore.sideBarCollapsed ? 'menu-unfold' : 'menu-fold'}
+                onClick={globalStore.toggleSideBarCollapsed}
             />
             <div className={styles.right}>
                 <Icon
@@ -26,17 +22,10 @@ function Header({ sideBarCollapsed, toggleSideBarCollapsed, logout }: IStoreProp
                     theme="outlined"
                     onClick={() => window.open(GITHUB_LINK)}
                 />
-                <Icon className={styles.rightIcon} type="logout" theme="outlined" onClick={logout} />
+                <Icon className={styles.rightIcon} type="logout" theme="outlined" onClick={authStore.logout} />
             </div>
         </Layout.Header>
     )
 }
 
-export default inject(
-    (store: IStore): IStoreProps => {
-        const { globalStore, authStore } = store
-        const { sideBarCollapsed, toggleSideBarCollapsed } = globalStore
-        const { logout } = authStore
-        return { sideBarCollapsed, toggleSideBarCollapsed, logout }
-    }
-)(observer(Header))
+export default observer(Header)

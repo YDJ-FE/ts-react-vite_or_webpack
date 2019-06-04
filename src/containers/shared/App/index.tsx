@@ -6,6 +6,7 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 import * as styles from './index.scss'
 import PageLoading from '@components/PageLoading'
 import Error from '@components/Error'
+import Provider from './Provider'
 import IntlWrapper from './IntlWrapper'
 
 const Home = Loadable({
@@ -21,17 +22,19 @@ const AppWrapper = ({ children }: { children?: React.ReactNode }) => <div classN
 
 function AppRouter() {
     return (
-        <IntlWrapper>
-            <AppWrapper>
-                <Router>
-                    <Switch>
-                        <Route exact path="/login" component={Login} />
-                        <Route path="/" component={Home} />
-                        <Route component={Error} />
-                    </Switch>
-                </Router>
-            </AppWrapper>
-        </IntlWrapper>
+        <Provider>
+            <IntlWrapper>
+                <AppWrapper>
+                    <Router>
+                        <Switch>
+                            <Route exact path="/login" component={Login} />
+                            <Route path="/" component={Home} />
+                            <Route component={Error} />
+                        </Switch>
+                    </Router>
+                </AppWrapper>
+            </IntlWrapper>
+        </Provider>
     )
 }
 

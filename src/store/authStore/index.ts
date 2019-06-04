@@ -18,7 +18,7 @@ export class AuthStore extends StoreExt {
 
     constructor() {
         super()
-        reaction(() => this.userInfo, userInfo => syncUserInfo(userInfo))
+        reaction(() => this.userInfo, syncUserInfo)
     }
 
     @action
@@ -33,8 +33,8 @@ export class AuthStore extends StoreExt {
         }
     }
 
-    @action
     logout = () => {
+        this.setUserInfo({})
         localStorage.removeItem(LOCALSTORAGE_KEYS.USERINFO)
         routerStore.replace('/login')
     }
