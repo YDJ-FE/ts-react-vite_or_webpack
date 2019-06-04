@@ -34,16 +34,6 @@ $ npm run build:(qa/prod)
 
 We do not use any mock tools(Anyway, you can use the data format from server response to achieve it!), all data interaction depends on [a real node service with nest and mongodb](https://github.com/jackple/showcase). Integration is in our future plan! We will make sure that you still can fully separate client and server side. 😁😁😁
 
-## primary packages
-
--   webpack-4.x (fixing on 4.28.4 avoid dynamic import error)
--   babel-7.x
--   typescript-3.x
--   react-16.x
--   mobx-5.x ([5.x makes your application must be running in the browser that support es2015+](https://github.com/mobxjs/mobx#browser-support), if you are not willing, you can use 4.x)
--   react-router-4
--   mobx-react-router
-
 ## characteristics
 
 -   use [ant design](https://ant.design/index-cn) as UI framework
@@ -70,14 +60,14 @@ We do not use any mock tools(Anyway, you can use the data format from server res
 
 ```jsx
 import * as React from 'react'
-import { inject, observer } from 'mobx-react'
+import { observer } from 'mobx-react'
 import { Button } from 'antd'
 
-interface IStoreProps {
-    routerStore?: RouterStore;
-}
+import useRootStore from '@store/useRootStore'
 
-function Test({ routerStore }: IStoreProps) {
+function Test() {
+    const { routerStore } = useRootStore()
+
     const gotoHome = () => {
         routerStore.push('/')
     }
@@ -88,7 +78,7 @@ function Test({ routerStore }: IStoreProps) {
     )
 }
 
-export default inject((store: IStore): IStoreProps => ({ routerStore: store.routerStore }))(observer(Test))
+export default observer(Test)
 ```
 
 [live example](https://github.com/YDJ-FE/ts-react-webpack4/blob/master/src/containers/views/Login/index.tsx?1532570619900)
