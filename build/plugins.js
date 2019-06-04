@@ -7,6 +7,7 @@ const WorkboxPlugin = require('workbox-webpack-plugin')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const openBrowser = require('react-dev-utils/openBrowser')
+const clearConsole = require('react-dev-utils/clearConsole')
 
 const constants = require('./constants')
 const config = require('./config')
@@ -41,10 +42,12 @@ const devPlugins = [
     new CaseSensitivePathsPlugin(),
     {
         apply: compiler => {
+            compiler.hooks.afterPlugins.tap('after-plugins', () => {
+                clearConsole()
+                openBrowser('http://localhost:8080')
+            })
             compiler.hooks.done.tap('BuildStatsPlugin', () => {
-                if (openBrowser('http://localhost:8080')) {
-                    console.log('The browser tab has been opened!')
-                }
+                clearConsole()
             })
         }
     }

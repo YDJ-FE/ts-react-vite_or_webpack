@@ -36,13 +36,6 @@ module.exports = {
     },
     plugins,
     optimization,
-    stats: {
-        children: false,
-        assets: false,
-        chunks: false,
-        chunkModules: false,
-        modules: false,
-        warningsFilter: /mini-css-extract-plugin[^]*Conflicting order between:/
-    },
+    stats: 'minimal',
     devtool: config.sourceMap
 }
