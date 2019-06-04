@@ -1,4 +1,3 @@
-import { hot } from 'react-hot-loader'
 import * as React from 'react'
 
 import * as styles from './index.scss'
@@ -14,4 +13,4 @@ function SocketDebugger() {
     )
 }
 
-export default hot(module)(SocketDebugger)
+export default SocketDebugger

@@ -1,4 +1,3 @@
-import { hot } from 'react-hot-loader'
 import * as React from 'react'
 import { observer } from 'mobx-react'
 import { Form, Icon, Input, Button } from 'antd'
@@ -75,4 +74,4 @@ function Login({ form }: IProps) {
     )
 }
 
-export default hot(module)(Form.create<IProps>()(observer(Login)))
+export default Form.create<IProps>()(observer(Login))
