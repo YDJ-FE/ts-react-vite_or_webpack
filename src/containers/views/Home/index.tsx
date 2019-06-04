@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { Layout } from 'antd'
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
-import { hot } from 'react-hot-loader'
 
 import * as styles from './index.scss'
 import Error from '@components/Error'
@@ -40,4 +39,4 @@ function Home() {
     )
 }
 
-export default hot(module)(Home)
+export default Home

@@ -1,13 +1,19 @@
+import { hot } from 'react-hot-loader/root'
 import * as React from 'react'
-import { hot } from 'react-hot-loader'
 import Loadable from 'react-loadable'
-import { HashRouter as Router, Switch, Route } from 'react-router-dom'
+import { HashRouter, Router, Switch, Route } from 'react-router-dom'
+import { createHashHistory } from 'history'
+import { syncHistoryWithStore } from 'mobx-react-router'
 
 import * as styles from './index.scss'
+import * as store from '@store/index'
 import PageLoading from '@components/PageLoading'
 import Error from '@components/Error'
 import Provider from './Provider'
 import IntlWrapper from './IntlWrapper'
+
+const hashHistory = createHashHistory()
+const history = syncHistoryWithStore(hashHistory, store.routerStore)
 
 const Home = Loadable({
     loader: () => import(/* webpackChunkName: "home" */ '@views/Home'),
@@ -20,17 +26,19 @@ const Login = Loadable({
 
 const AppWrapper = ({ children }: { children?: React.ReactNode }) => <div className={styles.appWrapper}>{children}</div>
 
-function AppRouter() {
+function App() {
     return (
         <Provider>
             <IntlWrapper>
                 <AppWrapper>
-                    <Router>
-                        <Switch>
-                            <Route exact path="/login" component={Login} />
-                            <Route path="/" component={Home} />
-                            <Route component={Error} />
-                        </Switch>
+                    <Router history={history}>
+                        <HashRouter>
+                            <Switch>
+                                <Route exact path="/login" component={Login} />
+                                <Route path="/" component={Home} />
+                                <Route component={Error} />
+                            </Switch>
+                        </HashRouter>
                     </Router>
                 </AppWrapper>
             </IntlWrapper>
@@ -38,4 +46,4 @@ function AppRouter() {
     )
 }
 
-export default hot(module)(AppRouter)
+export default hot(App)
