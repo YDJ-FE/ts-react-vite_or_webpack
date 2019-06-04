@@ -8,7 +8,6 @@ const fileRules = require('./rules/fileRules')
 const plugins = require('./plugins')
 const { assetsPath, resolve } = require('./utils')
 const optimization = require('./optimization')
-const alias = require('./alias')
 require('./cleanup-folder')
 
 module.exports = {
@@ -30,7 +29,7 @@ module.exports = {
                 extensions: constants.FILE_EXTENSIONS
             })
         ],
-        alias
+        alias: { mobx: resolve('node_modules/mobx/lib/mobx.es6.js') }
     },
     module: {
         rules: [...styleRules, ...jsRules, ...fileRules]
