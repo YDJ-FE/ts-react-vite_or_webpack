@@ -12,7 +12,11 @@ module.exports = [
                 loader: 'babel-loader',
                 options: {
                     babelrc: false,
-                    presets: [['@babel/preset-env'], '@babel/preset-typescript', '@babel/preset-react'],
+                    presets: [
+                        ['@babel/preset-env', { targets: { chrome: 60 }, useBuiltIns: 'usage', corejs: '2' }],
+                        '@babel/preset-typescript',
+                        '@babel/preset-react'
+                    ],
                     plugins: [
                         ['import', { libraryName: 'antd', libraryDirectory: 'lib', style: true }],
                         ['@babel/plugin-proposal-decorators', { legacy: true }],

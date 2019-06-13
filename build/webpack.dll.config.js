@@ -5,7 +5,7 @@ require('./cleanup-dll')
 
 module.exports = {
     entry: {
-        vendor: ['@babel/polyfill', 'react', 'react-dom']
+        react: ['react', 'react-dom']
     },
     output: {
         filename: '[name].dll.[hash:8].js',

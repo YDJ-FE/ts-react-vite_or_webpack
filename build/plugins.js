@@ -56,7 +56,7 @@ const devPlugins = [
 const prodPlugins = [
     new webpack.WatchIgnorePlugin([/css\.d\.ts$/]),
     new webpack.DllReferencePlugin({
-        manifest: require(`${DLL_PATH}/vendor.manifest.json`)
+        manifest: require(`${DLL_PATH}/react.manifest.json`)
     }),
     new HtmlWebpackPlugin({
         filename: config.index,
