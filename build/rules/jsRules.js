@@ -13,7 +13,11 @@ module.exports = [
                 options: {
                     babelrc: false,
                     presets: [
-                        ['@babel/preset-env', { targets: { chrome: 60 }, useBuiltIns: 'usage', corejs: '2' }],
+                        [
+                            '@babel/preset-env',
+                            // https://github.com/babel/babel/blob/master/packages/babel-preset-env/data/plugins.json#L32
+                            { targets: { browsers: ['chrome >= 47'] }, useBuiltIns: 'usage', corejs: '2' }
+                        ],
                         '@babel/preset-typescript',
                         '@babel/preset-react'
                     ],
