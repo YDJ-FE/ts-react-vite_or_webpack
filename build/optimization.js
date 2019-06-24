@@ -13,10 +13,15 @@ module.exports =
               splitChunks: {
                   cacheGroups: {
                       default: false,
-                      commons: {
-                          test: /moment|lodash|mobx/,
-                          name: 'split-vendor',
-                          chunks: 'all'
+                      buildup: {
+                          chunks: 'all',
+                          test: /[\\/]node_modules[\\/]/
+                      },
+                      vendor: {
+                          name: 'vendor',
+                          test: /[\\/]node_modules[\\/](lodash|moment|immutable|mobx|mobx-react|axios)[\\/]/,
+                          chunks: 'all',
+                          priority: 10
                       }
                   }
               },
