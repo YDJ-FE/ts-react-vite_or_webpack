@@ -1,10 +1,8 @@
-const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const WorkboxPlugin = require('workbox-webpack-plugin')
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const openBrowser = require('react-dev-utils/openBrowser')
 const clearConsole = require('react-dev-utils/clearConsole')
@@ -23,8 +21,6 @@ const defineEnv = {}
 for (let key in oriEnv) {
     defineEnv[`process.env.${key}`] = JSON.stringify(oriEnv[key])
 }
-
-const DLL_PATH = './../dll'
 
 const basePlugins = [
     new MomentLocalesPlugin({
@@ -55,9 +51,6 @@ const devPlugins = [
 
 const prodPlugins = [
     new webpack.WatchIgnorePlugin([/css\.d\.ts$/]),
-    new webpack.DllReferencePlugin({
-        manifest: require(`${DLL_PATH}/react.manifest.json`)
-    }),
     new HtmlWebpackPlugin({
         filename: config.index,
         template: 'build/tpl/index.html',
@@ -71,10 +64,6 @@ const prodPlugins = [
         },
         // necessary to consistently work with multiple chunks via CommonsChunkPlugin
         chunksSortMode: 'dependency'
-    }),
-    new AddAssetHtmlPlugin({
-        filepath: path.resolve(__dirname, `${DLL_PATH}/**/*.js`),
-        includeSourcemap: false
     }),
     new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output
