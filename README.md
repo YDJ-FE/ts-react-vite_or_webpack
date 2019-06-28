@@ -43,7 +43,6 @@ We do not use any mock tools(Anyway, you can use the data format from server res
 -   async to load component by `react-loadable`
 -   create component folder by `customaddcomponents` which is added to npm script `npm run add`
 -   use husky{pre-commit/commit-msg} hooks
--   use [webpack dll](https://webpack.js.org/plugins/dll-plugin/) when you are running in production mode
 -   use [react-intl-universal](https://github.com/alibaba/react-intl-universal) for i18n.
 -   use [react-virtualized](https://github.com/bvaughn/react-virtualized) for fat list.
 
