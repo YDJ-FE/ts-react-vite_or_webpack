@@ -3,7 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const config = require('./../config')
 const { resolve } = require('./../utils')
 const theme = require('./../../theme')
-const { threadLoader, cacheLoader } = require('./loaders')
+const { cacheLoader } = require('./loaders')
 
 const cssLoader = modules => ({
     loader: 'css-loader',
