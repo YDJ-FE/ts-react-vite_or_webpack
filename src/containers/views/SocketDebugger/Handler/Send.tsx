@@ -1,9 +1,9 @@
-import * as React from 'react'
+import React from 'react'
 import { observer } from 'mobx-react'
 import { Button, AutoComplete, Popconfirm, Modal, Input, message } from 'antd'
 import ReactJson from 'react-json-view'
 
-import * as styles from './index.scss'
+import styles from './index.scss'
 import useRootStore from '@store/useRootStore'
 import { LOCALSTORAGE_KEYS } from '@constants/index'
 import { DATA_FORMATS } from '@constants/socket'

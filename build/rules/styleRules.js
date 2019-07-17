@@ -25,7 +25,7 @@ const lessLoader = {
     }
 }
 
-const baseLoaders = (workerParallelJobs, modules) => {
+const baseLoaders = modules => {
     const loaders = [
         config.extractCss ? MiniCssExtractPlugin.loader : 'style-loader',
         cacheLoader,
@@ -35,9 +35,6 @@ const baseLoaders = (workerParallelJobs, modules) => {
     if (modules) {
         loaders.splice(2, 0, 'css-modules-typescript-loader')
     }
-    if (workerParallelJobs !== 0) {
-        loaders.splice(2, 0, threadLoader(workerParallelJobs))
-    }
     return loaders
 }
 
@@ -45,18 +42,18 @@ module.exports = [
     {
         test: /\.css$/,
         include: [resolve('node_modules')],
-        use: baseLoaders(undefined, false)
+        use: baseLoaders(false)
     },
     {
         test: /\.scss$/,
         include: [resolve('src')],
-        use: [...baseLoaders(0, true), sassLoader]
+        use: [...baseLoaders(true), sassLoader]
     },
     {
         // for ant design
         test: /\.less$/,
         // less do not use threadLoader
         // https://github.com/webpack-contrib/thread-loader/issues/10
-        use: [...baseLoaders(0, false), lessLoader]
+        use: [...baseLoaders(false), lessLoader]
     }
 ]

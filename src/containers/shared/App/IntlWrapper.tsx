@@ -1,10 +1,10 @@
-import * as React from 'react'
+import React from 'react'
 import intl from 'react-intl-universal'
 import { find } from 'lodash'
 import { Select, LocaleProvider } from 'antd'
 import { Locale } from 'antd/lib/locale-provider'
 
-import * as styles from './index.scss'
+import styles from './index.scss'
 import { useOnMount } from '@utils/reactExt'
 import { setCookie } from '@utils/index'
 import { COOKIE_KEYS } from '@constants/index'

@@ -39,7 +39,6 @@ const devPlugins = [
     {
         apply: compiler => {
             compiler.hooks.afterPlugins.tap('after-plugins', () => {
-                clearConsole()
                 openBrowser('http://localhost:8080')
             })
             compiler.hooks.done.tap('BuildStatsPlugin', () => {

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Table, Divider, Popconfirm } from 'antd'
 import { observer } from 'mobx-react'
 

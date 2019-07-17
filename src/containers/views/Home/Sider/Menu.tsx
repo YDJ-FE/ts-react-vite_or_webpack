@@ -1,10 +1,10 @@
-import * as React from 'react'
+import React from 'react'
 import { observer } from 'mobx-react'
 import { computed } from 'mobx'
 import { Menu, Icon } from 'antd'
 import pathToRegexp from 'path-to-regexp'
 
-import * as styles from './index.scss'
+import styles from './index.scss'
 import { RootConsumer } from '@shared/App/Provider'
 import { arrayToTree, queryArray } from '@utils/index'
 import menu, { IMenu, IMenuInTree } from './../menu'

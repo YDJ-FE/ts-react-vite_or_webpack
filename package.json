@@ -66,6 +66,7 @@
         "@types/jest": "^24.0.13",
         "@types/lodash": "^4.14.133",
         "@types/node": "^12.0.4",
+        "@types/qs": "^6.5.3",
         "@types/react": "^16.8.19",
         "@types/react-dom": "^16.8.4",
         "@types/react-loadable": "^5.5.1",

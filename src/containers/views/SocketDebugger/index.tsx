@@ -1,6 +1,6 @@
-import * as React from 'react'
+import React from 'react'
 
-import * as styles from './index.scss'
+import styles from './index.scss'
 import Handler from './Handler'
 import Browse from './Browse'
 

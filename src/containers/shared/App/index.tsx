@@ -1,10 +1,10 @@
-import * as React from 'react'
+import React from 'react'
 import Loadable from 'react-loadable'
 import { HashRouter, Router, Switch, Route } from 'react-router-dom'
 import { createHashHistory } from 'history'
 import { syncHistoryWithStore } from 'mobx-react-router'
 
-import * as styles from './index.scss'
+import styles from './index.scss'
 import * as store from '@store/index'
 import PageLoading from '@components/PageLoading'
 import Error from '@components/Error'

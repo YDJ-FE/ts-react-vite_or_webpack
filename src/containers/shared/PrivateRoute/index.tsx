@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { observer } from 'mobx-react'
 import { Route, RouteProps } from 'react-router-dom'
 
