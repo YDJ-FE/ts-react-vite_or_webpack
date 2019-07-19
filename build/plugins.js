@@ -1,4 +1,5 @@
 const webpack = require('webpack')
+const yargs = require('yargs')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
@@ -22,6 +23,8 @@ for (let key in oriEnv) {
     defineEnv[`process.env.${key}`] = JSON.stringify(oriEnv[key])
 }
 
+const { port } = yargs.argv
+
 const basePlugins = [
     new MomentLocalesPlugin({
         localesToKeep: ['es-us', 'zh-cn']
@@ -39,7 +42,7 @@ const devPlugins = [
     {
         apply: compiler => {
             compiler.hooks.afterPlugins.tap('after-plugins', () => {
-                openBrowser('http://localhost:8080')
+                openBrowser(`http://localhost:${port}`)
             })
             compiler.hooks.done.tap('BuildStatsPlugin', () => {
                 clearConsole()
