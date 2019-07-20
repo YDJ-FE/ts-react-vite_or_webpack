@@ -32,9 +32,6 @@ const baseLoaders = modules => {
         cssLoader(modules),
         'postcss-loader'
     ]
-    if (modules) {
-        loaders.splice(2, 0, 'css-modules-typescript-loader')
-    }
     return loaders
 }
 

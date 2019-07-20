@@ -1,13 +1,12 @@
 const webpack = require('webpack')
-const yargs = require('yargs')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const WorkboxPlugin = require('workbox-webpack-plugin')
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
-const openBrowser = require('react-dev-utils/openBrowser')
-const clearConsole = require('react-dev-utils/clearConsole')
+const { TypedCssModulesPlugin } = require('typed-css-modules-webpack-plugin')
 
+const { compilerHooks } = require('./custom-plugins')
 const constants = require('./constants')
 const config = require('./config')
 const { assetsPath } = require('./utils')
@@ -23,13 +22,14 @@ for (let key in oriEnv) {
     defineEnv[`process.env.${key}`] = JSON.stringify(oriEnv[key])
 }
 
-const { port } = yargs.argv
-
 const basePlugins = [
     new MomentLocalesPlugin({
         localesToKeep: ['es-us', 'zh-cn']
     }),
-    new webpack.DefinePlugin(defineEnv)
+    new webpack.DefinePlugin(defineEnv),
+    new TypedCssModulesPlugin({
+        globPattern: 'src/!(styles)/**/*.scss'
+    })
 ]
 
 const devPlugins = [
@@ -39,16 +39,7 @@ const devPlugins = [
         inject: true
     }),
     new CaseSensitivePathsPlugin(),
-    {
-        apply: compiler => {
-            compiler.hooks.afterPlugins.tap('after-plugins', () => {
-                openBrowser(`http://localhost:${port}`)
-            })
-            compiler.hooks.done.tap('BuildStatsPlugin', () => {
-                clearConsole()
-            })
-        }
-    }
+    ...compilerHooks
 ]
 
 const prodPlugins = [

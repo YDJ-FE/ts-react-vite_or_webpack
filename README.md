@@ -37,7 +37,7 @@ We do not use any mock tools(Anyway, you can use the data format from server res
 ## characteristics
 
 -   use [ant design](https://ant.design/index-cn) as UI framework
--   import .(s)css auto generate .(s)css.d.ts by `css-modules-typescript-loader`
+-   import .(s)css auto generate .(s)css.d.ts by [typed-css-modules-webpack-plugin](https://github.com/dropbox/typed-css-modules-webpack-plugin)
 -   use ServiceWorker by [workbox-webpack-plugin](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin)
 -   import svg icon as a component by `@svgr/webpack`, [there is an example in the doc of steamer-react-redux-ts](https://github.com/YDJ-FE/steamer-react-ts/blob/master/docs/svg.md)
 -   async to load component by `react-loadable`
@@ -125,7 +125,7 @@ server {
        server_name  localhost:9993;
 
        location / {
-             root   ~/Documents/react/ts-react-webpack4/dist/qa/;
+             root   ~/Documents/react/ts-react-webpack/dist/qa/;
              index  index.html index.htm;
        }
  }
