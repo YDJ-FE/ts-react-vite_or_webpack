@@ -1,7 +1,7 @@
-import * as React from 'react'
+import React from 'react'
 import { Button } from 'antd'
 
-import * as styles from './index.scss'
+import styles from './index.scss'
 import UserModal from './../UserModal'
 
 function Header() {

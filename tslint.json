@@ -32,14 +32,14 @@
         "prefer-method-signature": false,
         "prefer-template": [true, "allow-single-concat"],
         "quotemark": [true, "single", "jsx-double"],
-        "semicolon": [true, "never"],
+        "semicolon": [true, "never", "ignore-interfaces"],
         "trailing-comma": [false],
         "triple-equals": [true, "allow-null-check"],
         "type-literal-delimiter": false,
         "typedef": [true, "property-declaration"],
         "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case", "allow-leading-underscore"],
         "max-classes-per-file": false,
-        // tslint-react
+
         "jsx-no-lambda": false,
         "jsx-no-multiline-js": false,
         "jsx-curly-spacing": [true, { "when": "never", "allowMultiline": false }],

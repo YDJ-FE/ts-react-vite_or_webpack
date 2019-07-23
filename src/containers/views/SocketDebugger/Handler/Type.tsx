@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { observer } from 'mobx-react'
 import { Radio } from 'antd'
 import { RadioChangeEvent } from 'antd/lib/radio'

@@ -1,5 +1,5 @@
-import axios, { AxiosRequestConfig as _AxiosRequestConfig } from 'axios'
-import * as qs from 'qs'
+import axios, { AxiosRequestConfig as _AxiosRequestConfig, Method } from 'axios'
+import qs from 'qs'
 import { message } from 'antd'
 
 import { userInfo } from '@store/authStore/syncUserInfo'
@@ -28,7 +28,7 @@ const DEFAULTCONFIG = {
 }
 
 const http: HttpResquest = {}
-const methods = ['get', 'post', 'put', 'delete']
+const methods: Method[] = ['get', 'post', 'put', 'delete']
 
 let authTimer: NodeJS.Timer = null
 

@@ -4,6 +4,7 @@
         "module": "esnext",
         "moduleResolution": "node",
         "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
         "sourceMap": true,
         "removeComments": false,
         "rootDirs": ["./src"],

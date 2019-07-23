@@ -1,10 +1,10 @@
-import * as React from 'react'
+import React from 'react'
 import { observer } from 'mobx-react'
 import { Form, Icon, Input, Button } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
 import intl from 'react-intl-universal'
 
-import * as styles from './index.scss'
+import styles from './index.scss'
 import useRootStore from '@store/useRootStore'
 
 const FormItem = Form.Item

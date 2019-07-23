@@ -1,9 +1,9 @@
-import * as React from 'react'
+import React from 'react'
 import { observer, useLocalStore } from 'mobx-react'
 import moment from 'moment'
 import { Tag } from 'antd'
 
-import * as styles from './index.scss'
+import styles from './index.scss'
 
 interface IProps {
     message: ISocketStore.Message

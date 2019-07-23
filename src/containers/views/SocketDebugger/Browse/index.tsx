@@ -1,11 +1,11 @@
-import * as React from 'react'
+import React from 'react'
 import { reaction } from 'mobx'
 import { observer } from 'mobx-react'
 import { AutoSizer } from 'react-virtualized/dist/es/AutoSizer'
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized/dist/es/CellMeasurer'
 import { List as VList } from 'react-virtualized/dist/es/List'
 
-import * as styles from './index.scss'
+import styles from './index.scss'
 import useRootStore from '@store/useRootStore'
 import { useOnMount } from '@utils/reactExt'
 import Message from './Message'

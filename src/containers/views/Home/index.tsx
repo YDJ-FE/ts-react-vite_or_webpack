@@ -1,8 +1,8 @@
-import * as React from 'react'
+import React from 'react'
 import { Layout } from 'antd'
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 
-import * as styles from './index.scss'
+import styles from './index.scss'
 import Error from '@components/Error'
 import menu, { asynchronousComponents } from './menu'
 import Header from './Header'

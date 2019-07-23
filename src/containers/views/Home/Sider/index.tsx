@@ -1,9 +1,9 @@
-import * as React from 'react'
+import React from 'react'
 import classnames from 'classnames'
 import { observer } from 'mobx-react'
 import { Layout, Icon, Switch } from 'antd'
 
-import * as styles from './index.scss'
+import styles from './index.scss'
 import useRootStore from '@store/useRootStore'
 import SiderMenu from './Menu'
 
