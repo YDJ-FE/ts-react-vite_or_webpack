@@ -107,7 +107,7 @@
         "react-dev-utils": "^9.0.1",
         "sass-loader": "^7.1.0",
         "style-loader": "^0.23.1",
-        "stylelint": "10.1.0",
+        "stylelint": "9.9.0",
         "stylelint-config-css-modules": "^1.4.0",
         "stylelint-config-standard": "^18.3.0",
         "stylelint-config-ydj": "^0.1.1",
