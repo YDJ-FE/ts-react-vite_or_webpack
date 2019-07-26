@@ -7,7 +7,14 @@ const { cacheLoader } = require('./loaders')
 
 const cssLoader = modules => ({
     loader: 'css-loader',
-    options: { modules, localIdentName: '[name]__[local]--[hash:base64:5]' }
+    options: {
+        modules: modules
+            ? {
+                  mode: 'local',
+                  localIdentName: '[local]--[hash:base64:8]'
+              }
+            : false
+    }
 })
 
 const sassLoader = {
@@ -25,15 +32,12 @@ const lessLoader = {
     }
 }
 
-const baseLoaders = modules => {
-    const loaders = [
-        config.extractCss ? MiniCssExtractPlugin.loader : 'style-loader',
-        cacheLoader,
-        cssLoader(modules),
-        'postcss-loader'
-    ]
-    return loaders
-}
+const baseLoaders = modules => [
+    config.extractCss ? MiniCssExtractPlugin.loader : 'style-loader',
+    cacheLoader,
+    cssLoader(modules),
+    'postcss-loader'
+]
 
 module.exports = [
     {

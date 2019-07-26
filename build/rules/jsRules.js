@@ -5,6 +5,7 @@ module.exports = [
     {
         test: /\.(j|t)sx?$/,
         include: [resolve('src')],
+        exclude: /node_modules/,
         use: [
             cacheLoader,
             threadLoader(),
@@ -16,7 +17,7 @@ module.exports = [
                         [
                             '@babel/preset-env',
                             // https://github.com/babel/babel/blob/master/packages/babel-preset-env/data/plugins.json#L32
-                            { targets: { browsers: ['chrome >= 47'] }, useBuiltIns: 'usage', corejs: '2' }
+                            { targets: { browsers: ['chrome >= 47'] }, useBuiltIns: 'usage', corejs: 3 }
                         ],
                         '@babel/preset-typescript',
                         '@babel/preset-react'
@@ -29,7 +30,6 @@ module.exports = [
                     ]
                 }
             }
-        ],
-        exclude: /node_modules/
+        ]
     }
 ]

@@ -1,7 +1,4 @@
 {
-    "linters": {
-        "src/**/*.{ts,tsx}": ["tslint -c tslint.json", "prettier --write", "git add"],
-        "src/**/*.scss": ["stylelint --fix", "prettier --write", "git add"]
-    },
-    "ignore": ["**/*.scss.d.ts"]
+    "src/**/*.{ts,tsx}": ["tslint -c tslint.json", "prettier --write", "git add"],
+    "src/**/*.scss": ["stylelint --fix", "prettier --write", "git add"]
 }

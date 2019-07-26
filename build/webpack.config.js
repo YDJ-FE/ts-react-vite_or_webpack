@@ -22,7 +22,6 @@ module.exports = {
     },
     resolve: {
         extensions: constants.FILE_EXTENSIONS,
-        modules: [resolve('src'), resolve('node_modules')],
         plugins: [
             new TsconfigPathsPlugin({
                 configFile: resolve('tsconfig.webpack.json'),
