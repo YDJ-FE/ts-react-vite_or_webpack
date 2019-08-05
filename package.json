@@ -8,7 +8,7 @@
         "add": "add-component",
         "lint-staged": "lint-staged",
         "lint": "tslint -p ./tsconfig.json",
-        "dev": "cross-env NODE_ENV=development APP_ENV=dev webpack-dev-server --config build/webpack.config.js --hot --port 8080",
+        "dev": "cross-env NODE_ENV=development APP_ENV=dev webpack-dev-server --config build/webpack.config.js",
         "build": "cross-env NODE_ENV=production webpack --config build/webpack.config.js",
         "build:qa": "cross-env APP_ENV=qa npm run build",
         "build:prod": "cross-env APP_ENV=prod npm run build"

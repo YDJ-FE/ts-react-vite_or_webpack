@@ -1,16 +1,9 @@
-const yargs = require('yargs')
-const openBrowser = require('react-dev-utils/openBrowser')
 const clearConsole = require('react-dev-utils/clearConsole')
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages')
-
-const { port } = yargs.argv
 
 const compilerHooks = [
     {
         apply: compiler => {
-            compiler.hooks.afterPlugins.tap('after-plugins', function() {
-                openBrowser(`http://localhost:${port}`)
-            })
             compiler.hooks.invalid.tap('invalid', function() {
                 console.log('Compiling...')
             })

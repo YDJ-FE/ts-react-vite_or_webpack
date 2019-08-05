@@ -1,4 +1,5 @@
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+const openBrowser = require('react-dev-utils/openBrowser')
 
 const config = require('./config')
 const constants = require('./constants')
@@ -10,7 +11,7 @@ const { assetsPath, resolve } = require('./utils')
 const optimization = require('./optimization')
 require('./cleanup-folder')
 
-module.exports = {
+const conf = {
     mode: process.env.NODE_ENV,
     entry: { app: ['./src/index.tsx'] },
     output: {
@@ -38,3 +39,17 @@ module.exports = {
     stats: 'minimal',
     devtool: config.sourceMap
 }
+
+if (process.env.NODE_ENV === 'development') {
+    conf.devServer = {
+        port: config.devPort,
+        hot: true,
+        disableHostCheck: true,
+        host: '0.0.0.0',
+        after: function() {
+            openBrowser(`http://localhost:${config.devPort}`)
+        }
+    }
+}
+
+module.exports = conf
