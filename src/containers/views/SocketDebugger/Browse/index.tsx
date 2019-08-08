@@ -7,7 +7,7 @@ import { List as VList, ListRowProps } from 'react-virtualized/dist/es/List'
 
 import styles from './index.scss'
 import useRootStore from '@store/useRootStore'
-import { useOnMount } from '@utils/reactExt'
+import { useOnMount } from '@utils/hooks'
 import Message from './Message'
 
 function Browse() {
