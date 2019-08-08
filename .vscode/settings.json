@@ -8,6 +8,7 @@
         { "language": "typescriptreact", "autoFix": true }
     ],
     "eslint.autoFixOnSave": true,
+    "scss.lint.validProperties": ["composes"],
     "beautify.ignore": ["**/*.css", "**/*.scss", "**/*.js", "**/*.ts", "**/*.tsx"],
     "typescript.tsdk": "node_modules/typescript/lib"
 }
