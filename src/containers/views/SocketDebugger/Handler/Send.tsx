@@ -117,9 +117,9 @@ function Send() {
                             wordWrap: 'break-word',
                             wordBreak: 'break-all'
                         }}
-                        onAdd={({ updated_src }) => setJsonContent(updated_src)}
-                        onEdit={({ updated_src }) => setJsonContent(updated_src)}
-                        onDelete={({ updated_src }) => setJsonContent(updated_src)}
+                        onAdd={({ updated_src: uSrc }) => setJsonContent(uSrc)}
+                        onEdit={({ updated_src: uSrc }) => setJsonContent(uSrc)}
+                        onDelete={({ updated_src: uSrc }) => setJsonContent(uSrc)}
                         src={jsonContent}
                     />
                 </div>
