@@ -6,7 +6,7 @@ const Error = () => (
     <div className={styles.centered}>
         <div className={styles.emoji}>😭</div>
         <p className={styles.title}>Ooooops!</p>
-        <p>This page doesn't exist anymore.</p>
+        <p>This page does not exist anymore.</p>
     </div>
 )
 

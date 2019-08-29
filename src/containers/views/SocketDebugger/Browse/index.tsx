@@ -3,11 +3,11 @@ import { reaction } from 'mobx'
 import { observer } from 'mobx-react'
 import { AutoSizer } from 'react-virtualized/dist/es/AutoSizer'
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized/dist/es/CellMeasurer'
-import { List as VList } from 'react-virtualized/dist/es/List'
+import { List as VList, ListRowProps } from 'react-virtualized/dist/es/List'
 
 import styles from './index.scss'
 import useRootStore from '@store/useRootStore'
-import { useOnMount } from '@utils/reactExt'
+import { useOnMount } from '@utils/hooks'
 import Message from './Message'
 
 function Browse() {
@@ -34,7 +34,7 @@ function Browse() {
 
     useOnMount(listenMessagesLen)
 
-    function renderItem({ index, key, parent, style }) {
+    function renderItem({ index, key, parent, style }: ListRowProps) {
         const item = socketStore.messages[index]
         return (
             <CellMeasurer cache={measureCache} columnIndex={0} key={key} parent={parent} rowIndex={index}>

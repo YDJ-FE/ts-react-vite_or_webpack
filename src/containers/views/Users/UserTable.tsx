@@ -2,7 +2,7 @@ import React from 'react'
 import { Table, Divider, Popconfirm } from 'antd'
 import { observer } from 'mobx-react'
 
-import { useOnMount } from '@utils/reactExt'
+import { useOnMount } from '@utils/hooks'
 import useRootStore from '@store/useRootStore'
 import UserModal from './UserModal'
 

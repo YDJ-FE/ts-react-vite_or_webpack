@@ -84,7 +84,7 @@ export default observer(Test)
 
 ## necessary extensions (on vscode)
 
--   [TSLint](https://marketplace.visualstudio.com/items?itemName=eg2.tslint)
+-   [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
 -   [stylelint](https://marketplace.visualstudio.com/items?itemName=shinnn.stylelint)
 
