@@ -7,11 +7,10 @@ export class UserStore extends StoreExt {
     /**
      * 加载用户列表时的loading
      *
-     * @type {boolean}
      * @memberof UserStore
      */
     @observable
-    getUsersloading: boolean = false
+    getUsersloading = false
     /**
      * 用户列表
      *
@@ -23,27 +22,24 @@ export class UserStore extends StoreExt {
     /**
      * table pageIndex
      *
-     * @type {number}
      * @memberof UserStore
      */
     @observable
-    pageIndex: number = 1
+    pageIndex = 1
     /**
      * table pageSize
      *
-     * @type {number}
      * @memberof UserStore
      */
     @observable
-    pageSize: number = 30
+    pageSize = 30
     /**
      * users total
      *
-     * @type {number}
      * @memberof UserStore
      */
     @observable
-    total: number = 0
+    total = 0
 
     /**
      * 加载用户列表

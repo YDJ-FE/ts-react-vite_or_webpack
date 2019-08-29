@@ -19,7 +19,7 @@ export class SocketStore extends StoreExt {
     dataFormat: ISocketStore.DataFormatType =
         (localStorage.getItem(LOCALSTORAGE_KEYS.DATA_FORMAT) as ISocketStore.DataFormatType) || DATA_FORMATS[0]
     @observable
-    socketIsConnected: boolean = false
+    socketIsConnected = false
     @observable
     messages: ISocketStore.Message[] = []
     @observable
