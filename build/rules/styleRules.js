@@ -20,7 +20,9 @@ const cssLoader = modules => ({
 const sassLoader = {
     loader: 'sass-loader',
     options: {
-        includePaths: [require('bourbon').includePaths, resolve('src/styles')]
+        sassOptions: {
+            includePaths: [require('bourbon').includePaths, resolve('src/styles')]
+        }
     }
 }
 

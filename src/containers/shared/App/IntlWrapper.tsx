@@ -1,7 +1,7 @@
 import React from 'react'
 import intl from 'react-intl-universal'
 import { find } from 'lodash'
-import { Select, LocaleProvider } from 'antd'
+import { Select, ConfigProvider } from 'antd'
 import { Locale } from 'antd/lib/locale-provider'
 
 import styles from './index.scss'
@@ -53,11 +53,11 @@ export default function IntlWrapper({ children }: IProps) {
         </Select>
     )
     return (
-        <LocaleProvider locale={antdLocaleData}>
+        <ConfigProvider locale={antdLocaleData}>
             <React.Fragment>
                 {selectLanguage}
                 {children}
             </React.Fragment>
-        </LocaleProvider>
+        </ConfigProvider>
     )
 }

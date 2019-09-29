@@ -2,6 +2,7 @@ import React from 'react'
 import { Table, Divider, Popconfirm } from 'antd'
 import { observer } from 'mobx-react'
 
+import styles from './index.scss'
 import { useOnMount } from '@utils/hooks'
 import useRootStore from '@store/useRootStore'
 import UserModal from './UserModal'
@@ -51,9 +52,9 @@ function UserTable({ scrollY }: IProps) {
                     width={120}
                     render={(_, record) => (
                         <span>
-                            <a href="javascript:;" onClick={() => modifyUser(record)}>
+                            <span className={styles.ctrlEle} onClick={() => modifyUser(record)}>
                                 Modify
-                            </a>
+                            </span>
                             <Divider type="vertical" />
                             <Popconfirm
                                 placement="top"
@@ -62,7 +63,7 @@ function UserTable({ scrollY }: IProps) {
                                 okText="Yes"
                                 cancelText="No"
                             >
-                                <a href="javascript:;">Delete</a>
+                                <span className={styles.ctrlEle}>Delete</span>
                             </Popconfirm>
                         </span>
                     )}
