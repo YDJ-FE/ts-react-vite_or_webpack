@@ -1,11 +1,6 @@
 // @ts-nocheck
 module.exports = {
-    extends: [
-        'stylelint-prettier/recommended',
-        'stylelint-config-css-modules',
-        'stylelint-config-standard',
-        'stylelint-config-ydj/scss'
-    ],
+    extends: ['stylelint-prettier/recommended', 'stylelint-config-ydj/scss', 'stylelint-config-ydj/prettier'],
     rules: {
         'prettier/prettier': true,
         'selector-pseudo-class-no-unknown': [true, { ignorePseudoClasses: ['global', 'local'] }],

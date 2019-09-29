@@ -1,13 +1,13 @@
 {
     "editor.formatOnSave": true,
-    "prettier.stylelintIntegration": true,
-    "scss.lint.validProperties": ["composes"],
     "eslint.validate": [
         { "language": "javascript", "autoFix": true },
         { "language": "typescript", "autoFix": true },
         { "language": "typescriptreact", "autoFix": true }
     ],
     "eslint.autoFixOnSave": true,
-    "beautify.ignore": ["**/*.css", "**/*.scss", "**/*.js", "**/*.ts", "**/*.tsx"],
-    "typescript.tsdk": "node_modules/typescript/lib"
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "prettier.stylelintIntegration": true,
+    "scss.lint.validProperties": ["composes"],
+    "jest.autoEnable": false
 }
