@@ -1,2 +1,2 @@
-/src/**/*.scss.d.ts
 /node_modules
+/src/**/*.scss.d.ts
