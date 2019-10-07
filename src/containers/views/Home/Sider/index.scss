@@ -8,8 +8,8 @@
 }
 
 .logoBox {
-    padding: 10px 0;
     font-size: 50px;
+    padding: 10px 0;
     text-align: center;
 
     &.dark {
@@ -22,17 +22,17 @@
 }
 
 .changeTheme {
-    display: flex;
-    padding: 12px 10px;
-    justify-content: space-around;
     align-items: center;
     border-top: 1px solid $border-light-color;
+    display: flex;
     font-size: $font-size-sm;
+    justify-content: space-around;
+    padding: 12px 10px;
     transition: all 0.3s;
 
     &.dark {
-        color: rgba(white, 0.65);
         background-color: $dark-color;
         border-color: $dark-color;
+        color: rgba(white, 0.65);
     }
 }

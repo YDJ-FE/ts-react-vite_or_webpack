@@ -1,19 +1,19 @@
 @import '_base.scss';
 
 .header {
-    display: flex;
-    padding: 0 135px 0 0;
-    justify-content: space-between;
     align-items: center;
     background-color: white;
     border-left: 1px solid $border-light-color;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 135px 0 0;
 }
 
 .trigger {
-    padding: 0 24px;
+    cursor: pointer;
     font-size: 18px;
     line-height: 64px;
-    cursor: pointer;
+    padding: 0 24px;
     transition: color 0.3s;
 
     &:hover {
@@ -22,8 +22,8 @@
 }
 
 .right {
-    display: flex;
     align-items: center;
+    display: flex;
 }
 
 .rightIcon {

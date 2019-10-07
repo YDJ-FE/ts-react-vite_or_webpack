@@ -2,17 +2,17 @@
 
 .appWrapper {
     display: flex;
-    width: 100%;
+    flex-direction: column;
     height: 100%;
     margin: 0 auto;
-    overflow: auto;
     min-height: 100%;
-    flex-direction: column;
+    overflow: auto;
+    width: 100%;
 }
 
 .intlSelect:global.ant-select {
     position: absolute;
-    top: 15px;
     right: 15px;
+    top: 15px;
     width: 100px;
 }

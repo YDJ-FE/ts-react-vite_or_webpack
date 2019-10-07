@@ -5,8 +5,8 @@
 }
 
 .head {
-    display: flex;
     align-items: center;
+    display: flex;
     justify-content: space-between;
 }
 
@@ -16,8 +16,8 @@
 }
 
 .autoComplete {
-    width: 100%;
     margin-top: 15px;
+    width: 100%;
 }
 
 .btnCover {
@@ -25,10 +25,10 @@
 }
 
 .content {
-    padding: 10px;
-    margin: 10px 0;
     border: 1px dotted #cac5c5;
     border-radius: 3px;
+    margin: 10px 0;
+    padding: 10px;
 }
 
 .textContent:global(.ant-input) {
@@ -46,8 +46,8 @@
 }
 
 .connect {
-    display: flex;
     align-items: center;
+    display: flex;
 }
 
 .btn {
@@ -55,9 +55,9 @@
 }
 
 .checkbox {
-    display: flex;
     align-items: center;
     composes: btn;
+    display: flex;
 
     :global {
         .ant-checkbox {
@@ -71,9 +71,9 @@
 }
 
 .tips {
-    margin: 1em 0;
+    border-left: 4px solid #ebedf0;
     color: #697b8c;
     font-size: 90%;
-    border-left: 4px solid #ebedf0;
+    margin: 1em 0;
     padding-left: 0.8em;
 }
