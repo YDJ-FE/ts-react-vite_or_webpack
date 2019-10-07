@@ -1,2 +1,3 @@
 /node_nodules
+/dist
 /src/**/*.scss.d.ts
