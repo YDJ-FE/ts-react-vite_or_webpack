@@ -7,7 +7,7 @@
     ],
     "eslint.autoFixOnSave": true,
     "typescript.tsdk": "node_modules/typescript/lib",
-    "prettier.stylelintIntegration": true,
+    "stylelint.autoFixOnSave": true,
     "scss.lint.validProperties": ["composes"],
     "jest.autoEnable": false
 }

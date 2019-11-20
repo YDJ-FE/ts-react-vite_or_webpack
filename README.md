@@ -86,7 +86,9 @@ export default observer(Test)
 
 -   [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
--   [stylelint](https://marketplace.visualstudio.com/items?itemName=shinnn.stylelint)
+-   [stylelint-plus](https://marketplace.visualstudio.com/items?itemName=hex-ci.stylelint-plus#review-details)
+
+    > use stylelint-plus instead of [stylelint](https://marketplace.visualstudio.com/items?itemName=shinnn.stylelint), because `stylelint` does not supports autofix in vscode yet!
 
 -   [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
