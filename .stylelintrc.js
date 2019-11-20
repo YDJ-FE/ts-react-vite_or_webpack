@@ -1,6 +1,6 @@
 // @ts-nocheck
 module.exports = {
-    extends: ['stylelint-prettier/recommended'],
+    extends: ['prettier-stylelint/config.js', 'stylelint-prettier/recommended'],
     plugins: ['stylelint-order'],
     rules: {
         'prettier/prettier': true,

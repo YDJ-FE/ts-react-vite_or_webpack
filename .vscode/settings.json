@@ -7,7 +7,6 @@
     ],
     "eslint.autoFixOnSave": true,
     "typescript.tsdk": "node_modules/typescript/lib",
-    "stylelint.autoFixOnSave": true,
     "scss.lint.validProperties": ["composes"],
     "jest.autoEnable": false
 }
