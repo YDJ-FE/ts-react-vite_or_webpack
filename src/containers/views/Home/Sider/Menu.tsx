@@ -2,7 +2,7 @@ import React from 'react'
 import { observer } from 'mobx-react'
 import { computed } from 'mobx'
 import { Menu, Icon } from 'antd'
-import pathToRegexp from 'path-to-regexp'
+import { pathToRegexp } from 'path-to-regexp'
 
 import styles from './index.scss'
 import { RootConsumer } from '@shared/App/Provider'
