@@ -40,7 +40,6 @@ We do not use any mock tools(Anyway, you can use the data format from server res
 -   import .(s)css auto generate .(s)css.d.ts by [typed-css-modules-webpack-plugin](https://github.com/dropbox/typed-css-modules-webpack-plugin)
 -   use ServiceWorker by [workbox-webpack-plugin](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin)
 -   import svg icon as a component by `@svgr/webpack`, [there is an example in the doc of steamer-react-redux-ts](https://github.com/YDJ-FE/steamer-react-ts/blob/master/docs/svg.md)
--   async to load component by `react-loadable`
 -   create component folder by `customaddcomponents` which is added to npm script `npm run add`
 -   use husky{pre-commit/commit-msg} hooks
 -   use [react-intl-universal](https://github.com/alibaba/react-intl-universal) for i18n.

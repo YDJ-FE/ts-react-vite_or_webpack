@@ -99,7 +99,7 @@ function Send() {
                         >
                             <Input.TextArea
                                 placeholder="Please input json string"
-                                autosize={{ minRows: 4, maxRows: 10 }}
+                                autoSize={{ minRows: 4, maxRows: 10 }}
                                 value={content}
                                 onChange={({ target }) => setContent(target.value)}
                             />
@@ -127,7 +127,7 @@ function Send() {
                 <Input.TextArea
                     className={styles.textContent}
                     placeholder="Input your sending content"
-                    autosize={{ minRows: 4, maxRows: 10 }}
+                    autoSize={{ minRows: 4, maxRows: 10 }}
                     value={textContent}
                     onChange={({ target }) => setTextContent(target.value)}
                 />

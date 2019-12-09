@@ -1,8 +1,9 @@
-import Loadable from 'react-loadable'
+import React from 'react'
+import Loadable from '@loadable/component'
 
 import PageLoading from '@components/PageLoading'
 
-const loadComponent = (loader: () => Promise<any>) => Loadable({ loader, loading: PageLoading })
+const loadComponent = (loader: () => Promise<any>) => Loadable(loader, { fallback: <PageLoading /> })
 
 export const asynchronousComponents = {
     SocketDebugger: loadComponent(() => import(/* webpackChunkName: "socket-debugger" */ '@views/SocketDebugger')),

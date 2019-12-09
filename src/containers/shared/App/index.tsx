@@ -1,5 +1,5 @@
 import React from 'react'
-import Loadable from 'react-loadable'
+import loadable from '@loadable/component'
 import { HashRouter, Router, Switch, Route } from 'react-router-dom'
 import { createHashHistory } from 'history'
 import { syncHistoryWithStore } from 'mobx-react-router'
@@ -14,14 +14,9 @@ import IntlWrapper from './IntlWrapper'
 const hashHistory = createHashHistory()
 const history = syncHistoryWithStore(hashHistory, store.routerStore)
 
-const Home = Loadable({
-    loader: () => import(/* webpackChunkName: "home" */ '@views/Home'),
-    loading: PageLoading
-})
-const Login = Loadable({
-    loader: () => import(/* webpackChunkName: "login" */ '@views/Login'),
-    loading: PageLoading
-})
+const loadableOptions = { fallback: <PageLoading /> }
+const Home = loadable(() => import(/* webpackChunkName: "home" */ '@views/Home'), loadableOptions)
+const Login = loadable(() => import(/* webpackChunkName: "login" */ '@views/Login'), loadableOptions)
 
 const AppWrapper = ({ children }: { children?: React.ReactNode }) => <div className={styles.appWrapper}>{children}</div>
 
