@@ -1,9 +1,9 @@
 declare const styles: {
-  readonly "sider": string;
-  readonly "logoBox": string;
-  readonly "dark": string;
-  readonly "menu": string;
   readonly "changeTheme": string;
+  readonly "dark": string;
+  readonly "logoBox": string;
+  readonly "menu": string;
+  readonly "sider": string;
 };
 export = styles;
 

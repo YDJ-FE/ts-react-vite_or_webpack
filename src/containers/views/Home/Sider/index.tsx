@@ -1,7 +1,8 @@
 import React from 'react'
 import classnames from 'classnames'
 import { observer } from 'mobx-react'
-import { Layout, Icon, Switch } from 'antd'
+import { Layout, Switch } from 'antd'
+import { AntDesignOutlined } from '@ant-design/icons'
 
 import styles from './index.scss'
 import useRootStore from '@store/useRootStore'
@@ -30,7 +31,7 @@ function Sider() {
             collapsed={sideBarCollapsed}
         >
             <div className={classnames(styles.logoBox, sideBarTheme === 'dark' && styles.dark)}>
-                <Icon type="ant-design" />
+                <AntDesignOutlined />
             </div>
             <SiderMenu />
             {!sideBarCollapsed && ChangeTheme}

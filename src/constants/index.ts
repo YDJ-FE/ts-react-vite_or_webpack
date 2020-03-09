@@ -10,7 +10,7 @@ export enum LOCALSTORAGE_KEYS {
     // about socket
     SOCKET_URL = 'socketUrl',
     SOCKET_TYPE = 'socketType',
-    SOCKET_IO_EVENTS = 'socketIOEvents',
+    SOCKET_IO_EVENTS = '_socketIOEvents',
     DATA_FORMAT = 'dataFormat',
     NOT_SUPPORT_POLLING = 'notSupportPolling'
 }

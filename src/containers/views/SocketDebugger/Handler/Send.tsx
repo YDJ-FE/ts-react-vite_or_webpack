@@ -10,7 +10,7 @@ import { DATA_FORMATS } from '@constants/socket'
 import { send } from '@services/websocket'
 
 const localSocketIOEvents = localStorage.getItem(LOCALSTORAGE_KEYS.SOCKET_IO_EVENTS)
-let initialSocketIOEvents: string[] = localSocketIOEvents ? JSON.parse(localSocketIOEvents) : []
+let initialSocketIOEvents: { value: string }[] = localSocketIOEvents ? JSON.parse(localSocketIOEvents) : []
 if (initialSocketIOEvents.length > 30) {
     initialSocketIOEvents = initialSocketIOEvents.slice(0, 30)
 }
@@ -59,8 +59,9 @@ function Send() {
             message.destroy()
             return message.error('Please input event name!')
         }
-        if (!socketIOEvents.includes(socketIOEvent)) {
-            const newSocketIOEvents = [socketIOEvent, ...socketIOEvents]
+        const hasStoraged = socketIOEvents.some(e => e.value === socketIOEvent)
+        if (!hasStoraged) {
+            const newSocketIOEvents = [{ value: socketIOEvent }, ...socketIOEvents]
             setSocketIOEvents(newSocketIOEvents)
             localStorage.setItem(LOCALSTORAGE_KEYS.SOCKET_IO_EVENTS, JSON.stringify(newSocketIOEvents))
         }
@@ -72,13 +73,11 @@ function Send() {
             {socketStore.isSocketIO && (
                 <AutoComplete
                     className={styles.autoComplete}
-                    dataSource={socketIOEvents}
+                    options={socketIOEvents}
                     placeholder="Input event name"
                     value={socketIOEvent}
                     onChange={e => setSocketIOEvent(e as string)}
-                    filterOption={(inputValue, option) =>
-                        (option.props.children as string).toUpperCase().includes(inputValue.toUpperCase())
-                    }
+                    filterOption={(inputValue, option) => option.value.toUpperCase().includes(inputValue.toUpperCase())}
                 />
             )}
             {socketStore.dataFormat === DATA_FORMATS[0] ? (

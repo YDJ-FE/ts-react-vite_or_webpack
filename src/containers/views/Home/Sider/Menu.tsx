@@ -1,7 +1,7 @@
 import React from 'react'
 import { observer } from 'mobx-react'
 import { computed } from 'mobx'
-import { Menu, Icon } from 'antd'
+import { Menu } from 'antd'
 import { pathToRegexp } from 'path-to-regexp'
 
 import styles from './index.scss'
@@ -110,7 +110,7 @@ class SiderMenu extends React.Component<IProps> {
                         key={String(item.id)}
                         title={
                             <span>
-                                {item.icon && <Icon type={item.icon} />}
+                                {item.icon}
                                 <span>{item.title}</span>
                             </span>
                         }
@@ -121,7 +121,7 @@ class SiderMenu extends React.Component<IProps> {
             }
             return (
                 <Menu.Item key={String(item.id)}>
-                    {item.icon && <Icon type={item.icon} />}
+                    {item.icon}
                     <span>{item.title}</span>
                 </Menu.Item>
             )

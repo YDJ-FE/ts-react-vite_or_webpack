@@ -1,5 +1,6 @@
 import React from 'react'
 import Loadable from '@loadable/component'
+import { CoffeeOutlined, UserOutlined } from '@ant-design/icons'
 
 import PageLoading from '@components/PageLoading'
 
@@ -18,7 +19,7 @@ export interface IMenu {
     id: number
     pid?: number
     path?: string
-    icon?: string
+    icon?: JSX.Element
     component?: AsynchronousComponentKeys
     exact?: boolean
 }
@@ -32,7 +33,7 @@ export const menu: IMenu[] = [
         id: 1,
         path: '/',
         title: 'SocketDebugger',
-        icon: 'coffee',
+        icon: <CoffeeOutlined />,
         component: 'SocketDebugger',
         exact: true
     },
@@ -40,7 +41,7 @@ export const menu: IMenu[] = [
         id: 2,
         path: '/users',
         title: 'Users',
-        icon: 'user',
+        icon: <UserOutlined />,
         component: 'Users',
         exact: true
     }

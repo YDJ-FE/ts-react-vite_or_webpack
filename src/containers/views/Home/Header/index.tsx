@@ -1,6 +1,7 @@
 import React from 'react'
 import { observer } from 'mobx-react'
-import { Layout, Icon } from 'antd'
+import { Layout } from 'antd'
+import { MenuUnfoldOutlined, MenuFoldOutlined, GithubOutlined, LogoutOutlined } from '@ant-design/icons'
 
 import styles from './index.scss'
 import useRootStore from '@store/useRootStore'
@@ -8,21 +9,13 @@ import { GITHUB_LINK } from '@constants/index'
 
 function Header() {
     const { globalStore, authStore } = useRootStore()
+    const IconMenuFold = globalStore.sideBarCollapsed ? MenuUnfoldOutlined : MenuFoldOutlined
     return (
         <Layout.Header className={styles.header}>
-            <Icon
-                className={styles.trigger}
-                type={globalStore.sideBarCollapsed ? 'menu-unfold' : 'menu-fold'}
-                onClick={globalStore.toggleSideBarCollapsed}
-            />
+            <IconMenuFold className={styles.trigger} onClick={globalStore.toggleSideBarCollapsed} />
             <div className={styles.right}>
-                <Icon
-                    className={styles.rightIcon}
-                    type="github"
-                    theme="outlined"
-                    onClick={() => window.open(GITHUB_LINK)}
-                />
-                <Icon className={styles.rightIcon} type="logout" theme="outlined" onClick={authStore.logout} />
+                <GithubOutlined className={styles.rightIcon} onClick={() => window.open(GITHUB_LINK)} />
+                <LogoutOutlined className={styles.rightIcon} onClick={authStore.logout} />
             </div>
         </Layout.Header>
     )
