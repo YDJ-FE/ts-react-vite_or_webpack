@@ -32,7 +32,9 @@ module.exports = {
         '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/explicit-member-accessibility': 'off',
         '@typescript-eslint/interface-name-prefix': 'off',
-        '@typescript-eslint/no-empty-interface': 'off'
+        '@typescript-eslint/no-empty-interface': 'off',
+        'react/prop-types': 'off',
+        'react/display-name': 'off'
     },
     settings: {
         react: {
