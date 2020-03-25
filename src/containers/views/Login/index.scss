@@ -1,5 +1,9 @@
 @import '_base.scss';
 
+:export {
+    varDarkColor: $dark-color;
+}
+
 .login {
     align-items: center;
     display: flex;

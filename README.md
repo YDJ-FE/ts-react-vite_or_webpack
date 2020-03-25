@@ -6,7 +6,7 @@ Have a quick view:
 
 ## setup
 
-> 国内用户可在.npmrc 中设置源`https://registry.npm.taobao.org/`
+> If you do not need the taobao registry, you can change it in `.npmrc`
 
 ```bash
 $ npm i

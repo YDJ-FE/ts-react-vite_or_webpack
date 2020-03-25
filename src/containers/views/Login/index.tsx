@@ -7,6 +7,9 @@ import { UserOutlined, LockOutlined, AntDesignOutlined } from '@ant-design/icons
 import styles from './index.scss'
 import useRootStore from '@store/useRootStore'
 
+// for test
+console.log(styles.varDarkColor)
+
 const FormItem = Form.Item
 
 function Login() {
