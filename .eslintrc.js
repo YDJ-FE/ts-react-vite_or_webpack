@@ -26,6 +26,8 @@ module.exports = {
         '@typescript-eslint/explicit-function-return-type': 'off',
         'prefer-const': 'error',
         'no-var': 'error',
+        'comma-dangle': 'off',
+        'arrow-parens': 'off',
         'no-multiple-empty-lines': 'error',
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-var-requires': 'off',
