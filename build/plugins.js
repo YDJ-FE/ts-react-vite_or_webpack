@@ -18,7 +18,7 @@ Object.assign(oriEnv, {
 })
 // webpack process.env
 const defineEnv = {}
-for (let key in oriEnv) {
+for (const key in oriEnv) {
     defineEnv[`process.env.${key}`] = JSON.stringify(oriEnv[key])
 }
 
@@ -54,23 +54,21 @@ const prodPlugins = [
             removeAttributeQuotes: true
             // more options:
             // https://github.com/kangax/html-minifier#options-quick-reference
-        },
-        // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-        chunksSortMode: 'dependency'
+        }
     }),
     new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output
         // both options are optional
         filename: assetsPath('css/[name].[contenthash].css'),
-        chunkFilename: assetsPath('css/[name].[id].[contenthash].css')
+        chunkFilename: assetsPath('css/[name].[id].[contenthash].css'),
+        ignoreOrder: true
     }),
     new WorkboxPlugin.GenerateSW({
         cacheId: 'ts-react-webpack',
         clientsClaim: true,
         skipWaiting: true,
         offlineGoogleAnalytics: false,
-        // do not use google cdn
-        importWorkboxFrom: 'local',
+        inlineWorkboxRuntime: true,
         // precache ignore
         exclude: [/index\.html$/, /\.map$/],
         // dynamic update
