@@ -18,7 +18,7 @@ const loadableOptions = { fallback: <PageLoading /> }
 const Home = loadable(() => import(/* webpackChunkName: "home" */ '@views/Home'), loadableOptions)
 const Login = loadable(() => import(/* webpackChunkName: "login" */ '@views/Login'), loadableOptions)
 
-const AppWrapper = ({ children }: { children?: React.ReactNode }) => <div className={styles.appWrapper}>{children}</div>
+const AppWrapper: React.FC = ({ children }) => <div className={styles.appWrapper}>{children}</div>
 
 function App() {
     return (

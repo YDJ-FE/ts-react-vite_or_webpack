@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import intl from 'react-intl-universal'
 import { find } from 'lodash'
 import { Select, ConfigProvider } from 'antd'
@@ -11,13 +11,11 @@ import { COOKIE_KEYS } from '@constants/index'
 import PageLoading from '@components/PageLoading'
 import { SUPPOER_LOCALES, LOCALES_KEYS, getLocaleLoader } from '@locales/loader'
 
-interface IProps {
-    children?: React.ReactNode
-}
+interface IProps {}
 
-export default function IntlWrapper({ children }: IProps) {
-    const [currentLocale, setCurrentLocale] = React.useState('')
-    const [antdLocaleData, setAntdLocaleData] = React.useState<Locale>(null)
+const IntlWrapper: React.FC<IProps> = ({ children }) => {
+    const [currentLocale, setCurrentLocale] = useState('')
+    const [antdLocaleData, setAntdLocaleData] = useState<Locale>(null)
 
     function loadLocales() {
         let targetLocale = intl.determineLocale({ cookieLocaleKey: COOKIE_KEYS.LANG }) as LOCALES_KEYS
@@ -61,3 +59,5 @@ export default function IntlWrapper({ children }: IProps) {
         </ConfigProvider>
     )
 }
+
+export default IntlWrapper
