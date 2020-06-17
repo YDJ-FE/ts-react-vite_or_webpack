@@ -9,10 +9,10 @@ export interface AxiosRequestConfig extends _AxiosRequestConfig {
 }
 
 export interface HttpResquest {
-    get?(url: string, data: object, baseUrl?: string): Promise<any>
-    post?(url: string, data: object, baseUrl?: string): Promise<any>
-    delete?(url: string, data: object, baseUrl?: string): Promise<any>
-    put?(url: string, data: object, baseUrl?: string): Promise<any>
+    get?(url: string, data: PlainObject, baseUrl?: string): Promise<any>
+    post?(url: string, data: PlainObject, baseUrl?: string): Promise<any>
+    delete?(url: string, data: PlainObject, baseUrl?: string): Promise<any>
+    put?(url: string, data: PlainObject, baseUrl?: string): Promise<any>
 }
 
 enum HTTPERROR {
@@ -36,7 +36,7 @@ const isSuccess = res => res.errCode === 0
 const resFormat = res => res.response || res.data || {}
 
 methods.forEach(v => {
-    http[v] = (url: string, data: object, baseUrl?: string) => {
+    http[v] = (url: string, data: PlainObject, baseUrl?: string) => {
         const axiosConfig: AxiosRequestConfig = {
             method: v,
             url,

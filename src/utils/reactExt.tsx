@@ -12,7 +12,7 @@ import * as api from '@services/api'
  * @template P
  * @template S
  */
-export class ComponentExt<P = {}, S = {}> extends React.Component<P, S> {
+export class ComponentExt<P, S> extends React.Component<P, S> {
     readonly api = api
     readonly $message = message
     readonly $notification = notification

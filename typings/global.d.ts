@@ -1,5 +1,5 @@
 declare interface PlainObject {
-    [propName: string]: any
+    [propName: string]: unknown
 }
 
 declare interface BooleanObject {

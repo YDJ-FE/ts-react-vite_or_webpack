@@ -85,7 +85,7 @@ export default observer(Test)
 
 -   [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
--   [stylelint](https://marketplace.visualstudio.com/items?itemName=shinnn.stylelint)
+-   [stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
 
 -   [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
