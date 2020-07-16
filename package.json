@@ -35,7 +35,7 @@
         "axios": "^0.19.0",
         "bourbon": "7.0.0",
         "eventemitter3": "4.0.4",
-        "lodash": "4.17.15",
+        "lodash": "4.17.19",
         "mobx": "5.15.4",
         "mobx-react": "6.2.2",
         "mobx-react-router": "^4.0.7",
