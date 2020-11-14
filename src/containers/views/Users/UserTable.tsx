@@ -60,8 +60,6 @@ function UserTable({ scrollY }: IProps) {
                                 placement="top"
                                 title="确认删除?"
                                 onConfirm={() => userStore.deleteUser(record._id)}
-                                okText="Yes"
-                                cancelText="No"
                             >
                                 <span className={styles.ctrlEle}>Delete</span>
                             </Popconfirm>

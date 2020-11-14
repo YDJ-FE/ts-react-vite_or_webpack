@@ -5,11 +5,12 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const WorkboxPlugin = require('workbox-webpack-plugin')
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const { TypedCssModulesPlugin } = require('typed-css-modules-webpack-plugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
 const { compilerHooks } = require('./custom-plugins')
 const constants = require('./constants')
 const config = require('./config')
-const { assetsPath } = require('./utils')
+const { resolve, assetsPath } = require('./utils')
 const env = require('./env.json')
 
 const oriEnv = env[constants.APP_ENV]
@@ -29,10 +30,15 @@ const basePlugins = [
     new webpack.DefinePlugin(defineEnv),
     new TypedCssModulesPlugin({
         globPattern: 'src/!(styles)/**/*.scss'
+    }),
+    new ForkTsCheckerWebpackPlugin({
+        typescript: { configFile: resolve('tsconfig.json') },
+        eslint: { enabled: true, files: resolve('src/**/*.{ts,tsx}') }
     })
 ]
 
 const devPlugins = [
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
         filename: 'index.html',
         template: 'build/tpl/index.html',
@@ -43,15 +49,13 @@ const devPlugins = [
 ]
 
 const prodPlugins = [
-    new webpack.WatchIgnorePlugin([/css\.d\.ts$/]),
     new HtmlWebpackPlugin({
         filename: config.index,
         template: 'build/tpl/index.html',
         inject: true,
         minify: {
             removeComments: true,
-            collapseWhitespace: true,
-            removeAttributeQuotes: true
+            collapseWhitespace: true
             // more options:
             // https://github.com/kangax/html-minifier#options-quick-reference
         }

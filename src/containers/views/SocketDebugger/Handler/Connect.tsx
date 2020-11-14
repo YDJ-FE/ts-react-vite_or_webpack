@@ -51,7 +51,7 @@ function Connect() {
                 </Button>
                 <Button
                     className={styles.btn}
-                    type="danger"
+                    danger
                     onClick={socketDisconnect}
                     disabled={!socketStore.socketIsConnected}
                 >
@@ -59,8 +59,8 @@ function Connect() {
                 </Button>
             </div>
             <blockquote className={styles.tips}>
-                protocol//ip or domain:host (example:{' '}
-                {socketStore.isSocketIO ? 'wss://showcase.jackple.com' : 'ws://127.0.0.1:3001'})
+                protocol//ip or domain:host (example:
+                {socketStore.isSocketIO ? ' wss://showcase.jackple.com' : ' ws://127.0.0.1:3001'})
             </blockquote>
         </div>
     )

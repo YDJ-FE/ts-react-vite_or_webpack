@@ -1,4 +1,4 @@
-import { RouterStore } from 'mobx-react-router'
+import { RouterStore } from '@superwf/mobx-react-router'
 
 export const routerStore = new RouterStore()
 

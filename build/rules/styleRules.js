@@ -11,7 +11,7 @@ const cssLoader = modules => ({
         modules: modules
             ? {
                   mode: 'local',
-                  localIdentName: '[local]--[hash:base64:8]'
+                  localIdentName: '[local]--[contenthash:base64:8]'
               }
             : false
     }

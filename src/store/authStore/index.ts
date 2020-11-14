@@ -1,36 +1,31 @@
-import { observable, action, reaction } from 'mobx'
+import { makeAutoObservable, action, reaction } from 'mobx'
 import { isPlainObject } from 'lodash'
 
-import { StoreExt } from '@utils/reactExt'
 import { routerStore } from './../'
 import { initialUserInfo, syncUserInfo } from './syncUserInfo'
 import { LOCALSTORAGE_KEYS } from '@constants/index'
+import request from '@utils/request'
 
-export class AuthStore extends StoreExt {
+export class AuthStore {
     /**
      * 用户信息
      *
      * @type {IAuthStore.UserInfo}
      * @memberof AuthStore
      */
-    @observable
     userInfo: IAuthStore.UserInfo = initialUserInfo
 
     constructor() {
-        super()
+        makeAutoObservable(this)
         reaction(() => this.userInfo, syncUserInfo)
     }
 
     @action
-    login = async (params: IAuthStore.LoginParams): Promise<any> => {
-        try {
-            const res = await this.api.auth.login(params)
-            this.setUserInfo(isPlainObject(res) ? res : {})
-            localStorage.setItem(LOCALSTORAGE_KEYS.USERINFO, JSON.stringify(res))
-            routerStore.replace('/')
-        } catch (err) {
-            console.error(err)
-        }
+    login = async (params: IAuthStore.LoginParams) => {
+        const { data } = await request.post<IAuthStore.UserInfo>('auth/login', params)
+        this.setUserInfo(isPlainObject(data) ? data : {})
+        localStorage.setItem(LOCALSTORAGE_KEYS.USERINFO, JSON.stringify(data))
+        routerStore.replace('/')
     }
 
     logout = () => {

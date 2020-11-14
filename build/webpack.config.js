@@ -8,7 +8,6 @@ const jsRules = require('./rules/jsRules')
 const fileRules = require('./rules/fileRules')
 const plugins = require('./plugins')
 const { assetsPath, resolve } = require('./utils')
-const optimization = require('./optimization')
 require('./cleanup-folder')
 
 const conf = {
@@ -16,8 +15,8 @@ const conf = {
     entry: { app: ['./src/index.tsx'] },
     output: {
         path: config.assetsRoot,
-        filename: constants.APP_ENV === 'dev' ? '[name].js' : assetsPath('js/[name].[chunkhash].js'),
-        chunkFilename: constants.APP_ENV === 'dev' ? '[name].js' : assetsPath('js/[name].[id].[chunkhash].js'),
+        filename: constants.APP_ENV === 'dev' ? '[name].js' : assetsPath('js/[name].[contenthash].js'),
+        chunkFilename: constants.APP_ENV === 'dev' ? '[name].js' : assetsPath('js/[name].[id].[contenthash].js'),
         publicPath: config.assetsPublicPath,
         pathinfo: false
     },
@@ -28,25 +27,26 @@ const conf = {
                 configFile: resolve('tsconfig.webpack.json'),
                 extensions: constants.FILE_EXTENSIONS
             })
-        ],
-        alias: { mobx: resolve('node_modules/mobx/lib/mobx.es6.js') }
+        ]
     },
     module: {
         rules: [...styleRules, ...jsRules, ...fileRules]
     },
     plugins,
-    optimization,
     stats: 'minimal',
+    target: 'web',
     devtool: config.sourceMap
 }
 
 if (process.env.NODE_ENV === 'development') {
     conf.devServer = {
+        // 不显示模块信息
+        stats: 'errors-warnings',
         port: config.devPort,
         hot: true,
         disableHostCheck: true,
         host: '0.0.0.0',
-        after: function() {
+        after: function () {
             openBrowser(`http://localhost:${config.devPort}`)
         }
     }

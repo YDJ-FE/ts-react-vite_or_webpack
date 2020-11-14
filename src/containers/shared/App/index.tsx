@@ -2,7 +2,7 @@ import React from 'react'
 import loadable from '@loadable/component'
 import { HashRouter, Router, Switch, Route } from 'react-router-dom'
 import { createHashHistory } from 'history'
-import { syncHistoryWithStore } from 'mobx-react-router'
+import { syncHistoryWithStore } from '@superwf/mobx-react-router'
 
 import styles from './index.scss'
 import * as store from '@store/index'

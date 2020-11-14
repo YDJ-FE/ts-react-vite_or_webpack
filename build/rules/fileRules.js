@@ -6,7 +6,7 @@ function getUrlloader(assetsPrefix) {
         loader: 'url-loader',
         options: {
             limit: 10000,
-            name: assetsPath(`${assetsPrefix}/[name].[hash:7].[ext]`)
+            name: assetsPath(`${assetsPrefix}/[name].[contenthash:7].[ext]`)
         }
     }
 }
@@ -22,7 +22,7 @@ module.exports = [
     },
     {
         test: /\.svg$/,
-        loader: [cacheLoader, threadLoader(), '@svgr/webpack'],
+        use: [cacheLoader, threadLoader(), '@svgr/webpack'],
         include: [resolve('src')]
     }
 ]

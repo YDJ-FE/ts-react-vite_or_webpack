@@ -48,8 +48,9 @@ function UserModal({ visible, onCancel, user }: IProps) {
                 userStore.getUsers()
             }
             onCancel()
-        } catch (err) {}
-        toggleLoading()
+        } finally {
+            toggleLoading()
+        }
     }
 
     return (

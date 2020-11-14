@@ -91,7 +91,7 @@ class Socket extends EventEmitter {
 
         reaction(
             () => socketStore.socketType,
-            (_, r) => {
+            (_, __, r) => {
                 clearTimeout(reopenTimer)
                 r.dispose()
             }

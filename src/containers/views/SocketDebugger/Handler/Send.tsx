@@ -116,9 +116,9 @@ function Send() {
                             wordWrap: 'break-word',
                             wordBreak: 'break-all'
                         }}
-                        onAdd={({ updated_src: uSrc }) => setJsonContent(uSrc)}
-                        onEdit={({ updated_src: uSrc }) => setJsonContent(uSrc)}
-                        onDelete={({ updated_src: uSrc }) => setJsonContent(uSrc)}
+                        onAdd={({ updated_src: uSrc }) => setJsonContent(uSrc as PlainObject)}
+                        onEdit={({ updated_src: uSrc }) => setJsonContent(uSrc as PlainObject)}
+                        onDelete={({ updated_src: uSrc }) => setJsonContent(uSrc as PlainObject)}
                         src={jsonContent}
                     />
                 </div>

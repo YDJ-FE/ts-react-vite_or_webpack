@@ -1,4 +1,4 @@
-import { RouterStore as _RouterStore } from 'mobx-react-router'
+import { RouterStore as _RouterStore } from '@superwf/mobx-react-router'
 
 declare global {
     /**

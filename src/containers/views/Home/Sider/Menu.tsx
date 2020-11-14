@@ -3,6 +3,7 @@ import { observer } from 'mobx-react'
 import { computed } from 'mobx'
 import { Menu } from 'antd'
 import { pathToRegexp } from 'path-to-regexp'
+import { MenuInfo } from 'rc-menu/lib/interface'
 
 import styles from './index.scss'
 import { RootConsumer } from '@shared/App/Provider'
@@ -46,9 +47,9 @@ class SiderMenu extends React.Component<IProps> {
             : {}
     }
 
-    goto = ({ key }: { key: string }) => {
+    goto = (info: MenuInfo) => {
         const { history } = this.props.routerStore
-        const selectedMenu = menu.find(item => String(item.id) === key)
+        const selectedMenu = menu.find(item => String(item.id) === info.key)
         if (selectedMenu && selectedMenu.path && selectedMenu.path !== this.currentRoute) {
             history.push(selectedMenu.path)
         }

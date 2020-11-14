@@ -4,10 +4,10 @@ const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages')
 const compilerHooks = [
     {
         apply: compiler => {
-            compiler.hooks.invalid.tap('invalid', function() {
+            compiler.hooks.invalid.tap('invalid', function () {
                 console.log('Compiling...')
             })
-            compiler.hooks.done.tap('done', function(stats) {
+            compiler.hooks.done.tap('done', function (stats) {
                 const rawMessages = stats.toJson({}, true)
                 const messages = formatWebpackMessages(rawMessages)
                 if (!messages.errors.length && !messages.warnings.length) {

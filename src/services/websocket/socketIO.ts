@@ -42,7 +42,7 @@ class Socket {
 
         reaction(
             () => socketStore.socketType,
-            (_, r) => {
+            (_, __, r) => {
                 this.socket.close()
                 r.dispose()
             }
