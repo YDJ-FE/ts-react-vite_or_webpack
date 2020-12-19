@@ -1,0 +1,28 @@
+@import '_base.scss';
+
+.douyinVideo {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.container {
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.08);
+    padding: 20px 36px 36px;
+    width: 320px;
+}
+
+.link {
+    margin-top: 30px;
+    @include ellipsis;
+}
+
+.tips {
+    color: #b5b0b0;
+    font-size: 12px;
+    line-height: 1.5;
+    margin-top: 10px;
+    padding-left: 10px;
+}

@@ -1,6 +1,6 @@
 import React from 'react'
 import Loadable from '@loadable/component'
-import { CoffeeOutlined, UserOutlined } from '@ant-design/icons'
+import { CoffeeOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons'
 
 import PageLoading from '@components/PageLoading'
 
@@ -8,7 +8,8 @@ const loadComponent = (loader: () => Promise<any>) => Loadable(loader, { fallbac
 
 export const asynchronousComponents = {
     SocketDebugger: loadComponent(() => import(/* webpackChunkName: "socket-debugger" */ '@views/SocketDebugger')),
-    Users: loadComponent(() => import(/* webpackChunkName: "users" */ '@views/Users'))
+    Users: loadComponent(() => import(/* webpackChunkName: "users" */ '@views/Users')),
+    DouyinVideo: loadComponent(() => import(/* webpackChunkName: "douyin-video" */ '@views/DouyinVideo'))
 }
 
 // all routers key
@@ -35,6 +36,14 @@ export const menu: IMenu[] = [
         title: 'SocketDebugger',
         icon: <CoffeeOutlined />,
         component: 'SocketDebugger',
+        exact: true
+    },
+    {
+        id: 3,
+        path: '/dy-v',
+        title: 'dy',
+        icon: <VideoCameraOutlined />,
+        component: 'DouyinVideo',
         exact: true
     },
     {
