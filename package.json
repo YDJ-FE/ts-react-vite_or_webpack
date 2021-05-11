@@ -36,7 +36,7 @@
         "axios": "0.21.1",
         "bourbon": "7.0.0",
         "eventemitter3": "4.0.7",
-        "lodash": "4.17.20",
+        "lodash": "4.17.21",
         "mobx": "6.0.4",
         "mobx-react": "7.0.5",
         "path-to-regexp": "6.2.0",
