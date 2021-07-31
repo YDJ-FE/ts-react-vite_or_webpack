@@ -8,7 +8,7 @@ const compilerHooks = [
                 console.log('Compiling...')
             })
             compiler.hooks.done.tap('done', function (stats) {
-                const rawMessages = stats.toJson({}, true)
+                const rawMessages = stats.toJson({ all: false, warnings: true, errors: true })
                 const messages = formatWebpackMessages(rawMessages)
                 if (!messages.errors.length && !messages.warnings.length) {
                     clearConsole()

@@ -6,8 +6,7 @@ module.exports = {
         'plugin:react/recommended',
         // Uses the recommended rules from @typescript-eslint/eslint-plugin
         'plugin:@typescript-eslint/recommended',
-        'plugin:prettier/recommended',
-        'prettier/@typescript-eslint'
+        'plugin:prettier/recommended'
     ],
     parserOptions: {
         // Allows for the parsing of modern ECMAScript features

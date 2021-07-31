@@ -20,8 +20,10 @@ const cssLoader = modules => ({
 const sassLoader = {
     loader: 'sass-loader',
     options: {
+        // `dart-sass` 是首选
+        implementation: require('sass'),
         sassOptions: {
-            includePaths: [require('bourbon').includePaths, resolve('src/styles')]
+            includePaths: [require('bourbon').includePaths[0], resolve('src/styles')]
         }
     }
 }
