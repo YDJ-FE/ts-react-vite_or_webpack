@@ -6,6 +6,12 @@ Have a quick view:
 
 ## setup
 
+> for husky
+
+```bash
+$ npm run prepare
+```
+
 > If you do not need the taobao registry, you can change it in `.npmrc`
 
 ```bash
