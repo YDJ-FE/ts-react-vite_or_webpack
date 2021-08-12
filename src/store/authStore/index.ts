@@ -23,13 +23,13 @@ export class AuthStore {
     @action
     login = async (params: IAuthStore.LoginParams) => {
         const { data } = await request.post<IAuthStore.UserInfo>('auth/login', params)
-        this.setUserInfo(isPlainObject(data) ? data : {})
+        this.setUserInfo(isPlainObject(data) ? data : null)
         localStorage.setItem(LOCALSTORAGE_KEYS.USERINFO, JSON.stringify(data))
         routerStore.replace('/')
     }
 
     logout = () => {
-        this.setUserInfo({})
+        this.setUserInfo(null)
         localStorage.removeItem(LOCALSTORAGE_KEYS.USERINFO)
         routerStore.replace('/login')
     }

@@ -2,7 +2,7 @@ import { LOCALSTORAGE_KEYS } from '@constants/index'
 
 export const initialUserInfo = (() => {
     const localUserInfo = localStorage.getItem(LOCALSTORAGE_KEYS.USERINFO)
-    const _userInfo: IAuthStore.UserInfo = localUserInfo ? JSON.parse(localUserInfo) : {}
+    const _userInfo: IAuthStore.UserInfo = localUserInfo ? JSON.parse(localUserInfo) : null
     return _userInfo
 })()
 

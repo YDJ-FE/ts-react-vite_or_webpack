@@ -2,7 +2,6 @@ import axios, { AxiosRequestConfig } from 'axios'
 
 import { routerStore } from '@store/index'
 import { userInfo } from '@store/authStore/syncUserInfo'
-import { get } from 'lodash'
 
 const TIMEOUT = 2 * 60000
 
@@ -27,8 +26,7 @@ function getAxiosInstance() {
             return response.data
         },
         function (error) {
-            const errMsg = get(error, 'response.data.message')
-            if (errMsg === 'invalid token') {
+            if (error?.response?.data?.message === 'invalid token' || error?.response?.status === 401) {
                 routerStore.replace('/login')
             }
             return Promise.reject(error)
