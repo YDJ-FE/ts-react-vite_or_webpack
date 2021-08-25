@@ -22,8 +22,9 @@ const sassLoader = {
     options: {
         // `dart-sass` 是首选
         implementation: require('sass'),
+        additionalData: `@import "${resolve('src/styles')}/_base.scss";`,
         sassOptions: {
-            includePaths: [require('bourbon').includePaths[0], resolve('src/styles')]
+            includePaths: [require('bourbon').includePaths[0]]
         }
     }
 }
