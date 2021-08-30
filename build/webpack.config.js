@@ -1,5 +1,6 @@
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const openBrowser = require('react-dev-utils/openBrowser')
+const { ESBuildMinifyPlugin } = require('esbuild-loader')
 
 const config = require('./config')
 const constants = require('./constants')
@@ -33,6 +34,14 @@ const conf = {
         rules: [...styleRules, ...jsRules, ...fileRules]
     },
     plugins,
+    optimization: {
+        minimizer: [
+            new ESBuildMinifyPlugin({
+                target: 'es2015',
+                css: true
+            })
+        ]
+    },
     stats: 'minimal',
     target: 'web',
     devtool: config.sourceMap
