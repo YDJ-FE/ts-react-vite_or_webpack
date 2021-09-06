@@ -28,7 +28,7 @@
         "@loadable/component": "5.15.0",
         "@superwf/mobx-react-router": "6.0.0",
         "antd": "4.16.9",
-        "axios": "0.21.1",
+        "axios": "^0.21.3",
         "bourbon": "7.0.0",
         "eventemitter3": "4.0.7",
         "lodash": "4.17.21",
