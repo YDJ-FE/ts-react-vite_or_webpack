@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { observer } from 'mobx-react'
 import { Modal, Form, Input, Select } from 'antd'
 
@@ -44,7 +44,7 @@ function UserModal({ visible, onCancel, user }: IProps) {
                 await userStore.createUser(values)
                 userStore.changePageIndex(1)
             } else {
-                await userStore.modifyUser({ ...values, _id: user._id })
+                await userStore.modifyUser({ ...values, id: user.id })
                 userStore.getUsers()
             }
             onCancel()
@@ -53,6 +53,16 @@ function UserModal({ visible, onCancel, user }: IProps) {
         }
     }
 
+    useEffect(() => {
+        if (visible) {
+            form.setFieldsValue({
+                account: user ? user.account : '',
+                category: user ? user.category : userCategory[0],
+                password: null
+            })
+        }
+    }, [visible])
+
     return (
         <Modal
             title={typeIsAdd ? 'Add User' : 'Modify User'}
@@ -60,12 +70,9 @@ function UserModal({ visible, onCancel, user }: IProps) {
             onOk={form.submit}
             onCancel={onCancel}
             okButtonProps={{ loading }}
+            destroyOnClose
         >
-            <Form
-                form={form}
-                onFinish={submit}
-                initialValues={{ account: user ? user.account : '', category: user ? user.category : userCategory[0] }}
-            >
+            <Form form={form} onFinish={submit}>
                 <FormItem {...formItemLayout} label="account" name="account" rules={[{ required: true }]}>
                     <Input />
                 </FormItem>

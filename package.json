@@ -41,7 +41,7 @@
         "react-json-view": "1.21.3",
         "react-router-dom": "5.2.0",
         "react-virtualized": "9.22.3",
-        "socket.io-client": "2.3.0",
+        "socket.io-client": "^4.2.0",
         "socketio-wildcard": "2.0.0"
     },
     "devDependencies": {

@@ -30,7 +30,7 @@ function UserTable({ scrollY }: IProps) {
                 className="center-table"
                 style={{ width: '100%' }}
                 bordered
-                rowKey="_id"
+                rowKey="id"
                 loading={userStore.getUsersloading}
                 dataSource={userStore.users}
                 scroll={{ y: scrollY }}
@@ -59,7 +59,7 @@ function UserTable({ scrollY }: IProps) {
                             <Popconfirm
                                 placement="top"
                                 title="确认删除?"
-                                onConfirm={() => userStore.deleteUser(record._id)}
+                                onConfirm={() => userStore.deleteUser(record.id)}
                             >
                                 <span className={styles.ctrlEle}>Delete</span>
                             </Popconfirm>
