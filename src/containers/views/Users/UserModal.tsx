@@ -42,10 +42,8 @@ function UserModal({ visible, onCancel, user }: IProps) {
         try {
             if (typeIsAdd) {
                 await userStore.createUser(values)
-                userStore.changePageIndex(1)
             } else {
                 await userStore.modifyUser({ ...values, id: user.id })
-                userStore.getUsers()
             }
             onCancel()
         } finally {

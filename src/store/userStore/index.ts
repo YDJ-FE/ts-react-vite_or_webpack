@@ -63,14 +63,17 @@ export class UserStore {
 
     createUser = async (user: IUserStore.IUser) => {
         await request.post('user/create', user)
+        this.changePageIndex(1)
     }
 
     modifyUser = async (user: IUserStore.IUser) => {
-        await request.post('user/modify', user)
+        const { id, ...rest } = user
+        await request.put(`user/${id}`, rest)
+        this.getUsers()
     }
 
-    deleteUser = async (_id: string) => {
-        await request.post('user/delete', { _id })
+    deleteUser = async (id: string) => {
+        await request.delete(`user/${id}`)
         this.getUsers()
     }
 
