@@ -59,17 +59,15 @@ $ npm run build:(qa/prod)
 ## component example
 
 ```jsx
-import * as React from 'react'
+import React from 'react'
 import { observer } from 'mobx-react'
 import { Button } from 'antd'
 
-import useRootStore from '@store/useRootStore'
+import history from '@shared/App/ht'
 
 function Test() {
-    const { routerStore } = useRootStore()
-
-    const gotoHome = () => {
-        routerStore.push('/')
+    function gotoHome() {
+        history.push('/')
     }
     return (
         <Button type="primary" onClick={gotoHome}>
