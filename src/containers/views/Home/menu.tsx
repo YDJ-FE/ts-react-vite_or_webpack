@@ -1,15 +1,17 @@
 import React from 'react'
-import Loadable from '@loadable/component'
+import loadable from '@loadable/component'
 import { CoffeeOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons'
 
 import PageLoading from '@components/PageLoading'
 
-const loadComponent = (loader: () => Promise<any>) => Loadable(loader, { fallback: <PageLoading /> })
-
+const loadableOptions = { fallback: <PageLoading /> }
 export const asynchronousComponents = {
-    SocketDebugger: loadComponent(() => import(/* webpackChunkName: "socket-debugger" */ '@views/SocketDebugger')),
-    Users: loadComponent(() => import(/* webpackChunkName: "users" */ '@views/Users')),
-    DouyinVideo: loadComponent(() => import(/* webpackChunkName: "douyin-video" */ '@views/DouyinVideo'))
+    SocketDebugger: loadable(
+        () => import(/* webpackChunkName: "socket-debugger" */ '@views/SocketDebugger'),
+        loadableOptions
+    ),
+    Users: loadable(() => import(/* webpackChunkName: "users" */ '@views/Users'), loadableOptions),
+    DouyinVideo: loadable(() => import(/* webpackChunkName: "douyin-video" */ '@views/DouyinVideo'), loadableOptions)
 }
 
 // all routers key

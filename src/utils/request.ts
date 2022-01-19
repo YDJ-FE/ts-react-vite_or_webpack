@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios'
 
-import { routerStore } from '@store/index'
 import { userInfo } from '@store/authStore/syncUserInfo'
+import history from '@shared/App/ht'
 
 const TIMEOUT = 2 * 60000
 
@@ -27,7 +27,7 @@ function getAxiosInstance() {
         },
         function (error) {
             if (error?.response?.data?.message === 'invalid token' || error?.response?.status === 401) {
-                routerStore.replace('/login')
+                history.replace('/login')
             }
             return Promise.reject(error)
         }

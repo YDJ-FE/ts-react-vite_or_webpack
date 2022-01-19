@@ -1,10 +1,10 @@
 import { makeAutoObservable, action, reaction } from 'mobx'
 import { isPlainObject } from 'lodash'
 
-import { routerStore } from './../'
 import { initialUserInfo, syncUserInfo } from './syncUserInfo'
 import { LOCALSTORAGE_KEYS } from '@constants/index'
 import request from '@utils/request'
+import history from '@shared/App/ht'
 
 export class AuthStore {
     /**
@@ -25,13 +25,13 @@ export class AuthStore {
         const { data } = await request.post<IAuthStore.UserInfo>('auth/login', params)
         this.setUserInfo(isPlainObject(data) ? data : null)
         localStorage.setItem(LOCALSTORAGE_KEYS.USERINFO, JSON.stringify(data))
-        routerStore.replace('/')
+        history.replace('/')
     }
 
     logout = () => {
         this.setUserInfo(null)
         localStorage.removeItem(LOCALSTORAGE_KEYS.USERINFO)
-        routerStore.replace('/login')
+        history.replace('/login')
     }
 
     /**
