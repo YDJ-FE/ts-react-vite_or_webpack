@@ -1,11 +1,11 @@
-import io from 'socket.io-client'
+import io, { Manager, Socket } from 'socket.io-client'
 import socketioWildcard from 'socketio-wildcard'
 import { message } from 'antd'
 import { reaction } from 'mobx'
 
 import { socketStore } from '@store/index'
 
-const patch = socketioWildcard(io.Manager)
+const patch = socketioWildcard(Manager)
 
 /**
  * socket 通信
@@ -13,8 +13,8 @@ const patch = socketioWildcard(io.Manager)
  * @export
  * @class Socket
  */
-class Socket {
-    socket: SocketIOClient.Socket
+class _Socket {
+    socket: Socket
 
     send(event: string, data: any, retry = 0) {
         if (this.socket && this.socket.connected) {
@@ -31,7 +31,7 @@ class Socket {
         if (!socketStore.notSupportPolling) {
             transports.unshift('polling')
         }
-        this.socket = io.connect(url, {
+        this.socket = io(url, {
             reconnectionDelay: 1000,
             reconnection: true,
             reconnectionAttempts: 5,
@@ -141,7 +141,7 @@ class Socket {
     }
 }
 
-const socketInstance = new Socket()
+const socketInstance = new _Socket()
 
 function canSocketOpen() {
     return !(socketInstance.socket && socketInstance.socket.connected)

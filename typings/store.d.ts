@@ -1,14 +1,4 @@
-import { RouterStore as _RouterStore } from '@superwf/mobx-react-router'
-
-declare global {
-    /**
-     * type from mobx-react-router
-     *
-     * @interface RouterStore
-     * @extends {_RouterStore}
-     */
-    interface RouterStore extends _RouterStore {}
-
+export declare global {
     /**
      * type for all store
      *
@@ -19,6 +9,5 @@ declare global {
         userStore: IUserStore.UserStore
         globalStore: IGlobalStore.GlobalStore
         socketStore: ISocketStore.SocketStore
-        routerStore: RouterStore
     }
 }

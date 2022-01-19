@@ -40,15 +40,12 @@ const conf = {
 
 if (process.env.NODE_ENV === 'development') {
     conf.devServer = {
-        // 不显示模块信息
-        stats: 'errors-warnings',
         port: config.devPort,
         hot: true,
-        disableHostCheck: true,
-        host: '0.0.0.0',
-        after: function () {
-            openBrowser(`http://localhost:${config.devPort}`)
-        }
+        host: '0.0.0.0'
+        // after: function () {
+        //     openBrowser(`http://localhost:${config.devPort}`)
+        // }
     }
 }
 

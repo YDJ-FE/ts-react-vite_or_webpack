@@ -1,75 +1,66 @@
-import React from 'react'
+import React, { useCallback, useMemo, useRef } from 'react'
 import { observer } from 'mobx-react'
-import { computed } from 'mobx'
 import { Menu } from 'antd'
 import { pathToRegexp } from 'path-to-regexp'
 import { MenuInfo } from 'rc-menu/lib/interface'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import styles from './index.scss'
-import { RootConsumer } from '@shared/App/Provider'
 import { arrayToTree, queryArray } from '@utils/index'
 import menu, { IMenu, IMenuInTree } from './../menu'
+import useRootStore from '@store/useRootStore'
 
 const { SubMenu } = Menu
 
-interface IProps {
-    sideBarCollapsed: boolean
-    sideBarTheme: IGlobalStore.SideBarTheme
-    navOpenKeys: string[]
-    setOpenKeys: (openKeys: string[]) => void
-    userInfo: IAuthStore.UserInfo
-    routerStore: RouterStore
-}
+function SiderMenu() {
+    const navigate = useNavigate()
+    const location = useLocation()
+    const levelMap = useRef<NumberObject>({})
 
-@observer
-class SiderMenu extends React.Component<IProps> {
-    // 打开的菜单层级记录
-    private levelMap: NumberObject = {}
+    const {
+        globalStore: { sideBarTheme, sideBarCollapsed, navOpenKeys, setOpenKeys }
+    } = useRootStore()
 
-    @computed
-    get currentRoute() {
-        return this.props.routerStore.location.pathname
-    }
+    const menuTree = useMemo(() => arrayToTree<IMenuInTree>(menu, 'id', 'pid'), [])
 
-    @computed
-    get menuTree() {
-        return arrayToTree<IMenuInTree>(menu, 'id', 'pid')
-    }
-
-    @computed
-    get menuProps() {
-        const { sideBarCollapsed, navOpenKeys } = this.props
-        return !sideBarCollapsed
-            ? {
-                  onOpenChange: this.onOpenChange,
-                  openKeys: navOpenKeys
-              }
-            : {}
-    }
-
-    goto = (info: MenuInfo) => {
-        const { history } = this.props.routerStore
-        const selectedMenu = menu.find(item => String(item.id) === info.key)
-        if (selectedMenu && selectedMenu.path && selectedMenu.path !== this.currentRoute) {
-            history.push(selectedMenu.path)
+    const getAncestorKeys = useCallback((key: string) => {
+        const map = {}
+        const getParent = (index: string) => {
+            const result = [String(levelMap.current[index])]
+            if (levelMap.current[result[0]]) {
+                result.unshift(getParent(result[0])[0])
+            }
+            return result
         }
-    }
-
-    onOpenChange = (openKeys: string[]): void => {
-        const { navOpenKeys, setOpenKeys } = this.props
-        const latestOpenKey = openKeys.find(key => !navOpenKeys.includes(key))
-        const latestCloseKey = navOpenKeys.find(key => !openKeys.includes(key))
-        let nextOpenKeys = []
-        if (latestOpenKey) {
-            nextOpenKeys = this.getAncestorKeys(latestOpenKey).concat(latestOpenKey)
+        for (const index in levelMap.current) {
+            if ({}.hasOwnProperty.call(levelMap.current, index)) {
+                map[index] = getParent(index)
+            }
         }
-        if (latestCloseKey) {
-            nextOpenKeys = this.getAncestorKeys(latestCloseKey)
-        }
-        setOpenKeys(nextOpenKeys)
-    }
+        return map[key] || []
+    }, [])
 
-    getPathArray = (array: IMenu[], current: IMenu): string[] => {
+    const onOpenChange = useCallback(
+        (openKeys: string[]) => {
+            const latestOpenKey = openKeys.find(key => !navOpenKeys.includes(key))
+            const latestCloseKey = navOpenKeys.find(key => !openKeys.includes(key))
+            let nextOpenKeys = []
+            if (latestOpenKey) {
+                nextOpenKeys = getAncestorKeys(latestOpenKey).concat(latestOpenKey)
+            }
+            if (latestCloseKey) {
+                nextOpenKeys = getAncestorKeys(latestCloseKey)
+            }
+            setOpenKeys(nextOpenKeys)
+        },
+        [navOpenKeys, getAncestorKeys]
+    )
+
+    const menuProps = useMemo(() => {
+        return !sideBarCollapsed ? { onOpenChange, openKeys: navOpenKeys } : {}
+    }, [sideBarCollapsed, navOpenKeys, onOpenChange])
+
+    const getPathArray = useCallback((array: IMenu[], current: IMenu): string[] => {
         const result = [String(current.id)]
         const getPath = (item: IMenu): void => {
             if (item && item.pid) {
@@ -79,32 +70,23 @@ class SiderMenu extends React.Component<IProps> {
         }
         getPath(current)
         return result
-    }
+    }, [])
 
-    // 保持选中
-    getAncestorKeys = (key: string): string[] => {
-        const map = {}
-        const getParent = index => {
-            const result = [String(this.levelMap[index])]
-            if (this.levelMap[result[0]]) {
-                result.unshift(getParent(result[0])[0])
+    const goto = useCallback(
+        (info: MenuInfo) => {
+            const selectedMenu = menu.find(item => String(item.id) === info.key)
+            if (selectedMenu && selectedMenu.path && selectedMenu.path !== location.pathname) {
+                navigate(selectedMenu.path)
             }
-            return result
-        }
-        for (const index in this.levelMap) {
-            if ({}.hasOwnProperty.call(this.levelMap, index)) {
-                map[index] = getParent(index)
-            }
-        }
-        return map[key] || []
-    }
+        },
+        [location.pathname]
+    )
 
-    // 递归生成菜单
-    getMenus = (menuTree: IMenuInTree[]) => {
+    const getMenus = useCallback((menuTree: IMenuInTree[]) => {
         return menuTree.map(item => {
             if (item.children) {
                 if (item.pid) {
-                    this.levelMap[item.id] = item.pid
+                    levelMap.current[item.id] = item.pid
                 }
                 return (
                     <SubMenu
@@ -116,7 +98,7 @@ class SiderMenu extends React.Component<IProps> {
                             </span>
                         }
                     >
-                        {this.getMenus(item.children)}
+                        {getMenus(item.children)}
                     </SubMenu>
                 )
             }
@@ -127,57 +109,37 @@ class SiderMenu extends React.Component<IProps> {
                 </Menu.Item>
             )
         })
-    }
+    }, [])
 
-    render() {
-        this.levelMap = {}
-        const { sideBarTheme } = this.props
-        const menuItems = this.getMenus(this.menuTree)
-        // 寻找选中路由
-        let currentMenu: IMenu = null
-        for (const item of menu) {
-            if (item.path && pathToRegexp(item.path).exec(this.currentRoute)) {
-                currentMenu = item
-                break
-            }
+    levelMap.current = {}
+    const menuItems = getMenus(menuTree)
+    // 寻找选中路由
+    let currentMenu: IMenu = null
+    for (const item of menu) {
+        if (item.path && pathToRegexp(item.path).exec(location.pathname)) {
+            currentMenu = item
+            break
         }
-        let selectedKeys: string[] = null
-        if (currentMenu) {
-            selectedKeys = this.getPathArray(menu, currentMenu)
-        }
-        if (!selectedKeys) {
-            selectedKeys = ['1']
-        }
-        return (
-            <Menu
-                className={styles.menu}
-                theme={sideBarTheme}
-                mode="inline"
-                selectedKeys={selectedKeys}
-                onClick={this.goto}
-                {...this.menuProps}
-            >
-                {menuItems}
-            </Menu>
-        )
     }
-}
-
-function Wrapper() {
+    let selectedKeys: string[] = null
+    if (currentMenu) {
+        selectedKeys = getPathArray(menu, currentMenu)
+    }
+    if (!selectedKeys) {
+        selectedKeys = ['1']
+    }
     return (
-        <RootConsumer>
-            {({ routerStore, authStore, globalStore }) => (
-                <SiderMenu
-                    routerStore={routerStore}
-                    userInfo={authStore.userInfo}
-                    sideBarCollapsed={globalStore.sideBarCollapsed}
-                    sideBarTheme={globalStore.sideBarTheme}
-                    navOpenKeys={globalStore.navOpenKeys}
-                    setOpenKeys={globalStore.setOpenKeys}
-                />
-            )}
-        </RootConsumer>
+        <Menu
+            className={styles.menu}
+            theme={sideBarTheme}
+            mode="inline"
+            selectedKeys={selectedKeys}
+            onClick={goto}
+            {...menuProps}
+        >
+            {menuItems}
+        </Menu>
     )
 }
 
-export default Wrapper
+export default observer(SiderMenu)
