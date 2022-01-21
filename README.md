@@ -1,3 +1,5 @@
+There is an example [use-vite](https://github.com/YDJ-FE/ts-react-vite_or_webpack)
+
 This is a simple (admin) starter with typescript, react and webpack.
 
 Have a quick view:
