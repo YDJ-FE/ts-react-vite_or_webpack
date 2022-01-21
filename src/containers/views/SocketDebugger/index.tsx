@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styles from './index.scss'
+import styles from './index.module.scss'
 import Handler from './Handler'
 import Browse from './Browse'
 

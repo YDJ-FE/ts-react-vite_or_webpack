@@ -7,7 +7,7 @@ const TIMEOUT = 2 * 60000
 
 // if you want another config, create one!!
 const DEFAULTCONFIG: AxiosRequestConfig = {
-    baseURL: process.env.BASEURL,
+    baseURL: import.meta.env.VITE_BASEURL,
     timeout: TIMEOUT
 }
 

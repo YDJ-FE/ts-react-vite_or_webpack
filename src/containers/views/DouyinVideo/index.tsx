@@ -2,7 +2,7 @@ import React from 'react'
 import { Input, Button, message } from 'antd'
 import axios from 'axios'
 
-import styles from './index.scss'
+import styles from './index.module.scss'
 
 function DouyinVideo() {
     const [loading, setLoading] = React.useState(false)

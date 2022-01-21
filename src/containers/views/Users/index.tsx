@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styles from './index.scss'
+import styles from './index.module.scss'
 import Header from './Header'
 import UserTable from './UserTable'
 import AutoSizer from '@components/AutoSizer'

@@ -3,7 +3,7 @@ import { observer } from 'mobx-react'
 import { Layout } from 'antd'
 import { MenuUnfoldOutlined, MenuFoldOutlined, GithubOutlined, LogoutOutlined } from '@ant-design/icons'
 
-import styles from './index.scss'
+import styles from './index.module.scss'
 import useRootStore from '@store/useRootStore'
 import { GITHUB_LINK } from '@constants/index'
 

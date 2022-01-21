@@ -1,7 +1,7 @@
 import React from 'react'
 import enzyme from 'enzyme'
 
-import styles from './index.scss'
+import styles from './index.module.scss'
 import Error from './'
 
 it('renders the correct text', () => {

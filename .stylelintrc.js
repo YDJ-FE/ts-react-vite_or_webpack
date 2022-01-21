@@ -1,5 +1,6 @@
 // @ts-nocheck
 module.exports = {
+    customSyntax: 'postcss-scss',
     extends: ['prettier-stylelint/config.js', 'stylelint-prettier/recommended'],
     plugins: ['stylelint-order'],
     rules: {

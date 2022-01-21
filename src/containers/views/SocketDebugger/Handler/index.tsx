@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styles from './index.scss'
+import styles from './index.module.scss'
 import Type from './Type'
 import DataFormat from './DataFormat'
 import Connect from './Connect'

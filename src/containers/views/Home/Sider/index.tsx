@@ -4,7 +4,7 @@ import { observer } from 'mobx-react'
 import { Layout, Switch } from 'antd'
 import { AntDesignOutlined } from '@ant-design/icons'
 
-import styles from './index.scss'
+import styles from './index.module.scss'
 import useRootStore from '@store/useRootStore'
 import SiderMenu from './Menu'
 

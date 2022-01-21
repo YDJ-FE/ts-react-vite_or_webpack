@@ -6,12 +6,9 @@ import PageLoading from '@components/PageLoading'
 
 const loadableOptions = { fallback: <PageLoading /> }
 export const asynchronousComponents = {
-    SocketDebugger: loadable(
-        () => import(/* webpackChunkName: "socket-debugger" */ '@views/SocketDebugger'),
-        loadableOptions
-    ),
-    Users: loadable(() => import(/* webpackChunkName: "users" */ '@views/Users'), loadableOptions),
-    DouyinVideo: loadable(() => import(/* webpackChunkName: "douyin-video" */ '@views/DouyinVideo'), loadableOptions)
+    SocketDebugger: loadable(() => import('@views/SocketDebugger'), loadableOptions),
+    Users: loadable(() => import('@views/Users'), loadableOptions),
+    DouyinVideo: loadable(() => import('@views/DouyinVideo'), loadableOptions)
 }
 
 // all routers key

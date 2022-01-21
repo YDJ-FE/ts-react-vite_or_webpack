@@ -2,7 +2,7 @@ import React from 'react'
 import loadable from '@loadable/component'
 import { Routes, Route } from 'react-router-dom'
 
-import styles from './index.scss'
+import styles from './index.module.scss'
 import PageLoading from '@components/PageLoading'
 import Provider from './Provider'
 import IntlWrapper from './IntlWrapper'
@@ -10,8 +10,8 @@ import HashRouter from './HashRouter'
 import history from './ht'
 
 const loadableOptions = { fallback: <PageLoading /> }
-const Home = loadable(() => import(/* webpackChunkName: "home" */ '@views/Home'), loadableOptions)
-const Login = loadable(() => import(/* webpackChunkName: "login" */ '@views/Login'), loadableOptions)
+const Home = loadable(() => import('@views/Home'), loadableOptions)
+const Login = loadable(() => import('@views/Login'), loadableOptions)
 
 const AppWrapper: React.FC = ({ children }) => <div className={styles.appWrapper}>{children}</div>
 

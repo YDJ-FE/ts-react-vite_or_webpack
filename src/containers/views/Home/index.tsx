@@ -2,7 +2,7 @@ import React from 'react'
 import { Layout } from 'antd'
 import { Routes, Route } from 'react-router-dom'
 
-import styles from './index.scss'
+import styles from './index.module.scss'
 import Error from '@components/Error'
 import menu, { asynchronousComponents } from './menu'
 import Header from './Header'

@@ -5,7 +5,7 @@ import { pathToRegexp } from 'path-to-regexp'
 import { MenuInfo } from 'rc-menu/lib/interface'
 import { useNavigate, useLocation } from 'react-router-dom'
 
-import styles from './index.scss'
+import styles from './index.module.scss'
 import { arrayToTree, queryArray } from '@utils/index'
 import menu, { IMenu, IMenuInTree } from './../menu'
 import useRootStore from '@store/useRootStore'

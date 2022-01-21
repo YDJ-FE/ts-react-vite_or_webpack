@@ -2,7 +2,7 @@ import React from 'react'
 import { observer } from 'mobx-react'
 import { message, Input, Button, Checkbox } from 'antd'
 
-import styles from './index.scss'
+import styles from './index.module.scss'
 import useRootStore from '@store/useRootStore'
 import { socketConnect, socketDisconnect } from '@services/websocket'
 import { LOCALSTORAGE_KEYS } from '@constants/index'

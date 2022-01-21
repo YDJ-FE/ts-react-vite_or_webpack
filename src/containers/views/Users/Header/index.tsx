@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from 'antd'
 
-import styles from './index.scss'
+import styles from './index.module.scss'
 import UserModal from './../UserModal'
 
 function Header() {

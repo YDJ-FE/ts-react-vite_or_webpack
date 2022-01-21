@@ -3,7 +3,7 @@ import { observer } from 'mobx-react'
 import { Button, AutoComplete, Popconfirm, Modal, Input, message } from 'antd'
 import ReactJson from 'react-json-view'
 
-import styles from './index.scss'
+import styles from './index.module.scss'
 import useRootStore from '@store/useRootStore'
 import { LOCALSTORAGE_KEYS } from '@constants/index'
 import { DATA_FORMATS } from '@constants/socket'

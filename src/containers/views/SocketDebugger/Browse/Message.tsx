@@ -3,7 +3,7 @@ import { observer } from 'mobx-react'
 import moment from 'moment'
 import { Tag } from 'antd'
 
-import styles from './index.scss'
+import styles from './index.module.scss'
 
 interface IProps {
     message: ISocketStore.Message

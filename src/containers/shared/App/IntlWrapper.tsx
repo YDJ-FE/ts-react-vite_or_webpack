@@ -4,7 +4,7 @@ import { find } from 'lodash'
 import { Select, ConfigProvider } from 'antd'
 import { Locale } from 'antd/lib/locale-provider'
 
-import styles from './index.scss'
+import styles from './index.module.scss'
 import { useOnMount } from '@utils/hooks'
 import { setCookie } from '@utils/index'
 import { COOKIE_KEYS } from '@constants/index'

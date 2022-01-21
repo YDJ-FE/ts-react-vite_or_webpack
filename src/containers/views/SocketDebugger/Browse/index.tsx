@@ -5,7 +5,7 @@ import { AutoSizer } from 'react-virtualized/dist/es/AutoSizer'
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized/dist/es/CellMeasurer'
 import { List as VList, ListRowProps } from 'react-virtualized/dist/es/List'
 
-import styles from './index.scss'
+import styles from './index.module.scss'
 import useRootStore from '@store/useRootStore'
 import { useOnMount } from '@utils/hooks'
 import Message from './Message'

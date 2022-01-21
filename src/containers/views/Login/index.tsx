@@ -4,7 +4,7 @@ import { Form, Input, Button } from 'antd'
 import intl from 'react-intl-universal'
 import { UserOutlined, LockOutlined, AntDesignOutlined } from '@ant-design/icons'
 
-import styles from './index.scss'
+import styles from './index.module.scss'
 import useRootStore from '@store/useRootStore'
 
 const FormItem = Form.Item
