@@ -1,7 +1,7 @@
 {
-    "name": "ts-react-vite_or_webpack",
+    "name": "ts-react-vite",
     "version": "1.0.0",
-    "description": "an admin starter-template with typescript, react, mobx and vite/webpack...",
+    "description": "an admin starter-template with typescript, react, mobx and vite...",
     "main": "index.js",
     "scripts": {
         "test": "jest",
@@ -15,7 +15,7 @@
         "preview:prod": "vite build && vite preview --port 8081"
     },
     "keywords": [
-        "vite/webpack",
+        "vite",
         "typescript",
         "admin",
         "react",

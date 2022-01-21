@@ -1,4 +1,6 @@
-This is a simple (admin) starter with typescript, react and vite/webpack.
+There is an example [use-webpack](https://github.com/YDJ-FE/ts-react-vite_or_webpack/tree/use-webpack)
+
+This is a simple (admin) starter with typescript, react and vite.
 
 Have a quick view:
 
