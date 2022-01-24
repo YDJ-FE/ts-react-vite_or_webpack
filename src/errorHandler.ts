@@ -1,4 +1,4 @@
-import { get } from 'lodash'
+import { get } from 'lodash-es'
 import { message } from 'antd'
 
 const NETWORK_ERRORS_PREFIX = ['network error', 'connect etimedout', 'getaddrinfo enotfound']

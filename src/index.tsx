@@ -1,4 +1,3 @@
-import 'antd/dist/antd.less'
 import './index.scss'
 
 import React from 'react'

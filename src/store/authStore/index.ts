@@ -1,5 +1,5 @@
 import { makeAutoObservable, action, reaction } from 'mobx'
-import { isPlainObject } from 'lodash'
+import { isPlainObject } from 'lodash-es'
 
 import { initialUserInfo, syncUserInfo } from './syncUserInfo'
 import { LOCALSTORAGE_KEYS } from '@constants/index'

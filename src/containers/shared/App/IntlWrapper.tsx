@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import intl from 'react-intl-universal'
-import { find } from 'lodash'
+import { find } from 'lodash-es'
 import { Select, ConfigProvider } from 'antd'
 import { Locale } from 'antd/lib/locale-provider'
 

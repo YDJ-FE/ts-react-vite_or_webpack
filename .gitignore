@@ -6,3 +6,4 @@ npm-debug*
 /.cache-loader
 /.awcache
 /deploy
+/stats.html
