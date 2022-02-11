@@ -63,8 +63,8 @@ export default ({ mode }) => {
                 scss: {
                     charset: false,
                     additionalData: `
-                    @import "${pathNodeModules}/bourbon/core/_bourbon.scss";
-                    @import "${pathSrc}/styles/_base.scss";
+                    @import "${pathNodeModules.replace(/\\/g, '/')}/bourbon/core/_bourbon.scss";
+                    @import "${pathSrc.replace(/\\/g, '/')}/styles/_base.scss";
                     `
                 },
                 less: {
