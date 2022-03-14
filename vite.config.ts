@@ -4,7 +4,6 @@ import react from '@vitejs/plugin-react'
 import legacy from '@vitejs/plugin-legacy'
 import { VitePWA } from 'vite-plugin-pwa'
 import tsconfigPaths from 'vite-tsconfig-paths'
-import styleImport, { AntdResolve } from 'vite-plugin-style-import'
 
 const pathSrc = path.resolve(__dirname, './src')
 const pathNodeModules = path.resolve(__dirname, './node_modules')
@@ -21,18 +20,6 @@ export default ({ mode }) => {
         plugins: [
             tsconfigPaths(),
             react(),
-            styleImport({
-                resolves: [AntdResolve()],
-                libs: [
-                    {
-                        libraryName: 'antd',
-                        esModule: true,
-                        resolveStyle: name => {
-                            return `antd/es/${name}/style/index`
-                        }
-                    }
-                ]
-            }),
             legacy({ targets: ['defaults', 'not IE 11'] }),
             VitePWA({
                 base: '/',
