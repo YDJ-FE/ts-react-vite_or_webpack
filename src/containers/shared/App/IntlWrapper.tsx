@@ -11,9 +11,7 @@ import { COOKIE_KEYS } from '@constants/index'
 import PageLoading from '@components/PageLoading'
 import { SUPPOER_LOCALES, LOCALES_KEYS, getLocaleLoader } from '@locales/loader'
 
-interface IProps {}
-
-const IntlWrapper: React.FC<IProps> = ({ children }) => {
+const IntlWrapper: React.ReactFCWithChildren = ({ children }) => {
     const [currentLocale, setCurrentLocale] = useState('')
     const [antdLocaleData, setAntdLocaleData] = useState<Locale>(null)
 

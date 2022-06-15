@@ -2,7 +2,7 @@ import 'antd/dist/antd.less'
 import './index.scss'
 
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { configure } from 'mobx'
 
 import App from '@shared/App'
@@ -12,7 +12,8 @@ configure({ enforceActions: 'observed' })
 catchUnhandledRejection()
 
 const render = (Component: React.ComponentType) => {
-    ReactDOM.render(<Component />, document.getElementById('app'))
+    const root = createRoot(document.getElementById('app'))
+    root.render(<Component />)
 }
 
 render(App)

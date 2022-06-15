@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+type PropsWithChildrenOnly = React.PropsWithChildren<unknown>
 declare module 'react' {
     interface ImgHTMLAttributes<T> extends HTMLAttributes<T> {
         referrerPolicy?:
@@ -9,4 +10,6 @@ declare module 'react' {
             | 'origin-when-cross-origin'
             | 'unsafe-url'
     }
+
+    type ReactFCWithChildren = React.FC<PropsWithChildrenOnly>
 }

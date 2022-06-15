@@ -15,7 +15,7 @@ export const RootContext = createContext<IStore>(null)
  */
 export const RootConsumer = ({ children }: ChildrenProps<IStore>) => <Observer>{() => children(store)}</Observer>
 
-const Provider: React.FC = ({ children }) => {
+const Provider: React.ReactFCWithChildren = ({ children }) => {
     return <RootContext.Provider value={{ ...store }}>{children}</RootContext.Provider>
 }
 

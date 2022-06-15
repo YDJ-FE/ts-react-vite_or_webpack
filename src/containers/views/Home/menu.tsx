@@ -1,58 +1,63 @@
-import React from 'react'
-import loadable from '@loadable/component'
+import React, { lazy } from 'react'
 import { CoffeeOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons'
+import { ItemType } from 'antd/lib/menu/hooks/useItems'
 
-import PageLoading from '@components/PageLoading'
-
-const loadableOptions = { fallback: <PageLoading /> }
-export const asynchronousComponents = {
-    SocketDebugger: loadable(() => import('@views/SocketDebugger'), loadableOptions),
-    Users: loadable(() => import('@views/Users'), loadableOptions),
-    DouyinVideo: loadable(() => import('@views/DouyinVideo'), loadableOptions)
+export type RouteMapValue = {
+    component: React.LazyExoticComponent<() => JSX.Element>
+    path: string
 }
 
-// all routers key
-export type AsynchronousComponentKeys = keyof typeof asynchronousComponents
-
-export interface IMenu {
-    title: string
-    id: number
-    pid?: number
-    path?: string
-    icon?: JSX.Element
-    component?: AsynchronousComponentKeys
-    exact?: boolean
-}
-
-export interface IMenuInTree extends IMenu {
-    children?: IMenuInTree[]
-}
-
-export const menu: IMenu[] = [
-    {
-        id: 1,
-        path: '/',
-        title: 'SocketDebugger',
-        icon: <CoffeeOutlined />,
-        component: 'SocketDebugger',
-        exact: true
+export const routeMap = {
+    SocketDebugger: {
+        component: lazy(() => import('@views/SocketDebugger')),
+        path: '/'
     },
-    {
-        id: 3,
-        path: '/dy-v',
-        title: 'dy',
-        icon: <VideoCameraOutlined />,
-        component: 'DouyinVideo',
-        exact: true
+    Users: {
+        component: lazy(() => import('@views/Users')),
+        path: '/users'
     },
-    {
-        id: 2,
-        path: '/users',
-        title: 'Users',
-        icon: <UserOutlined />,
-        component: 'Users',
-        exact: true
+    DouyinVideo: {
+        component: lazy(() => import('@views/DouyinVideo')),
+        path: '/dy-v'
     }
+}
+
+/**
+ * menu
+ * PS: 有路由时, key必须与routeMap对应, 否则不能匹配跳转
+ */
+const menus: ItemType[] = [
+    { key: 'SocketDebugger', label: 'SocketDebugger', icon: <CoffeeOutlined /> },
+    { key: 'DouyinVideo', label: 'dy', icon: <VideoCameraOutlined /> },
+    { key: 'Users', label: 'Users', icon: <UserOutlined /> }
 ]
 
-export default menu
+export default menus
+
+/**
+ * all routers key
+ */
+export type RouteMapKey = keyof typeof routeMap
+
+/**
+ * all routers key
+ */
+export const routeKeys = Object.keys(routeMap) as RouteMapKey[]
+
+/**
+ * 带跳转地址的menu
+ */
+export const menusWithRoute: ItemType[] = []
+// 递归寻找
+function match(items: ItemType[]) {
+    items.forEach(function (item) {
+        if (routeKeys.includes(item.key as RouteMapKey)) {
+            menusWithRoute.push(item)
+        }
+        const children = (item as any).children as ItemType[]
+        if (Array.isArray(children)) {
+            match(children)
+        }
+    })
+}
+match(menus)
